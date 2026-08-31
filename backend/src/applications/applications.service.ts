@@ -26,6 +26,10 @@ export class ApplicationsService {
     return this.AppRepository.find();
   }
 
+  findOne(id: number) {
+    return this.AppRepository.findBy({id});
+  }
+
   async findbySeekerId(jobSeekerId: number): Promise<Application[]> {
     return this.AppRepository.find({ where: {jobSeekerId}, relations: {jobSeeker: true}, order: {createdAt: 'DESC'},
     });
@@ -47,8 +51,8 @@ export class ApplicationsService {
     return this.AppRepository.save(app);
   }
 
-  async remove(id: number, jobSeekerId: number): Promise<void> {
-    const app = await this.AppRepository.findOne({where: {id, jobSeekerId}, });
+  async remove(id: number): Promise<void> {
+    const app = await this.AppRepository.findOne({where: {id}, });
 
     if (!app) {
       throw new NotFoundException('Candidature non trouvée.');
