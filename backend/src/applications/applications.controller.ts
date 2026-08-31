@@ -1,15 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
-import { UpdateApplicationDto } from './dto/update-application.dto';
+import { UpdateApplicationDto, UpdateApplicationStatusDto } from './dto/update-application.dto';
 
 @Controller('applications')
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @Post()
-  create(@Body() createApplicationDto: CreateApplicationDto) {
-    return this.applicationsService.create(createApplicationDto);
+  apply(@Body() createApplicationDto: CreateApplicationDto) {
+    return this.applicationsService.apply(createApplicationDto.jobSeekerId, createApplicationDto.jobId);
   }
 
   @Get()
@@ -22,9 +22,22 @@ export class ApplicationsController {
     return this.applicationsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApplicationDto: UpdateApplicationDto) {
-    return this.applicationsService.update(+id, updateApplicationDto);
+  @Get('/seeker:seekerId')
+  findBySeeker(@Param('seekerId') id: string) {
+    return this.applicationsService.findbySeekerId(+id);
+  }
+
+  @Get('/job:jobId')
+  findByJob(@Param('jobId') id: string) {
+    return this.applicationsService.findbyJobId(+id);
+  }
+
+  @Patch(':id/status')
+  updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateStatusDto: UpdateApplicationStatusDto,
+  ) {
+    return this.applicationsService.UpdateStatus(id, updateStatusDto.status);
   }
 
   @Delete(':id')
