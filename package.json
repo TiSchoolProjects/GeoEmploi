@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@nestjs/cli": "^12.0.0",
+    "nestjs": "^0.0.1"
+  }
+}
