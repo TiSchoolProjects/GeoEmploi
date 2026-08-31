@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { CreateEmployerDto } from './dto/create-employer.dto';
-import { UpdateEmployerDto } from './dto/update-employer.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Employer } from './entities/employer.entity';
 
 @Injectable()
 export class EmployersService {
-  create(createEmployerDto: CreateEmployerDto) {
-    return 'This action adds a new employer';
+  constructor(
+    @InjectRepository(Employer)
+    private employerRepository: Repository<Employer>,
+  ) {}
+
+  async create(data: Partial<Employer>) {
+    const employer = this.employerRepository.create(data);
+    return this.employerRepository.save(employer);
   }
 
   findAll() {
-    return `This action returns all employers`;
+    return this.employerRepository.find({ relations: {user:true}});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} employer`;
+  findOne(userId: number) {
+    return this.employerRepository.findOne({where: { userId }, relations: {user: true}});
   }
 
-  update(id: number, updateEmployerDto: UpdateEmployerDto) {
-    return `This action updates a #${id} employer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} employer`;
+  remove(userId: number) {
+    return this.employerRepository.delete({ userId });
   }
 }

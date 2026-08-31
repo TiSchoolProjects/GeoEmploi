@@ -15,8 +15,11 @@ import { EmployersModule } from './employers/employers.module';
       password: 'adminpassword',
       database: 'geoemploi_test',
       entities: [User],
+      autoLoadEntities: true,
       synchronize: true, //a enlever pour la prod
-    }), EmployersModule, UsersModule 
+    }), 
+    EmployersModule,
+    UsersModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
