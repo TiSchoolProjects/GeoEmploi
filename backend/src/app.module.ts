@@ -5,6 +5,9 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { EmployersModule } from './employers/employers.module';
+import { JobsModule } from './jobs/jobs.module';
+import { SeekersModule } from './seekers/seekers.module';
+import { ApplicationsModule } from './applications/applications.module';
 
 @Module({
   imports: [ TypeOrmModule.forRoot({
@@ -19,7 +22,10 @@ import { EmployersModule } from './employers/employers.module';
       synchronize: true, //a enlever pour la prod
     }), 
     EmployersModule,
-    UsersModule, 
+    UsersModule,
+    JobsModule,
+    SeekersModule,
+    ApplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
