@@ -21,6 +21,11 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Get('/email:id')
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.findbyEmail(email);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
