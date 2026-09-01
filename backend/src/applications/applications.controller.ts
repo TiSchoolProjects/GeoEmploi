@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
-import { UpdateApplicationDto, UpdateApplicationStatusDto } from './dto/update-application.dto';
+import { UpdateApplicationStatusDto } from './dto/update-application.dto';
 
 @Controller('applications')
 export class ApplicationsController {
