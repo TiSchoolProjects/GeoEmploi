@@ -21,7 +21,7 @@ export default function Register() {
       <div className="form-card">
         <div className="form-header">
           
-          <h1>Créer votre profile</h1>
+          <h1>Créer votre compte</h1>
           <p>Remplissez vos coordonnées pour commencer.</p>
         </div>
 
@@ -83,7 +83,7 @@ export default function Register() {
               </span>
             )}
           </div>
-
+/*
           <div className="form-group">
             <label htmlFor="gender">Genre</label>
             <select id="gender" {...register("gender")}>
@@ -95,7 +95,7 @@ export default function Register() {
               <option value="other">Autre</option>
             </select>
           </div>
-
+*/
           <button type="submit" className="submit-btn">
             <span>Confirmer votre profile</span>
             <span className="arrow">→</span>

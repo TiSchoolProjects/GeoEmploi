@@ -10,7 +10,8 @@ function NavBar() {
       {/* Logo + nom */}
       <div className="logo-section">
         <Link to="../Home" className="logo-container"> <img src={logo} alt="Logo" className="logo" /> </Link>
-        <p className="site-name">GéoEmploi</p>
+        <Link to="../Home" className="logo-container"> <p className="site-name">GéoEmploi</p> </Link>
+        
       </div>
       {/* Liens à droite */}
       <div className="nav-right">
