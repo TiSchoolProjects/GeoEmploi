@@ -1,0 +1,78 @@
+.account {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fb;
+  padding: 20px;
+}
+
+.account-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  background: white;
+  padding: 60px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.account-container h1 {
+  margin-bottom: 15px;
+  font-size: 36px;
+  color: #1f2937;
+}
+
+.subtitle {
+  margin-bottom: 40px;
+  color: #6b7280;
+  font-size: 17px;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.role-button {
+  padding: 14px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.rh-button {
+  background: #2563eb;
+  color: white;
+}
+
+.rh-button:hover {
+  background: #1d4ed8;
+}
+
+.seeker-button {
+  background: #10b981;
+  color: white;
+}
+
+.seeker-button:hover {
+  background: #059669;
+}
+
+@media (max-width: 600px) {
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .home-container {
+    padding: 40px 25px;
+  }
+}
+
+.footer {
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+}

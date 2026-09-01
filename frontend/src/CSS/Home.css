@@ -1,0 +1,113 @@
+.home {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.body-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8%;
+  box-sizing: border-box;
+}
+
+/* TEXTE À GAUCHE */
+.body-style-container {
+  position: relative;
+  z-index: 10;
+  width: 50%;
+  color: #222;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.body-style-container p {
+  margin: 0;
+}
+
+/* IMAGE À DROITE */
+.image-container {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* BOUTON */
+.map-button-container {
+  margin-top: 35px;
+}
+
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 16px 22px;
+  background-color: #222;
+  color: white;
+  text-decoration: none;
+  border-radius: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.map-btn:hover {
+  background-color: #444;
+  transform: translateY(-3px);
+}
+
+.arrow {
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.map-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .body-container {
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 100px 30px;
+    gap: 40px;
+  }
+  .body-style-container {
+    width: 100%;
+    font-size: 35px;
+    text-align: center;
+  }
+  .image-container {
+    width: 100%;
+  }
+  .image-container img {
+    max-width: 350px;
+  }
+  .map-button-container {
+    margin-top: 25px;
+  }
+  .map-btn {
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+}
