@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
+import { useState } from "react";
 
 export default function Login() {
   const {
@@ -10,9 +11,11 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
+  const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setAuthError("");
   try {
     const response = await fetch("http://localhost:4242/auth/login", {
       method: "POST",
@@ -26,13 +29,13 @@ export default function Login() {
     });
     const result = await response.json();
     if (!response.ok) {
-      console.log("Erreur de connexion :", result);
+      setAuthError("Mot de passe refusé ou identifiants incorrects.");
       return;
     }
     console.log("Connexion réussie :", result);
     navigate("/home");
   } catch (error) {
-    console.error("Erreur réseau :", error);
+    setAuthError("Erreur de communication avec le serveur.");
   }
 };
 
@@ -45,6 +48,13 @@ export default function Login() {
           <h1>Bienvenue</h1>
           <p>Connectez-vous à votre compte.</p>
         </div>
+
+        {authError && (
+          <div className="server-error">
+            {authError}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
             <label htmlFor="email">Adresse Email</label>
