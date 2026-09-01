@@ -12,7 +12,7 @@ export class EmployersService {
 
   async create(data: Partial<Employer>) {
     const employer = this.employerRepository.create(data);
-    return this.employerRepository.save(employer);
+    return await this.employerRepository.save(employer);
   }
 
   findAll() {
