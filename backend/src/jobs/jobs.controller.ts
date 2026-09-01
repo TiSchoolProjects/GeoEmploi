@@ -22,7 +22,7 @@ export class JobsController {
     return this.jobsService.findNearby(searchJobDto.lat, searchJobDto.lng, searchJobDto.radius);
   }
 
-  @Get('/employer:id')
+  @Get('/employer/:id')
   findByEmployer(@Param('id') id: string) {
     return this.jobsService.findByEmployer(+id);
   }

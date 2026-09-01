@@ -22,12 +22,12 @@ export class ApplicationsController {
     return this.applicationsService.findOne(+id);
   }
 
-  @Get('/seeker:seekerId')
+  @Get('/seeker/:seekerId')
   findBySeeker(@Param('seekerId') id: string) {
     return this.applicationsService.findbySeekerId(+id);
   }
 
-  @Get('/job:jobId')
+  @Get('/job/:jobId')
   findByJob(@Param('jobId') id: string) {
     return this.applicationsService.findbyJobId(+id);
   }
