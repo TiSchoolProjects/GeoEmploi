@@ -26,6 +26,11 @@ export class JobsService {
     return this.jobRepository.findOne({where: {id}});
   }
 
+  async findByEmployer(employerId: number): Promise<Job[]> {
+    return this.jobRepository.find({ where: {employerId}, relations: {employer: true}, order: {createdAt: 'DESC'},
+    });
+  }
+
   async findNearby(lat: number, lng: number, radius: number) {
     const jobs = await this.jobRepository.find({where: {archivedAt: IsNull()}});
 
