@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Employer } from './entities/employer.entity';
@@ -22,6 +22,18 @@ export class EmployersService {
   findOne(userId: number) {
     return this.employerRepository.findOne({where: { userId }, relations: {user: true}});
   }
+
+  async validate(userId: number): Promise<Employer> {
+    const acc = await this.employerRepository.findOne({where: {userId}});
+
+    if (!acc) {
+      throw new NotFoundException("Compte non trouvé.");
+    }
+
+    acc.verifiedAt = new Date();
+
+    return await this.employerRepository.save(acc);
+  } 
 
   remove(userId: number) {
     return this.employerRepository.delete({ userId });

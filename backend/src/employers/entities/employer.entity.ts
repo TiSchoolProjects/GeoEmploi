@@ -13,6 +13,9 @@ export class Employer {
   @Column()
   companyName: string;
 
+  @Column()
+  companyDesc: string;
+
   @Column({type: 'timestamp', nullable: true, default: null })
   verifiedAt: Date | null;
 
