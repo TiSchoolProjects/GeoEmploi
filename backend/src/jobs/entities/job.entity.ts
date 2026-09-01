@@ -26,9 +26,6 @@ export class Job {
 
   @Column('decimal', {precision: 10, scale: 7})
   lng: number;
-  
-  @Column('int')
-  radius: number;
 
   @CreateDateColumn()
   createdAt: Date;

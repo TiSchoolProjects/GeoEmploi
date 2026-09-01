@@ -19,7 +19,7 @@ export class ApplicationsService {
 
     const app = this.AppRepository.create({jobSeekerId, jobId, status: ApplicationStatus.WAITING});
 
-    return this.AppRepository.save(app);
+    return await this.AppRepository.save(app);
   }
 
   findAll() {
@@ -48,7 +48,7 @@ export class ApplicationsService {
     }
 
     app.status = status;
-    return this.AppRepository.save(app);
+    return await this.AppRepository.save(app);
   }
 
   async remove(id: number): Promise<void> {

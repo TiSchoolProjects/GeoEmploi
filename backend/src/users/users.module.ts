@@ -12,6 +12,6 @@ import { Application } from '../applications/entities/application.entity';
   controllers: [UsersController],
   providers: [UsersService],
   imports: [TypeOrmModule.forFeature([User, Employer, Seeker, Job, Application])],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule, UsersService]
 })
 export class UsersModule {}

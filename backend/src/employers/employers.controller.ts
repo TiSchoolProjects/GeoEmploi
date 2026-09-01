@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe } from '@nestjs/common';
 import { EmployersService } from './employers.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 
@@ -20,6 +20,12 @@ export class EmployersController {
   findOne(@Param('id') id: string) {
     return this.employersService.findOne(+id);
   }
+
+  @Patch(':id/verify')
+  validate(@Param('id', ParseIntPipe) id: number) {
+    return this.employersService.validate(id);
+  }
+  
 
   @Delete(':id')
   remove(@Param('id') id: string) {

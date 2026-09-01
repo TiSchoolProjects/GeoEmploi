@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: GeoDB
+      POSTGRES_USER: GeoUser
+      POSTGRES_PASSWORD: GeoPassword
+    ports:
+      - "${PORT_DB:-5432}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U GeoUser -d GeoDB"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: backend/
+    env_file:
+        - .env
+    restart: unless-stopped
+    environment:
+      NODE_ENV: developpement
+      PORT: 4242
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: GeoDB
+      DB_USER: GeoUser
+      DB_PASSWORD: GeoPassword
+    ports: 
+      - 4242:4242
+    depends_on:
+      db:
+        condition: service_started
+
+volumes: 
+  db_data:
+
