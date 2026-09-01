@@ -8,6 +8,7 @@ import { EmployersModule } from './employers/employers.module';
 import { JobsModule } from './jobs/jobs.module';
 import { SeekersModule } from './seekers/seekers.module';
 import { ApplicationsModule } from './applications/applications.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ TypeOrmModule.forRoot({
@@ -26,6 +27,7 @@ import { ApplicationsModule } from './applications/applications.module';
     JobsModule,
     SeekersModule,
     ApplicationsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

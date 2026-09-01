@@ -19,6 +19,8 @@ services:
   backend:
     build:
       context: backend/
+    env_file:
+        - .env
     restart: unless-stopped
     environment:
       NODE_ENV: developpement

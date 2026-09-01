@@ -7,18 +7,22 @@ import { LocalStrategy } from './local.strategy.js';
 import { LocalAuthGuard } from './local-auth.guard.js';
 import { JwtModule } from '@nestjs/jwt';
 import { StringValue } from 'ms';
+import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './auth.controller.js';
 
 @Module({
   imports: [
     UsersModule,
+    ConfigModule,
     PassportModule.register({ defaultStrategy: 'local' }),
     JwtModule.registerAsync({
       useFactory: async () => ({
-        secret: process.env.JWT_SECRET,
-        signOptions: { expiresIn: process.env.JWT_EXPIRATION as StringValue },
+        secret: process.env.JWT_SECRET || 'dev-secret',
+        signOptions: { expiresIn: (process.env.JWT_EXPIRATION || '1h') as StringValue },
       }),
     }),
   ],
+  controllers: [AuthController],
   providers: [AuthService, LocalStrategy, LocalAuthGuard, JwtStrategy],
   exports: [AuthService, PassportModule, LocalAuthGuard]
 })
