@@ -24,7 +24,7 @@ export class SeekersController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSeekerDto: UpdateSeekerDto) {
-    return this.seekersService.update(+id, updateSeekerDto);
+    return this.seekersService.update(Number(id), updateSeekerDto);
   }
 
   @Delete(':id')
