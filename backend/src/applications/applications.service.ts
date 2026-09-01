@@ -19,7 +19,7 @@ export class ApplicationsService {
 
     const app = this.AppRepository.create({jobSeekerId, jobId, status: ApplicationStatus.WAITING});
 
-    return this.AppRepository.save(app);
+    return await this.AppRepository.save(app);
   }
 
   findAll() {
