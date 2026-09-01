@@ -23,7 +23,7 @@ services:
         - .env
     restart: unless-stopped
     environment:
-      NODE_ENV: developpement
+      NODE_ENV: development
       PORT: 4242
       DB_HOST: db
       DB_PORT: 5432
@@ -35,6 +35,15 @@ services:
     depends_on:
       db:
         condition: service_started
+
+  frontend:
+    build:
+      context: frontend/
+    ports:
+      - 5173:5173
+    depends_on:
+      - backend
+
 
 volumes: 
   db_data:
