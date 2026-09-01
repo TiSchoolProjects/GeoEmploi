@@ -11,12 +11,12 @@ import { ApplicationsModule } from './applications/applications.module';
 
 @Module({
   imports: [ TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'admin',
-      password: 'adminpassword',
-      database: 'geoemploi_test',
+      type: 'postgres',
+      host: 'db',
+      port: 5432,
+      username: 'GeoUser',
+      password: 'GeoPassword',
+      database: 'GeoDB',
       entities: [User],
       autoLoadEntities: true,
       synchronize: true, //a enlever pour la prod
