@@ -4,9 +4,11 @@ RUN mkdir -p /usr/src/geoemploi
 
 WORKDIR /usr/src/geoemploi
 
-COPY . .
+COPY package*.json .
 
-run npm i
+RUN npm i
+
+COPY . .
 
 EXPOSE ${PORT:-4242}
 
