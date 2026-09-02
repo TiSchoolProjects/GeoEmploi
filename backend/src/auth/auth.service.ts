@@ -6,7 +6,7 @@ import { RegisterSeekerDto } from './dto/register-seeker.dto.js';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Seeker } from '../seekers/entities/seeker.entity.js';
-import { User } from '../users/entities/user.entity.js';
+import { User, UserRole } from '../users/entities/user.entity.js';
 import { ConflictException } from '@nestjs/common';
 import { Employer } from '../employers/entities/employer.entity.js';
 import { RegisterEmployerDto } from './dto/register-employer.dto.js';
@@ -50,6 +50,7 @@ export class AuthService {
         username: data.username,
         email: data.email,
         password: pwd,
+        role: UserRole.SEEKER,
       });
 
       const userSaved = await manager.save(User, user);
@@ -84,6 +85,7 @@ export class AuthService {
         username: data.username,
         email: data.email,
         password: pwd,
+        role: UserRole.EMPLOYER,
       });
 
       const userSaved = await manager.save(User, user);
@@ -96,7 +98,7 @@ export class AuthService {
 
       const employerSaved = await manager.save(Employer, employer);
 
-      return { message: 'Compte Emplyeur créé avec succès.', 
+      return { message: 'Compte Employeur créé avec succès.', 
         user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
         emplyer: employerSaved,
       };

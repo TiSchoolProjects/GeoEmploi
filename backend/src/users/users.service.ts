@@ -35,7 +35,7 @@ export class UsersService {
     const user = await this.UserRepository.findOne({where: {id}});
 
     if (!user) {
-      throw new NotFoundException("Candidature non trouvée.");
+      throw new NotFoundException("Utilisateur non trouvée.");
     }
 
     user.status = status;

@@ -14,11 +14,7 @@ export class CreateJobDto {
   @IsNotEmpty()
   description: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  lat: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  lng: number;
+  adress: string;
 }
