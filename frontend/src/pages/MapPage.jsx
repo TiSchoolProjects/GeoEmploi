@@ -64,7 +64,7 @@ export default function MapPage() {
             class="jobDetailsBtn"
             data-offer-id="${offerId}"
           >
-            Voir les détails
+            Postuler
           </button>
         </div>
       `
@@ -190,7 +190,7 @@ export default function MapPage() {
     setSearchError("")
 
     const response = await fetch(
-      `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(position)}&limit=1` // mettre dans le back
+      `http://localhost:4242/jobs/geocode?address=${encodeURIComponent(position)}`
     )
 
     const data = await response.json()
@@ -202,7 +202,7 @@ export default function MapPage() {
 
     hasSearchedRef.current = true
 
-    const newCoordinates = data.features[0].geometry.coordinates
+     const newCoordinates = [Number(data.lng), Number(data.lat)]
 
     setCoordinates(newCoordinates)
 
@@ -210,9 +210,7 @@ export default function MapPage() {
       mapRef.current.setCenter(newCoordinates)
     }
 
-    const score = data.features[0].properties.score
     console.log("Coordonnées :", newCoordinates)
-    console.log("Score :", score)
   }
 
   useEffect(() => {
