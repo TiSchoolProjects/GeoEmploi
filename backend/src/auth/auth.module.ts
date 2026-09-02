@@ -19,8 +19,8 @@ import { AuthController } from './auth.controller.js';
     PassportModule.register({ defaultStrategy: 'local' }),
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.getOrThrow<string>('auth.jwtSecret'),
-        signOptions: { expiresIn: configService.getOrThrow<StringValue>('auth.jwtExpiration') },
+        secret: configService.get<string>('auth.jwtSecret'),
+        signOptions: { expiresIn: configService.get<StringValue>('auth.jwtExpiration') },
       }),
       inject: [ConfigService],
     }),

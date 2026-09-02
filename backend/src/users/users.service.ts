@@ -14,7 +14,7 @@ export class UsersService {
   ) {}
 
   async create(data: Partial<User>) {
-    const pwdhashed = await hash(data.password!, this.configService.getOrThrow<number>('auth.saltRounds'));
+    const pwdhashed = await hash(data.password!, this.configService.get<number>('auth.saltRounds')!);
     const user = this.UserRepository.create({...data, password: pwdhashed});
     return this.UserRepository.save(user);
   }
