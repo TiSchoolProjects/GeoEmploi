@@ -10,7 +10,7 @@ setWorkerUrl(workerUrl)
 
 export default function MapPage() {
 
-  const [coordinates, setCoordinates] = useState([2.3522, 48.8566]) // Paris par défaut
+  const [coordinates, setCoordinates] = useState([2.3522, 48.8566])
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
@@ -28,9 +28,6 @@ export default function MapPage() {
     markersRef.current = []
   }
 
-  // Ouvre la page de détails d'une offre.
-  // NB : adapte la route ci-dessous ("/offres/:id") à celle définie
-  // dans ton routeur si elle porte un autre nom.
   const goToOfferDetails = (offer) => {
     if (!offer) return
     navigate(`/offres/${offer.id ?? offer._id ?? ""}`)
@@ -72,13 +69,8 @@ export default function MapPage() {
         </div>
       `
 
-      // maxWidth: 'none' désactive la limite de 240px imposée par défaut
-      // par MapLibre (appliquée en style inline) : la taille réelle de la
-      // popup est désormais pilotée par les règles CSS de .jobOfferPopup
       const popup = new Popup({ offset: 25, closeButton: true, maxWidth: 'none' }).setHTML(popupHtml)
 
-      // Rend le bouton "fermer" de MapLibre explicite pour les lecteurs d'écran
-      // et relie le bouton "Voir les détails" à la navigation.
       popup.on('open', () => {
         const popupEl = popup.getElement()
         if (!popupEl) return
