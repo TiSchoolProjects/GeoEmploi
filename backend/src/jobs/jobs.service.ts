@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
@@ -55,7 +55,19 @@ export class JobsService {
 
 
   async create(data: Partial<Job>) {
-    const job = this.jobRepository.create(data);
+    if (!data.adress) {
+      throw new BadRequestException("Adresse obligatoire.")
+    }
+    const geoc = await this.geocodeAdress(data.adress);
+
+    if (geoc.lat == null || geoc.lng == null) {
+      throw new BadRequestException("Adresse invalide.");
+    }
+
+    const job = this.jobRepository.create({
+      ...data,
+      ...geoc,
+    });
     return await this.jobRepository.save(job);
   }
 
