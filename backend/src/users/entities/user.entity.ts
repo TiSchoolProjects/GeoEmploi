@@ -34,9 +34,6 @@ export class User {
   @Column()
   username: string;
 
-  @Column({ default: false })
-  isValid: boolean
-
   @ApiProperty({ description: 'Account type and permissions', example: UserRole.SEEKER })
   @Column({ type: 'enum', enum: UserRole, default: UserRole.SEEKER })
   role: UserRole;

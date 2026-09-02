@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { createDoc, findAllDoc, findbyEmailDoc, findOneDoc, removeDoc } from './user.controller.doc';
+import { UserStatus } from './entities/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -30,6 +31,14 @@ export class UsersController {
   findByEmail(@Param('email') email: string) {
     return this.usersService.findbyEmail(email);
   }
+
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() userStatus: UserStatus,
+  ) {
+      return this.usersService.UpdateStatus(id, userStatus);    
+    }
 
   @removeDoc()
   @Delete(':id')
