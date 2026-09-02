@@ -44,27 +44,38 @@ const onSubmit = async (formData) => {
       console.log("Compte créé :", seeker);
     }
 
-    if (isRH) {
-      const rhResponse = await fetch("http://localhost:4242/rhs",
-        {
-          method: "POST",
-          headers: {"Content-Type": "application/json",},
-          body: JSON.stringify({
-            userId: user.id,
-            company: formData.company,
-            position: formData.position,
-          }),
-        }
-      );
-      if (!rhResponse.ok) {
-        throw new Error("Erreur lors de la création du profil RH");
+  if (isRH) {
+    const employerResponse = await fetch(
+      "http://localhost:4242/auth/register/employer",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          companyName: formData.companyName,
+          companyDesc: formData.companyDesc,
+        }),
       }
-      const rh = await rhResponse.json();
-      console.log("Compte créé :", user);
-      console.log("Profil RH créé :", rh);
+    );
+
+    const data = await employerResponse.json();
+
+    if (!employerResponse.ok) {
+      throw new Error(
+        Array.isArray(data.message)
+          ? data.message.join(", ")
+          : data.message || "Erreur lors de la création du compte RH"
+      );
     }
+    console.log("Compte Employeur créé :", data);
 
     navigate("/login");
+  }
+
   } catch (error) {
     console.error(error);
   }
@@ -244,13 +255,13 @@ const onSubmit = async (formData) => {
               <div className="input-row">
                 {/* COMPANY */}
                 <div className="form-group">
-                  <label htmlFor="company">Entreprise</label>
+                  <label htmlFor="companyName">Entreprise</label>
 
                   <input
-                    id="company"
+                    id="companyName"
                     type="text"
                     placeholder="Nom de votre entreprise"
-                    {...register("company", {required:"Le nom de l'entreprise est obligatoire",})}
+                    {...register("companyName", {required:"Le nom de l'entreprise est obligatoire",})}
                   />
                   {errors.company && (
                     <span className="error">{errors.company.message}</span>)}
@@ -258,13 +269,13 @@ const onSubmit = async (formData) => {
 
                 {/* POSITION */}
                 <div className="form-group">
-                  <label htmlFor="position">Poste</label>
+                  <label htmlFor="companyDesc">Description de votre entreprise</label>
 
                   <input
-                    id="position"
+                    id="companyDesc"
                     type="text"
-                    placeholder="Ex: Responsable RH"
-                    {...register("position", {required:"Le poste est obligatoire",})}
+                    placeholder="Ex: Entreprise de sécurité"
+                    {...register("companyDesc", {required:"La description est obligatoire",})}
                   />
 
                   {errors.position && (
