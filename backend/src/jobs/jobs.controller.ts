@@ -29,7 +29,7 @@ export class JobsController {
     return this.jobsService.findByEmployer(id);
   }
 
-  @Get('/test-geocode')
+  @Get('/geocode')
   async testGeocode(@Query('address') address: string) {
     return await this.jobsService.geocodeAdress(address); 
   }

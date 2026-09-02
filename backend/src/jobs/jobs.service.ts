@@ -16,7 +16,7 @@ export class JobsService {
     return {
       GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       geocodingScore: null,
-      geocodingSource: null,
+      geocodingSource: 'api-adresse',
     };
   }
 
@@ -26,7 +26,7 @@ export class JobsService {
       const reponse = await fetch(url);
 
       if (!reponse.ok) {
-        throw new Error('Erreur Api: &{reponse.status} &{reponse.statusText}');
+        throw new Error(`Erreur Api: ${reponse.status} ${reponse.statusText}`);
       }
 
       const data = await reponse.json();
