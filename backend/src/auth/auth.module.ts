@@ -11,9 +11,14 @@ import { APP_GUARD } from '@nestjs/core';
 import { StringValue } from 'ms';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller.js';
+import { User } from '../users/entities/user.entity.js';
+import { Seeker } from '../seekers/entities/seeker.entity.js';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([User, Seeker]),
     UsersModule,
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'local' }),
