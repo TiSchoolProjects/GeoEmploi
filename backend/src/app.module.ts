@@ -9,7 +9,7 @@ import { JobsModule } from './jobs/jobs.module';
 import { SeekersModule } from './seekers/seekers.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import config from './config/config'
 
 @Module({
@@ -18,16 +18,19 @@ import config from './config/config'
       isGlobal: true,
       load: [config]
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'db',
-      port: 5432,
-      username: 'GeoUser',
-      password: 'GeoPassword',
-      database: 'GeoDB',
-      entities: [User],
-      autoLoadEntities: true,
-      synchronize: true, //a enlever pour la prod
+    TypeOrmModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('database.host'),
+        port: configService.get<number>('database.port'),
+        username: configService.get<string>('database.username'),
+        password: configService.get<string>('database.password'),
+        database: configService.get<string>('database.database'),
+        entities: [User],
+        autoLoadEntities: true,
+        synchronize: true, //a enlever pour la prod
+      }),
+      inject: [ConfigService]
     }),
     EmployersModule,
     UsersModule,
@@ -39,4 +42,4 @@ import config from './config/config'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
