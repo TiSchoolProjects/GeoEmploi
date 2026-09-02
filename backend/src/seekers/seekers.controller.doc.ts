@@ -7,7 +7,7 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 
 export function createDoc() {
     return applyDecorators(
-        ApiOperation({ summary: 'Create a new user' }),
+        ApiOperation({ summary: 'Create a new seeker' }),
         ApiParam({
             name: 'createSeekerDto',
             type: CreateSeekerDto,
