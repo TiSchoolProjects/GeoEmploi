@@ -57,6 +57,7 @@ export function removeDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Remove user from database' }),
         ApiResponse({ status: 200, description: 'Removed user', type: DeleteResult }),
+        ApiResponse({ status: 404, description: 'No user found with given id', type: undefined })
     );
 }
 

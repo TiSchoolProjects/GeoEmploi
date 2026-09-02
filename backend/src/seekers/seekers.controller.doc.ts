@@ -49,6 +49,7 @@ export function removeDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Remove seeker from database' }),
         ApiResponse({ status: 200, description: 'Removed seeker', type: DeleteResult }),
+        ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
     );
 }
 
