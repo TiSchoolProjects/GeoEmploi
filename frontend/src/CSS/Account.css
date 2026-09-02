@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f7fb;
+  background: #F5F7FB;
   padding: 20px;
 }
 
@@ -11,22 +11,24 @@
   width: 100%;
   max-width: 600px;
   text-align: center;
-  background: white;
+  background: #FFFFFF;
   padding: 60px 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(27, 58, 107, 0.10);
 }
 
 .account-container h1 {
   margin-bottom: 15px;
   font-size: 36px;
-  color: #1f2937;
+  color: #1B3A6B;
+  font-family: "Marianne", Arial, sans-serif;
 }
 
 .subtitle {
   margin-bottom: 40px;
-  color: #6b7280;
+  color: #4B5563;
   font-size: 17px;
+  font-family: "Spectral", Georgia, serif;
 }
 
 .buttons-container {
@@ -40,25 +42,32 @@
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
+  font-family: "Marianne", Arial, sans-serif;
   transition: 0.2s ease;
+  border: 2px solid transparent;
 }
 
 .rh-button {
-  background: #2563eb;
-  color: white;
+  background: #FFFFFF;
+  color: #1B3A6B;
+  border-color: #1B3A6B;
 }
 
 .rh-button:hover {
-  background: #1d4ed8;
+  background: #E8EEF7;
+  border-color: #163158;
+  color: #163158;
 }
 
 .seeker-button {
-  background: #10b981;
-  color: white;
+  background: #E07A3F;
+  color: #FFFFFF;
+  border-color: #E07A3F;
 }
 
 .seeker-button:hover {
-  background: #059669;
+  background: #C96532;
+  border-color: #C96532;
 }
 
 @media (max-width: 600px) {
@@ -66,13 +75,15 @@
     flex-direction: column;
   }
 
-  .home-container {
+  .account-container {
     padding: 40px 25px;
   }
 }
 
 .footer {
-    margin-bottom: 15px;
-    align-items: center;
-    justify-content: center;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+  color: #6B7280;
+  font-family: "Spectral", Georgia, serif;
 }

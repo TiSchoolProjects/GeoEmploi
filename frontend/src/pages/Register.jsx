@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
+import { seekerpath } from '../utils/config.js';
 
 export default function Register() {
   const { role } = useParams();
@@ -23,7 +24,7 @@ const onSubmit = async (formData) => {
       .split(",")
       .map((skill) => skill.trim())
       .filter(Boolean)
-      const seekerResponse = await fetch("http://localhost:4242/auth/register/seeker",
+      const seekerResponse = await fetch(seekerpath,
         {
           method: "POST",
           headers: {"Content-Type": "application/json",},
