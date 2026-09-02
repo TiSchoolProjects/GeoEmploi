@@ -28,9 +28,33 @@ export default function MapPage() {
     markersRef.current = []
   }
 
-  const goToOfferDetails = (offer) => {
-    if (!offer) return
-    navigate(`/offres/${offer.id ?? offer._id ?? ""}`)
+  const applyForJob = async (offer) => {
+    try  {
+      const user = JSON.parse(localStorage.getItem("user"))
+      if (!user) {
+        console.error("Utilisateur non connecté")
+        return
+      }
+      const userId = user.sub
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        console.error("Token d'authentification manquant")
+        return
+      }
+      const response = await fetch(`http://localhost:4242/applications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          jobSeekerId: userId,
+          jobId: offer.id ?? offer._id ?? ""
+        })
+      })
+    } catch (error) {
+      console.error("Erreur lors de l'application à l'offre :", error)
+    }
   }
 
   const renderMarkersInView = () => {
@@ -82,7 +106,7 @@ export default function MapPage() {
 
         const detailsBtn = popupEl.querySelector('.jobDetailsBtn')
         if (detailsBtn) {
-          detailsBtn.addEventListener('click', () => goToOfferDetails(offer))
+          detailsBtn.addEventListener('click', () => applyForJob(offer))
         }
       })
 
