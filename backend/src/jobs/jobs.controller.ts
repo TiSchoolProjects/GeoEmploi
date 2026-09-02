@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
@@ -25,24 +25,30 @@ export class JobsController {
   }
 
   @Get('/employer/:id')
-  findByEmployer(@Param('id') id: string) {
-    return this.jobsService.findByEmployer(+id);
+  findByEmployer(@Param('id', ParseIntPipe) id: number) {
+    return this.jobsService.findByEmployer(id);
+  }
+
+  @Get('/test-geocode')
+  async testGeocode(@Query('address') address: string) {
+    return await this.jobsService.geocodeAdress(address); 
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.jobsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.jobsService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  archive(@Param('id') id: string) {
-    return this.jobsService.archive(+id);
+  archive(@Param('id', ParseIntPipe) id: number) {
+    return this.jobsService.archive(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.remove(+id);
   }
+
 }
