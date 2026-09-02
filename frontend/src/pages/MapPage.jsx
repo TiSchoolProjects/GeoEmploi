@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Map, Marker, Popup, setWorkerUrl } from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -12,6 +13,7 @@ export default function MapPage() {
   const [coordinates, setCoordinates] = useState([2.3522, 48.8566]) // Paris par défaut
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
+  const [searchError, setSearchError] = useState("")
 
   const zoom = 13
   const mapContainer = useRef(null)
@@ -19,10 +21,19 @@ export default function MapPage() {
   const markersRef = useRef([])
   const jobOffersRef = useRef([])
   const hasSearchedRef = useRef(false)
+  const navigate = useNavigate()
 
   const clearMarkers = () => {
     markersRef.current.forEach((marker) => marker.remove())
     markersRef.current = []
+  }
+
+  // Ouvre la page de détails d'une offre.
+  // NB : adapte la route ci-dessous ("/offres/:id") à celle définie
+  // dans ton routeur si elle porte un autre nom.
+  const goToOfferDetails = (offer) => {
+    if (!offer) return
+    navigate(`/offres/${offer.id ?? offer._id ?? ""}`)
   }
 
   const renderMarkersInView = () => {
@@ -33,27 +44,55 @@ export default function MapPage() {
 
     const bounds = map.getBounds()
 
-    for (const offer of jobOffersRef.current) {
+    jobOffersRef.current.forEach((offer, index) => {
       if (offer.lat == null || offer.lng == null) {
-        continue
+        return
       }
 
       const lngLat = [Number(offer.lng), Number(offer.lat)]
 
       if (!bounds.contains(lngLat)) {
-        continue
+        return
       }
 
+      const offerId = offer.id ?? offer._id ?? index
       const popupHtml = `
-        <div class="jobOfferPopup">
+        <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
           <h3>${offer.title}</h3>
           <p>${offer.description}</p>
           <p><strong>Entreprise :</strong> ${offer.company}</p>
           <p><strong>Lieu :</strong> ${offer.location}</p>
+          <button
+            type="button"
+            class="jobDetailsBtn"
+            data-offer-id="${offerId}"
+          >
+            Voir les détails
+          </button>
         </div>
       `
 
-      const popup = new Popup({ offset: 25, closeButton: true }).setHTML(popupHtml)
+      // maxWidth: 'none' désactive la limite de 240px imposée par défaut
+      // par MapLibre (appliquée en style inline) : la taille réelle de la
+      // popup est désormais pilotée par les règles CSS de .jobOfferPopup
+      const popup = new Popup({ offset: 25, closeButton: true, maxWidth: 'none' }).setHTML(popupHtml)
+
+      // Rend le bouton "fermer" de MapLibre explicite pour les lecteurs d'écran
+      // et relie le bouton "Voir les détails" à la navigation.
+      popup.on('open', () => {
+        const popupEl = popup.getElement()
+        if (!popupEl) return
+
+        const closeBtn = popupEl.querySelector('.maplibregl-popup-close-button')
+        if (closeBtn) {
+          closeBtn.setAttribute('aria-label', "Fermer les détails de l'offre")
+        }
+
+        const detailsBtn = popupEl.querySelector('.jobDetailsBtn')
+        if (detailsBtn) {
+          detailsBtn.addEventListener('click', () => goToOfferDetails(offer))
+        }
+      })
 
       const marker = new Marker()
         .setLngLat(lngLat)
@@ -61,7 +100,7 @@ export default function MapPage() {
         .addTo(map)
 
       markersRef.current.push(marker)
-    }
+    })
   }
 
   useEffect(() => {
@@ -156,6 +195,8 @@ export default function MapPage() {
 
     if (!position.trim()) return
 
+    setSearchError("")
+
     const response = await fetch(
       `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(position)}&limit=1` // mettre dans le back
     )
@@ -163,7 +204,7 @@ export default function MapPage() {
     const data = await response.json()
 
     if (!data.features || data.features.length === 0) {
-      alert("Localisation introuvable")
+      setSearchError("Localisation introuvable. Vérifiez l'orthographe et réessayez.")
       return
     }
 
@@ -193,20 +234,32 @@ export default function MapPage() {
   return (
     <div className="MapPage">
       <NavBar />
-      <div className="searchBar">
+      <form className="searchBar" onSubmit={searchLocation}>
+        <label htmlFor="location-search" className="visuallyHidden">
+          Rechercher une adresse ou une ville
+        </label>
         <input
+          id="location-search"
           type="text"
           placeholder="Search a location"
           value={position}
           onChange={(e) => setPosition(e.target.value)}
+          aria-describedby={searchError ? "location-search-error" : undefined}
         />
-        <button type="submit" onClick={searchLocation}>
+        <button type="submit">
           Rechercher
         </button>
-      </div>
+      </form>
+      {searchError && (
+        <p id="location-search-error" className="searchError" role="alert">
+          {searchError}
+        </p>
+      )}
       <div
         ref={mapContainer}
         className="map"
+        role="application"
+        aria-label="Carte des offres d'emploi"
       />
     </div>
   )
