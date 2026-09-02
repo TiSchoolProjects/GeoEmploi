@@ -44,15 +44,15 @@ export class AuthService {
 
       const pwd = await hash(data.password, 10);
 
-      const user = await manager.create(User, {
+      const user = manager.create(User, {
         username: data.username,
         email: data.email,
-        pwd,
+        password: pwd,
       });
 
       const userSaved = await manager.save(User, user);
 
-      const seeker = await manager.create(Seeker, {
+      const seeker = manager.create(Seeker, {
         userId: userSaved.id,
         skills: data.skills,
         experience: data.experience,
