@@ -21,11 +21,28 @@ export default function MapPage() {
   const markersRef = useRef([])
   const jobOffersRef = useRef([])
   const hasSearchedRef = useRef(false)
+  const companyNamesRef = useRef({})
   const navigate = useNavigate()
 
   const clearMarkers = () => {
     markersRef.current.forEach((marker) => marker.remove())
     markersRef.current = []
+  }
+
+  const getCompanyName = async (offer) => {
+    try {
+      const response = await fetch(`http://localhost:4242/employers/${offer.employerId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const data = await response.json()
+      return data.companyName || "Entreprise inconnue"
+    } catch (error) {
+      console.error("Erreur lors de la récupération du nom de l'entreprise :", error)
+      return "Entreprise inconnue"
+    }
   }
 
   const applyForJob = async (offer) => {
@@ -77,12 +94,12 @@ export default function MapPage() {
       }
 
       const offerId = offer.id ?? offer._id ?? index
+      const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
       const popupHtml = `
         <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
           <h3>${offer.title}</h3>
           <p>${offer.description}</p>
-          <p><strong>Entreprise :</strong> ${offer.company}</p>
-          <p><strong>Lieu :</strong> ${offer.location}</p>
+          <p><strong>Entreprise :</strong> ${companyName}</p>
           <button
             type="button"
             class="jobDetailsBtn"
@@ -239,9 +256,40 @@ export default function MapPage() {
 
   useEffect(() => {
     jobOffersRef.current = jobOffers
+
     if (mapRef.current) {
       renderMarkersInView()
-      console.log(`Details des offres d'emploi : ${JSON.stringify(jobOffers)}`)
+    }
+
+    const uniqueEmployerIds = [
+      ...new Set(
+        jobOffers
+          .map((offer) => offer.employerId)
+          .filter((id) => id != null && !(id in companyNamesRef.current))
+      )
+    ]
+
+    if (uniqueEmployerIds.length === 0) return
+
+    let cancelled = false
+
+    Promise.all(
+      uniqueEmployerIds.map(async (employerId) => {
+        const name = await getCompanyName({ employerId })
+        return [employerId, name]
+      })
+    ).then((entries) => {
+      if (cancelled) return
+      entries.forEach(([employerId, name]) => {
+        companyNamesRef.current[employerId] = name
+      })
+      if (mapRef.current) {
+        renderMarkersInView()
+      }
+    })
+
+    return () => {
+      cancelled = true
     }
   }, [jobOffers])
 
