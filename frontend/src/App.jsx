@@ -6,6 +6,7 @@ import Cgu from "./pages/Cgu";
 import Home from "./pages/Home"
 import MapPage from "./pages/MapPage";
 import Profile from "./pages/Profile";
+import JobOffer from "./pages/JobOffer";
 export default function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ export default function App() {
         {/* <Route path="/Cgu" element={<Cgu />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/job-offers" element={<JobOffer />} />
         <Route path="/map" element={<MapPage />} />
 
         {/* Si aucune route ne correspond */}
