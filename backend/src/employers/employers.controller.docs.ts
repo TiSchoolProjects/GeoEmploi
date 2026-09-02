@@ -49,5 +49,6 @@ export function removeDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Remove employer from database' }),
         ApiResponse({ status: 200, description: 'Removed employer', type: DeleteResult }),
+        ApiResponse({ status: 404, description: 'No employer found with given id', type: undefined })
     );
 }
