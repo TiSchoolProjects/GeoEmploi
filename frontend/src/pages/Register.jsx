@@ -16,76 +16,59 @@ export default function Register() {
   const isSeeker = role === "seeker";
   const isRH = role === "rh";
 
-  const onSubmit = async (formData) => {
-    try {
-      // CREATE USER
-      const userResponse = await fetch("http://localhost:4242/users", {
-        method: "POST",
-        headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-          // firstName: formData.firstName,
-          // lastName: formData.lastName,
-          // gender: formData.gender,
-          // role: role,
-        }),
-      });
-      if (!userResponse.ok) {
-        throw new Error("Erreur lors de la création du compte");
-      }
-      const user = await userResponse.json();
-
-      // CREATE SEEKER 
-      if (isSeeker) {
-        const seekerResponse = await fetch("http://localhost:4242/seekers",
-          {
-            method: "POST",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify({
-              userId: user.id,
-              skills: formData.skills,
-              experience: formData.experience,
-              availability: formData.availability,
-            }),
-          }
-        );
-        if (!seekerResponse.ok) {
-          throw new Error("Erreur lors de la création du profil Seeker");
+const onSubmit = async (formData) => {
+  try {
+    if (isSeeker) {
+      const skills = formData.skills
+      .split(",")
+      .map((skill) => skill.trim())
+      .filter(Boolean)
+      const seekerResponse = await fetch("http://localhost:4242/auth/register/seeker",
+        {
+          method: "POST",
+          headers: {"Content-Type": "application/json",},
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            skills,
+            experience: formData.experience,
+            availability: formData.availability,
+          }),
         }
-        const seeker = await seekerResponse.json();
-        console.log("Compte créé :", user);
-        console.log("Profil Seeker créé :", seeker);
+      );
+      if (!seekerResponse.ok) {
+        throw new Error("Erreur lors de la création du compte Seeker");
       }
-
-      // CREATE RH 
-      if (isRH) {
-        const rhResponse = await fetch("http://localhost:4242/rhs",
-          {
-            method: "POST",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify({
-              userId: user.id,
-              company: formData.company,
-              position: formData.position,
-            }),
-          }
-        );
-        if (!rhResponse.ok) {
-          throw new Error("Erreur lors de la création du profil RH");
-        }
-        const rh = await rhResponse.json();
-        console.log("Compte créé :", user);
-        console.log("Profil RH créé :", rh);
-      }
-
-      // LOG REDIReCT
-      navigate("/login");
-    } catch (error) {
-      console.error(error);
+      const seeker = await seekerResponse.json();
+      console.log("Compte créé :", seeker);
     }
-  };
+
+    if (isRH) {
+      const rhResponse = await fetch("http://localhost:4242/rhs",
+        {
+          method: "POST",
+          headers: {"Content-Type": "application/json",},
+          body: JSON.stringify({
+            userId: user.id,
+            company: formData.company,
+            position: formData.position,
+          }),
+        }
+      );
+      if (!rhResponse.ok) {
+        throw new Error("Erreur lors de la création du profil RH");
+      }
+      const rh = await rhResponse.json();
+      console.log("Compte créé :", user);
+      console.log("Profil RH créé :", rh);
+    }
+
+    navigate("/login");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   // ROLE ERROR
   if (!isSeeker && !isRH) {
@@ -142,67 +125,67 @@ export default function Register() {
             </div>
           </div>
 
-          {/*USERNAME*/}
-          <div className="form-group">
-            <label htmlFor="username">Nom d'utilisateur</label>
-            <input
-              id="username"
-              type="text"
-              placeholder="Nom d'utilisateur"
-              {...register("username", {required:"Le nom d'utilisateur est obligatoire",})}
-            />
-            {errors.username && (<span className="error">{errors.username.message}</span>)}
-          </div>
-
           {/*EMAIL*/}
-          <div className="form-group">
-            <label htmlFor="email">Adresse Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="example@example.com"
-              {...register("email", {required: "L'email est obligatoire",pattern: {
-                  value: /^\S+@\S+\.\S+$/,
-                  message: "Email invalide"},})}
-            />
-            {errors.email && (<span className="error">{errors.email.message}</span>)}
+          <div className="input-row">
+            <div className="form-group">
+              <label htmlFor="email">Adresse Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="example@example.com"
+                {...register("email", {required: "L'email est obligatoire",pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "Email invalide"},})}
+              />
+              {errors.email && (<span className="error">{errors.email.message}</span>)}
+            </div>
+            
+            {/*PASSWORD*/}
+            <div className="form-group">
+              <label htmlFor="password">Mot de passe</label>
+
+              <input
+                id="password"
+                type="password"
+                placeholder="Mot de passe"
+                {...register("password", {
+                  required: "Le mot de passe est obligatoire",
+                  // minLength: {value: 6, message: "Le mot de passe doit contenir au moins 6 caractères",},
+                  })}
+              />
+              {errors.password && (<span className="error">{errors.password.message}</span>)}
+            </div>
           </div>
 
-          {/*PASSWORD*/}
+          <div className="input-row">
+            {/*GENDER*/}
+            <div className="form-group">
+              <label htmlFor="gender">Civilité</label>
 
-          <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
+              <select
+                id="gender" {...register("gender", {required: "Veuillez choisir votre Civilité",})}
+              >
+                <option value="" hidden>Choisissez votre civilité</option>
 
-            <input
-              id="password"
-              type="password"
-              placeholder="Mot de passe"
-              {...register("password", {
-                required: "Le mot de passe est obligatoire",
-                // minLength: {value: 6, message: "Le mot de passe doit contenir au moins 6 caractères",},
-                })}
-            />
-            {errors.password && (<span className="error">{errors.password.message}</span>)}
+                <option value="female">Madame</option>
+                <option value="male">Monsieur</option>
+                <option value="other">Autre</option>
+              </select>
+
+              {errors.gender && (<span className="error">{errors.gender.message}</span>)}
+            </div>
+            {/*USERNAME*/}
+            <div className="form-group">
+              <label htmlFor="username">Nom d'utilisateur</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Nom d'utilisateur"
+                {...register("username", {required:"Le nom d'utilisateur est obligatoire",})}
+              />
+              {errors.username && (<span className="error">{errors.username.message}</span>)}
+            </div>
           </div>
-
-          {/*GENDER*/}
-
-          <div className="form-group">
-            <label htmlFor="gender">Civilité</label>
-
-            <select
-              id="gender" {...register("gender", {required: "Veuillez choisir votre Civilité",})}
-            >
-              <option value="" hidden>Choisissez votre civilité</option>
-
-              <option value="female">Madame</option>
-              <option value="male">Monsieur</option>
-              <option value="other">Autre</option>
-            </select>
-
-            {errors.gender && (<span className="error">{errors.gender.message}</span>)}
-          </div>
-
 
           {/*SEEKER ONLY FIELDS*/}
           {isSeeker && (
@@ -220,36 +203,36 @@ export default function Register() {
                 {errors.skills && (<span className="error">{errors.skills.message}</span>)}
               </div>
 
-              {/* EXPERIENCE */}
+              <div className="input-row">
+                {/* EXPERIENCE */}
+                <div className="form-group">
+                  <label htmlFor="experience">Expérience</label>
 
-              <div className="form-group">
-                <label htmlFor="experience">Expérience</label>
+                  <input
+                    id="experience"
+                    type="text"
+                    placeholder="Ex: 2 ans"
+                    {...register("experience", {required:"L'expérience est obligatoire"})}
+                  />
 
-                <input
-                  id="experience"
-                  type="text"
-                  placeholder="Ex: 2 ans"
-                  {...register("experience", {required:"L'expérience est obligatoire"})}
-                />
+                  {errors.experience && (
+                    <span className="error">{errors.experience.message}</span>)}
+                </div>
 
-                {errors.experience && (
-                  <span className="error">{errors.experience.message}</span>)}
-              </div>
+                {/* AVAILABILITY */}
+                <div className="form-group">
+                  <label htmlFor="availability">Disponibilité</label>
 
-              {/* AVAILABILITY */}
+                  <input
+                    id="availability"
+                    type="text"
+                    placeholder="Ex: Temps plein"
+                    {...register("availability", {required:"La disponibilité est obligatoire",})}
+                  />
 
-              <div className="form-group">
-                <label htmlFor="availability">Disponibilité</label>
-
-                <input
-                  id="availability"
-                  type="text"
-                  placeholder="Ex: Temps plein"
-                  {...register("availability", {required:"La disponibilité est obligatoire",})}
-                />
-
-                {errors.availability && (
-                  <span className="error">{errors.availability.message}</span>)}
+                  {errors.availability && (
+                    <span className="error">{errors.availability.message}</span>)}
+                </div>
               </div>
             </>
           )}
@@ -258,33 +241,35 @@ export default function Register() {
 
           {isRH && (
             <>
-              {/* COMPANY */}
-              <div className="form-group">
-                <label htmlFor="company">Entreprise</label>
+              <div className="input-row">
+                {/* COMPANY */}
+                <div className="form-group">
+                  <label htmlFor="company">Entreprise</label>
 
-                <input
-                  id="company"
-                  type="text"
-                  placeholder="Nom de votre entreprise"
-                  {...register("company", {required:"Le nom de l'entreprise est obligatoire",})}
-                />
-                {errors.company && (
-                  <span className="error">{errors.company.message}</span>)}
-              </div>
+                  <input
+                    id="company"
+                    type="text"
+                    placeholder="Nom de votre entreprise"
+                    {...register("company", {required:"Le nom de l'entreprise est obligatoire",})}
+                  />
+                  {errors.company && (
+                    <span className="error">{errors.company.message}</span>)}
+                </div>
 
-              {/* POSITION */}
-              <div className="form-group">
-                <label htmlFor="position">Poste</label>
+                {/* POSITION */}
+                <div className="form-group">
+                  <label htmlFor="position">Poste</label>
 
-                <input
-                  id="position"
-                  type="text"
-                  placeholder="Ex: Responsable RH"
-                  {...register("position", {required:"Le poste est obligatoire",})}
-                />
+                  <input
+                    id="position"
+                    type="text"
+                    placeholder="Ex: Responsable RH"
+                    {...register("position", {required:"Le poste est obligatoire",})}
+                  />
 
-                {errors.position && (
-                  <span className="error">{errors.position.message}</span>)}
+                  {errors.position && (
+                    <span className="error">{errors.position.message}</span>)}
+                </div>
               </div>
             </>
           )}
