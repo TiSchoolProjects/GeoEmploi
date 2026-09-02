@@ -83,7 +83,7 @@ export default function MapPage() {
         }
       }
 
-      return { ok: true, message: "Candidature envoyée avec succès." }
+      return { ok: true, message: data?.message || "Candidature envoyée avec succès." }
     } catch (error) {
       console.error("Erreur lors de l'application à l'offre :", error)
       return {
@@ -165,9 +165,15 @@ export default function MapPage() {
 
             const result = await applyForJob(offer)
 
-            detailsBtn.disabled = false
             detailsBtn.removeAttribute('aria-busy')
-            detailsBtn.textContent = initialLabel
+
+            if (result.ok) {
+              detailsBtn.disabled = true
+              detailsBtn.textContent = "Candidature envoyée"
+            } else {
+              detailsBtn.disabled = false
+              detailsBtn.textContent = initialLabel
+            }
 
             if (statusEl) {
               statusEl.textContent = result.message
