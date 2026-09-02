@@ -14,11 +14,12 @@ import { AuthController } from './auth.controller.js';
 import { User } from '../users/entities/user.entity.js';
 import { Seeker } from '../seekers/entities/seeker.entity.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Employer } from '../employers/entities/employer.entity.js';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Seeker]),
+    TypeOrmModule.forFeature([User, Seeker, Employer]),
     UsersModule,
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'local' }),
