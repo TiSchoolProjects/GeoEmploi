@@ -20,8 +20,11 @@ export class JobsController {
   }
 
   @Get('/search')
-  findAround(@Body() searchJobDto: SearchJobDto) {
-    return this.jobsService.findNearby(searchJobDto.lat, searchJobDto.lng, searchJobDto.radius);
+  findAround(
+    @Query('lat') lat: string,
+    @Query('lng') lng: string,
+    @Query('radius') radius: string,) {
+    return this.jobsService.findNearby(Number(lat), Number(lng), Number(radius),);
   }
 
   @Get('/employer/:id')
