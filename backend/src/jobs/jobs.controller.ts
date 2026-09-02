@@ -24,8 +24,11 @@ export class JobsController {
 
   @findAroundDoc()
   @Get('/search')
-  findAround(@Body() searchJobDto: SearchJobDto) {
-    return this.jobsService.findNearby(searchJobDto.lat, searchJobDto.lng, searchJobDto.radius);
+  findAround(
+    @Query('lat') lat: string,
+    @Query('lng') lng: string,
+    @Query('radius') radius: string,) {
+    return this.jobsService.findNearby(Number(lat), Number(lng), Number(radius),);
   }
 
   @findByEmployerDoc()
@@ -34,7 +37,7 @@ export class JobsController {
     return this.jobsService.findByEmployer(id);
   }
 
-  @Get('/test-geocode')
+  @Get('/geocode')
   async testGeocode(@Query('address') address: string) {
     return await this.jobsService.geocodeAdress(address);
   }

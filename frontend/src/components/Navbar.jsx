@@ -16,13 +16,13 @@ function NavBar() {
       </div>
 
       <div className="nav-right">
-        <Link to="/about" className="nav-link">À propos</Link>
+        <Link to="/Cgu" className="nav-link">À propos</Link>
 
         {user?.role === "seeker" && (
-          <Link to="/applied-jobs" className="nav-link">Applied Jobs</Link>
+          <Link to="/applied-jobs" className="nav-link">Candidatures</Link>
         )}
         {user?.role === "employer" && (
-          <Link to="/job-offers" className="nav-link">Job Offers</Link>
+          <Link to="/job-offers" className="nav-link">Mes Offres</Link>
         )}
         <Link to={user ? "/profile" : "/login"}className="profile-btn" aria-label="Account"> 👤 </Link>
       </div>

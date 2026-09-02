@@ -1,63 +1,65 @@
-.MapPage {
-  font-family: sans-serif;
-  text-align: center;
-  background-color: #f0f0f0;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* background-color: #f0f0f0; */
 }
 
-#root {
+.MapPage {
+  position: relative;
   height: 100vh;
   width: 100vw;
-  background-color: #f0f0f0;
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-decoration: none;
-  gap: 20px;
-  background-color: #1B3A6B;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.logo {
-  margin-left: 5px;
-  width: 55px;
-  height: auto;
-  display: block;
+.map canvas {
+  outline: none;
 }
 
-.name {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: left;
-  color: #f0f0f0;
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .searchBar {
-  position: fixed;
-  top: 12vh;
-  left: 2%;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 420px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-radius: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  width: fit-content;
+  background-color: white;
   z-index: 10;
 }
 
 .searchBar input {
-  width: 300px;
+  flex: 1;
+  min-width: 0;
   padding: 12px 20px;
   border: none;
   font-size: 16px;
@@ -67,11 +69,17 @@
 }
 
 .searchBar input::placeholder {
-  color: black;
+  color: #4a4a4a;
+}
+
+.searchBar input:focus-visible {
+  outline: 3px solid #1B3A6B;
+  outline-offset: -3px;
 }
 
 .searchBar button {
   padding: 12px 24px;
+  min-height: 44px;
   border: none;
   background-color: #1B3A6B;
   color: white;
@@ -79,54 +87,158 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .searchBar button:hover {
   background-color: #14294d;
 }
 
-.mapJobContainer {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 80px);
-  margin-top: 80px;
+.searchBar button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -5px;
+  box-shadow: 0 0 0 3px #1B3A6B;
 }
 
-.map {
-  flex: 1;
-  position: fixed;
-  top: 20vh;
-  left: 5vh;
-  width: 50%;
-  height: 70vh;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
-}
-
-.map canvas {
-  border-radius: 20px;
-}
-
-.jobOffers  {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  gap: 20px;
-  border-radius: 20px;
-  overflow-y: auto;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
-  margin-left: 55%;
-}
-
-.jobOfferCard {
-  background-color: #1B3A6B;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
+.searchError {
+  position: absolute;
+  top: 68px;
+  left: 16px;
+  right: 16px;
+  max-width: 420px;
+  background-color: #ffffff;
+  color: #8b1e1e;
+  border: 1px solid #8b1e1e;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  z-index: 10;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jobOfferPopup {
+  width: max-content;
+  min-width: 200px;
+  max-width: min(280px, calc(100vw - 48px));
+  text-align: left;
+}
+
+.jobOfferPopup h3 {
+  color: #1B3A6B;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  padding-right: 40px;
+}
+
+.jobOfferPopup p {
+  font-size: 0.85rem;
+  margin: 2px 0;
+  color: #222;
+}
+
+.jobDetailsBtn {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #E07A3F;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.jobDetailsBtn:hover {
+  background-color: #c8642b;
+}
+
+.jobDetailsBtn:focus-visible {
+  outline: 3px solid #1a1a1a;
+  outline-offset: 2px;
+}
+
+.jobDetailsBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.applyStatus {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.applyStatus:empty {
+  margin-top: 0;
+}
+
+.applyStatus--error {
+  padding: 6px 10px;
+  color: #8b1e1e;
+  background-color: #fbeaea;
+  border: 1px solid #8b1e1e;
+}
+
+.applyStatus--success {
+  padding: 6px 10px;
+  color: #14532d;
+  background-color: #eaf6ee;
+  border: 1px solid #14532d;
+}
+
+.maplibregl-popup-close-button {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #E07A3F;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  border: 2px solid #E07A3F;
+}
+
+.maplibregl-popup-close-button:hover {
+  background-color: #fbeee5;
+  color: #c8642b;
+}
+
+.maplibregl-popup-close-button:focus-visible {
+  outline: 3px solid #1B3A6B;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .searchBar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    max-width: none;
+  }
+
+  .searchError {
+    top: 60px;
+    left: 8px;
+    right: 8px;
+    max-width: none;
+  }
+
+  .searchBar input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .searchBar button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }
