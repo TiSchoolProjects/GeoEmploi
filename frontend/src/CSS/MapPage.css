@@ -161,6 +161,36 @@ html, body, #root {
   outline-offset: 2px;
 }
 
+.jobDetailsBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.applyStatus {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.applyStatus:empty {
+  margin-top: 0;
+}
+
+.applyStatus--error {
+  padding: 6px 10px;
+  color: #8b1e1e;
+  background-color: #fbeaea;
+  border: 1px solid #8b1e1e;
+}
+
+.applyStatus--success {
+  padding: 6px 10px;
+  color: #14532d;
+  background-color: #eaf6ee;
+  border: 1px solid #14532d;
+}
+
 .maplibregl-popup-close-button {
   width: 40px;
   height: 40px;

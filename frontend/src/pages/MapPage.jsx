@@ -46,17 +46,15 @@ export default function MapPage() {
   }
 
   const applyForJob = async (offer) => {
-    try  {
+    try {
       const user = JSON.parse(localStorage.getItem("user"))
       if (!user) {
-        console.error("Utilisateur non connecté")
-        return
+        return { ok: false, message: "Vous devez être connecté pour postuler." }
       }
       const userId = user.sub
       const token = localStorage.getItem("access_token")
       if (!token) {
-        console.error("Token d'authentification manquant")
-        return
+        return { ok: false, message: "Vous devez être connecté pour postuler." }
       }
       const response = await fetch(`http://localhost:4242/applications`, {
         method: 'POST',
@@ -69,8 +67,29 @@ export default function MapPage() {
           jobId: offer.id ?? offer._id ?? ""
         })
       })
+
+      let data = null
+      try {
+        data = await response.json()
+      } catch {
+        data = null
+      }
+
+      if (!response.ok) {
+        const backendMessage = data?.message || data?.error
+        return {
+          ok: false,
+          message: backendMessage || "Une erreur est survenue lors de l'envoi de votre candidature."
+        }
+      }
+
+      return { ok: true, message: "Candidature envoyée avec succès." }
     } catch (error) {
       console.error("Erreur lors de l'application à l'offre :", error)
+      return {
+        ok: false,
+        message: "Impossible de contacter le serveur. Vérifiez votre connexion et réessayez."
+      }
     }
   }
 
@@ -95,6 +114,8 @@ export default function MapPage() {
 
       const offerId = offer.id ?? offer._id ?? index
       const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
+      const statusId = `applyStatus-${offerId}`
+
       const popupHtml = `
         <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
           <h3>${offer.title}</h3>
@@ -104,9 +125,15 @@ export default function MapPage() {
             type="button"
             class="jobDetailsBtn"
             data-offer-id="${offerId}"
+            aria-describedby="${statusId}"
           >
             Postuler
           </button>
+          <p
+            id="${statusId}"
+            class="applyStatus"
+            role="alert"
+          ></p>
         </div>
       `
 
@@ -122,8 +149,31 @@ export default function MapPage() {
         }
 
         const detailsBtn = popupEl.querySelector('.jobDetailsBtn')
+        const statusEl = popupEl.querySelector('.applyStatus')
+
         if (detailsBtn) {
-          detailsBtn.addEventListener('click', () => applyForJob(offer))
+          detailsBtn.addEventListener('click', async () => {
+            if (statusEl) {
+              statusEl.textContent = ""
+              statusEl.classList.remove('applyStatus--error', 'applyStatus--success')
+            }
+
+            detailsBtn.disabled = true
+            detailsBtn.setAttribute('aria-busy', 'true')
+            const initialLabel = detailsBtn.textContent
+            detailsBtn.textContent = "Envoi en cours..."
+
+            const result = await applyForJob(offer)
+
+            detailsBtn.disabled = false
+            detailsBtn.removeAttribute('aria-busy')
+            detailsBtn.textContent = initialLabel
+
+            if (statusEl) {
+              statusEl.textContent = result.message
+              statusEl.classList.add(result.ok ? 'applyStatus--success' : 'applyStatus--error')
+            }
+          })
         }
       })
 
