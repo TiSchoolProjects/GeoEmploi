@@ -2,10 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
-import Home from "./pages/Home";
 import Cgu from "./pages/Cgu";
 import Home from "./pages/Home"
-// import Cgu from "./pages/Cgu"
 import MapPage from "./pages/MapPage";
 
 export default function App() {
