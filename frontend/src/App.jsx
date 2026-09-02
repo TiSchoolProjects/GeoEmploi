@@ -5,7 +5,7 @@ import Account from "./pages/Account";
 import Cgu from "./pages/Cgu";
 import Home from "./pages/Home"
 import MapPage from "./pages/MapPage";
-
+import Profile from "./pages/Profile";
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/register/:role" element={<Register />} />
         {/* <Route path="/Cgu" element={<Cgu />} /> */}
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/map" element={<MapPage />} />
 
         {/* Si aucune route ne correspond */}
