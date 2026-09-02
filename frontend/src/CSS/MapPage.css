@@ -17,21 +17,6 @@
   background-color: #f0f0f0;
 }
 
-.map {
-  position: absolute;
-  top: 20vh;
-  left: 5vh;
-  width: 50%;
-  height: 70vh;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
-}
-
-.map canvas {
-  border-radius: 20px;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -58,9 +43,9 @@
 }
 
 .searchBar {
-  position: absolute;
+  position: fixed;
   top: 12vh;
-  left: 5vh;
+  left: 2%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -68,6 +53,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   width: fit-content;
+  z-index: 10;
 }
 
 .searchBar input {
@@ -97,4 +83,50 @@
 
 .searchBar button:hover {
   background-color: #14294d;
+}
+
+.mapJobContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+}
+
+.map {
+  flex: 1;
+  position: fixed;
+  top: 20vh;
+  left: 5vh;
+  width: 50%;
+  height: 70vh;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.map canvas {
+  border-radius: 20px;
+}
+
+.jobOffers  {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 20px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+  margin-left: 55%;
+}
+
+.jobOfferCard {
+  background-color: #1B3A6B;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
