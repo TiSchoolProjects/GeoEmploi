@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
-import { useState } from "react";
 
 export default function Login() {
   const {
@@ -11,34 +10,9 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const [authError, setAuthError] = useState("");
-  const navigate = useNavigate();
-
-  const onSubmit = async (data) => {
-    setAuthError("");
-  try {
-    const response = await fetch("http://localhost:4242/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-      }),
-    });
-    const result = await response.json();
-    if (!response.ok) {
-      setAuthError("Mot de passe refusé ou identifiants incorrects.");
-      return;
-    }
-    console.log("Connexion réussie :", result);
-    navigate("/home");
-  } catch (error) {
-    setAuthError("Erreur de communication avec le serveur.");
-  }
-};
-
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="page">
@@ -48,13 +22,6 @@ export default function Login() {
           <h1>Bienvenue</h1>
           <p>Connectez-vous à votre compte.</p>
         </div>
-
-        {authError && (
-          <div className="server-error">
-            {authError}
-          </div>
-        )}
-
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
             <label htmlFor="email">Adresse Email</label>
@@ -82,7 +49,7 @@ export default function Login() {
             <span className="arrow">→</span>
           </button>
         </form>
-        <p className="form-footer">Pas encore de compte ?{" "}<Link to="/account">S'inscrire</Link></p>
+        <p className="form-footer">Pas encore de compte ?{" "}<Link to="/register">S'inscrire</Link></p>
       </div>
     </div>
   );

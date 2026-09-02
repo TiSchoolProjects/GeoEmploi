@@ -8,6 +8,8 @@ import { DataSource } from 'typeorm';
 import { Seeker } from '../seekers/entities/seeker.entity.js';
 import { User } from '../users/entities/user.entity.js';
 import { ConflictException } from '@nestjs/common';
+import { Employer } from '../employers/entities/employer.entity.js';
+import { RegisterEmployerDto } from './dto/register-employer.dto.js';
 
 @Injectable()
 export class AuthService {
@@ -44,15 +46,15 @@ export class AuthService {
 
       const pwd = await hash(data.password, 10);
 
-      const user = await manager.create(User, {
+      const user = manager.create(User, {
         username: data.username,
         email: data.email,
-        pwd,
+        password: pwd,
       });
 
       const userSaved = await manager.save(User, user);
 
-      const seeker = await manager.create(Seeker, {
+      const seeker = manager.create(Seeker, {
         userId: userSaved.id,
         skills: data.skills,
         experience: data.experience,
@@ -68,4 +70,37 @@ export class AuthService {
     });
   }
 
+  async registerEmployer(data: RegisterEmployerDto) {
+    return this.dataSource.transaction(async(manager) => {
+      const exist = await manager.findOne(User, {where: {email: data.email}})
+
+      if (exist) {
+        throw new ConflictException("Un compte existe déja pour cette adresse email.")
+      }
+
+      const pwd = await hash(data.password, 10);
+
+      const user = manager.create(User, {
+        username: data.username,
+        email: data.email,
+        password: pwd,
+      });
+
+      const userSaved = await manager.save(User, user);
+
+      const employer = manager.create(Employer, {
+        userId: userSaved.id,
+        companyName: data.companyName,
+        companyDesc: data.companyDesc,
+      });
+
+      const employerSaved = await manager.save(Employer, employer);
+
+      return { message: 'Compte Emplyeur créé avec succès.', 
+        user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
+        emplyer: employerSaved,
+      };
+    });
+
+  }
 }

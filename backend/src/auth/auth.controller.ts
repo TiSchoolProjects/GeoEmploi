@@ -4,6 +4,7 @@ import { AuthService } from "./auth.service";
 import { Request } from "express";
 import { User } from "../users/entities/user.entity";
 import { RegisterSeekerDto } from "./dto/register-seeker.dto";
+import { RegisterEmployerDto } from "./dto/register-employer.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -18,5 +19,10 @@ export class AuthController {
   @Post('register/seeker')
   registerSeeker(@Body() registerSeekerDto: RegisterSeekerDto) {
     return this.authService.registerSeeker(registerSeekerDto,);
+  }
+
+  @Post('register/employer')
+  registerEmployer(@Body() registerEmployerDto: RegisterEmployerDto) {
+    return this.authService.registerEmployer(registerEmployerDto,);
   }
 }
