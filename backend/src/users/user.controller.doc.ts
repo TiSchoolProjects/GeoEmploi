@@ -3,6 +3,7 @@ import { ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 export function createDoc() {
     return applyDecorators(
@@ -35,6 +36,19 @@ export function findOneDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Find a user through their id' }),
         ApiResponse({ status: 200, description: 'Found user info', type: User }),
+        ApiResponse({ status: 404, description: 'No user found with given id', type: undefined })
+    );
+}
+
+export function updateDoc() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Update user info' }),
+        ApiParam({
+            name: 'updateUserDto',
+            type: UpdateUserDto,
+            description: 'New user information',
+        }),
+        ApiResponse({ status: 200, description: 'Updated user info', type: User }),
         ApiResponse({ status: 404, description: 'No user found with given id', type: undefined })
     );
 }
