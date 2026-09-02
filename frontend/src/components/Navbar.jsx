@@ -21,7 +21,7 @@ function NavBar() {
         {user?.role === "seeker" && (
           <Link to="/applied-jobs" className="nav-link">Applied Jobs</Link>
         )}
-        {user?.role === "rh" && (
+        {user?.role === "employer" && (
           <Link to="/job-offers" className="nav-link">Job Offers</Link>
         )}
         <Link to={user ? "/profile" : "/login"}className="profile-btn" aria-label="Account"> 👤 </Link>
