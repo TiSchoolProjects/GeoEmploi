@@ -82,7 +82,7 @@ export default function Login() {
             <span className="arrow">→</span>
           </button>
         </form>
-        <p className="form-footer">Pas encore de compte ?{" "}<Link to="/register">S'inscrire</Link></p>
+        <p className="form-footer">Pas encore de compte ?{" "}<Link to="/account">S'inscrire</Link></p>
       </div>
     </div>
   );
