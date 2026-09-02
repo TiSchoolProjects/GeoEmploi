@@ -1,63 +1,53 @@
-.MapPage {
-  font-family: sans-serif;
-  text-align: center;
-  background-color: #f0f0f0;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* background-color: #f0f0f0; */
 }
 
-#root {
+.MapPage {
+  position: relative;
   height: 100vh;
   width: 100vw;
-  background-color: #f0f0f0;
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-decoration: none;
-  gap: 20px;
-  background-color: #1B3A6B;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.logo {
-  margin-left: 5px;
-  width: 55px;
-  height: auto;
-  display: block;
-}
-
-.name {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: left;
-  color: #f0f0f0;
+.map canvas {
+  outline: none;
 }
 
 .searchBar {
-  position: fixed;
-  top: 12vh;
-  left: 2%;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 420px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-radius: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  width: fit-content;
+  background-color: white;
   z-index: 10;
 }
 
 .searchBar input {
-  width: 300px;
+  flex: 1;
+  min-width: 0;
   padding: 12px 20px;
   border: none;
   font-size: 16px;
@@ -79,54 +69,46 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .searchBar button:hover {
   background-color: #14294d;
 }
 
-.mapJobContainer {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 80px);
-  margin-top: 80px;
+/* Contenu des popups affichées au clic sur un marqueur */
+.jobOfferPopup {
+  max-width: 240px;
+  text-align: left;
 }
 
-.map {
-  flex: 1;
-  position: fixed;
-  top: 20vh;
-  left: 5vh;
-  width: 50%;
-  height: 70vh;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+.jobOfferPopup h3 {
+  color: #1B3A6B;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
 }
 
-.map canvas {
-  border-radius: 20px;
+.jobOfferPopup p {
+  font-size: 0.85rem;
+  margin: 2px 0;
+  color: #222;
 }
 
-.jobOffers  {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  gap: 20px;
-  border-radius: 20px;
-  overflow-y: auto;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
-  margin-left: 55%;
-}
+@media (max-width: 600px) {
+  .searchBar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    max-width: none;
+  }
 
-.jobOfferCard {
-  background-color: #1B3A6B;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .searchBar input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .searchBar button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }
