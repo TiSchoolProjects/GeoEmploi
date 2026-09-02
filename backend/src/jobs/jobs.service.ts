@@ -58,11 +58,7 @@ export class JobsService {
     if (!data.adress) {
       throw new BadRequestException("Adresse obligatoire.")
     }
-    const geoc = await this.geocodeAdress(data.adress);
-
-    if (geoc.lat == null || geoc.lng == null) {
-      throw new BadRequestException("Adresse invalide.");
-    }
+    const geoc = await this.geocodeAdress(data.adress); 
 
     const job = this.jobRepository.create({
       ...data,
@@ -88,7 +84,7 @@ export class JobsService {
     const jobs = await this.jobRepository.find({where: {archivedAt: IsNull()}});
 
     return jobs.filter((job) => {
-      if (!job.lat || ! job.lng) {
+      if (job.lat == null|| job.lng == null) {
         return false; 
       }
       const distance = this.calcdist(lat, lng, Number(job.lat), Number(job.lng));
