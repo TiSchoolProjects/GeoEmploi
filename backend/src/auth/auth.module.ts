@@ -26,10 +26,11 @@ import { AuthController } from './auth.controller.js';
     }),
   ],
   controllers: [AuthController],
-  providers: [{
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard,
-  },
+  providers: [
+  //{
+  //  provide: APP_GUARD,
+  //  useClass: JwtAuthGuard,
+  //},
     AuthService,
     LocalStrategy,
     LocalAuthGuard,
