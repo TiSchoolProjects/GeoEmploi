@@ -9,9 +9,16 @@ import { JobsModule } from './jobs/jobs.module';
 import { SeekersModule } from './seekers/seekers.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import config from './config/config'
 
 @Module({
-  imports: [ TypeOrmModule.forRoot({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config]
+    }),
+    TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'db',
       port: 5432,
@@ -21,7 +28,7 @@ import { AuthModule } from './auth/auth.module';
       entities: [User],
       autoLoadEntities: true,
       synchronize: true, //a enlever pour la prod
-    }), 
+    }),
     EmployersModule,
     UsersModule,
     JobsModule,

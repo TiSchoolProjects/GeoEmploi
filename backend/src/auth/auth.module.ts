@@ -9,9 +9,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtAuthGuard } from './jwt-auth.guard.js';
 import { APP_GUARD } from '@nestjs/core';
 import { StringValue } from 'ms';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller.js';
-
 
 @Module({
   imports: [
@@ -19,10 +18,11 @@ import { AuthController } from './auth.controller.js';
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'local' }),
     JwtModule.registerAsync({
-      useFactory: async () => ({
-        secret: process.env.JWT_SECRET || 'dev-secret',
-        signOptions: { expiresIn: (process.env.JWT_EXPIRATION || '1h') as StringValue },
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.getOrThrow<string>('auth.jwtSecret'),
+        signOptions: { expiresIn: configService.getOrThrow<StringValue>('auth.jwtExpiration') },
       }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],
