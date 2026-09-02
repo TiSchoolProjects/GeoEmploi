@@ -28,11 +28,11 @@ export class Job {
   @Column()
   adress: string;
 
-  @Column('decimal', {precision: 10, scale: 7})
-  lat: number;
+  @Column('decimal', {precision: 10, scale: 7, nullable: true})
+  lat: number | null;
 
-  @Column('decimal', {precision: 10, scale: 7})
-  lng: number;
+  @Column('decimal', {precision: 10, scale: 7, nullable: true})
+  lng: number | null;
 
   @Column({type: 'varchar', nullable: true})
   geocodingSource: string | null;
