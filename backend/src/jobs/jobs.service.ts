@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
-import { Job } from './entities/job.entity';
+import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 
@@ -12,9 +12,58 @@ export class JobsService {
     private jobRepository: Repository<Job>,
   ) {}
 
+  private geocodingFail(): Partial<Job> {
+    return {
+      GeocodingStatus: GeoCodingStatus.TO_VERIFY,
+      geocodingScore: null,
+      geocodingSource: 'api-adresse',
+    };
+  }
+
+  async geocodeAdress(address: string): Promise<Partial<Job>> {
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
+    try {
+      const reponse = await fetch(url);
+
+      if (!reponse.ok) {
+        throw new Error(`Erreur Api: ${reponse.status} ${reponse.statusText}`);
+      }
+
+      const data = await reponse.json();
+      const feats = data.features;
+      
+      if (!feats || feats.length === 0) {
+        return this.geocodingFail();
+      }
+
+      const first = feats[0];
+      const[lng, lat] = first.geometry.coordinates;
+      const score = first.properties.score;
+
+      return {
+        lat: lat,
+        lng: lng,
+        geocodingSource: 'api-adresse',
+        geocodingScore: score,
+        geocodedAt: new Date(),
+        GeocodingStatus: GeoCodingStatus.VALID,
+      }
+    } catch {
+      return this.geocodingFail();
+    }
+  }
+
 
   async create(data: Partial<Job>) {
-    const job = this.jobRepository.create(data);
+    if (!data.adress) {
+      throw new BadRequestException("Adresse obligatoire.")
+    }
+    const geoc = await this.geocodeAdress(data.adress); 
+
+    const job = this.jobRepository.create({
+      ...data,
+      ...geoc,
+    });
     return await this.jobRepository.save(job);
   }
 
@@ -35,7 +84,7 @@ export class JobsService {
     const jobs = await this.jobRepository.find({where: {archivedAt: IsNull()}});
 
     return jobs.filter((job) => {
-      if (!job.lat || ! job.lng) {
+      if (job.lat == null|| job.lng == null) {
         return false; 
       }
       const distance = this.calcdist(lat, lng, Number(job.lat), Number(job.lng));

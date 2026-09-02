@@ -3,16 +3,18 @@ import { Repository } from 'typeorm';
 import { User, UserStatus } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private UserRepository: Repository<User>,
+    private configService: ConfigService
   ) {}
 
   async create(data: Partial<User>) {
-    const pwdhashed = await hash(data.password!, 10);
+    const pwdhashed = await hash(data.password!, this.configService.get<number>('auth.saltRounds')!);
     const user = this.UserRepository.create({...data, password: pwdhashed});
     return this.UserRepository.save(user);
   }
@@ -33,7 +35,7 @@ export class UsersService {
     const user = await this.UserRepository.findOne({where: {id}});
 
     if (!user) {
-      throw new NotFoundException("Candidature non trouvée.");
+      throw new NotFoundException("Utilisateur non trouvée.");
     }
 
     user.status = status;
