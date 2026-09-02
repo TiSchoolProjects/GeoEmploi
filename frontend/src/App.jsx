@@ -18,7 +18,7 @@ export default function App() {
 
         {/* Register selon le type de compte */}
         <Route path="/register/:role" element={<Register />} />
-        {/* <Route path="/Cgu" element={<Cgu />} /> */}
+        <Route path="/Cgu" element={<Cgu />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/job-offers" element={<JobOffer />} />

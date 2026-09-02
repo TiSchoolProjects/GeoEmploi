@@ -42,7 +42,7 @@ export default function Login() {
       localStorage.setItem("access_token", token);
       const user = jwtDecode(token);
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.error("Login Failed :", error);
     }

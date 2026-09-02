@@ -24,7 +24,7 @@ const onSubmit = async (formData) => {
       .split(",")
       .map((skill) => skill.trim())
       .filter(Boolean)
-      const seekerResponse = await fetch(seekerpath,
+      const seekerResponse = await fetch("http://localhost:4242/auth/register/seeker",
         {
           method: "POST",
           headers: {"Content-Type": "application/json",},
@@ -42,7 +42,9 @@ const onSubmit = async (formData) => {
         throw new Error("Erreur lors de la création du compte Seeker");
       }
       const seeker = await seekerResponse.json();
-      console.log("Compte créé :", seeker);
+      console.log("Compte créé.");
+      
+      navigate("/login");
     }
 
   if (isRH) {
@@ -72,7 +74,7 @@ const onSubmit = async (formData) => {
           : data.message || "Erreur lors de la création du compte RH"
       );
     }
-    console.log("Compte Employeur créé :", data);
+    console.log("Compte Employeur créé.");
 
     navigate("/login");
   }
