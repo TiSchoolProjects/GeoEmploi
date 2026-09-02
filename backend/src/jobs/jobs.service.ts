@@ -16,7 +16,7 @@ export class JobsService {
     return {
       GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       geocodingScore: null,
-      geocodingSource: null,
+      geocodingSource: "api-adresse",
     };
   }
 

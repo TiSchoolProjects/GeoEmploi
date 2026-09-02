@@ -42,7 +42,7 @@ async function geocode(address: string): Promise<Partial<Job>> {
           lat: null,
           lng: null,
           geocodingScore: null,
-          geocodingSource: null,
+          geocodingSource: "api-adresse",
           geocodedAt: null,
           GeocodingStatus: GeoCodingStatus.TO_VERIFY,
         };
@@ -66,50 +66,112 @@ async function geocode(address: string): Promise<Partial<Job>> {
         lat: null,
         lng: null,
         geocodingScore: null,
-        geocodingSource: null,
+        geocodingSource: "api-adresse",
         geocodedAt: null,
         GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       }
     }
 }
 
+function calculateDistance(
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number,
+): number {
+  const R = 6371;
+
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c * 1000;
+}
+
+
 async function main() {
+  const startT = Date.now();
   console.log('-Script de Re-géocodage GeoEmploi-');
 
   await dataSource.initialize();
+
   const repo = dataSource.getRepository(Job);
 
-  const toHandle = await repo.find({ where: [
-    {GeocodingStatus: GeoCodingStatus.TO_VERIFY,},
-    {lat: IsNull(),},
-    {lng: IsNull(),},
-  ],})
+  const toHandle = await repo.createQueryBuilder("job").where(
+    `job."GeocodingStatus" != :valid 
+    OR job."geocodingSource" IS DISTINCT FROM :source
+    OR job.lat IS NULL
+    OR job.lng IS NULL
+    `,
+    {
+      valid: GeoCodingStatus.VALID,
+      source: "api-adresse",
+    },
+  ).getMany();
 
   console.log(`${toHandle.length} offre(s) à Re-géocoder.\n`);
 
   let suc = 0;
   let fail = 0;
+  let totalDis = 0;
+  let moved = 0;
+  const movements: { id: number; address: string; distance: number;}[] = [];
 
   for (const job of toHandle) {
     console.log(`Adresse n°${job.id} - ${job.adress}`);
+    
+    const OldLat = job.lat != null ? Number(job.lat) : null;
+    const OldLng = job.lng != null ? Number(job.lng) : null;
     const result = await geocode(job.adress);
 
     await repo.update(job.id, result);
 
-    if (result.GeocodingStatus === GeoCodingStatus.VALID) {
+    if (result.GeocodingStatus === GeoCodingStatus.VALID && result.lat != null && result.lng != null) {
       suc++;
       console.log(`Réussite : ${result.lat}, ${result.lng}`,);
+
+      const newLat = Number(result.lat);
+      const newLng = Number(result.lng);
+      
+      if (OldLat != null && OldLng != null) {
+        const dis = calculateDistance(OldLat, OldLng, newLat, newLng);
+
+      moved++;
+      totalDis += dis;
+      movements.push({id: job.id, address: job.adress, distance: dis});
+      console.log(` Déplacement: ${dis.toFixed(0)}mètre(s).`);
+      }
     } else {
       fail++;
-      console.log(`à revérifier`);
+      console.log(`Localisation à vérifier`);
     }
     await sleep(1000);
   }
 
-  console.log('\n - Résultat - ');
+  const time = (Date.now() - startT) / 1000;
+  movements.sort((a,b) => b.distance - a.distance);
+  const avgDis = moved > 0 ? totalDis / moved : 0;
+
+  console.log('\n\n - Résultat - ');
   console.log(`Offres traitées : ${toHandle.length}`);
   console.log(`Succès : ${suc}`);
   console.log(`Echecs : ${fail}`);
+  console.log(`Temps d'éxécution: ${time.toFixed(1)} secondes`);
+  console.log(`Déplacement moyen: ${avgDis.toFixed(1)} mètre(s)`);
+
+  if (movements.length > 0) {
+    console.log('\n\n- Top 5 des Déplacements -');
+    for(const move of movements.slice(0,5)) {
+      console.log(`Adresse n°${move.id} - ${move.address} - ${move.distance.toFixed(0)} m`)
+    }
+  }
 
   await dataSource.destroy();
 }
