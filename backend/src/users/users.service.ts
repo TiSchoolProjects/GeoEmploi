@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   findbyEmail(email: string) {
-    return this.UserRepository.findOneBy({email});
+    return this.UserRepository.createQueryBuilder('user').addSelect('user.password').where('user.email = :email', {email}).getOne();
   }
 
   findOne(id: number) {

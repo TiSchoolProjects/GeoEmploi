@@ -6,6 +6,7 @@ import { User } from "../users/entities/user.entity";
 import { RegisterSeekerDto } from "./dto/register-seeker.dto";
 import { RegisterEmployerDto } from "./dto/register-employer.dto";
 import { loginDoc, registerSeekersDoc, registerEmployerDoc } from "./auth.controller.docs";
+import { Public } from "./decorators/public.decorator";
 
 @Controller('auth')
 export class AuthController {
@@ -13,18 +14,21 @@ export class AuthController {
 
   @loginDoc()
   @UseGuards(LocalAuthGuard)
+  @Public()
   @Post('login')
   async login(@Req() req: Request & { user: User}) {
     return this.authService.login(req.user);
   }
 
   @registerSeekersDoc()
+  @Public()
   @Post('register/seeker')
   registerSeeker(@Body() registerSeekerDto: RegisterSeekerDto) {
     return this.authService.registerSeeker(registerSeekerDto,);
   }
 
   @registerEmployerDoc()
+  @Public()
   @Post('register/employer')
   registerEmployer(@Body() registerEmployerDto: RegisterEmployerDto) {
     return this.authService.registerEmployer(registerEmployerDto,);

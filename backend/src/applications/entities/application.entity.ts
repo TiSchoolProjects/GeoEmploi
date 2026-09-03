@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { User } from "../../users/entities/user.entity";
 import { Job } from "../../jobs/entities/job.entity";
 
@@ -12,6 +12,7 @@ export enum ApplicationStatus {
 
 
 @Entity('applications')
+@Unique(['jobSeekerId', 'jobId'])
 export class Application {
   @ApiProperty({ description: 'Unique application id', example: 12345 })
   @PrimaryGeneratedColumn()
@@ -30,7 +31,7 @@ export class Application {
   jobSeekerId: number;
 
   @ManyToOne('User', (user: User) => user.applications, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'jobSeeker' })
+  @JoinColumn({ name: 'jobSeekerId' })
   jobSeeker: User;
 
   @ApiProperty({ description: 'Application status', example: ApplicationStatus.ACCEPTED})
