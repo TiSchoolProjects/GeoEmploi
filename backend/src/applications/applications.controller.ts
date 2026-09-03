@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Req } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationStatusDto } from './dto/update-application.dto';
@@ -13,8 +13,13 @@ export class ApplicationsController {
   @applyDoc()
   @Roles(UserRole.ADMIN, UserRole.SEEKER)
   @Post()
-  apply(@Body() createApplicationDto: CreateApplicationDto) {
-    return this.applicationsService.apply(createApplicationDto.jobSeekerId, createApplicationDto.jobId);
+  apply(@Body() createApplicationDto: CreateApplicationDto,
+        @Req() req: Request & {user: {userId: number; role: UserRole;};
+      },
+  ) {
+    const id = req.user.role === UserRole.ADMIN ? createApplicationDto.jobSeekerId : req.user.userId;
+
+    return this.applicationsService.apply(id, createApplicationDto.jobId);
   }
 
   @findAllDoc()
