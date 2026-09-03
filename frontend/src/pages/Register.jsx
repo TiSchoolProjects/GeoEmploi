@@ -27,9 +27,13 @@ const onSubmit = async (formData) => {
       const seekerResponse = await fetch("http://localhost:4242/auth/register/seeker",
         {
           method: "POST",
-          headers: {"Content-Type": "application/json",},
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
           body: JSON.stringify({
-            username: formData.username,
+            firstname: formData.firstName,
+            lastname: formData.lastName,
             email: formData.email,
             password: formData.password,
             skills,
@@ -43,7 +47,6 @@ const onSubmit = async (formData) => {
       }
       const seeker = await seekerResponse.json();
       console.log("Compte créé.");
-      
       navigate("/login");
     }
 
@@ -56,7 +59,8 @@ const onSubmit = async (formData) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.username,
+          firstname: formData.firstName,
+          lastname: formData.lastName,
           email: formData.email,
           password: formData.password,
           companyName: formData.companyName,
@@ -168,36 +172,6 @@ const onSubmit = async (formData) => {
                   })}
               />
               {errors.password && (<span className="error">{errors.password.message}</span>)}
-            </div>
-          </div>
-
-          <div className="input-row">
-            {/*GENDER*/}
-            <div className="form-group">
-              <label htmlFor="gender">Civilité</label>
-
-              <select
-                id="gender" {...register("gender", {required: "Veuillez choisir votre Civilité",})}
-              >
-                <option value="" hidden>Choisissez votre civilité</option>
-
-                <option value="female">Madame</option>
-                <option value="male">Monsieur</option>
-                <option value="other">Autre</option>
-              </select>
-
-              {errors.gender && (<span className="error">{errors.gender.message}</span>)}
-            </div>
-            {/*USERNAME*/}
-            <div className="form-group">
-              <label htmlFor="username">Nom d'utilisateur</label>
-              <input
-                id="username"
-                type="text"
-                placeholder="Nom d'utilisateur"
-                {...register("username", {required:"Le nom d'utilisateur est obligatoire",})}
-              />
-              {errors.username && (<span className="error">{errors.username.message}</span>)}
             </div>
           </div>
 

@@ -38,7 +38,7 @@ export default function JobOffer() {
         throw new Error(result.message || "Informations invalides");
       }
 
-      navigate("/home");
+      navigate("/map");
     } catch (error) {
       console.error("Post Failed :", error);
     }

@@ -8,6 +8,7 @@ export default function EditProfile() {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
 
   const {
     register,
@@ -16,31 +17,59 @@ export default function EditProfile() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
+    useEffect(() => {
+    const getProfile = async () => {
+      if (!user) {
+        navigate("/login");
+        return;
+      }
 
-    reset({
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      email: user.email || "",
-      username: user.username || "",
-      gender: user.gender || "",
+      try {
+        const endpoint = user.role === "employer"
+          ? `http://localhost:4242/employers/${user.sub}`
+          : `http://localhost:4242/seekers/${user.sub}`;
 
-      // Seeker
-      skills: Array.isArray(user.skills)
-        ? user.skills.join(", ")
-        : user.skills || "",
-      experience: user.experience || "",
-      availability: user.availability || "",
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
 
-      // RH
-      companyName: user.companyName || "",
-      companyDesc: user.companyDesc || "",
-    });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            Array.isArray(data.message)
+              ? data.message.join(", ")
+              : data.message || "Impossible de récupérer le profil"
+          );
+        }
+
+        reset({
+          firstName: data.user?.firstname || "",
+          lastName: data.user?.lastname || "",
+          email: data.user?.email || "",
+
+          skills: Array.isArray(data.skills)
+            ? data.skills.join(", ")
+            : data.skills || "",
+
+          experience: data.experience || "",
+          availability: data.availability || "",
+
+          companyName: data.companyName || "",
+          companyDesc: data.companyDesc || "",
+        });
+      } catch (error) {
+        console.error(error);
+        alert(error.message);
+      }
+    };
+
+    getProfile();
   }, [reset, navigate]);
+
 
   if (!user) {
     return null;
@@ -62,8 +91,6 @@ export default function EditProfile() {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        username: formData.username,
-        gender: formData.gender,
       };
 
       if (isSeeker) {
@@ -76,10 +103,10 @@ export default function EditProfile() {
         body.companyName = formData.companyName;
         body.companyDesc = formData.companyDesc;
       }
-
-      const response = await fetch(`http://localhost:4242/auth/profile`,
+      const endpoint = isRH ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
+      const response = await fetch(endpoint,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
 
@@ -159,51 +186,21 @@ export default function EditProfile() {
             </div>
           </div>
 
-          {/* EMAIL / USERNAME */}
-          <div className="input-row">
+          {/* EMAIL*/}
 
-            <div className="form-group">
-              <label htmlFor="email">Adresse Email</label>
-
-              <input
-                id="email"
-                type="email"
-                placeholder="example@example.com"
-                {...register("email", {
-                  required: "L'email est obligatoire",pattern: {value: /^\S+@\S+\.\S+$/,message: "Email invalide",}})}
-              />
-
-              {errors.email && (<span className="error">{errors.email.message}</span>)}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="username">Nom d'utilisateur</label>
-
-              <input
-                id="username"
-                type="text"
-                placeholder="Nom d'utilisateur"
-                {...register("username", {required:"Le nom d'utilisateur est obligatoire"})}
-              />
-
-              {errors.username && (<span className="error">{errors.username.message}</span>)}
-            </div>
-          </div>
-
-          {/* CIVILITE */}
           <div className="form-group">
-            <label htmlFor="gender">Civilité</label>
+            <label htmlFor="email">Adresse Email</label>
 
-            <select id="gender" {...register("gender", {required: "Veuillez choisir votre civilité",})}>
-              <option value="" hidden>Choisissez votre civilité</option>
-              <option value="female">Madame</option>
-              <option value="male">Monsieur</option>
-              <option value="other">Autre</option>
-            </select>
+            <input
+              id="email"
+              type="email"
+              placeholder="example@example.com"
+              {...register("email", {
+                required: "L'email est obligatoire",pattern: {value: /^\S+@\S+\.\S+$/,message: "Email invalide",}})}
+            />
 
-            {errors.gender && (<span className="error">{errors.gender.message}</span>)}
+            {errors.email && (<span className="error">{errors.email.message}</span>)}
           </div>
-
           {/* SEEKER */}
           {isSeeker && (
             <>
