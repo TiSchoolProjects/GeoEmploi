@@ -7,10 +7,15 @@ export class RegisterEmployerDto {
   @IsNotEmpty()
   email: string;
 
-  @ApiProperty({ description: 'User\'s first and last name', example: 'John Doe' })
+  @ApiProperty({ description: 'User\'s firstname', example: 'John' })
   @IsString()
   @IsNotEmpty()
-  username: string;
+  firstname: string;
+
+  @ApiProperty({ description: 'User\'s lastname', example: 'Doe' })
+  @IsString()
+  @IsNotEmpty()
+  lastname: string;
 
   @ApiProperty({ description: 'Account password', example: 'very-secret-password', writeOnly: true })
   @IsString()
