@@ -4,12 +4,7 @@ import { Seeker } from "../../seekers/entities/seeker.entity";
 import { Job } from "../../jobs/entities/job.entity";
 import { Application } from "../../applications/entities/application.entity";
 import { ApiProperty } from '@nestjs/swagger';
-
-export enum UserRole {
-  SEEKER = 'seeker',
-  EMPLOYER = 'employer',
-  ADMIN = 'admin',
-}
+import { UserRole } from "../../auth/roles.enum";
 
 export enum UserStatus {
   ACTIVE = 'active',
