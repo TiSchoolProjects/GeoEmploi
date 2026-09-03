@@ -20,7 +20,7 @@ services:
     build:
       context: backend/
     env_file:
-        - .env
+        - backend/.env
     restart: unless-stopped
     environment:
       NODE_ENV: development
@@ -40,7 +40,7 @@ services:
     build:
       context: frontend/
     ports:
-      - 5173:5173
+      - "5173:80"
     depends_on:
       - backend
 

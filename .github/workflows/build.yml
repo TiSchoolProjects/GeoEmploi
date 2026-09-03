@@ -1,0 +1,29 @@
+name: build
+run-name: build
+on: 
+  push:
+    branches: [main]
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Repository checkout
+          uses: actions/checkout@v4
+
+        - name: Backend .env copy 
+          working-directory: backend 
+          run: |
+            cp .env.example .env
+
+        - name: launch docker
+          run: docker compose up --build -d
+
+        - name: Clean and Upload
+          if: success()
+          uses: actions/upload-artifact@v4
+          with:
+            name: docker-artifact
+            path: .
+            include-hidden-files: true
+
+
