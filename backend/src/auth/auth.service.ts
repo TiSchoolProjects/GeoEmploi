@@ -20,8 +20,8 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findbyEmail(username);
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user = await this.usersService.findbyEmail(email);
     if (user && await compare(pass, user.password)) {
       const { password, ...result } = user;
       return result;
@@ -64,10 +64,7 @@ export class AuthService {
 
       const seekerSaved = await manager.save(Seeker, seeker);
 
-      return { message: 'Compte Chercheur créé avec succès.', 
-        user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
-        seeker: seekerSaved,
-      };
+      return { message: 'Compte Chercheur créé avec succès.',};
     });
   }
 
@@ -98,10 +95,7 @@ export class AuthService {
 
       const employerSaved = await manager.save(Employer, employer);
 
-      return { message: 'Compte Employeur créé avec succès.', 
-        user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
-        emplyer: employerSaved,
-      };
+      return { message: 'Compte Employeur créé avec succès.',};
     });
 
   }
