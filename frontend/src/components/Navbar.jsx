@@ -18,14 +18,14 @@ function NavBar() {
       </div>
 
       <div className="nav-right">
-        <Link to="/Cgu" className="nav-link">À propos</Link>
+        {/*<Link to="/Cgu" className="nav-link">À propos</Link>*/}
 
-        {user?.role === "seeker" && (
-          <Link to="/applied-jobs" className="nav-link">Candidatures</Link>
-        )}
+        {/* {user?.role === "seeker" && (
+          <Link to="/my-application" className="nav-link">Candidatures</Link>
+        )} */}
         {user?.role === "employer" && (
           <div className="employer-actions">
-            <Link to="/my-job-offers" className="nav-link">Voir mes offres</Link>
+            {/* <Link to="/my-job-offers" className="nav-link">Voir mes offres</Link> */}
             <Link to="/job-offers" className="nav-link">Créer une offre</Link>
           </div>
         )}

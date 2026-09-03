@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
-import { seekerpath } from '../utils/config.js';
+// import { seekerpath } from '../utils/config.js';
 
 export default function Register() {
   const { role } = useParams();

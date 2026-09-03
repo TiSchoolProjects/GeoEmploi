@@ -8,6 +8,7 @@ import MapPage from "./pages/MapPage";
 import Profile from "./pages/Profile";
 import JobOffer from "./pages/JobOffer";
 import MyJobOffers from "./pages/MyJobOffers";
+import Application from "./pages/Application";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/job-offers" element={<JobOffer />} />
         <Route path="/my-job-offers" element={<MyJobOffers />} />
+        <Route path="/my-application" element={<Application />} />
         <Route path="/map" element={<MapPage />} />
 
         {/* Si aucune route ne correspond */}
