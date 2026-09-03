@@ -116,11 +116,22 @@ html, body, #root {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+.jobOfferContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .jobOfferPopup {
   width: max-content;
   min-width: 200px;
   max-width: min(280px, calc(100vw - 48px));
   text-align: left;
+}
+
+.jobOfferPopup + .jobOfferPopup {
+  padding-top: 12px;
+  border-top: 1px solid #d9d9d9;
 }
 
 .jobOfferPopup h3 {
