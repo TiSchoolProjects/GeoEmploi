@@ -19,8 +19,8 @@ export class JobsController {
       @Req() req: Request & {user: {userId: number; role: UserRole;};
       },
   ) {
-    const id = req.user.role === UserRole.ADMIN ? createJobDto.employerId : req.user.userId;
-    return this.jobsService.create({...createJobDto, id});
+    const employerId = req.user.role === UserRole.ADMIN ? createJobDto.employerId : req.user.userId;
+    return this.jobsService.create({...createJobDto, employerId});
   }
 
   @findAllDoc()
