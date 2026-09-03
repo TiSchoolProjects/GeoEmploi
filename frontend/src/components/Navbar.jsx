@@ -22,7 +22,10 @@ function NavBar() {
           <Link to="/applied-jobs" className="nav-link">Candidatures</Link>
         )}
         {user?.role === "employer" && (
-          <Link to="/job-offers" className="nav-link">Mes Offres</Link>
+          <div className="employer-actions">
+            <Link to="/my-job-offers" className="nav-link">Voir mes offres</Link>
+            <Link to="/job-offers" className="nav-link">Créer une offre</Link>
+          </div>
         )}
         <Link to={user ? "/profile" : "/login"}className="profile-btn" aria-label="Account"> 👤 </Link>
       </div>

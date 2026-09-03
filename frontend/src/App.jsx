@@ -7,6 +7,8 @@ import Home from "./pages/Home"
 import MapPage from "./pages/MapPage";
 import Profile from "./pages/Profile";
 import JobOffer from "./pages/JobOffer";
+import MyJobOffers from "./pages/MyJobOffers";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -22,6 +24,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/job-offers" element={<JobOffer />} />
+        <Route path="/my-job-offers" element={<MyJobOffers />} />
         <Route path="/map" element={<MapPage />} />
 
         {/* Si aucune route ne correspond */}
