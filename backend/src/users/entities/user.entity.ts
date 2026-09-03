@@ -30,9 +30,13 @@ export class User {
   @Column()
   password: string;
 
-  @ApiProperty({ description: 'User first and last name', example: 'John Doe' })
+  @ApiProperty({ description: 'User firstname', example: 'John' })
   @Column()
-  username: string;
+  firstname: string;
+
+  @ApiProperty({ description: 'User lastname', example: 'Doe' })
+  @Column()
+  lastname: string;
 
   @ApiProperty({ description: 'Account type and permissions', example: UserRole.SEEKER })
   @Column({ type: 'enum', enum: UserRole, default: UserRole.SEEKER })
