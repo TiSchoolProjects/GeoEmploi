@@ -115,20 +115,28 @@ export default function MapPage() {
       const offerId = offer.id ?? offer._id ?? index
       const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
       const statusId = `applyStatus-${offerId}`
+      const user = JSON.parse(localStorage.getItem("user"))
+      if (!user) {
+        return { ok: false, message: "Vous devez être connecté pour postuler." }
+      }
+      const userId = user.sub
+      const role = user.role
 
       const popupHtml = `
         <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
           <h3>${offer.title}</h3>
           <p>${offer.description}</p>
           <p><strong>Entreprise :</strong> ${companyName}</p>
-          <button
-            type="button"
-            class="jobDetailsBtn"
-            data-offer-id="${offerId}"
-            aria-describedby="${statusId}"
-          >
-            Postuler
-          </button>
+          ${role === "seeker" ? `
+            <button
+              type="button"
+              class="jobDetailsBtn"
+              data-offer-id="${offerId}"
+              aria-describedby="${statusId}"
+            >
+              Postuler
+            </button>
+          ` : ""}
           <p
             id="${statusId}"
             class="applyStatus"
