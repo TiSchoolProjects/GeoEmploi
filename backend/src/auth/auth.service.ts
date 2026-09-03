@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service.js';
+import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcrypt';
-import { RegisterSeekerDto } from './dto/register-seeker.dto.js';
+import { RegisterSeekerDto } from './dto/register-seeker.dto';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { Seeker } from '../seekers/entities/seeker.entity.js';
-import { User, UserRole } from '../users/entities/user.entity.js';
+import { Seeker } from '../seekers/entities/seeker.entity';
+import { User } from '../users/entities/user.entity';
+import { UserRole } from './roles.enum';
 import { ConflictException } from '@nestjs/common';
 import { Employer } from '../employers/entities/employer.entity.js';
 import { RegisterEmployerDto } from './dto/register-employer.dto.js';
