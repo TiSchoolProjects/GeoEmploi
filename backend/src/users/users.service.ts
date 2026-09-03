@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { User, UserStatus } from './entities/user.entity';
+import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { UpdateStatusDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -31,14 +32,14 @@ export class UsersService {
     return this.UserRepository.findOneBy({id});
   }
 
-  async UpdateStatus(id: number, status: UserStatus): Promise<User> {
+  async UpdateStatus(id: number, data: UpdateStatusDto): Promise<User> {
     const user = await this.UserRepository.findOne({where: {id}});
 
     if (!user) {
       throw new NotFoundException("Utilisateur non trouvée.");
     }
 
-    user.status = status;
+    user.status = data.status;
     return this.UserRepository.save(user);
   }
 

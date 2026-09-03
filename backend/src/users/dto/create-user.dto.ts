@@ -12,9 +12,14 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
-  @ApiProperty({ description: 'User\'s first and last name', example: 'John Doe' })
+  @ApiProperty({ description: 'User\'s firstname', example: 'John' })
   @IsString()
   @IsNotEmpty()
-  username: string;
+  firstname: string;
+
+  @ApiProperty({ description: 'User\'s lastname', example: 'Doe' })
+  @IsString()
+  @IsNotEmpty()
+  lastname: string;
 }
 

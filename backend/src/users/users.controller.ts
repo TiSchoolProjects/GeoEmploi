@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { createDoc, findAllDoc, findOneDoc, findbyEmailDoc, updateDoc, removeDoc } from './user.controller.doc';
 import { UserStatus } from './entities/user.entity';
+import { UpdateStatusDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -36,9 +37,9 @@ export class UsersController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() userStatus: UserStatus,
+    @Body() updateStatusDto: UpdateStatusDto,
   ) {
-      return this.usersService.UpdateStatus(id, userStatus);
+      return this.usersService.UpdateStatus(id, updateStatusDto);
     }
 
   @removeDoc()
