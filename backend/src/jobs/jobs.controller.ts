@@ -49,14 +49,12 @@ export class JobsController {
   }
 
   @archiveDoc()
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   archive(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.archive(id);
   }
 
   @removeDoc()
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.remove(+id);

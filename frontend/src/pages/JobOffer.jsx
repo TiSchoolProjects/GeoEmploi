@@ -72,11 +72,8 @@ export default function JobOffer() {
           </div>
           <div className="form-group">
             <label htmlFor="text">Description</label>
-            <input
-              id="description"
-              type="text"
-              placeholder="Description du job"
-              {...register("description", {required: "La description est requise"})}
+            <textarea id="description" placeholder="Description du job" rows="6"
+              {...register("description", {required: "La description est requise",})}
             />
             {errors.password && (<span className="error">{errors.password.message}</span>
             )}

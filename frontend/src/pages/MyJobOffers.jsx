@@ -1,53 +1,172 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
 
 export default function MyJobOffers() {
   const [offers, setOffers] = useState([]);
+  const [employer, setEmployer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [deletingId, setDeletingId] = useState(null);
+
+  // Offre popup détail
+  const [selectedOffer, setSelectedOffer] = useState(null);
+
+  // Offre editt
+  const [editingOffer, setEditingOffer] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const employerId = user?.sub;
+    const fetchData = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const employerId = user?.sub;
 
-    if (!employerId) {
-      setError("Impossible de récupérer l'identifiant de l'employeur.");
-      setLoading(false);
-      return;
-    }
+        if (!employerId) {
+          throw new Error("Impossible de récupérer l'identifiant de l'employeur.");
+        }
 
-    fetch(`http://localhost:4242/jobs/employer/${employerId}`)
-      .then((response) => {
-        if (!response.ok) {
+        // Récup offres
+        const offersResponse = await fetch(`http://localhost:4242/jobs/employer/${employerId}`);
+
+        if (!offersResponse.ok) {
           throw new Error("Erreur lors de la récupération des offres.");
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Offres récupérées :", data);
-        setOffers(Array.isArray(data) ? data : []); // tableau ? 
-        setLoading(false);
-      })
-      .catch((err) => {
+
+        const offersData = await offersResponse.json();
+
+        // Récup infos employeur
+        const employerResponse = await fetch(`http://localhost:4242/employers/${employerId}`);
+
+        if (!employerResponse.ok) {
+          throw new Error("Erreur lors de la récupération des informations de l'entreprise.");
+        }
+
+        const employerData = await employerResponse.json();
+        setEmployer(employerData);
+        const offersWithEmployer = Array.isArray(offersData) ? offersData.map((offer) => ({...offer, employer: employerData,})): [];
+        setOffers(offersWithEmployer);
+      } catch (err) {
         console.error(err);
-        setError("Impossible de charger vos offres.");
+        setError(err.message || "Impossible de charger vos offres.");
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const handleEdit = (offerId) => {
-    console.log("Modifier l'offre :", offerId);
+  const handleDelete = async (offerId) => {
+    const result = await Swal.fire({
+      title: "Supprimer l'offre ?",
+      text: "Êtes-vous sûr de vouloir supprimer cette offre ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Supprimer",
+      cancelButtonText: "Annuler",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      setDeletingId(offerId);
+      setError("");
+
+      const response = await fetch(`http://localhost:4242/jobs/${offerId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Erreur lors de la suppression de l'offre.");
+      setOffers((currentOffers) => currentOffers.filter((offer) => offer.id !== offerId));
+    } catch (err) {
+      console.error(err);
+      setError("Impossible de supprimer l'offre.");
+    } finally {
+      setDeletingId(null);
+    }
   };
 
-  const handleDelete = (offerId) => {
-    console.log("Supprimer l'offre :", offerId);
+  const handleDetails = (offer) => {
+    setSelectedOffer(offer);
   };
+
+  const closeDetails = () => {
+    setSelectedOffer(null);
+  };
+
+  const handleEdit = (offer) => {
+    setEditingOffer({...offer,});
+  };
+
+  const closeEdit = () => {
+    setEditingOffer(null);
+  };
+
+  const handleEditChange = (e) => {
+    const {name, value} = e.target;
+
+    setEditingOffer((current) => ({...current, [name]: value,}));
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+
+    if (!editingOffer)return;
+
+    try {
+      setSaving(true);
+      setError("");
+
+      const response = await fetch(`http://localhost:4242/jobs/${editingOffer.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: editingOffer.title,
+            description: editingOffer.description,
+            adress: editingOffer.adress,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Erreur lors de la modification de l'offre.");
+      const updatedOffer = await response.json();
+
+      // kkeep infos employer
+      const updatedOfferWithEmployer = {...updatedOffer,employer: employer,};
+
+      setOffers((currentOffers) =>
+        currentOffers.map((offer) =>
+          offer.id === updatedOffer.id ? updatedOfferWithEmployer : offer
+        )
+      );
+
+      setEditingOffer(null);
+    } catch (err) {
+      console.error(err);
+      setError("Modification impossible");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const truncateDescription = (description, maxLength = 120) => {
+    if (!description) return "";
+    if (description.length <= maxLength) {
+      return description;
+    }
+    return description.substring(0, maxLength).trimEnd() + "...";
+  };
+
 
   return (
     <>
       <NavBar />
-
       <main className="job-offers-page">
         <div className="job-offers-header">
           <h1>Mes offres</h1>
@@ -79,31 +198,49 @@ export default function MyJobOffers() {
               <div className="offer-card" key={`offer-${offer.id}`}>
                 <div className="offer-card-content">
                   <h2>{offer.title}</h2>
-
-                  {offer.company && (
-                    <p className="offer-company">🏢 {offer.company}</p>
+                  {offer.employer && (
+                    <div className="offer-company-info">
+                      {offer.employer.companyName && (
+                        <p className="offer-company">Entreprise: {offer.employer.companyName}</p>
+                      )}
+                      {offer.employer.email && (
+                        <p>{offer.employer.email}</p>
+                      )}
+                    </div>
                   )}
-
                   {offer.adress && (
-                    <p className="offer-location">📍 {offer.adress}</p>
+                    <p className="offer-location"> Adresse: {offer.adress}</p>
                   )}
-
                   {offer.description && (
-                    <p className="offer-description">{offer.description}</p>
-                  )}
-
-                  {offer.contractType && (
-                    <span className="offer-tag">{offer.contractType}</span>
+                    <p className="offer-description"> Description: {truncateDescription(offer.description, 120)}</p>
                   )}
                 </div>
 
+                {/* ACTIONS */}
                 <div className="offer-card-footer">
-                  <button className="edit-offer-btn"onClick={() => handleEdit(offer.id)}>
-                    Modifier
+                  {/* DETAILS */}
+                  <button type="button" className="offer-action-btn details-btn" onClick={() => handleDetails(offer)} title="Voir les détails">
+                    Détail
                   </button>
 
-                  <button className="delete-offer-btn" onClick={() => handleDelete(offer.id)}>
-                    Supprimer
+                  {/* EDIT */}
+                  <button
+                    type="button"
+                    className="offer-action-btn edit-btn"
+                    onClick={() => handleEdit(offer)}
+                    disabled={deletingId === offer.id}
+                    title="Modifier l'offre">
+                    Editer
+                  </button>
+
+                  {/* DELETE */}
+                  <button
+                    type="button"
+                    className="offer-action-btn delete-btn"
+                    onClick={() => handleDelete(offer.id)}
+                    disabled={deletingId === offer.id}
+                    title="Supprimer l'offre">
+                    {deletingId === offer.id ? "..." : "Supprimer"}
                   </button>
                 </div>
               </div>
@@ -111,6 +248,140 @@ export default function MyJobOffers() {
           </div>
         )}
       </main>
+
+      {/* POPUP */}
+      {selectedOffer && (
+        <div className="modal-overlay" onClick={closeDetails}>
+          <div className="modal-content details-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeDetails} type="button">
+              x
+            </button>
+
+            <h2>{selectedOffer.title}</h2>
+            <div className="details-section">
+              <h3>Informations de l'offre</h3>
+
+              <div className="detail-row">
+                <strong>Titre</strong>
+                <span>{selectedOffer.title || "Non renseigné"}</span>
+              </div>
+
+              <div className="detail-row">
+                <strong>Adresse</strong>
+                <span>{selectedOffer.adress || "Non renseignée"}</span>
+              </div>
+
+              <div className="detail-row detail-description">
+                <strong>Description</strong>
+                <p>{selectedOffer.description || "Aucune description disponible."}</p>
+              </div>
+            </div>
+
+            {selectedOffer.employer && (
+              <div className="details-section">
+                <h3>Informations de l'entreprise</h3>
+
+                {selectedOffer.employer.companyName && (
+                  <div className="detail-row">
+                    <strong>Entreprise</strong>
+                    <span>{selectedOffer.employer.companyName}</span>
+                  </div>
+                )}
+
+                {selectedOffer.employer.email && (
+                  <div className="detail-row">
+                    <strong>Email</strong>
+                    <span>{selectedOffer.employer.email}</span>
+                  </div>
+                )}
+
+                {selectedOffer.employer.companyDesc && (
+                  <div className="detail-row">
+                    <strong>Description</strong>
+                    <span>{selectedOffer.employer.companyDesc}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="modal-actions">
+              <button type="button" className="modal-secondary-btn"onClick={closeDetails}>Fermer</button> 
+              <button type="button" className="modal-edit-btn"
+                onClick={() => {closeDetails(); handleEdit(selectedOffer);}}
+              >
+                 Modifier
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* POPUP EDIT */}
+
+      {editingOffer && (
+        <div className="modal-overlay" onClick={closeEdit}>
+          <div className="modal-content edit-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeEdit} type="button">
+              x
+            </button>
+
+            <h2>Modifier l'offre</h2>
+            <form onSubmit={handleSaveEdit}>
+              <div className="form-group">
+                <label htmlFor="title">Titre de l'offre</label>
+
+                <input
+                  id="title"
+                  type="text"
+                  name="title"
+                  value={editingOffer.title || ""}
+                  onChange={handleEditChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="adress">Adresse</label>
+
+                <input
+                  id="adress"
+                  type="text"
+                  name="adress"
+                  value={editingOffer.adress || ""}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="description">Description</label>
+
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="7"
+                  value={editingOffer.description || ""}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="modal-secondary-btn"
+                  onClick={closeEdit}
+                  disabled={saving}
+                >
+                  Annuler
+                </button>
+
+                <button type="submit" className="modal-save-btn" disabled={saving}>
+                  {saving ? "Enregistrement..." : "Enregistrer"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }

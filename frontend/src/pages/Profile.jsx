@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 
@@ -25,45 +26,57 @@ export default function EditProfile() {
       }
 
       try {
-        const endpoint = user.role === "employer"
-          ? `http://localhost:4242/employers/${user.sub}`
-          : `http://localhost:4242/seekers/${user.sub}`;
+        const profileEndpoint =
+          user.role === "employer"
+            ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
 
-        const response = await fetch(endpoint, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const [userResponse, profileResponse] = await Promise.all([
+          fetch(`http://localhost:4242/users/${user.sub}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }),
 
-        const data = await response.json();
+          fetch(profileEndpoint, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }),
+        ]);
 
-        if (!response.ok) {
+        const userData = await userResponse.json();
+        const profileData = await profileResponse.json();
+
+        if (!userResponse.ok) {
           throw new Error(
-            Array.isArray(data.message)
-              ? data.message.join(", ")
-              : data.message || "Impossible de récupérer le profil"
+            Array.isArray(userData.message)
+              ? userData.message.join(", ") : userData.message || "Impossible de récupérer l'utilisateur"
+          );
+        }
+
+        if (!profileResponse.ok) {
+          throw new Error(
+            Array.isArray(profileData.message)
+              ? profileData.message.join(", ") : profileData.message || "Impossible de récupérer le profil"
           );
         }
 
         reset({
-          firstName: data.user?.firstname || "",
-          lastName: data.user?.lastname || "",
-          email: data.user?.email || "",
+          firstName: userData.firstname || "",
+          lastName: userData.lastname || "",
+          email: userData.email || "",
 
-          skills: Array.isArray(data.skills)
-            ? data.skills.join(", ")
-            : data.skills || "",
+          skills: Array.isArray(profileData.skills) ? profileData.skills.join(", ") : profileData.skills || "",
+          experience: profileData.experience || "",
+          availability: profileData.availability || "",
 
-          experience: data.experience || "",
-          availability: data.availability || "",
-
-          companyName: data.companyName || "",
-          companyDesc: data.companyDesc || "",
+          companyName: profileData.companyName || "",
+          companyDesc: profileData.companyDesc || "",
         });
       } catch (error) {
         console.error(error);
-        alert(error.message);
       }
     };
 
@@ -87,55 +100,78 @@ export default function EditProfile() {
             .filter(Boolean)
         : [];
 
-      const body = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+      const userBody = {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
         email: formData.email,
       };
 
+      const profileBody = {};
+
       if (isSeeker) {
-        body.skills = skills;
-        body.experience = formData.experience;
-        body.availability = formData.availability;
+        profileBody.skills = skills;
+        profileBody.experience = formData.experience;
+        profileBody.availability = formData.availability;
       }
 
       if (isRH) {
-        body.companyName = formData.companyName;
-        body.companyDesc = formData.companyDesc;
+        profileBody.companyName = formData.companyName;
+        profileBody.companyDesc = formData.companyDesc;
       }
-      const endpoint = isRH ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
-      const response = await fetch(endpoint,
+
+      const userResponse = await fetch(`http://localhost:4242/users/${user.sub}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-
             Authorization: `Bearer ${user.token}`,
           },
-          body: JSON.stringify(body),
+          body: JSON.stringify(userBody),
         }
       );
 
-      const data = await response.json();
-      if (!response.ok) {
+      const userData = await userResponse.json();
+
+      if (!userResponse.ok) {
         throw new Error(
-          Array.isArray(data.message)
-            ? data.message.join(", ") : data.message || "Erreur dans la modification"
+          Array.isArray(userData.message)
+            ? userData.message.join(", ") : userData.message || "Erreur dans la modification de l'utilisateur"
         );
       }
 
-      // met à jour user stocké
+      const profileEndpoint = isRH ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
+      const profileResponse = await fetch(profileEndpoint, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(profileBody),
+      });
+
+      const profileData = await profileResponse.json();
+
+      if (!profileResponse.ok) {
+        throw new Error(
+          Array.isArray(profileData.message)
+            ? profileData.message.join(", ") : profileData.message || "Erreur dans la modification du profil"
+        );
+      }
+
       const updatedUser = {
         ...user,
-        ...body,
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        email: formData.email,
       };
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      alert("Profil modifié avec succès !");
+      toast.success("Profil modifié avec succès !");
+
       navigate("/profile");
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
