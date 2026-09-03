@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
+import { getToken } from "../utils/auth";
 
 export default function MyJobOffers() {
   const [offers, setOffers] = useState([]);
@@ -10,10 +11,8 @@ export default function MyJobOffers() {
   const [error, setError] = useState("");
   const [deletingId, setDeletingId] = useState(null);
 
-  // Offre popup détail
   const [selectedOffer, setSelectedOffer] = useState(null);
 
-  // Offre editt
   const [editingOffer, setEditingOffer] = useState(null);
   const [saving, setSaving] = useState(false);
 
@@ -27,7 +26,6 @@ export default function MyJobOffers() {
           throw new Error("Impossible de récupérer l'identifiant de l'employeur.");
         }
 
-        // Récup offres
         const offersResponse = await fetch(`http://localhost:4242/jobs/employer/${employerId}`);
 
         if (!offersResponse.ok) {
@@ -36,7 +34,6 @@ export default function MyJobOffers() {
 
         const offersData = await offersResponse.json();
 
-        // Récup infos employeur
         const employerResponse = await fetch(`http://localhost:4242/employers/${employerId}`);
 
         if (!employerResponse.ok) {
@@ -75,8 +72,13 @@ export default function MyJobOffers() {
       setDeletingId(offerId);
       setError("");
 
+      const token = getToken();
+
       const response = await fetch(`http://localhost:4242/jobs/${offerId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) throw new Error("Erreur lors de la suppression de l'offre.");
@@ -122,7 +124,7 @@ export default function MyJobOffers() {
 
       const response = await fetch(`http://localhost:4242/jobs/${editingOffer.id}`,
         {
-          method: "PUT",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
@@ -137,7 +139,6 @@ export default function MyJobOffers() {
       if (!response.ok) throw new Error("Erreur lors de la modification de l'offre.");
       const updatedOffer = await response.json();
 
-      // kkeep infos employer
       const updatedOfferWithEmployer = {...updatedOffer,employer: employer,};
 
       setOffers((currentOffers) =>

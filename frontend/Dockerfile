@@ -1,14 +1,16 @@
-FROM node:25 AS constructor
+FROM node:24 AS constructor
 
 WORKDIR /app
 
 COPY package*.json .
 
+COPY .dsfr.yml ./
+
+RUN npm ci --no-audit --no-fund
+
 COPY . .
 
-RUN npm install
-
-run npm run build
+RUN npm run build
 
 FROM nginx
 
