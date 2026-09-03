@@ -10,18 +10,20 @@ import { User, UserRole } from '../users/entities/user.entity.js';
 import { ConflictException } from '@nestjs/common';
 import { Employer } from '../employers/entities/employer.entity.js';
 import { RegisterEmployerDto } from './dto/register-employer.dto.js';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectDataSource()
     private readonly dataSource: DataSource,
+    private readonly configService: ConfigService,
     private usersService: UsersService,
     private jwtService: JwtService
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findbyEmail(username);
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user = await this.usersService.findbyEmail(email);
     if (user && await compare(pass, user.password)) {
       const { password, ...result } = user;
       return result;
@@ -44,7 +46,7 @@ export class AuthService {
         throw new ConflictException("Un compte existe déja pour cette adresse email.")
       }
 
-      const pwd = await hash(data.password, 10);
+      const pwd = await hash(data.password, this.configService.get<number>('auth.saltRounds')!);
 
       const user = manager.create(User, {
         username: data.username,
@@ -64,10 +66,7 @@ export class AuthService {
 
       const seekerSaved = await manager.save(Seeker, seeker);
 
-      return { message: 'Compte Chercheur créé avec succès.', 
-        user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
-        seeker: seekerSaved,
-      };
+      return { message: 'Compte Chercheur créé avec succès.',};
     });
   }
 
@@ -79,7 +78,7 @@ export class AuthService {
         throw new ConflictException("Un compte existe déja pour cette adresse email.")
       }
 
-      const pwd = await hash(data.password, 10);
+      const pwd = await hash(data.password, this.configService.get<number>('auth.saltRounds')!);
 
       const user = manager.create(User, {
         username: data.username,
@@ -98,10 +97,7 @@ export class AuthService {
 
       const employerSaved = await manager.save(Employer, employer);
 
-      return { message: 'Compte Employeur créé avec succès.', 
-        user: {id: userSaved.id, username: userSaved.username, email: userSaved.email, },
-        emplyer: employerSaved,
-      };
+      return { message: 'Compte Employeur créé avec succès.',};
     });
 
   }
