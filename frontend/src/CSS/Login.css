@@ -356,6 +356,26 @@ body {
   color: white;
 }
 
+.form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 150px;
+  padding: 12px 15px;
+  font-family: "Spectral", Georgia, serif;
+  font-size: 15px;
+  border: 1.5px solid #9CA3AF;
+  border-radius: 11px;
+  background: var(--bg-input);
+  color: var(--text-main);
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
 
 @media (max-width: 600px) {
 
