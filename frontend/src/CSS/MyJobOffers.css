@@ -1,0 +1,254 @@
+/* PAGE */
+
+.job-offers-page {
+  min-height: calc(100vh - 70px);
+  padding: 90px 60px 50px;
+  background: var(--bg-page);
+  box-sizing: border-box;
+}
+
+/*HEADER */
+
+.job-offers-header {
+  max-width: 1200px;
+  margin: 0 auto 35px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-left: 5px solid var(--blue-primary);
+  border-radius: 12px;
+  padding: 25px 30px;
+  box-shadow: 0 3px 12px rgba(20, 43, 77, 0.06);
+}
+
+.job-offers-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+.job-offers-header p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+
+/*GALERIE*/
+
+.offers-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding: 10px 5px 25px;
+  scroll-behavior: smooth;
+}
+
+
+/*BARRE DE SCROLL */
+
+.offers-gallery::-webkit-scrollbar {
+  height: 9px;
+}
+
+.offers-gallery::-webkit-scrollbar-track {
+  background: var(--blue-light);
+  border-radius: 10px;
+}
+
+.offers-gallery::-webkit-scrollbar-thumb {
+  background: var(--blue-primary);
+  border-radius: 10px;
+}
+
+.offers-gallery::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-dark);
+}
+
+
+/*CARD OFFRE*/
+
+.offer-card {
+  flex: 0 0 350px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(20, 43, 77, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--blue-primary);
+  box-shadow: 0 10px 25px rgba(20, 43, 77, 0.12);
+}
+
+
+/* CONTENU*/
+
+.offer-card-content h2 {
+  margin: 0 0 18px;
+  font-size: 21px;
+  line-height: 1.3;
+  color: var(--blue-dark);
+}
+
+.offer-company,
+.offer-location {
+  margin: 10px 0;
+
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+IMPORTANT PENSE A LIMITER LA TAILLE DE LA DESC
+======================================================== */
+
+.offer-description {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-light);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* TYPE DE CONTRAT*/
+
+.offer-tag {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 6px 12px;
+  background: var(--blue-light);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  color: var(--blue-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* BOUTONS*/
+
+.offer-card-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.edit-offer-btn,
+.delete-offer-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--bg-white);
+  transition: all 0.2s ease;
+}
+
+
+/* Modifier */
+.edit-offer-btn {
+  border: 1px solid var(--orange-accent);
+  color: var(--orange-accent);
+}
+
+.edit-offer-btn:hover {
+  background: #FEF0E8;
+  border-color: var(--orange-hover);
+  color: var(--orange-hover);
+}
+
+
+/* Supprimer */
+.delete-offer-btn {
+  border: 1px solid var(--error-red);
+  color: var(--error-red);
+}
+
+.delete-offer-btn:hover {
+  background: var(--error-bg);
+}
+
+
+/* AUCUNE OFFRE */
+.empty-offers {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 30px;
+  text-align: center;
+  background: var(--bg-white);
+  border: 1px dashed var(--border-light);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(20, 43, 77, 0.04);
+}
+
+.empty-offers h2 {
+  margin: 0 0 10px;
+  color: var(--blue-dark);
+  font-size: 22px;
+}
+
+.empty-offers p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+
+/* CHARGEMENT*/
+.loading-message {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+  text-align: center;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  color: var(--text-muted);
+}
+
+
+/*ERREUR*/
+.error-message {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+  text-align: center;
+  color: var(--error-red);
+  background: var(--error-bg);
+  border: 1px solid #F5C2C0;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .job-offers-page {
+    padding: 60px 20px 30px;
+  }
+
+  .job-offers-header {
+    padding: 20px;
+  }
+
+  .job-offers-header h1 {
+    font-size: 26px;
+  }
+
+  .offer-card {
+    flex: 0 0 300px;
+  }
+}

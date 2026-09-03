@@ -337,6 +337,26 @@ body {
   outline-offset: 3px;
 }
 
+.logout-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #dc3545;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+
 @media (max-width: 600px) {
 
   .page {
