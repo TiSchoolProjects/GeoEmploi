@@ -4,18 +4,22 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { createDoc, findAllDoc, findOneDoc, findbyEmailDoc, updateDoc, removeDoc } from './user.controller.doc';
 import { UserStatus } from './entities/user.entity';
 import { UpdateStatusDto, UpdateUserDto } from './dto/update-user.dto';
+import { Roles } from '../auth/decorators/role.decorator';
+import { UserRole } from '../auth/roles.enum';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @createDoc()
+  @Roles(UserRole.ADMIN)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @findAllDoc()
+  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.usersService.findAll();
@@ -52,6 +56,7 @@ export class UsersController {
     }
 
   @removeDoc()
+  @Roles(UserRole.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

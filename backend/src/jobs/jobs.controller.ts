@@ -4,6 +4,8 @@ import { CreateJobDto } from './dto/create-job.dto';
 import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, archiveDoc, removeDoc } from './job.controller.docs';
+import { Roles } from '../auth/decorators/role.decorator';
+import { UserRole } from '../auth/roles.enum';
 
 @Controller('jobs')
 export class JobsController {
@@ -11,6 +13,7 @@ export class JobsController {
 
  /* @UseGuards(JwtAuthGuard)*/
   @createDoc()
+  @Roles(UserRole.ADMIN)
   @Post()
   create(@Body() createJobDto: CreateJobDto) {
     return this.jobsService.create(createJobDto);
@@ -50,6 +53,7 @@ export class JobsController {
 
   @archiveDoc()
   @UseGuards(JwtAuthGuard)
+  @Roles(UserRole.ADMIN)
   @Patch(':id')
   archive(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.archive(id);
@@ -57,6 +61,7 @@ export class JobsController {
 
   @removeDoc()
   @UseGuards(JwtAuthGuard)
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.remove(+id);
