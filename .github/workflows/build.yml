@@ -9,29 +9,13 @@ jobs:
       steps:
         - name: Repository checkout
           uses: actions/checkout@v4
-        
-        - name: Install NodeJs
-          uses: actions/setup-node@v4
-          with:
-            node-version: 25
-            cache: npm
-            cache-dependency-path: |
-              backend/package-lock.json
-              frontend/package-lock.json
 
-        - name: Backend install and build
+        - name: Backend .env copy 
           working-directory: backend 
           run: |
-            npm ci
-            npm run build
+            cp .env.example .env
 
-        - name: Frontend install and build
-          working-directory: frontend
-          run: |
-            npm ci
-            npm run build
-
-        - name: Artefact assembling
+        - name: start service
           run: |
             mkdir -p artifact/backend
             mkdir -p artifact/frontend
@@ -39,11 +23,15 @@ jobs:
             cp backend/package.json backend/package-lock.json artifact/backend/
             cp -r frontend/dist artifact/frontend/dist
 
-        - name: Artefact publication
+        - name: launch docker
+          run: docker compose up --build -d
+
+        - name: Clean and Upload
+          if: success()
           uses: actions/upload-artifact@v4
           with:
-             name: geo-emploi-build-${{ github.sha}}
-             path: artifact/
-             retention-days: 7
+            name: docker-artifact
+            path: .
+            include-hiden-files: true
 
 
