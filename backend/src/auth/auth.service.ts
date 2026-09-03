@@ -6,7 +6,7 @@ import { RegisterSeekerDto } from './dto/register-seeker.dto';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Seeker } from '../seekers/entities/seeker.entity';
-import { User } from '../users/entities/user.entity';
+import { User, UserStatus } from '../users/entities/user.entity';
 import { UserRole } from './roles.enum';
 import { ConflictException } from '@nestjs/common';
 import { Employer } from '../employers/entities/employer.entity.js';
@@ -25,11 +25,21 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findbyEmail(email);
-    if (user && await compare(pass, user.password)) {
-      const { password, ...result } = user;
-      return result;
+    
+    if (!user) {
+      return null;
     }
-    return null;
+
+    if (user.status == UserStatus.SUSPENDED) {
+      return null;
+    }
+
+    const valid = await compare(pass, user.password);
+    if (!valid) {
+      return null;
+    }
+    const { password, ...result } = user;
+    return result;
   }
 
   async login(user: any) {
