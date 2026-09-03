@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
+import { getToken, logout } from "../utils/auth";
 
 export default function EditProfile() {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  const token = getToken();
 
   const {
     register,
@@ -34,14 +35,14 @@ export default function EditProfile() {
           fetch(`http://localhost:4242/users/${user.sub}`, {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }),
 
           fetch(profileEndpoint, {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }),
         ]);
@@ -124,7 +125,7 @@ export default function EditProfile() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(userBody),
         }
@@ -144,7 +145,7 @@ export default function EditProfile() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(profileBody),
       });
@@ -176,7 +177,7 @@ export default function EditProfile() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    logout();
     navigate("/login");
   };
 

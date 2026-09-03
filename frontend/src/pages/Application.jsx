@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
+import { getToken } from "../utils/auth";
 
 export default function Application() {
   const [applications, setApplications] = useState([]);
@@ -9,6 +10,7 @@ export default function Application() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const token = getToken();
     const seekerId = user?.sub;
 
     if (!seekerId) {
@@ -17,7 +19,12 @@ export default function Application() {
       return;
     }
 
-    fetch(`http://localhost:4242/applications/seeker/${seekerId}`)
+    fetch(`http://localhost:4242/applications/seeker/${seekerId}`),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des offres.");
