@@ -16,7 +16,6 @@ import { Seeker } from '../seekers/entities/seeker.entity.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Employer } from '../employers/entities/employer.entity.js';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, Seeker, Employer]),
@@ -33,10 +32,10 @@ import { Employer } from '../employers/entities/employer.entity.js';
   ],
   controllers: [AuthController],
   providers: [
-  //{
-  //  provide: APP_GUARD,
-  //  useClass: JwtAuthGuard,
-  //},
+  {
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard,
+  },
     AuthService,
     LocalStrategy,
     LocalAuthGuard,
