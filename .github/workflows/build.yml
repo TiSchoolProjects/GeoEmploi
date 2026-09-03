@@ -15,14 +15,6 @@ jobs:
           run: |
             cp .env.example .env
 
-        - name: start service
-          run: |
-            mkdir -p artifact/backend
-            mkdir -p artifact/frontend
-            cp -r backend/dist artifact/backend/dist
-            cp backend/package.json backend/package-lock.json artifact/backend/
-            cp -r frontend/dist artifact/frontend/dist
-
         - name: launch docker
           run: docker compose up --build -d
 
@@ -32,6 +24,6 @@ jobs:
           with:
             name: docker-artifact
             path: .
-            include-hiden-files: true
+            include-hidden-files: true
 
 

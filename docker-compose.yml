@@ -20,7 +20,7 @@ services:
     build:
       context: backend/
     env_file:
-        - .env
+        - backend/.env
     restart: unless-stopped
     environment:
       NODE_ENV: development
