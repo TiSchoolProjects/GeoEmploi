@@ -47,7 +47,8 @@ export class AuthService {
       const pwd = await hash(data.password, 10);
 
       const user = manager.create(User, {
-        username: data.username,
+        firstname: data.firstname,
+        lastname: data.lastname,
         email: data.email,
         password: pwd,
         role: UserRole.SEEKER,
@@ -82,7 +83,8 @@ export class AuthService {
       const pwd = await hash(data.password, 10);
 
       const user = manager.create(User, {
-        username: data.username,
+        firstname: data.firstname,
+        lastname: data.lastname,
         email: data.email,
         password: pwd,
         role: UserRole.EMPLOYER,
