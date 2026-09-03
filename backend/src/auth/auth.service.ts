@@ -10,12 +10,14 @@ import { User, UserRole } from '../users/entities/user.entity.js';
 import { ConflictException } from '@nestjs/common';
 import { Employer } from '../employers/entities/employer.entity.js';
 import { RegisterEmployerDto } from './dto/register-employer.dto.js';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectDataSource()
     private readonly dataSource: DataSource,
+    private readonly configService: ConfigService,
     private usersService: UsersService,
     private jwtService: JwtService
   ) {}
@@ -44,7 +46,7 @@ export class AuthService {
         throw new ConflictException("Un compte existe déja pour cette adresse email.")
       }
 
-      const pwd = await hash(data.password, 10);
+      const pwd = await hash(data.password, this.configService.get<number>('auth.saltRounds')!);
 
       const user = manager.create(User, {
         username: data.username,
@@ -76,7 +78,7 @@ export class AuthService {
         throw new ConflictException("Un compte existe déja pour cette adresse email.")
       }
 
-      const pwd = await hash(data.password, 10);
+      const pwd = await hash(data.password, this.configService.get<number>('auth.saltRounds')!);
 
       const user = manager.create(User, {
         username: data.username,
