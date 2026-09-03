@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Req, ForbiddenException } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationStatusDto } from './dto/update-application.dto';
@@ -39,8 +39,15 @@ export class ApplicationsController {
   @findBySeekerDoc()
   @Roles(UserRole.ADMIN, UserRole.SEEKER)
   @Get('/seeker/:seekerId')
-  findBySeeker(@Param('seekerId') id: string) {
-    return this.applicationsService.findbySeekerId(+id);
+  findBySeeker(@Param('seekerId', ParseIntPipe) id: number,
+               @Req() req: Request & {user: {userId: number; role: UserRole;}
+      },
+  ) {
+    if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
+      throw new ForbiddenException("Impossible de consulter les candidatures d'un autre utilisateur.",);
+    }
+
+    return this.applicationsService.findbySeekerId(id);
   }
 
   @findByJobDoc()
