@@ -45,6 +45,19 @@ export function validateDoc() {
     );
 }
 
+export function updateDoc() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Update employer info' }),
+        ApiParam({
+            name: 'updateEmployerDto',
+            type: UpdateEmployerDto,
+            description: 'New employer information',
+        }),
+        ApiResponse({ status: 200, description: 'Updated employer info', type: Employer }),
+        ApiResponse({ status: 404, description: 'No employer found with given id', type: undefined })
+    );
+}
+
 export function removeDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Remove employer from database' }),
