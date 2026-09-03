@@ -11,8 +11,10 @@ function NavBar() {
     <nav className="nav-bar-container">
 
       <div className="logo-section">
-        <Link to="/Home" className="logo-container"><img src={logo} alt="Logo" className="logo" /></Link>
-        <Link to="/Home" className="logo-container"><p className="site-name">GéoEmploi</p></Link>
+        <Link to="/Home" className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+          <p className="site-name">GéoEmploi</p>
+        </Link>
       </div>
 
       <div className="nav-right">
