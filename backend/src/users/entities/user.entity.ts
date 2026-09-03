@@ -22,7 +22,7 @@ export class User {
   email: string;
 
   @ApiProperty({ description: 'Account password', example: 'very-secret-password', writeOnly: true })
-  @Column()
+  @Column({select: false})
   password: string;
 
   @ApiProperty({ description: 'User firstname', example: 'John' })
