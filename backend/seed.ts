@@ -35,8 +35,8 @@ async function seed() {
   if (!employerUser) {
     employerUser = await userRepository.save({
       email: 'employer@demo.fr',
-      password: await bcrypt.hash('Demo123!', saltRounds),
-      username: 'Demo Employer',
+      password: await bcrypt.hash('employer', saltRounds),
+      username: 'Pierre Maréchal',
       role: UserRole.EMPLOYER,
       status: UserStatus.ACTIVE,
     });
@@ -62,8 +62,8 @@ async function seed() {
   if (!seekerUser) {
     seekerUser = await userRepository.save({
       email: 'seeker@demo.fr',
-      password: await bcrypt.hash('Demo123!', saltRounds),
-      username: 'Demo Seeker',
+      password: await bcrypt.hash('seeker', saltRounds),
+      username: 'Jean Baptiste',
       role: UserRole.SEEKER,
       status: UserStatus.ACTIVE,
     });
@@ -98,7 +98,7 @@ async function seed() {
       adress: 'Paris, France',
       lat: 48.8566,
       lng: 2.3522,
-      geocodingSource: 'demo',
+      geocodingSource: 'api-ancien',
       geocodingScore: 1,
       geocodedAt: new Date(),
       GeocodingStatus: GeoCodingStatus.VALID,
