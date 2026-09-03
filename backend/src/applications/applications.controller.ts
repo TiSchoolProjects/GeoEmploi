@@ -11,7 +11,7 @@ export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @applyDoc()
-  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
+  @Roles(UserRole.ADMIN, UserRole.SEEKER)
   @Post()
   apply(@Body() createApplicationDto: CreateApplicationDto) {
     return this.applicationsService.apply(createApplicationDto.jobSeekerId, createApplicationDto.jobId);
