@@ -1,0 +1,49 @@
+name: build
+run-name: build
+on: 
+  push:
+    branches: [main]
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Repository checkout
+          uses: actions/checkout@v4
+        
+        - name: Install NodeJs
+          uses: actions/setup-node@v4
+          with:
+            node-version: 25
+            cache: npm
+            cache-dependency-path: |
+              backend/package-lock.json
+              frontend/package-lock.json
+
+        - name: Backend install and build
+          working-directory: backend 
+          run: |
+            npm ci
+            npm run build
+
+        - name: Frontend install and build
+          working-directory: frontend
+          run: |
+            npm ci
+            npm run build
+
+        - name: Artefact assembling
+          run: |
+            mkdir -p artifact/backend
+            mkdir -p artifact/frontend
+            cp -r backend/dist artifact/backend/dist
+            cp backend/package.json backend/package-lock.json artifact/backend/
+            cp -r frontend/dist artifact/frontend/dist
+
+        - name: Artefact publication
+          uses: actions/upload-artifact@v4
+          with:
+             name: geo-emploi-build-${{ github.sha}}
+             path: artifact/
+             retention-days: 7
+
+
