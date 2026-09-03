@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Map, Marker, Popup, setWorkerUrl } from 'maplibre-gl'
+import { Map as MapLibreMap, Marker, Popup, setWorkerUrl } from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import '../CSS/MapPage.css'
@@ -18,6 +18,7 @@ export default function MapPage() {
   const zoom = 13
   const mapContainer = useRef(null)
   const mapRef = useRef(null)
+  const mapLoadedRef = useRef(false)
   const markersRef = useRef([])
   const jobOffersRef = useRef([])
   const hasSearchedRef = useRef(false)
@@ -95,11 +96,18 @@ export default function MapPage() {
 
   const renderMarkersInView = () => {
     const map = mapRef.current
-    if (!map) return
+    if (!map || !mapLoadedRef.current) return
+
+    let bounds
+    try {
+      bounds = map.getBounds()
+    } catch {
+      return
+    }
 
     clearMarkers()
 
-    const bounds = map.getBounds()
+    const offersByLngLat = new Map()
 
     jobOffersRef.current.forEach((offer, index) => {
       if (offer.lat == null || offer.lng == null) {
@@ -107,41 +115,52 @@ export default function MapPage() {
       }
 
       const lngLat = [Number(offer.lng), Number(offer.lat)]
+      const key = `${lngLat[0]},${lngLat[1]}`
 
+      if (!offersByLngLat.has(key)) {
+        offersByLngLat.set(key, { lngLat, offers: [] })
+      }
+      offersByLngLat.get(key).offers.push({ ...offer, index })
+    })
+
+    offersByLngLat.forEach(({ lngLat, offers }) => {
       if (!bounds.contains(lngLat)) {
         return
       }
 
-      const offerId = offer.id ?? offer._id ?? index
-      const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
-      const statusId = `applyStatus-${offerId}`
       const user = JSON.parse(localStorage.getItem("user"))
-      if (!user) {
-        return { ok: false, message: "Vous devez être connecté pour postuler." }
-      }
-      const userId = user.sub
-      const role = user.role
+      const role = user?.role
 
       const popupHtml = `
-        <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
-          <h3>${offer.title}</h3>
-          <p>${offer.description}</p>
-          <p><strong>Entreprise :</strong> ${companyName}</p>
-          ${role === "seeker" ? `
-            <button
-              type="button"
-              class="jobDetailsBtn"
-              data-offer-id="${offerId}"
-              aria-describedby="${statusId}"
-            >
-              Postuler
-            </button>
-          ` : ""}
-          <p
-            id="${statusId}"
-            class="applyStatus"
-            role="alert"
-          ></p>
+        <div class="jobOfferContainer">
+          ${offers.map((offer) => {
+            const offerId = offer.id ?? offer._id ?? offer.index
+            const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
+            const statusId = `applyStatus-${offerId}`
+
+            return `
+              <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
+                <h3>${offer.title}</h3>
+                <p>${offer.description}</p>
+                <p><strong>Entreprise :</strong> ${companyName}</p>
+                ${role === "seeker" ? `
+                  <button
+                    type="button"
+                    class="jobDetailsBtn"
+                    data-offer-id="${offerId}"
+                    aria-describedby="${statusId}"
+                  >
+                    Postuler
+                  </button>
+                ` : ""}
+                <p
+                  id="${statusId}"
+                  class="applyStatus"
+                  role="alert"
+                ></p>
+              </div>
+            `
+          }).join('')}
         </div>
       `
 
@@ -156,11 +175,24 @@ export default function MapPage() {
           closeBtn.setAttribute('aria-label', "Fermer les détails de l'offre")
         }
 
-        const detailsBtn = popupEl.querySelector('.jobDetailsBtn')
-        const statusEl = popupEl.querySelector('.applyStatus')
+        const detailsBtns = popupEl.querySelectorAll('.jobDetailsBtn')
 
-        if (detailsBtn) {
+        detailsBtns.forEach((detailsBtn) => {
           detailsBtn.addEventListener('click', async () => {
+            const offerId = detailsBtn.getAttribute('data-offer-id')
+            const offer = offers.find(
+              (o) => String(o.id ?? o._id ?? o.index) === String(offerId)
+            )
+            const statusEl = popupEl.querySelector(`#applyStatus-${offerId}`)
+
+            if (!user) {
+              if (statusEl) {
+                statusEl.textContent = "Vous devez être connecté pour postuler."
+                statusEl.classList.add('applyStatus--error')
+              }
+              return
+            }
+
             if (statusEl) {
               statusEl.textContent = ""
               statusEl.classList.remove('applyStatus--error', 'applyStatus--success')
@@ -188,7 +220,7 @@ export default function MapPage() {
               statusEl.classList.add(result.ok ? 'applyStatus--success' : 'applyStatus--error')
             }
           })
-        }
+        })
       })
 
       const marker = new Marker()
@@ -202,7 +234,7 @@ export default function MapPage() {
 
   useEffect(() => {
 
-    const map = new Map({
+    const map = new MapLibreMap({
       container: mapContainer.current,
 
       style: {
@@ -242,9 +274,15 @@ export default function MapPage() {
     })
 
     mapRef.current = map
+    mapLoadedRef.current = false
+
+    const handleLoad = () => {
+      mapLoadedRef.current = true
+      renderMarkersInView()
+    }
 
     map.on('moveend', renderMarkersInView)
-    map.on('load', renderMarkersInView)
+    map.on('load', handleLoad)
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -280,9 +318,11 @@ export default function MapPage() {
 
     return () => {
       map.off('moveend', renderMarkersInView)
-      map.off('load', renderMarkersInView)
+      map.off('load', handleLoad)
+      mapLoadedRef.current = false
       clearMarkers()
       map.remove()
+      mapRef.current = null
     }
 
   }, [])
@@ -307,7 +347,7 @@ export default function MapPage() {
 
     hasSearchedRef.current = true
 
-     const newCoordinates = [Number(data.lng), Number(data.lat)]
+    const newCoordinates = [Number(data.lng), Number(data.lat)]
 
     setCoordinates(newCoordinates)
 
@@ -321,7 +361,7 @@ export default function MapPage() {
   useEffect(() => {
     jobOffersRef.current = jobOffers
 
-    if (mapRef.current) {
+    if (mapRef.current && mapLoadedRef.current) {
       renderMarkersInView()
     }
 
@@ -347,7 +387,7 @@ export default function MapPage() {
       entries.forEach(([employerId, name]) => {
         companyNamesRef.current[employerId] = name
       })
-      if (mapRef.current) {
+      if (mapRef.current && mapLoadedRef.current) {
         renderMarkersInView()
       }
     })
