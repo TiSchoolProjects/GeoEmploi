@@ -34,6 +34,15 @@ export class UsersController {
   }
 
   @updateDoc()
+  @Patch('/status/:id')
+  updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateStatusDto: UpdateStatusDto,
+  ) {
+      return this.usersService.UpdateStatus(id, updateStatusDto);
+    }
+
+  @updateDoc()
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
