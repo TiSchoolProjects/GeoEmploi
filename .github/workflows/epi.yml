@@ -1,7 +1,7 @@
 name: epici
 run-name: epici
 on:
-    push:
+  push:
         branches: [ main]
 
 env:
@@ -10,29 +10,8 @@ env:
     GH_PUB_KEY:
       github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
 jobs:
-    #check_program_compilation:
-#        name: check_program_compilation
-#        runs-on: ubuntu-latest
-#       container:
-#            image: epitechcontent/epitest-docker
-#        steps:
-#            - uses: actions/checkout@v3
-#            - id: check_program_compilation
-#              run: make
-#              timeout-minutes: 2
-#            - run: make clean
-#            - run: |
-#                OIFS=$IFS
-#                IFS=','
-#                for x in $EXECUTABLES; do
-#                    if [ ! -x "./$x" ]; then
-#                        echo "Error: Executable ./$x not found or not executable."
-#                        exit 1
-#                    fi
-#                done
-#               IFS=$OIFS
     push_repository:
-#        needs: check_program_compilation
+        if: github.repository == 'TiSchoolProjects/GeoEmploi'
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
