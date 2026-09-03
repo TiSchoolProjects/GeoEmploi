@@ -15,6 +15,7 @@ import { User } from '../users/entities/user.entity.js';
 import { Seeker } from '../seekers/entities/seeker.entity.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Employer } from '../employers/entities/employer.entity.js';
+import { RolesGuard } from './roles.guard.js';
 
 @Module({
   imports: [
@@ -32,10 +33,14 @@ import { Employer } from '../employers/entities/employer.entity.js';
   ],
   controllers: [AuthController],
   providers: [
-  {
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard,
-  },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
     AuthService,
     LocalStrategy,
     LocalAuthGuard,
