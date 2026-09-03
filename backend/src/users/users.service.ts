@@ -4,7 +4,7 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
-import { UpdateStatusDto } from './dto/update-user.dto';
+import { UpdateStatusDto, UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -40,7 +40,27 @@ export class UsersService {
     }
 
     user.status = data.status;
-    return this.UserRepository.save(user);
+    return await this.UserRepository.save(user);
+  }
+
+  async UpdateUser(id: number, data: UpdateUserDto): Promise<User> {
+    const user = await this.UserRepository.findOne({where: {id}});
+
+    if (!user) {
+      throw new NotFoundException("Utilisateur non trouvée.");
+    }
+    if (data.firstname) {
+      user.firstname = data.firstname;
+    }
+    if (data.lastname) {
+      user.lastname = data.lastname;
+    } 
+    if (data.email) {
+      user.email = data.email;
+    }
+
+    return await this.UserRepository.save(user);
+
   }
 
   remove(id: number) {
