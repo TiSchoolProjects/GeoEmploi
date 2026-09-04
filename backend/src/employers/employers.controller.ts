@@ -18,14 +18,12 @@ export class EmployersController {
   }
 
   @findAllDoc()
-  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.employersService.findAll();
   }
 
   @findOneDoc()
-  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.employersService.findOne(+id);
