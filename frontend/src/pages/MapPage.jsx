@@ -5,7 +5,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import '../CSS/MapPage.css'
 import NavBar from "../components/Navbar";
-
+import { apiFetch } from '../api/client'
 setWorkerUrl(workerUrl)
 
 export default function MapPage() {
