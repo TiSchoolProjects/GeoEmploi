@@ -63,32 +63,13 @@ export default function MapPage() {
       if (!token) {
         return { ok: false, message: "Vous devez être connecté pour postuler." }
       }
-      const response = await fetch(`http://localhost:4242/applications`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+      const data = await apiFetch("/applications", {
+        method: "POST",
         body: JSON.stringify({
-          jobSeekerId: userId,
-          jobId: offer.id ?? offer._id ?? ""
-        })
-      })
-
-      let data = null
-      try {
-        data = await response.json()
-      } catch {
-        data = null
-      }
-
-      if (!response.ok) {
-        const backendMessage = data?.message || data?.error
-        return {
-          ok: false,
-          message: backendMessage || "Une erreur est survenue lors de l'envoi de votre candidature."
-        }
-      }
+          jobId: offer.id,
+          jobSeekerId: user.sub,
+        }),
+      });
 
       return { ok: true, message: data?.message || "Candidature envoyée avec succès." }
     } catch (error) {
@@ -322,13 +303,7 @@ export default function MapPage() {
 
     const fetchJobOffers = async () => {
       try {
-        const response = await fetch('http://localhost:4242/jobs', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        const data = await response.json()
+        const data = await apiFetch('/jobs');
         setJobOffers(data)
       } catch (error) {
         console.error('Erreur lors de la récupération des offres d\'emploi :', error)
