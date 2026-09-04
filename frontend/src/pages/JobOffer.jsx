@@ -33,9 +33,6 @@ export default function JobOffer() {
         }),
       });
 
-      if (!response) {
-        throw new Error(result.message || "Informations invalides");
-      }
       toast.success("Offre crée avec succès")
       navigate("/map");
     } catch (error) {

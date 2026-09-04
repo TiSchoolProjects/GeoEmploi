@@ -120,7 +120,10 @@ export default function EditProfile() {
         profileBody.companyDesc = formData.companyDesc;
       }
 
-      const userData = await apiFetch(`/users/${user.sub}`);
+      const userData = await apiFetch(`/users/${user.sub}`, {
+        method: "PATCH",
+        body: JSON.stringify(userBody),
+      });
 
       if (!userData) {
         throw new Error(
@@ -130,7 +133,10 @@ export default function EditProfile() {
       }
 
       const profileEndpoint = isRH ? `/employers/${user.sub}` : `/seekers/${user.sub}`;
-      const profileData = await apiFetch(profileEndpoint);
+      const profileData = await apiFetch(profileEndpoint, {
+        method: "PATCH",
+        body: JSON.stringify(userBody),
+      });
 
       if (!profileData) {
         throw new Error(
