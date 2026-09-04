@@ -1,9 +1,24 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { PartialType } from '@nestjs/swagger';
-import { CreateJobDto } from './create-job.dto';
-import { IsInt, IsNumber, IsNotEmpty } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsInt, IsNumber, IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
-export class UpdateJobDto extends PartialType(CreateJobDto) {}
+export class UpdateJobDto {
+
+  @ApiPropertyOptional({ description: 'Job title', example: 'Fullstack developer'})
+  @IsString()
+  @IsOptional()
+  title: string;
+
+  @ApiPropertyOptional({ description: 'Job description', example: 'Senior developer to work on networking website on a NestJs + React stack'})
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @ApiPropertyOptional({ description: 'Job address', example: '123 Elm Street, New York, NY 10001'})
+  @IsString()
+  @IsOptional()
+  adress: string;
+
+}
 
 export class SearchJobDto {
   @ApiProperty({ description: 'Job latitude', example: 40.7128})

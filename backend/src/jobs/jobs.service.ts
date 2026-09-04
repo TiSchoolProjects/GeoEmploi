@@ -1,5 +1,4 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -94,12 +93,16 @@ export class JobsService {
     });
   }
 
-  async update(id: number, updateJobDto: UpdateJobDto) {
+  async update(id: number, updateJobDto: UpdateJobDto, curId: number, role: UserRole): Promise<Job> {
     const job = await this.jobRepository.findOne({ where: { id } });
 
     if (!job) {
       throw new NotFoundException("Offre non trouvé.");
     }
+    if (role !== UserRole.ADMIN && job.employerId !== curId) {
+      throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
+    }
+
     Object.assign(job, updateJobDto);
     return await this.jobRepository.save(job);
   }
