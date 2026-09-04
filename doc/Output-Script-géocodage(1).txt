@@ -1,0 +1,152 @@
+> backend@0.0.1 regeocode
+> ts-node -r tsconfig-paths/register src/jobs/scripts/regeocode.ts
+
+-Script de Re-géocodage GeoEmploi-
+32 offre(s) à Re-géocoder.
+
+Adresse n°1 - 55 Rue du Faubourg Saint-Honoré, 75008 Paris
+Réussite : 48.87063, 2.316931
+ Déplacement: 0mètre(s).
+Adresse n°2 - 1 Place de la Comédie, 69001 Lyon
+Réussite : 45.767808, 4.835757
+ Déplacement: 38mètre(s).
+Adresse n°3 - 58 Boulevard Charles Livon, 13007 Marseille
+Réussite : 43.292154, 5.359134
+ Déplacement: 249mètre(s).
+Adresse n°4 - 1 Place Pey Berland, 33000 Bordeaux
+Réussite : 44.838168, -0.578803
+ Déplacement: 3mètre(s).
+^C%                                                                                                                                                                                                                         ~/year3/GeoEmploi  dev ≡  ?1 ~2 -1  6  6.331s   130 
+ 16:11:31  sudo docker compose exec backend npm run regeocode                                                                                                                                                 24.20.0
+
+> backend@0.0.1 regeocode
+> ts-node -r tsconfig-paths/register src/jobs/scripts/regeocode.ts
+
+-Script de Re-géocodage GeoEmploi-
+28 offre(s) à Re-géocoder.
+
+Adresse n°5 - Place Augustin Laurent, 59000 Lille
+Réussite : 50.630925, 3.070892
+ Déplacement: 11mètre(s).
+Adresse n°6 - 2 Rue de l'Hôtel de Ville, 44000 Nantes
+Réussite : 47.217804, -1.555041
+ Déplacement: 7mètre(s).
+Adresse n°7 - 1 Place du Capitole, 31000 Toulouse
+Réussite : 43.603872, 1.444053
+ Déplacement: 38mètre(s).
+Adresse n°8 - Place de la Mairie, 35000 Rennes
+Réussite : 48.110964, -1.679255
+ Déplacement: 46mètre(s).
+Adresse n°9 - 1 Parc de l'Étoile, 67000 Strasbourg
+Réussite : 48.573465, 7.753399
+ Déplacement: 30mètre(s).
+Adresse n°10 - 1 Place Georges Frêche, 34000 Montpellier
+Réussite : 43.598842, 3.896549
+ Déplacement: 36mètre(s).
+Adresse n°11 - 2 Place du Général de Gaulle, 76000 Rouen
+Réussite : 49.443269, 1.099821
+ Déplacement: 21mètre(s).
+Adresse n°12 - Site logistique interne ZK-42, quai bleu, France
+Localisation à vérifier
+Adresse n°13 - 1 Place de l’Hôtel de Ville, 21000 Dijon
+Localisation à vérifier
+Adresse n°14 - Place de l’Hôtel de Ville, 80000 Amiens
+Réussite : 49.893238, 2.295394
+ Déplacement: 52mètre(s).
+Adresse n°15 - Place Stanislas, 54000 Nancy
+Réussite : 48.693742, 6.183083
+ Déplacement: 28mètre(s).
+Adresse n°16 - Place du Ralliement, 49000 Angers
+Réussite : 47.471147, -0.551717
+ Déplacement: 42mètre(s).
+Adresse n°17 - Place de Jaude, 63000 Clermont-Ferrand
+Réussite : 45.776588, 3.082062
+ Déplacement: 20mètre(s).
+Adresse n°18 - Place de la Libération, 25000 Besançon
+Localisation à vérifier
+Adresse n°19 - Place de la République, 87000 Limoges
+Réussite : 45.83201, 1.260181
+ Déplacement: 9mètre(s).
+Adresse n°20 - Place du Maréchal Foch, 14000 Caen
+Réussite : 49.178155, -0.359732
+ Déplacement: 33774mètre(s).
+Adresse n°21 - Place de l’Hôtel de Ville, 51100 Reims
+Réussite : 49.257706, 4.032093
+ Déplacement: 20mètre(s).
+Adresse n°22 - Place de l’Hôtel de Ville, 38000 Grenoble
+Localisation à vérifier
+Adresse n°23 - Place de la République, 45000 Orléans
+Réussite : 47.901172, 1.905938
+ Déplacement: 7mètre(s).
+Adresse n°24 - 12 Rue de la Gare, France
+Localisation à vérifier
+Adresse n°25 - 55 Rue du Faubourg Saint-Honoré, 75008 Paris
+Réussite : 48.87063, 2.316931
+ Déplacement: 0mètre(s).
+Adresse n°26 - 5 Avenue Anatole France, 75007 Paris
+Réussite : 48.858819, 2.294597
+ Déplacement: 63mètre(s).
+Adresse n°27 - Place de l'Hôtel de Ville, 75004 Paris
+Réussite : 48.854287, 2.356161
+ Déplacement: 454mètre(s).
+Adresse n°28 - Place du Panthéon, 75005 Paris
+Réussite : 48.845939, 2.34571
+ Déplacement: 82mètre(s).
+Adresse n°29 - 1 Place du Louvre, 75001 Paris
+Réussite : 48.859301, 2.340771
+ Déplacement: 1mètre(s).
+Adresse n°30 - 10 Place de la République, 75011 Paris
+Réussite : 48.867386, 2.365249
+ Déplacement: 23mètre(s).
+Adresse n°31 - 1 Place de la Bastille, 75004 Paris
+Réussite : 48.85302, 2.368036
+ Déplacement: 1mètre(s).
+Adresse n°32 - 6 Place Saint-Germain-des-Prés, 75006 Paris
+Réussite : 48.854237, 2.333197
+ Déplacement: 21mètre(s).
+
+
+ - Résultat - 
+Offres traitées : 28
+Succès : 23
+Echecs : 5
+Temps d'éxécution: 35.6 secondes
+Déplacement moyen: 1512.4 mètre(s)
+
+
+- Top 5 des Déplacements -
+Adresse n°20 - Place du Maréchal Foch, 14000 Caen - 33774 m
+Adresse n°27 - Place de l'Hôtel de Ville, 75004 Paris - 454 m
+Adresse n°28 - Place du Panthéon, 75005 Paris - 82 m
+Adresse n°26 - 5 Avenue Anatole France, 75007 Paris - 63 m
+Adresse n°14 - Place de l’Hôtel de Ville, 80000 Amiens - 52 m
+   ~/year3/GeoEmploi  dev ≡  ?1 ~2 -1  6  37.01s   
+ 16:12:42  sudo docker compose exec backend npm run regeocode                                                                                                                                                 24.20.0
+
+> backend@0.0.1 regeocode
+> ts-node -r tsconfig-paths/register src/jobs/scripts/regeocode.ts
+
+-Script de Re-géocodage GeoEmploi-
+5 offre(s) à Re-géocoder.
+
+Adresse n°12 - Site logistique interne ZK-42, quai bleu, France
+Erreur API pour "Site logistique interne ZK-42, quai bleu, France"
+Localisation à vérifier
+Adresse n°13 - 1 Place de l’Hôtel de Ville, 21000 Dijon
+Localisation à vérifier
+Adresse n°18 - Place de la Libération, 25000 Besançon
+Localisation à vérifier
+Adresse n°22 - Place de l’Hôtel de Ville, 38000 Grenoble
+Localisation à vérifier
+Adresse n°24 - 12 Rue de la Gare, France
+Localisation à vérifier
+
+
+ - Résultat - 
+Offres traitées : 5
+Succès : 0
+Echecs : 5
+Temps d'éxécution: 8.7 secondes
+Déplacement moyen: 0.0 mètre(s)
+   ~/year3/GeoEmploi  dev ≡  ?1 ~2 -1  6  10.095s   
+ 16:13:35                        

@@ -11,7 +11,7 @@ import { Application } from "../../applications/entities/application.entity";
 
 const dataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: 'db',
   port: Number(process.env.DB_PORT || 5432),
   username: process.env.DB_USERNAME || 'GeoUser',
   password: process.env.DB_PASSWORD || 'GeoPassword',
