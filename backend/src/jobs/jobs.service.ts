@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
+import { UserRole } from '../auth/roles.enum';
 
 @Injectable()
 export class JobsService {
@@ -95,14 +96,24 @@ export class JobsService {
   async archive(id: number): Promise<Job> {
     const job = await this.jobRepository.findOne({where: {id}});
     if (!job)
-      throw new NotFoundException("Proposition non trouvée.");
+      throw new NotFoundException("Offre non trouvée.");
 
     job.archivedAt = new Date();
     return await this.jobRepository.save(job);
   }
 
-  remove(id: number) {
-    return this.jobRepository.delete({id});
+  async remove(id: number, curId: number, role: UserRole): Promise<void> {
+    const job = await this.jobRepository.findOne({where: {id},});
+
+    if (!job) {
+      throw new NotFoundException("Offre non trouvée.");
+    }
+    
+    if (role !== UserRole.ADMIN && job.employerId !== curId) {
+      throw new ForbiddenException("Cette offre ne vous appartient pas.");
+    }
+
+    await this.jobRepository.remove(job);
   }
 
 

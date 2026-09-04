@@ -19,12 +19,13 @@ export default function Application() {
       return;
     }
 
-    fetch(`http://localhost:4242/applications/seeker/${seekerId}`),
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    fetch(`http://localhost:4242/applications/seeker/${seekerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des offres.");

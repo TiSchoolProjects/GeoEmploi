@@ -1,11 +1,12 @@
 import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { User, UserRole, UserStatus } from './src/users/entities/user.entity';
+import { User, UserStatus } from './src/users/entities/user.entity';
 import { Employer } from './src/employers/entities/employer.entity';
 import { Seeker } from './src/seekers/entities/seeker.entity';
 import { Job, GeoCodingStatus } from './src/jobs/entities/job.entity';
 import { Application } from './src/applications/entities/application.entity';
+import { UserRole } from './src/auth/roles.enum';
 
 const dataSource = new DataSource({
   type: 'postgres',
