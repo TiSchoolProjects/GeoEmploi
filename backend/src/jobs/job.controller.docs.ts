@@ -52,6 +52,14 @@ export function findOneDoc() {
     );
 }
 
+export function updateDoc() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Update job info' }),
+        ApiResponse({ status: 200, description: 'Updated job info', type: Job }),
+        ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
+    );
+}
+
 export function archiveDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Archive job, making it unavailable for viewing or application' }),

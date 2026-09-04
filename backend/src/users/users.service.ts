@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Not, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
@@ -49,15 +49,16 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException("Utilisateur non trouvée.");
     }
-    if (data.firstname) {
-      user.firstname = data.firstname;
+
+    const taken = await this.UserRepository.findOne({
+      where :{email: data.email, id: Not(id),},
+    });
+
+    if (taken) {
+      throw new ConflictException("Adresse email déjà utilisée");
     }
-    if (data.lastname) {
-      user.lastname = data.lastname;
-    } 
-    if (data.email) {
-      user.email = data.email;
-    }
+
+    Object.assign(user, data);
 
     return await this.UserRepository.save(user);
 

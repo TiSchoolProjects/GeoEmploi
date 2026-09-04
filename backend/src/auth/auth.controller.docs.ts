@@ -6,6 +6,8 @@ import { RegisterSeekerDto } from './dto/register-seeker.dto';
 export function loginDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Login page' }),
+        ApiParam({ name: 'email', type: String}),
+        ApiParam({ name: 'password', type: String}),
         ApiResponse({ status: 200, description: 'Successfully authenticated, returns JWT token.' }),
         ApiResponse({ status: 401, description: 'Invalid credentials.' })
     );
