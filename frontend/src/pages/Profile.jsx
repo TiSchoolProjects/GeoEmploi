@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 import { getToken, logout } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -119,39 +120,19 @@ export default function EditProfile() {
         profileBody.companyDesc = formData.companyDesc;
       }
 
-      const userResponse = await fetch(`http://localhost:4242/users/${user.sub}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(userBody),
-        }
-      );
+      const userData = await apiFetch(`/users/${user.sub}`);
 
-      const userData = await userResponse.json();
-
-      if (!userResponse.ok) {
+      if (!userData) {
         throw new Error(
           Array.isArray(userData.message)
             ? userData.message.join(", ") : userData.message || "Erreur dans la modification de l'utilisateur"
         );
       }
 
-      const profileEndpoint = isRH ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
-      const profileResponse = await fetch(profileEndpoint, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(profileBody),
-      });
+      const profileEndpoint = isRH ? `/employers/${user.sub}` : `/seekers/${user.sub}`;
+      const profileData = await apiFetch(profileEndpoint);
 
-      const profileData = await profileResponse.json();
-
-      if (!profileResponse.ok) {
+      if (!profileData) {
         throw new Error(
           Array.isArray(profileData.message)
             ? profileData.message.join(", ") : profileData.message || "Erreur dans la modification du profil"

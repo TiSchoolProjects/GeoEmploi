@@ -6,6 +6,7 @@ import NavBar from "../components/Navbar";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function JobOffer() {
   const {
@@ -22,12 +23,8 @@ export default function JobOffer() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:4242/jobs", {
+      const response = await apiFetch("/jobs", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         body: JSON.stringify({
           title: data.title,
           description: data.description,

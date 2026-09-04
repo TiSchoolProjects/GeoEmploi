@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function Application() {
   const [applications, setApplications] = useState([]);
@@ -19,13 +20,7 @@ export default function Application() {
       return;
     }
 
-    fetch(`http://localhost:4242/applications/seeker/${seekerId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    apiFetch(`/seeker/${seekerId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des offres.");
