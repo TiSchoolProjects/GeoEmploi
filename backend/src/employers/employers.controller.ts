@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, Headers, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, Req, ForbiddenException } from '@nestjs/common';
 import { EmployersService } from './employers.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { createDoc, findAllDoc, findOneDoc, validateDoc, updateDoc, removeDoc } from './employers.controller.docs';
@@ -39,7 +39,12 @@ export class EmployersController {
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateEmployerDto: UpdateEmployerDto,
+      @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
+  ) {
+      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
+        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
+      }
     return this.employersService.update(Number(id), updateEmployerDto);
   }
 
