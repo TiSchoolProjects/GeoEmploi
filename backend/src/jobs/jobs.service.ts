@@ -36,7 +36,14 @@ export class JobsService {
         return this.geocodingFail();
       }
 
+
+
       const first = feats[0];
+
+      if (first.properties.score < 0.7) {
+        return this.geocodingFail();
+      }
+
       const [lng, lat] = first.geometry.coordinates;
       const score = first.properties.score;
 
