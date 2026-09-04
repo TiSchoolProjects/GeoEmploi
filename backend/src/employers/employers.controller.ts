@@ -18,14 +18,12 @@ export class EmployersController {
   }
 
   @findAllDoc()
-  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.employersService.findAll();
   }
 
   @findOneDoc()
-  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.employersService.findOne(+id);
@@ -39,6 +37,7 @@ export class EmployersController {
   }
 
   @updateDoc()
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
     return this.employersService.update(Number(id), updateEmployerDto);
@@ -50,18 +49,4 @@ export class EmployersController {
   remove(@Param('id') id: string) {
     return this.employersService.remove(+id);
   }
-  /*
-  @Delete(':id')
-  remove(@Param('id') id: string, @Headers('authorization') authHeader: string) {
-    if (!authHeader) {
-      throw new UnauthorizedException('No authorization header provided');
-    }
-
-    const token = authHeader.replace('Bearer ', '').trim();
-
-    console.log('Extracted Token:', token);
-
-    return this.employersService.remove(+id);
-  }
-  */
 }

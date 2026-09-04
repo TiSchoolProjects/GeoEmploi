@@ -14,16 +14,11 @@ export class RolesGuard implements CanActivate {
       context.getClass(),
     ]);
     if (!requiredRoles) {
-        console.log('this page has no role requirements')
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    console.log('checking roles')
-    console.log(user.role)
-    console.log(requiredRoles)
-    if (!requiredRoles.some((role) => user.role.includes(role)))
+    if (!requiredRoles.some((role) => user.role === role))
         throw new ForbiddenException('Missing permissions.');
-    console.log()
     return true;
   }
 }

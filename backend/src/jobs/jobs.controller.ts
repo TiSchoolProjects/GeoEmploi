@@ -1,26 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Req } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, archiveDoc, removeDoc } from './job.controller.docs';
+import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, updateDoc, archiveDoc, removeDoc } from './job.controller.docs';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('jobs')
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) {}
+  constructor(private readonly jobsService: JobsService) { }
 
   @createDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Post()
   create(@Body() createJobDto: CreateJobDto,
-      @Req() req: Request & {user: {userId: number; role: UserRole;};
-      },
+    @Req() req: Request & {
+      user: { userId: number; role: UserRole; };
+    },
   ) {
     const employerId = req.user.role === UserRole.ADMIN ? createJobDto.employerId : req.user.userId;
-    return this.jobsService.create({...createJobDto, employerId});
+    return this.jobsService.create({ ...createJobDto, employerId });
   }
 
   @findAllDoc()
@@ -59,21 +60,27 @@ export class JobsController {
     return this.jobsService.findOne(id);
   }
 
-  @archiveDoc()
-  @UseGuards(JwtAuthGuard)
-  @Roles(UserRole.ADMIN)
+  @updateDoc()
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto) {
+    return this.jobsService.archive(id);
+  }
+
+  @archiveDoc()
+  @Roles(UserRole.ADMIN)
+  @Patch('/archive/:id')
   archive(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.archive(id);
   }
 
   @removeDoc()
-  @UseGuards(JwtAuthGuard)
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number,
-        @Req() req: Request & {user: {userId: number; role: UserRole;};
-        },
+    @Req() req: Request & {
+      user: { userId: number; role: UserRole; };
+    },
   ) {
     return this.jobsService.remove(id, req.user.userId, req.user.role);
   }
