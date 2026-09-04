@@ -5,7 +5,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import '../CSS/MapPage.css'
 import NavBar from "../components/Navbar";
-
+import { apiFetch } from '../api/client'
 setWorkerUrl(workerUrl)
 
 export default function MapPage() {
@@ -28,6 +28,12 @@ export default function MapPage() {
   const clearMarkers = () => {
     markersRef.current.forEach((marker) => marker.remove())
     markersRef.current = []
+  }
+
+  const truncateDescription = (description, maxLength = 120) => {
+    if (!description) return ""
+    if (description.length <= maxLength) return description
+    return `${description.substring(0, maxLength).trimEnd()}...`
   }
 
   const getCompanyName = async (offer) => {
@@ -57,32 +63,13 @@ export default function MapPage() {
       if (!token) {
         return { ok: false, message: "Vous devez être connecté pour postuler." }
       }
-      const response = await fetch(`http://localhost:4242/applications`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+      const data = await apiFetch("/applications", {
+        method: "POST",
         body: JSON.stringify({
-          jobSeekerId: userId,
-          jobId: offer.id ?? offer._id ?? ""
-        })
-      })
-
-      let data = null
-      try {
-        data = await response.json()
-      } catch {
-        data = null
-      }
-
-      if (!response.ok) {
-        const backendMessage = data?.message || data?.error
-        return {
-          ok: false,
-          message: backendMessage || "Une erreur est survenue lors de l'envoi de votre candidature."
-        }
-      }
+          jobId: offer.id,
+          jobSeekerId: user.sub,
+        }),
+      });
 
       return { ok: true, message: data?.message || "Candidature envoyée avec succès." }
     } catch (error) {
@@ -141,7 +128,7 @@ export default function MapPage() {
             return `
               <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
                 <h3>${offer.title}</h3>
-                <p>${offer.description}</p>
+                <p>${truncateDescription(offer.description)}</p>
                 <p><strong>Entreprise :</strong> ${companyName}</p>
                 ${role === "seeker" ? `
                   <button
@@ -221,12 +208,27 @@ export default function MapPage() {
             }
           })
         })
+
+        detailsBtns[0]?.focus()
       })
 
       const marker = new Marker()
         .setLngLat(lngLat)
         .setPopup(popup)
         .addTo(map)
+
+      const markerElement = marker.getElement()
+      markerElement.setAttribute('tabindex', '0')
+      markerElement.setAttribute(
+        'aria-label',
+        `Afficher ${offers.length === 1 ? "l'offre d'emploi" : "les offres d'emploi"} à cet endroit`
+      )
+      markerElement.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+
+        event.preventDefault()
+        marker.togglePopup()
+      })
 
       markersRef.current.push(marker)
     })
@@ -301,13 +303,7 @@ export default function MapPage() {
 
     const fetchJobOffers = async () => {
       try {
-        const response = await fetch('http://localhost:4242/jobs', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        const data = await response.json()
+        const data = await apiFetch('/jobs');
         setJobOffers(data)
       } catch (error) {
         console.error('Erreur lors de la récupération des offres d\'emploi :', error)
@@ -340,8 +336,8 @@ export default function MapPage() {
 
     const data = await response.json()
 
-    if (!data.features || data.features.length === 0) {
-      setSearchError("Localisation introuvable. Vérifiez l'orthographe et réessayez.")
+    if (data.GeocodingStatus != "valid" || !data.lat || !data.lng) {
+      setSearchError("Adresse ou ville introuvable. Veuillez réessayer.")
       return
     }
 
@@ -399,14 +395,14 @@ export default function MapPage() {
 
   return (
     <div className="MapPage">
-      <NavBar />
+      <NavBar/>
       <form className="searchBar" onSubmit={searchLocation}>
-        <label htmlFor="location-search" className="visuallyHidden">
+      <label htmlFor="location-search" className="visuallyHidden">
           Rechercher une adresse ou une ville
         </label>
         <input
-          id="location-search"
-          type="text"
+        id="location-search"
+        type="text"
           placeholder="Search a location"
           value={position}
           onChange={(e) => setPosition(e.target.value)}

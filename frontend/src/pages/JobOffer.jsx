@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function JobOffer() {
   const {
@@ -21,12 +23,8 @@ export default function JobOffer() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:4242/jobs", {
+      const response = await apiFetch("/jobs", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         body: JSON.stringify({
           title: data.title,
           description: data.description,
@@ -35,14 +33,10 @@ export default function JobOffer() {
         }),
       });
 
-      const result = await response.json();
-      if (!response.ok) {
-        console.error("Erreur  Post:", result);
-        throw new Error(result.message || "Informations invalides");
-      }
-
+      toast.success("Offre crée avec succès")
       navigate("/map");
     } catch (error) {
+      toast.error("Impossible de crée l'offre")
       console.error("Post Failed :", error);
     }
   };

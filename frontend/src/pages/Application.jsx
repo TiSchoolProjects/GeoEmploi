@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function Application() {
   const [applications, setApplications] = useState([]);
@@ -14,42 +15,31 @@ export default function Application() {
     const seekerId = user?.sub;
 
     if (!seekerId) {
-      setError("Impossible de récupérer l'identifiant de l'employeur.");
+      setError("Impossible de récupérer l'identifiant de l'utilisateur.");
       setLoading(false);
       return;
     }
 
-    fetch(`http://localhost:4242/applications/seeker/${seekerId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des offres.");
-        }
-        return response.json();
-      })
+    apiFetch(`/application/seeker/${seekerId}`)
       .then((data) => {
-        console.log("Offres récupérées :", data);
-        setApplications(Array.isArray(data) ? data : []); // tableau ? 
+          setApplications(Array.isArray(data) ? data : []);
+        })
+       .catch((err) => {
+        console.error(err);
+        setError("Impossible de charger vos candidature.");
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
-        setError("Impossible de charger vos offres.");
+      .finally(() => {
         setLoading(false);
-      });
+    });
   }, []);
 
   const handleEdit = (applicationId) => {
-    console.log("Modifier l'offre :", applicationId);
+    console.log("Modifier la candidature :", applicationId);
   };
 
   const handleDelete = (applicationId) => {
-    console.log("Supprimer l'offre :", applicationId);
+    console.log("Supprimer la candidature :", applicationId);
   };
 
   return (
@@ -89,11 +79,11 @@ export default function Application() {
                   <h2>{application.title}</h2>
 
                   {application.company && (
-                    <p className="offer-company">🏢 {application.company}</p>
+                    <p className="offer-company"> {application.company}</p>
                   )}
 
                   {application.adress && (
-                    <p className="offer-location">📍 {application.adress}</p>
+                    <p className="offer-location">{application.adress}</p>
                   )}
 
                   {application.description && (

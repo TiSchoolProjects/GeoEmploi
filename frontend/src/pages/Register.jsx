@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 // import { seekerpath } from '../utils/config.js';
@@ -29,7 +30,6 @@ const onSubmit = async (formData) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify({
             firstname: formData.firstName,
@@ -47,6 +47,7 @@ const onSubmit = async (formData) => {
       }
       const seeker = await seekerResponse.json();
       console.log("Compte créé.");
+      toast.success("Compte crée avec succès.");
       navigate("/login");
     }
 
@@ -78,12 +79,12 @@ const onSubmit = async (formData) => {
           : data.message || "Erreur lors de la création du compte RH"
       );
     }
-    console.log("Compte Employeur créé.");
-
+    toast.success("Compte crée avec succès.");
     navigate("/login");
   }
 
   } catch (error) {
+    toast.error("Impossible de créer votre compte.");
     console.error(error);
   }
 };

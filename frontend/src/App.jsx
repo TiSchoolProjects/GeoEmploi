@@ -15,7 +15,7 @@ export default function App() {
   return (
     <BrowserRouter>
       {/* Gestion notif*/}
-      <Toaster position="top-right" toastOptions={{duration: 3000,}}/>
+      <Toaster position="top-center" toastOptions={{duration: 5000,}}/>
 
       <Routes>
         <Route path="/home" element={<Home />} />
