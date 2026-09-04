@@ -33,9 +33,7 @@ export default function JobOffer() {
         }),
       });
 
-      const result = await response.json();
-      if (!response.ok) {
-        console.error("Erreur  Post:", result);
+      if (!response) {
         throw new Error(result.message || "Informations invalides");
       }
       toast.success("Offre crée avec succès")
