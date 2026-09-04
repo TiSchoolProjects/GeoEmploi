@@ -51,18 +51,4 @@ export class EmployersController {
   remove(@Param('id') id: string) {
     return this.employersService.remove(+id);
   }
-  /*
-  @Delete(':id')
-  remove(@Param('id') id: string, @Headers('authorization') authHeader: string) {
-    if (!authHeader) {
-      throw new UnauthorizedException('No authorization header provided');
-    }
-
-    const token = authHeader.replace('Bearer ', '').trim();
-
-    console.log('Extracted Token:', token);
-
-    return this.employersService.remove(+id);
-  }
-  */
 }
