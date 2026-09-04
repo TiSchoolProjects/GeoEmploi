@@ -39,6 +39,7 @@ export class EmployersController {
   }
 
   @updateDoc()
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
     return this.employersService.update(Number(id), updateEmployerDto);
