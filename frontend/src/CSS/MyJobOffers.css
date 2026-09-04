@@ -492,7 +492,7 @@
 }
 
 .modal-secondary-btn {
-  background: var(#D3D3D3);
+  background:#dbdbdb;
   color: var(--text-muted);
 }
 
