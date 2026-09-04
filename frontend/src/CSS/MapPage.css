@@ -43,7 +43,7 @@ html, body, #root {
 
 .searchBar {
   position: absolute;
-  top: 16px;
+  top: 88px;
   left: 16px;
   right: 16px;
   max-width: 420px;
@@ -102,7 +102,7 @@ html, body, #root {
 
 .searchError {
   position: absolute;
-  top: 68px;
+  top: 140px;
   left: 16px;
   right: 16px;
   max-width: 420px;
@@ -230,14 +230,14 @@ html, body, #root {
 
 @media (max-width: 600px) {
   .searchBar {
-    top: 8px;
+    top: 72px;
     left: 8px;
     right: 8px;
     max-width: none;
   }
 
   .searchError {
-    top: 60px;
+    top: 124px;
     left: 8px;
     right: 8px;
     max-width: none;

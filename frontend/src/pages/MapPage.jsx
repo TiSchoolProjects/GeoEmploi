@@ -361,8 +361,8 @@ export default function MapPage() {
 
     const data = await response.json()
 
-    if (!data.features || data.features.length === 0) {
-      setSearchError("Localisation introuvable. Vérifiez l'orthographe et réessayez.")
+    if (data.GeocodingStatus != "valid" || !data.lat || !data.lng) {
+      setSearchError("Adresse ou ville introuvable. Veuillez réessayer.")
       return
     }
 
@@ -420,14 +420,14 @@ export default function MapPage() {
 
   return (
     <div className="MapPage">
-      <NavBar />
+      <NavBar/>
       <form className="searchBar" onSubmit={searchLocation}>
-        <label htmlFor="location-search" className="visuallyHidden">
+      <label htmlFor="location-search" className="visuallyHidden">
           Rechercher une adresse ou une ville
         </label>
         <input
-          id="location-search"
-          type="text"
+        id="location-search"
+        type="text"
           placeholder="Search a location"
           value={position}
           onChange={(e) => setPosition(e.target.value)}
