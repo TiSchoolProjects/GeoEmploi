@@ -4,6 +4,7 @@ import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { getToken } from "../utils/auth";
 
 export default function JobOffer() {
   const {
@@ -12,10 +13,11 @@ export default function JobOffer() {
     formState: { errors },
   } = useForm();
 
+  const token = getToken();
+
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
 
   const onSubmit = async (data) => {
     try {
@@ -23,6 +25,7 @@ export default function JobOffer() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: data.title,
@@ -72,11 +75,8 @@ export default function JobOffer() {
           </div>
           <div className="form-group">
             <label htmlFor="text">Description</label>
-            <input
-              id="description"
-              type="text"
-              placeholder="Description du job"
-              {...register("description", {required: "La description est requise"})}
+            <textarea id="description" placeholder="Description du job" rows="6"
+              {...register("description", {required: "La description est requise",})}
             />
             {errors.password && (<span className="error">{errors.password.message}</span>
             )}

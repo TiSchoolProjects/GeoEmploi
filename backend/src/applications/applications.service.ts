@@ -31,7 +31,7 @@ export class ApplicationsService {
   }
 
   async findbySeekerId(jobSeekerId: number): Promise<Application[]> {
-    return this.AppRepository.find({ where: {jobSeekerId}, relations: {jobSeeker: true}, order: {createdAt: 'DESC'},
+    return this.AppRepository.find({ where: {jobSeekerId}, relations: {job: true}, order: {createdAt: 'DESC'},
     });
   }
 
