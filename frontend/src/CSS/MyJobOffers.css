@@ -492,7 +492,7 @@
 }
 
 .modal-secondary-btn {
-  background: var(--blue-light);
+  background: var(#D3D3D3);
   color: var(--text-muted);
 }
 
@@ -511,12 +511,16 @@
 }
 
 .modal-save-btn {
-  background: #16A34A;
+  background: #E07A3F;
   color: #FFFFFF;
 }
 
 .modal-save-btn:hover:not(:disabled) {
-  background: #15803D;
+  background: #C85F2D;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .offer-action-btn:focus-visible,

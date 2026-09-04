@@ -23,7 +23,8 @@
   font-size: 52px;
   line-height: 1.1;
   font-weight: 700;
-  color: #222;
+  color: #1B3A6B;
+  font-family: "Marianne", Arial, sans-serif;
   letter-spacing: -1.5px;
 }
 
@@ -33,6 +34,7 @@
   color: #666;
   font-size: 18px;
   line-height: 1.7;
+  font-family: "Spectral", Georgia, serif;
 }
 
 .cgu-section {
@@ -44,7 +46,8 @@
   font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
-  color: #222;
+  color: #1B3A6B;
+  font-family: "Marianne", Arial, sans-serif;
 }
 
 .cgu-section p {
@@ -52,6 +55,7 @@
   color: #555;
   font-size: 16px;
   line-height: 1.8;
+  font-family: "Spectral", Georgia, serif;
 }
 
 .cgu-section p:last-child {
@@ -62,6 +66,7 @@
   margin: 20px 0 0;
   padding-left: 25px;
   color: #555;
+  font-family: "Spectral", Georgia, serif;
 }
 
 .cgu-section li {
@@ -93,6 +98,7 @@
   margin: 0;
   color: #999;
   font-size: 14px;
+  font-family: "Spectral", Georgia, serif;
 }
 
 .cgu-back {
@@ -100,9 +106,10 @@
   align-items: center;
   gap: 10px;
 
-  color: #222;
+  color: #1B3A6B;
   font-size: 15px;
   font-weight: 600;
+  font-family: "Marianne", Arial, sans-serif;
   text-decoration: none;
 
   transition: transform 0.2s ease, color 0.2s ease;
@@ -112,7 +119,7 @@
   transition: transform 0.2s ease;
 }
 .cgu-back:hover {
-  color: #555;
+  color: #E07A3F;
 }
 .cgu-back:hover span {
   transform: translateX(-5px);
