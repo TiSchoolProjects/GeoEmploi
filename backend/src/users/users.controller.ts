@@ -31,6 +31,7 @@ export class UsersController {
   }
 
   @updateStatusDoc()
+  @Roles(UserRole.ADMIN)
   @Patch('/status/:id')
   updateStatus(
     @Param('id', ParseIntPipe) id: number,
