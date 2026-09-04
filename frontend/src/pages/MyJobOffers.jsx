@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
@@ -17,6 +18,7 @@ export default function MyJobOffers() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    const token = getToken();
     const fetchData = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -26,7 +28,12 @@ export default function MyJobOffers() {
           throw new Error("Impossible de récupérer l'identifiant de l'employeur.");
         }
 
-        const offersResponse = await fetch(`http://localhost:4242/jobs/employer/${employerId}`);
+        const offersResponse = await fetch(`http://localhost:4242/jobs/employer/${employerId}`,{
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
         if (!offersResponse.ok) {
           throw new Error("Erreur lors de la récupération des offres.");
@@ -34,7 +41,12 @@ export default function MyJobOffers() {
 
         const offersData = await offersResponse.json();
 
-        const employerResponse = await fetch(`http://localhost:4242/employers/${employerId}`);
+        const employerResponse = await fetch(`http://localhost:4242/employers/${employerId}`,{
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
         if (!employerResponse.ok) {
           throw new Error("Erreur lors de la récupération des informations de l'entreprise.");
@@ -83,6 +95,7 @@ export default function MyJobOffers() {
 
       if (!response.ok) throw new Error("Erreur lors de la suppression de l'offre.");
       setOffers((currentOffers) => currentOffers.filter((offer) => offer.id !== offerId));
+      toast.success("Offre supprimé avec succès");
     } catch (err) {
       console.error(err);
       setError("Impossible de supprimer l'offre.");
@@ -114,6 +127,7 @@ export default function MyJobOffers() {
   };
 
   const handleSaveEdit = async (e) => {
+    const token = getToken();
     e.preventDefault();
 
     if (!editingOffer)return;
@@ -127,6 +141,7 @@ export default function MyJobOffers() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             title: editingOffer.title,
@@ -135,7 +150,7 @@ export default function MyJobOffers() {
           }),
         }
       );
-
+      closeEdit();
       if (!response.ok) throw new Error("Erreur lors de la modification de l'offre.");
       const updatedOffer = await response.json();
 
@@ -146,11 +161,15 @@ export default function MyJobOffers() {
           offer.id === updatedOffer.id ? updatedOfferWithEmployer : offer
         )
       );
-
+      toast.success("Offre modifié avec succès");
       setEditingOffer(null);
     } catch (err) {
       console.error(err);
+      toast.error("Modification impossible");
       setError("Modification impossible");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
     } finally {
       setSaving(false);
     }

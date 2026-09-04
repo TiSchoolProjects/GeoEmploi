@@ -89,11 +89,11 @@ export default function Application() {
                   <h2>{application.title}</h2>
 
                   {application.company && (
-                    <p className="offer-company">🏢 {application.company}</p>
+                    <p className="offer-company"> {application.company}</p>
                   )}
 
                   {application.adress && (
-                    <p className="offer-location">📍 {application.adress}</p>
+                    <p className="offer-location">{application.adress}</p>
                   )}
 
                   {application.description && (

@@ -27,8 +27,7 @@ export default function EditProfile() {
       }
 
       try {
-        const profileEndpoint =
-          user.role === "employer"
+        const profileEndpoint = user.role === "employer"
             ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
 
         const [userResponse, profileResponse] = await Promise.all([
