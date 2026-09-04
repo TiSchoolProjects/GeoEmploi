@@ -20,9 +20,9 @@ function NavBar() {
       <div className="nav-right">
         {/*<Link to="/Cgu" className="nav-link">À propos</Link>*/}
 
-        /*{user?.role === "seeker" && (
+        {/*user?.role === "seeker" && (
           <Link to="/my-application" className="nav-link">Candidatures</Link>
-        )}*/
+        )*/}
         {user?.role === "employer" && (
           <div className="employer-actions">
             <Link to="/my-job-offers" className="nav-link">Voir mes offres</Link>
