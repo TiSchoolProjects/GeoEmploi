@@ -31,12 +31,6 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
-  @findbyEmailDoc()
-  @Get('/email/:id')
-  findByEmail(@Param('email') email: string) {
-    return this.usersService.findbyEmail(email);
-  }
-
   @updateDoc()
   @Patch('/status/:id')
   updateStatus(
