@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../CSS/Login.css";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
@@ -42,8 +43,10 @@ export default function Login() {
       localStorage.setItem("access_token", token);
       const user = jwtDecode(token);
       localStorage.setItem("user", JSON.stringify(user));
+      toast.success("Connexion effectuée avec succès");
       navigate("/home");
     } catch (error) {
+      toast.error("Identifiant Incorrect")
       console.error("Login Failed :", error);
     }
   };

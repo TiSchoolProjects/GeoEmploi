@@ -1,3 +1,24 @@
+:root {
+  --blue-primary: #1B3A6B;
+  --blue-dark: #142B4D;
+  --blue-light: #EAF0F8;
+  --orange-accent: #E07A3F;
+  --orange-hover: #C96532;
+  --text-main: #1F2937;
+  --text-muted: #5F6B7A;
+  --text-light: #6B7280;
+  --border-light: #D9E0E8;
+  --border-focus: #1B3A6B;
+  --bg-page: #F5F7FB;
+  --bg-white: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --error-red: #B42318;
+  --error-bg: #FEF3F2;
+
+  --font-heading: 'Marianne', Arial, sans-serif;
+  --font-body: 'Spectral', Georgia, serif;
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;
@@ -10,12 +31,17 @@ html, body, #root {
   padding: 0;
 }
 
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+}
+
 .MapPage {
   position: relative;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: var(--font-body);
 }
 
 .map {
@@ -43,7 +69,7 @@ html, body, #root {
 
 .searchBar {
   position: absolute;
-  top: 16px;
+  top: 88px;
   left: 16px;
   right: 16px;
   max-width: 420px;
@@ -53,7 +79,7 @@ html, body, #root {
   border-radius: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  background-color: white;
+  background-color: var(--bg-white);
   z-index: 10;
 }
 
@@ -62,18 +88,19 @@ html, body, #root {
   min-width: 0;
   padding: 12px 20px;
   border: none;
+  font-family: var(--font-body);
   font-size: 16px;
   outline: none;
-  background: transparent;
-  color: black;
+  background: var(--bg-input);
+  color: var(--text-main);
 }
 
 .searchBar input::placeholder {
-  color: #4a4a4a;
+  color: var(--text-muted);
 }
 
 .searchBar input:focus-visible {
-  outline: 3px solid #1B3A6B;
+  outline: 3px solid var(--border-focus);
   outline-offset: -3px;
 }
 
@@ -81,8 +108,9 @@ html, body, #root {
   padding: 12px 24px;
   min-height: 44px;
   border: none;
-  background-color: #1B3A6B;
-  color: white;
+  background-color: var(--orange-accent);
+  color: #1a1a1a;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -91,26 +119,27 @@ html, body, #root {
 }
 
 .searchBar button:hover {
-  background-color: #14294d;
+  background-color: var(--orange-hover);
 }
 
 .searchBar button:focus-visible {
-  outline: 3px solid #ffffff;
+  outline: 3px solid var(--blue-primary);
   outline-offset: -5px;
-  box-shadow: 0 0 0 3px #1B3A6B;
+  box-shadow: 0 0 0 3px var(--bg-white);
 }
 
 .searchError {
   position: absolute;
-  top: 68px;
+  top: 140px;
   left: 16px;
   right: 16px;
   max-width: 420px;
-  background-color: #ffffff;
-  color: #8b1e1e;
-  border: 1px solid #8b1e1e;
+  background-color: var(--bg-white);
+  color: var(--error-red);
+  border: 1px solid var(--error-red);
   border-radius: 8px;
   padding: 10px 16px;
+  font-family: var(--font-body);
   font-size: 14px;
   z-index: 10;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -131,20 +160,22 @@ html, body, #root {
 
 .jobOfferPopup + .jobOfferPopup {
   padding-top: 12px;
-  border-top: 1px solid #d9d9d9;
+  border-top: 1px solid var(--border-light);
 }
 
 .jobOfferPopup h3 {
-  color: #1B3A6B;
+  color: var(--blue-primary);
+  font-family: var(--font-heading);
   font-size: 1.05rem;
   margin-bottom: 6px;
   padding-right: 40px;
 }
 
 .jobOfferPopup p {
+  font-family: var(--font-body);
   font-size: 0.85rem;
   margin: 2px 0;
-  color: #222;
+  color: var(--text-main);
 }
 
 .jobDetailsBtn {
@@ -153,10 +184,11 @@ html, body, #root {
   min-height: 44px;
   margin-top: 10px;
   padding: 8px 12px;
-  background-color: #E07A3F;
+  background-color: var(--orange-accent);
   color: #1a1a1a;
   border: none;
   border-radius: 6px;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
@@ -164,7 +196,7 @@ html, body, #root {
 }
 
 .jobDetailsBtn:hover {
-  background-color: #c8642b;
+  background-color: var(--orange-hover);
 }
 
 .jobDetailsBtn:focus-visible {
@@ -179,6 +211,7 @@ html, body, #root {
 
 .applyStatus {
   margin-top: 8px;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: 6px;
@@ -190,9 +223,9 @@ html, body, #root {
 
 .applyStatus--error {
   padding: 6px 10px;
-  color: #8b1e1e;
-  background-color: #fbeaea;
-  border: 1px solid #8b1e1e;
+  color: var(--error-red);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-red);
 }
 
 .applyStatus--success {
@@ -210,34 +243,42 @@ html, body, #root {
   top: 2px;
   right: 2px;
   border-radius: 50%;
-  background-color: #ffffff;
-  color: #E07A3F;
+  background-color: var(--bg-white);
+  color: var(--orange-accent);
   font-size: 22px;
   line-height: 1;
   font-weight: 700;
-  border: 2px solid #E07A3F;
+  border: 2px solid var(--orange-accent);
 }
 
 .maplibregl-popup-close-button:hover {
   background-color: #fbeee5;
-  color: #c8642b;
+  color: var(--orange-hover);
 }
 
 .maplibregl-popup-close-button:focus-visible {
-  outline: 3px solid #1B3A6B;
+  outline: 3px solid var(--blue-primary);
   outline-offset: 2px;
+}
+
+.brandBlock {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 20;
+  padding: 8px;
 }
 
 @media (max-width: 600px) {
   .searchBar {
-    top: 8px;
+    top: 72px;
     left: 8px;
     right: 8px;
     max-width: none;
   }
 
   .searchError {
-    top: 60px;
+    top: 124px;
     left: 8px;
     right: 8px;
     max-width: none;

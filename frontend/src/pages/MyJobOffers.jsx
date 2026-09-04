@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function MyJobOffers() {
   const [offers, setOffers] = useState([]);
@@ -17,6 +19,7 @@ export default function MyJobOffers() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
+    const token = getToken();
     const fetchData = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -26,21 +29,9 @@ export default function MyJobOffers() {
           throw new Error("Impossible de récupérer l'identifiant de l'employeur.");
         }
 
-        const offersResponse = await fetch(`http://localhost:4242/jobs/employer/${employerId}`);
+        const offersData = await apiFetch(`/jobs/employer/${employerId}`);
+        const employerData = await apiFetch(`/employers/${employerId}`);
 
-        if (!offersResponse.ok) {
-          throw new Error("Erreur lors de la récupération des offres.");
-        }
-
-        const offersData = await offersResponse.json();
-
-        const employerResponse = await fetch(`http://localhost:4242/employers/${employerId}`);
-
-        if (!employerResponse.ok) {
-          throw new Error("Erreur lors de la récupération des informations de l'entreprise.");
-        }
-
-        const employerData = await employerResponse.json();
         setEmployer(employerData);
         const offersWithEmployer = Array.isArray(offersData) ? offersData.map((offer) => ({...offer, employer: employerData,})): [];
         setOffers(offersWithEmployer);
@@ -72,17 +63,10 @@ export default function MyJobOffers() {
       setDeletingId(offerId);
       setError("");
 
-      const token = getToken();
+      await apiFetch(`/jobs/${offerId}`, {method: "DELETE"}); 
 
-      const response = await fetch(`http://localhost:4242/jobs/${offerId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error("Erreur lors de la suppression de l'offre.");
       setOffers((currentOffers) => currentOffers.filter((offer) => offer.id !== offerId));
+      toast.success("Offre supprimé avec succès");
     } catch (err) {
       console.error(err);
       setError("Impossible de supprimer l'offre.");
@@ -114,6 +98,7 @@ export default function MyJobOffers() {
   };
 
   const handleSaveEdit = async (e) => {
+    const token = getToken();
     e.preventDefault();
 
     if (!editingOffer)return;
@@ -122,23 +107,14 @@ export default function MyJobOffers() {
       setSaving(true);
       setError("");
 
-      const response = await fetch(`http://localhost:4242/jobs/${editingOffer.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: editingOffer.title,
-            description: editingOffer.description,
-            adress: editingOffer.adress,
-          }),
-        }
-      );
-
-      if (!response.ok) throw new Error("Erreur lors de la modification de l'offre.");
-      const updatedOffer = await response.json();
-
+      const updatedOffer = await apiFetch(`/jobs/${editingOffer.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: editingOffer.title,
+          description: editingOffer.description,
+          adress: editingOffer.adress,
+        }),
+      });
       const updatedOfferWithEmployer = {...updatedOffer,employer: employer,};
 
       setOffers((currentOffers) =>
@@ -146,11 +122,15 @@ export default function MyJobOffers() {
           offer.id === updatedOffer.id ? updatedOfferWithEmployer : offer
         )
       );
-
+      toast.success("Offre modifié avec succès");
       setEditingOffer(null);
     } catch (err) {
       console.error(err);
+      toast.error("Modification impossible");
       setError("Modification impossible");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
     } finally {
       setSaving(false);
     }

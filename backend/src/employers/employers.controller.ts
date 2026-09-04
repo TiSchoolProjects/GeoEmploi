@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, Headers, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, Req, ForbiddenException } from '@nestjs/common';
 import { EmployersService } from './employers.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { createDoc, findAllDoc, findOneDoc, validateDoc, updateDoc, removeDoc } from './employers.controller.docs';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
+import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('employers')
 export class EmployersController {
@@ -18,14 +19,13 @@ export class EmployersController {
   }
 
   @findAllDoc()
-  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.employersService.findAll();
   }
 
+  @Public()
   @findOneDoc()
-  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.employersService.findOne(+id);
@@ -39,8 +39,14 @@ export class EmployersController {
   }
 
   @updateDoc()
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateEmployerDto: UpdateEmployerDto,
+      @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
+  ) {
+      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
+        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
+      }
     return this.employersService.update(Number(id), updateEmployerDto);
   }
 
@@ -50,18 +56,4 @@ export class EmployersController {
   remove(@Param('id') id: string) {
     return this.employersService.remove(+id);
   }
-  /*
-  @Delete(':id')
-  remove(@Param('id') id: string, @Headers('authorization') authHeader: string) {
-    if (!authHeader) {
-      throw new UnauthorizedException('No authorization header provided');
-    }
-
-    const token = authHeader.replace('Bearer ', '').trim();
-
-    console.log('Extracted Token:', token);
-
-    return this.employersService.remove(+id);
-  }
-  */
 }

@@ -2,15 +2,25 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Application, ApplicationStatus } from './entities/application.entity';
 import { Repository } from 'typeorm';
+import { Job } from '../jobs/entities/job.entity';
 
 @Injectable()
 export class ApplicationsService {
   constructor(
     @InjectRepository(Application) 
     private AppRepository: Repository<Application>,
+
+    @InjectRepository(Job)
+    private JobRepository: Repository<Job>,
   ) {}
 
   async apply(jobSeekerId: number, jobId: number): Promise<Application> {
+    const job = await this.JobRepository.findOne({where: {id: jobId},});
+
+    if (!job) {
+      throw new NotFoundException("L'offre demandée n'existe pas.");
+    }
+
     const exist = await this.AppRepository.findOne({where : {jobSeekerId, jobId}});
 
     if (exist) {
@@ -27,7 +37,7 @@ export class ApplicationsService {
   }
 
   findOne(id: number) {
-    return this.AppRepository.findBy({id});
+    return this.AppRepository.findOneBy({id});
   }
 
   async findbySeekerId(jobSeekerId: number): Promise<Application[]> {

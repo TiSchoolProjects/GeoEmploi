@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
 import "../CSS/MyJobOffers.css";
 import { getToken } from "../utils/auth";
+import { apiFetch } from "../api/client";
 
 export default function Application() {
   const [applications, setApplications] = useState([]);
@@ -14,42 +15,31 @@ export default function Application() {
     const seekerId = user?.sub;
 
     if (!seekerId) {
-      setError("Impossible de récupérer l'identifiant de l'employeur.");
+      setError("Impossible de récupérer l'identifiant de l'utilisateur.");
       setLoading(false);
       return;
     }
 
-    fetch(`http://localhost:4242/applications/seeker/${seekerId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des offres.");
-        }
-        return response.json();
-      })
+    apiFetch(`/applications/seeker/${seekerId}`)
       .then((data) => {
-        console.log("Offres récupérées :", data);
-        setApplications(Array.isArray(data) ? data : []); // tableau ? 
+          setApplications(Array.isArray(data) ? data : []);
+        })
+       .catch((err) => {
+        console.error(err);
+        setError("Impossible de charger vos candidature.");
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
-        setError("Impossible de charger vos offres.");
+      .finally(() => {
         setLoading(false);
-      });
+    });
   }, []);
 
   const handleEdit = (applicationId) => {
-    console.log("Modifier l'offre :", applicationId);
+    console.log("Modifier la candidature :", applicationId);
   };
 
   const handleDelete = (applicationId) => {
-    console.log("Supprimer l'offre :", applicationId);
+    console.log("Supprimer la candidature :", applicationId);
   };
 
   return (
@@ -86,21 +76,21 @@ export default function Application() {
             {applications.map((application) => (
               <div className="offer-card" key={`offer-${application.id}`}>
                 <div className="offer-card-content">
-                  <h2>{application.title}</h2>
+                  <h2>{application.job?.title}</h2>
 
-                  {application.company && (
-                    <p className="offer-company">🏢 {application.company}</p>
+                  {application.job?.company && (
+                    <p className="offer-company"> {application.job?.company}</p>
                   )}
 
-                  {application.adress && (
-                    <p className="offer-location">📍 {application.adress}</p>
+                  {application.job?.adress && (
+                    <p className="offer-location">{application.job?.adress}</p>
                   )}
 
-                  {application.description && (
-                    <p className="offer-description">{application.description}</p>
+                  {application.job?.description && (
+                    <p className="offer-description">{application.job?.description}</p>
                   )}
 
-                  {application.contractType && (
+                  {application.job?.contractType && (
                     <span className="offer-tag">{application.contapplicationractType}</span>
                   )}
                 </div>
