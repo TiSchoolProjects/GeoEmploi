@@ -11,7 +11,7 @@ import { Application } from "../../applications/entities/application.entity";
 
 const dataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: 'db',
   port: Number(process.env.DB_PORT || 5432),
   username: process.env.DB_USERNAME || 'GeoUser',
   password: process.env.DB_PASSWORD || 'GeoPassword',
@@ -49,8 +49,21 @@ async function geocode(address: string): Promise<Partial<Job>> {
       }
 
       const first = feats[0];
+
+      if (first.properties.score < 0.7) {
+        return {
+          lat: null,
+          lng: null,
+          geocodingScore: null,
+          geocodingSource: "api-adresse",
+          geocodedAt: null,
+          GeocodingStatus: GeoCodingStatus.TO_VERIFY,
+        };
+      }
+
       const[lng, lat] = first.geometry.coordinates;
       const score = first.properties.score;
+
 
       return {
         lat,
