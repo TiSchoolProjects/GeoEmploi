@@ -30,6 +30,12 @@ export default function MapPage() {
     markersRef.current = []
   }
 
+  const truncateDescription = (description, maxLength = 120) => {
+    if (!description) return ""
+    if (description.length <= maxLength) return description
+    return `${description.substring(0, maxLength).trimEnd()}...`
+  }
+
   const getCompanyName = async (offer) => {
     try {
       const response = await fetch(`http://localhost:4242/employers/${offer.employerId}`, {
@@ -141,7 +147,7 @@ export default function MapPage() {
             return `
               <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
                 <h3>${offer.title}</h3>
-                <p>${offer.description}</p>
+                <p>${truncateDescription(offer.description)}</p>
                 <p><strong>Entreprise :</strong> ${companyName}</p>
                 ${role === "seeker" ? `
                   <button
@@ -221,12 +227,27 @@ export default function MapPage() {
             }
           })
         })
+
+        detailsBtns[0]?.focus()
       })
 
       const marker = new Marker()
         .setLngLat(lngLat)
         .setPopup(popup)
         .addTo(map)
+
+      const markerElement = marker.getElement()
+      markerElement.setAttribute('tabindex', '0')
+      markerElement.setAttribute(
+        'aria-label',
+        `Afficher ${offers.length === 1 ? "l'offre d'emploi" : "les offres d'emploi"} à cet endroit`
+      )
+      markerElement.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+
+        event.preventDefault()
+        marker.togglePopup()
+      })
 
       markersRef.current.push(marker)
     })
