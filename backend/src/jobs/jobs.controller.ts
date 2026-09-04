@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, ParseIntPipe, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Req } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
@@ -60,7 +60,6 @@ export class JobsController {
   }
 
   @archiveDoc()
-  @UseGuards(JwtAuthGuard)
   @Roles(UserRole.ADMIN)
   @Patch(':id')
   archive(@Param('id', ParseIntPipe) id: number) {
@@ -68,7 +67,6 @@ export class JobsController {
   }
 
   @removeDoc()
-  @UseGuards(JwtAuthGuard)
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number,
