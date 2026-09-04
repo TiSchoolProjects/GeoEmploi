@@ -76,7 +76,7 @@ export default function MapPage() {
       console.error("Erreur lors de l'application à l'offre :", error)
       return {
         ok: false,
-        message: "Impossible de contacter le serveur. Vérifiez votre connexion et réessayez."
+        message: "Vous avez déjà postulé à cette offre."
       }
     }
   }
