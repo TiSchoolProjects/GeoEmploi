@@ -63,7 +63,7 @@ export default function MyJobOffers() {
       setDeletingId(offerId);
       setError("");
 
-      await apiFetch(`jobs/${offerId}`, {method: "DELETE"}); 
+      await apiFetch(`/jobs/${offerId}`, {method: "DELETE"}); 
 
       setOffers((currentOffers) => currentOffers.filter((offer) => offer.id !== offerId));
       toast.success("Offre supprimé avec succès");

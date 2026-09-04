@@ -76,21 +76,21 @@ export default function Application() {
             {applications.map((application) => (
               <div className="offer-card" key={`offer-${application.id}`}>
                 <div className="offer-card-content">
-                  <h2>{application.title}</h2>
+                  <h2>{application.job?.title}</h2>
 
-                  {application.company && (
-                    <p className="offer-company"> {application.company}</p>
+                  {application.job?.company && (
+                    <p className="offer-company"> {application.job?.company}</p>
                   )}
 
-                  {application.adress && (
-                    <p className="offer-location">{application.adress}</p>
+                  {application.job?.adress && (
+                    <p className="offer-location">{application.job?.adress}</p>
                   )}
 
-                  {application.description && (
-                    <p className="offer-description">{application.description}</p>
+                  {application.job?.description && (
+                    <p className="offer-description">{application.job?.description}</p>
                   )}
 
-                  {application.contractType && (
+                  {application.job?.contractType && (
                     <span className="offer-tag">{application.contapplicationractType}</span>
                   )}
                 </div>

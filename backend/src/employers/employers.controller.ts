@@ -5,6 +5,7 @@ import { createDoc, findAllDoc, findOneDoc, validateDoc, updateDoc, removeDoc } 
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
+import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('employers')
 export class EmployersController {
@@ -23,6 +24,7 @@ export class EmployersController {
     return this.employersService.findAll();
   }
 
+  @Public()
   @findOneDoc()
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -135,7 +135,7 @@ export default function EditProfile() {
       const profileEndpoint = isRH ? `/employers/${user.sub}` : `/seekers/${user.sub}`;
       const profileData = await apiFetch(profileEndpoint, {
         method: "PATCH",
-        body: JSON.stringify(userBody),
+        body: JSON.stringify(profileBody),
       });
 
       if (!profileData) {
