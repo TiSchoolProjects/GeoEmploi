@@ -24,8 +24,8 @@ export class EmployersController {
     return this.employersService.findAll();
   }
 
-  @Public()
   @findOneDoc()
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.employersService.findOne(+id);
@@ -45,7 +45,7 @@ export class EmployersController {
       @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
   ) {
       if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
-        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
+        throw new ForbiddenException("Vous ne pouvez pas modifier les informations d'un autre utilisateur.",);
       }
     return this.employersService.update(Number(id), updateEmployerDto);
   }

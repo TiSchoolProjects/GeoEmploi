@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { Job } from './entities/job.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateJobDto } from './dto/create-job.dto';
@@ -7,6 +7,7 @@ import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
 
 export function createDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Create a new job' }),
         ApiParam({
             name: 'createJobDto',
@@ -54,6 +55,7 @@ export function findOneDoc() {
 
 export function updateDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Update job info' }),
         ApiResponse({ status: 200, description: 'Updated job info', type: Job }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
@@ -62,6 +64,7 @@ export function updateDoc() {
 
 export function archiveDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Archive job, making it unavailable for viewing or application' }),
         ApiResponse({ status: 200, description: 'Archived job', type: Job }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
@@ -70,6 +73,7 @@ export function archiveDoc() {
 
 export function removeDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove job from database' }),
         ApiResponse({ status: 200, description: 'Removed job', type: DeleteResult }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
