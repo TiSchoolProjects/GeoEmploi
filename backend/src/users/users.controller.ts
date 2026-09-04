@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, ForbiddenException, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { createDoc, findAllDoc, findOneDoc, findbyEmailDoc, updateDoc, removeDoc } from './user.controller.doc';
@@ -51,7 +51,11 @@ export class UsersController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
+    @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
   ) {
+      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
+        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
+      }
       return this.usersService.UpdateUser(id, updateUserDto);
     }
 
