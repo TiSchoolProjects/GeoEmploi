@@ -20,7 +20,7 @@ export default function Application() {
       return;
     }
 
-    apiFetch(`/application/seeker/${seekerId}`)
+    apiFetch(`/applications/seeker/${seekerId}`)
       .then((data) => {
           setApplications(Array.isArray(data) ? data : []);
         })

@@ -64,7 +64,7 @@ export class JobsController {
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto) {
-    return this.jobsService.archive(id);
+    return this.jobsService.update(id, updateJobDto);
   }
 
   @archiveDoc()
