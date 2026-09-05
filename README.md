@@ -22,7 +22,7 @@ Services disponibles :
 
 - Front-end : `http://localhost:5173`
 - Back-end : `http://localhost:4242`
-- Swagger : `http://localhost:4242`
+- Swagger : `http://localhost:4242/api/docs`
 - PostgreSQL : port `5432` par défaut
 
 Pour arrêter les services :
