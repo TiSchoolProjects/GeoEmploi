@@ -4,7 +4,6 @@ import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, LessThanOrEqual, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
-import { IsNotIn } from 'class-validator';
 
 @Injectable()
 export class JobsService {
@@ -15,9 +14,12 @@ export class JobsService {
 
   private geocodingFail(): Partial<Job> {
     return {
+      lat: null,
+      lng: null,
       GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       geocodingScore: null,
       geocodingSource: 'api-adresse',
+      geocodedAt: null,
     };
   }
 
@@ -111,7 +113,14 @@ export class JobsService {
       throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
     }
 
+    const changed = updateJobDto.adress !== undefined && updateJobDto.adress != job.adress;
+
     Object.assign(job, updateJobDto);
+
+    if (changed && updateJobDto.adress) {
+      const geocoding = await this.geocodeAdress(updateJobDto.adress);
+      Object.assign(job, geocoding);
+    }
     return await this.jobRepository.save(job);
   }
 
@@ -163,4 +172,10 @@ export class JobsService {
     return R * c;
 
   }
+
+  async findAdmin(): Promise<Job[]> {
+    return this.jobRepository.find({where: {GeocodingStatus: GeoCodingStatus.TO_VERIFY, archivedAt: IsNull(),},
+      relations: {employer: true,}, order: {createdAt: 'DESC',},});
+  }
+
 }

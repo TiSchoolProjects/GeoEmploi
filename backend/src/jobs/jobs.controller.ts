@@ -53,6 +53,12 @@ export class JobsController {
     return await this.jobsService.geocodeAdress(address);
   }
 
+  @Roles(UserRole.ADMIN)
+  @Get('to-verify')
+  findAdmin() {
+    return this.jobsService.findAdmin();
+  }
+
   @Public()
   @findOneDoc()
   @Get(':id')
@@ -66,7 +72,6 @@ export class JobsController {
   update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto,
         @Req() req: Request & {user: {userId: number; role: UserRole;};},
   ) {
-
     return this.jobsService.update(id, updateJobDto, req.user.userId, req.user.role);
   }
 
