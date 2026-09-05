@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Application, ApplicationStatus } from './entities/application.entity';
 import { Repository } from 'typeorm';
 import { Job } from '../jobs/entities/job.entity';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class ApplicationsService {
@@ -12,6 +13,7 @@ export class ApplicationsService {
 
     @InjectRepository(Job)
     private JobRepository: Repository<Job>,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async apply(jobSeekerId: number, jobId: number): Promise<Application> {
@@ -29,7 +31,11 @@ export class ApplicationsService {
 
     const app = this.AppRepository.create({jobSeekerId, jobId, status: ApplicationStatus.WAITING});
 
-    return await this.AppRepository.save(app);
+    const savedApp = await this.AppRepository.save(app);
+
+    await this.notificationsService.create(job.employerId, savedApp.id, job.title,);
+
+    return savedApp;
   }
 
   findAll() {
