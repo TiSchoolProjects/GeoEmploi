@@ -6,10 +6,11 @@ import { User } from '../users/entities/user.entity';
 import { Application } from '../applications/entities/application.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
+import { JobsScheduler } from './jobs.scheduler';
 
 @Module({
   controllers: [JobsController],
-  providers: [JobsService],
+  providers: [JobsService, JobsScheduler,],
   imports: [AuthModule, TypeOrmModule.forFeature([Job, User, Application])],
   exports: [TypeOrmModule]
 

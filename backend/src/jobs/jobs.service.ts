@@ -2,8 +2,9 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Repository } from 'typeorm';
+import { IsNull, LessThanOrEqual, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
+import { IsNotIn } from 'class-validator';
 
 @Injectable()
 export class JobsService {
@@ -75,7 +76,7 @@ export class JobsService {
   }
 
   findAll() {
-    return this.jobRepository.find();
+    return this.jobRepository.find({where: {archivedAt: IsNull(),},});
   }
 
   findOne(id: number) {
@@ -137,6 +138,16 @@ export class JobsService {
     await this.jobRepository.remove(job);
   }
 
+  async archiveAfter30days(): Promise<number> {
+    const dateLim = new Date();
+    dateLim.setDate(dateLim.getDate() - 30);
+
+    const res = await this.jobRepository.update(
+      {archivedAt: IsNull(), createdAt: LessThanOrEqual(dateLim)},
+      {archivedAt: new Date(),},);
+    
+    return res.affected ?? 0;
+  }
 
   private calcdist(Alat: number, Alng: number, Blat: number, Blng: number): number {
     const R = 6371.0
