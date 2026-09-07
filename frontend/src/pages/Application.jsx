@@ -163,9 +163,7 @@ export default function Application() {
                       disabled={deletingId === application.id}
                       title="Supprimer la candidature"
                     >
-                      {deletingId === application.id
-                        ? "..."
-                        : "Supprimer"}
+                      {deletingId === application.id ? "..." : "Supprimer"}
                     </button>
                   </div>
                 </div>
