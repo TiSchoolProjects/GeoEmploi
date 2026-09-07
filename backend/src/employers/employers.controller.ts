@@ -6,6 +6,7 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
+import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('employers')
 export class EmployersController {
@@ -19,6 +20,7 @@ export class EmployersController {
   }
 
   @findAllDoc()
+  @Public()
   @Get()
   findAll() {
     return this.employersService.findAll();
@@ -40,13 +42,9 @@ export class EmployersController {
 
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
+  @CheckOwnership('id')
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateEmployerDto: UpdateEmployerDto,
-      @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
-  ) {
-      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
-        throw new ForbiddenException("Vous ne pouvez pas modifier les informations d'un autre utilisateur.",);
-      }
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateEmployerDto: UpdateEmployerDto) {
     return this.employersService.update(Number(id), updateEmployerDto);
   }
 

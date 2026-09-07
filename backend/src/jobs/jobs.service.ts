@@ -154,7 +154,7 @@ export class JobsService {
     const res = await this.jobRepository.update(
       {archivedAt: IsNull(), createdAt: LessThanOrEqual(dateLim)},
       {archivedAt: new Date(),},);
-    
+
     return res.affected ?? 0;
   }
 
