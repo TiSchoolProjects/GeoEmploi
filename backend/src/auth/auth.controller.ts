@@ -3,6 +3,7 @@ import { LocalAuthGuard } from "./local-auth.guard";
 import { AuthService } from "./auth.service";
 import { Request } from "express";
 import { User } from "../users/entities/user.entity";
+import { LoginDto } from "./dto/login.dto";
 import { RegisterSeekerDto } from "./dto/register-seeker.dto";
 import { RegisterEmployerDto } from "./dto/register-employer.dto";
 import { loginDoc, registerSeekersDoc, registerEmployerDoc } from "./auth.controller.docs";
@@ -16,7 +17,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Public()
   @Post('login')
-  async login(@Req() req: Request & { user: User}) {
+  async login(@Body() _loginDto: LoginDto, @Req() req: Request & { user: User}) {
     return this.authService.login(req.user);
   }
 
