@@ -94,10 +94,10 @@ export class JobsController {
     return this.jobsService.remove(id, req.user.userId, req.user.role);
   }
 
-  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
+  @Public()
   @Patch('views/:id')
   increaseView(@Param('id', ParseIntPipe) id: number) {
-    this.increaseView(id);
+    this.jobsService.incrementView(id);
   }
 
 }
