@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../CSS/Login.css";
@@ -77,15 +78,25 @@ export default function EditProfile() {
   }
 
   const ProfileDelete = async (userId) => {
+    const result = await Swal.fire({
+      title: "Supprimer le compte?",
+      text: "Êtes-vous sûr de vouloir supprimer ce compte ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Supprimer",
+      cancelButtonText: "Annuler",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
     try {
       await apiFetch(`/users/${userId}`, { method: "DELETE" });
 
       toast.success("Profile supprimé avec succès");
+      logout();
+      navigate("/login");
     } catch (err) {
       console.error(err);
       toast.error("Impossible de supprimer le profile.");
-    } finally {
-      setDeletingId(null);
     }
   };
 
