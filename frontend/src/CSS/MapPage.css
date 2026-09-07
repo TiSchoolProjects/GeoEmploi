@@ -1,22 +1,22 @@
 :root {
-  --blue-primary: #1B3A6B;
-  --blue-dark: #142B4D;
-  --blue-light: #EAF0F8;
-  --orange-accent: #E07A3F;
-  --orange-hover: #C96532;
+  --blue-primary: #1A1F26;
+  --blue-dark: #12161C;
+  --blue-light: #F5EFE0;
+  --orange-accent: #D9A441;
+  --orange-hover: #B8862F;
   --text-main: #1F2937;
   --text-muted: #5F6B7A;
   --text-light: #6B7280;
   --border-light: #D9E0E8;
-  --border-focus: #1B3A6B;
+  --border-focus: #1A1F26;
   --bg-page: #F5F7FB;
   --bg-white: #FFFFFF;
   --bg-input: #FFFFFF;
   --error-red: #B42318;
   --error-bg: #FEF3F2;
 
-  --font-heading: 'Marianne', Arial, sans-serif;
-  --font-body: 'Spectral', Georgia, serif;
+  --font-heading: 'Outfit', Arial, sans-serif;
+  --font-body: 'Outfit', Arial, sans-serif;
 }
 
 html, body, #root {
