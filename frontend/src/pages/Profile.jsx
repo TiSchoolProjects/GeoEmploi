@@ -179,7 +179,7 @@ export default function EditProfile() {
         </div>
 
         {/* FORM */}
-        <form onSubmit={handleSubmit(onSubuser.controlmit)} className="form">
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
 
           {/* PRENOM / NOM */}
           <div className="input-row">
