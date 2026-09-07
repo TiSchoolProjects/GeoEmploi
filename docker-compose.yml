@@ -30,6 +30,8 @@ services:
       DB_NAME: GeoDB
       DB_USER: GeoUser
       DB_PASSWORD: GeoPassword
+      IGN_CACHE_DIR: /usr/src/geoemploi/.cache/ign
+      IGN_CACHE_TTL_MS: 604800000
     ports: 
       - 4242:4242
     depends_on:
@@ -47,4 +49,4 @@ services:
 
 volumes: 
   db_data:
-
+  ign_cache:
