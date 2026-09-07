@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { Employer } from './entities/employer.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateEmployerDto } from './dto/create-employer.dto';
@@ -7,6 +7,7 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 
 export function createDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Create a new employer' }),
         ApiParam({
             name: 'createEmployerDto',
@@ -19,6 +20,7 @@ export function createDoc() {
 
 export function findAllDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Get all employers' }),
         ApiResponse({ status: 200, description: 'List of all registered employers', type: [Employer] }),
     );
@@ -34,6 +36,7 @@ export function findOneDoc() {
 
 export function validateDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Validate employer info and certify their profile' }),
         ApiParam({
             name: 'updateEmployerDto',
@@ -47,6 +50,7 @@ export function validateDoc() {
 
 export function updateDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Update employer info' }),
         ApiParam({
             name: 'updateEmployerDto',
@@ -60,6 +64,7 @@ export function updateDoc() {
 
 export function removeDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove employer from database' }),
         ApiResponse({ status: 200, description: 'Removed employer', type: DeleteResult }),
         ApiResponse({ status: 404, description: 'No employer found with given id', type: undefined })

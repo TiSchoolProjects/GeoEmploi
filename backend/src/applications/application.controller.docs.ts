@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 import { Application } from './entities/application.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateApplicationDto } from './dto/create-application.dto';
@@ -7,6 +7,7 @@ import { UpdateApplicationDto } from './dto/update-application.dto';
 
 export function applyDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Apply to a job' }),
         ApiParam({
             name: 'createApplicationDto',
@@ -19,6 +20,7 @@ export function applyDoc() {
 
 export function findAllDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Get all applications' }),
         ApiResponse({ status: 200, description: 'List of all applications', type: [Application] }),
     );
@@ -26,6 +28,7 @@ export function findAllDoc() {
 
 export function findOneDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find an application through their id' }),
         ApiResponse({ status: 200, description: 'Found application info', type: Application }),
         ApiResponse({ status: 404, description: 'No application found with given id', type: undefined })
@@ -34,6 +37,7 @@ export function findOneDoc() {
 
 export function findBySeekerDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find an application through seeked id' }),
         ApiResponse({ status: 200, description: 'List of all applications from seeker', type: [Application] }),
         ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
@@ -42,6 +46,7 @@ export function findBySeekerDoc() {
 
 export function findByJobDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find an application through job id' }),
         ApiResponse({ status: 200, description: 'List of all applications from employer', type: [Application] }),
         ApiResponse({ status: 404, description: 'No employer found with given id', type: undefined })
@@ -50,6 +55,7 @@ export function findByJobDoc() {
 
 export function updateStatusDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Archive application, making it unavailable for viewing or application' }),
         ApiParam({
             name: 'updateApplicationDto',
@@ -63,6 +69,7 @@ export function updateStatusDoc() {
 
 export function removeDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove application from database' }),
         ApiResponse({ status: 200, description: 'Removed application', type: DeleteResult }),
         ApiResponse({ status: 404, description: 'No application found with given id', type: undefined })

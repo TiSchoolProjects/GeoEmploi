@@ -25,14 +25,14 @@ export class JobsController {
   }
 
   @findAllDoc()
-  @Get()
   @Public()
+  @Get()
   findAll() {
     return this.jobsService.findAll();
   }
 
-  @Public()
   @findAroundDoc()
+  @Public()
   @Get('/search')
   findAround(
     @Query('lat') lat: string,
@@ -61,6 +61,7 @@ export class JobsController {
 
   @Public()
   @findOneDoc()
+  @Public()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.findOne(id);
