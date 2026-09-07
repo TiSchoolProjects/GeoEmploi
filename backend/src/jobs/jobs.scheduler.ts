@@ -11,7 +11,7 @@ export class JobsScheduler implements OnModuleInit {
       await this.archiveJobs();
   }
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async archiveJobs() {
     await this.jobsService.archiveAfter30days();
   }
