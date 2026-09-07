@@ -1,17 +1,17 @@
 :root {
-  --blue-primary: #1B3A6B;
-  --blue-dark: #142B4D;
-  --blue-light: #EAF0F8;
+  --blue-primary: #1A1F26;
+  --blue-dark: #12161C;
+  --blue-light: #F5EFE0;
 
-  --orange-accent: #E07A3F;
-  --orange-hover: #C96532;
+  --orange-accent: #D9A441;
+  --orange-hover: #B8862F;
 
   --text-main: #1F2937;
   --text-muted: #5F6B7A;
   --text-light: #6B7280;
 
   --border-light: #D9E0E8;
-  --border-focus: #1B3A6B;
+  --border-focus: #1A1F26;
 
   --bg-page: #F5F7FB;
   --bg-white: #FFFFFF;
@@ -52,7 +52,7 @@ body {
 
   overflow-y: auto;
 
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Outfit", Arial, sans-serif;
   color: var(--text-main);
 
   background-color: var(--bg-page);
@@ -70,8 +70,8 @@ body {
   border-radius: 22px;
 
   box-shadow:
-    0 20px 50px rgba(20, 43, 77, 0.10),
-    0 8px 25px rgba(20, 43, 77, 0.05);
+    0 20px 50px rgba(18, 22, 28, 0.10),
+    0 8px 25px rgba(18, 22, 28, 0.05);
 
   backdrop-filter: blur(15px);
 }
@@ -83,7 +83,7 @@ body {
 }
 
 .form-header h1 {
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   font-size: 30px;
   font-weight: 800;
@@ -95,7 +95,7 @@ body {
 .form-header p {
   margin-top: 8px;
 
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   color: var(--text-muted);
   font-size: 15px;
@@ -121,7 +121,7 @@ body {
 }
 
 .form-group label {
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   font-size: 14px;
   font-weight: 700;
@@ -136,7 +136,7 @@ body {
 
   padding: 0 15px;
 
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Outfit", Arial, sans-serif;
   font-size: 15px;
 
   border: 1.5px solid #9CA3AF;
@@ -171,7 +171,7 @@ body {
   background: #FFFFFF;
 
   box-shadow:
-    0 0 0 4px rgba(27, 58, 107, 0.14);
+    0 0 0 4px rgba(26, 31, 38, 0.14);
 
   transform: translateY(-1px);
 }
@@ -207,7 +207,7 @@ body {
 .error {
   color: var(--error-red);
 
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   font-size: 12px;
   font-weight: 600;
@@ -229,7 +229,7 @@ body {
 
   color: #FFFFFF;
 
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   font-size: 15px;
   font-weight: 700;
@@ -243,7 +243,7 @@ body {
   gap: 10px;
 
   box-shadow:
-    0 6px 16px rgba(201, 101, 50, 0.18);
+    0 6px 16px rgba(184, 134, 47, 0.18);
 
   transition:
     transform 0.2s ease,
@@ -270,7 +270,7 @@ body {
   filter: none;
 
   box-shadow:
-    0 8px 20px rgba(201, 101, 50, 0.22);
+    0 8px 20px rgba(184, 134, 47, 0.22);
 }
 
 .submit-btn:hover .arrow {
@@ -287,8 +287,8 @@ body {
   outline: none;
 
   box-shadow:
-    0 0 0 3px rgba(27, 58, 107, 0.18),
-    0 0 0 6px rgba(224, 122, 63, 0.25);
+    0 0 0 3px rgba(26, 31, 38, 0.18),
+    0 0 0 6px rgba(217, 164, 65, 0.25);
 }
 
 .submit-btn:disabled {
@@ -305,7 +305,7 @@ body {
 
   text-align: center;
 
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Outfit", Arial, sans-serif;
 
   color: var(--text-muted);
 
@@ -313,7 +313,7 @@ body {
 }
 
 .form-footer a {
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
   font-weight: 700;
 
   color: var(--blue-primary);
@@ -361,7 +361,7 @@ body {
   max-width: 100%;
   min-height: 150px;
   padding: 12px 15px;
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Outfit", Arial, sans-serif;
   font-size: 15px;
   border: 1.5px solid #9CA3AF;
   border-radius: 11px;
