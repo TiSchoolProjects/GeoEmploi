@@ -81,6 +81,10 @@ export default function MapPage() {
     }
   }
 
+  const regView = async (offerId) => {
+      await apiFetch(`/jobs/views/${offerId}`, { method: "PATCH",});
+  }
+
   const renderMarkersInView = () => {
     const map = mapRef.current
     if (!map || !mapLoadedRef.current) return
@@ -126,7 +130,7 @@ export default function MapPage() {
             const statusId = `applyStatus-${offerId}`
 
             return `
-              <div class="jobOfferPopup" role="group" aria-label="Offre d'emploi : ${offer.title}">
+              <div class="jobOfferPopup" data-offer-id="${offerId}" role="group" aria-label="Offre d'emploi : ${offer.title}">
                 <h3>${offer.title}</h3>
                 <p>${truncateDescription(offer.description)}</p>
                 <p><strong>Entreprise :</strong> ${companyName}</p>
@@ -218,6 +222,24 @@ export default function MapPage() {
         .addTo(map)
 
       const markerElement = marker.getElement()
+
+      let viewed = false
+
+      markerElement.addEventListener('click', async () => {
+        if (viewed) return
+
+        viewed = true
+
+        try {
+          for (const offer of offers) {
+            await regView(offer.id)
+          }
+        } catch (error) {
+          console.error(error)
+          viewed = false
+        }
+      })
+
       markerElement.setAttribute('tabindex', '0')
       markerElement.setAttribute(
         'aria-label',

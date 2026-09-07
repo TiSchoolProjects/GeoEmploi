@@ -178,6 +178,10 @@ export default function MyJobOffers() {
                 <div className="offer-card-content">
                   <h2>{offer.title}</h2>
 
+                  <p className="offer-views">
+                    {offer.views ?? 0} vue{(offer.views ?? 0) > 1 ? "s" : ""}
+                  </p>
+
                   {offer.employer && (
                     <div className="offer-company-info">
                       {offer.employer.companyName && (
@@ -259,6 +263,11 @@ export default function MyJobOffers() {
               <div className="detail-row detail-description">
                 <strong>Description</strong>
                 <p> {selectedOffer.description || "Aucune description disponible."}</p>
+              </div>
+
+              <div className="detail-row">
+                <strong>Nombre de vues</strong>
+                <span>{selectedOffer.views ?? 0}</span>
               </div>
             </div>
 
