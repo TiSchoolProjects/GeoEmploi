@@ -128,24 +128,37 @@ export default function MapPage() {
             const offerId = offer.id ?? offer._id ?? offer.index
             const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
             const statusId = `applyStatus-${offerId}`
+            const safeTitle = escapeHtml(offer.title);
+            const safeDescription = escapeHtml(truncateDescription(offer.description));
+            const safeCompanyName = escapeHtml(companyName);
+            const safeOfferId = escapeHtml(offerId);
+            const safeStatusId = escapeHtml(statusId);
 
             return `
-              <div class="jobOfferPopup" data-offer-id="${offerId}" role="group" aria-label="Offre d'emploi : ${offer.title}">
-                <h3>${offer.title}</h3>
-                <p>${truncateDescription(offer.description)}</p>
-                <p><strong>Entreprise :</strong> ${companyName}</p>
+              <div class="jobOfferPopup" data-offer-id="${safeOfferId}" role="group" aria-label="Offre d'emploi : ${safeTitle}">
+                <h3>${safeTitle}</h3>
+                <p>${safeDescription}</p>
+                  const escapeHtml = (value) => {
+                    return String(value ?? "")
+                    .replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;")
+                    .replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;")
+                    .replaceAll("'", "&#039;");
+                  };
+                <p><strong>Entreprise :</strong> ${safeCompanyName}</p>
                 ${role === "seeker" ? `
                   <button
                     type="button"
                     class="jobDetailsBtn"
-                    data-offer-id="${offerId}"
-                    aria-describedby="${statusId}"
+                    data-offer-id="${safeOfferId}"
+                    aria-describedby="${safeStatusId}"
                   >
                     Postuler
                   </button>
                 ` : ""}
                 <p
-                  id="${statusId}"
+                  id="${safeStatusId}"
                   class="applyStatus"
                   role="alert"
                 ></p>

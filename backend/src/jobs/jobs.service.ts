@@ -178,13 +178,13 @@ export class JobsService {
       relations: {employer: true,}, order: {createdAt: 'DESC',},});
   }
 
-  async incrementView(id: number): Promise<void> {
+  async incrementView(id: number) {
     const job = await this.jobRepository.findOne({where: {id},});
 
     if (!job) {
       throw new NotFoundException("Offre non trouvée.");
     }
-    await this.jobRepository.increment({id}, 'views', 1,);
+    return await this.jobRepository.increment({id}, 'views', 1,);
   }
 
   async getView(id: number): Promise<number> {  

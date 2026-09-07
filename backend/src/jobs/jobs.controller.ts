@@ -69,7 +69,6 @@ export class JobsController {
 
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
-  @CheckOwnership('id')
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto,
     @Req() req: Request & { user: { userId: number; role: UserRole; }; },
@@ -86,7 +85,6 @@ export class JobsController {
 
   @removeDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
-  @CheckOwnership('id')
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number,
     @Req() req: Request & {user: { userId: number; role: UserRole; }; },
