@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -10,8 +10,12 @@ import { apiFetch } from "../api/client";
 export default function EditProfile() {
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+
   const token = getToken();
+  const user = useMemo(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  }, []);
 
   const {
     register,
@@ -20,78 +24,73 @@ export default function EditProfile() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-    useEffect(() => {
+  useEffect(() => {
     const getProfile = async () => {
-      if (!user) {
+      if (!user || !token) {
         navigate("/login");
         return;
       }
 
       try {
-        const profileEndpoint = user.role === "employer"
-            ? `http://localhost:4242/employers/${user.sub}` : `http://localhost:4242/seekers/${user.sub}`;
+        const profileEndpoints = {
+          admin: `/admins/${user.sub}`,
+          employer: `/employers/${user.sub}`,
+          seeker: `/seekers/${user.sub}`,
+        };
+        const profileEndpoint = profileEndpoints[user.role];
+        if (!profileEndpoint) {
+          throw new Error(`Rôle utilisateur non supporté : ${user.role}`);
+        }
 
-        const [userResponse, profileResponse] = await Promise.all([
-          fetch(`http://localhost:4242/users/${user.sub}`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }),
-
-          fetch(profileEndpoint, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }),
+        const [userData, profileData] = await Promise.all([
+          apiFetch(`/users/${user.sub}`),
+          apiFetch(profileEndpoint),
         ]);
-
-        const userData = await userResponse.json();
-        const profileData = await profileResponse.json();
-
-        if (!userResponse.ok) {
-          throw new Error(
-            Array.isArray(userData.message)
-              ? userData.message.join(", ") : userData.message || "Impossible de récupérer l'utilisateur"
-          );
-        }
-
-        if (!profileResponse.ok) {
-          throw new Error(
-            Array.isArray(profileData.message)
-              ? profileData.message.join(", ") : profileData.message || "Impossible de récupérer le profil"
-          );
-        }
 
         reset({
           firstName: userData.firstname || "",
           lastName: userData.lastname || "",
           email: userData.email || "",
-
+          // Seekr
           skills: Array.isArray(profileData.skills) ? profileData.skills.join(", ") : profileData.skills || "",
           experience: profileData.experience || "",
           availability: profileData.availability || "",
 
+          //employer
           companyName: profileData.companyName || "",
           companyDesc: profileData.companyDesc || "",
         });
       } catch (error) {
-        console.error(error);
+        console.error("Erreur récupération profil :", error);
+
+        toast.error(
+          error.message || "Impossible de récupérer le profil"
+        );
       }
     };
 
     getProfile();
-  }, [reset, navigate]);
-
+  }, [navigate, reset, token, user]);
 
   if (!user) {
     return null;
   }
 
+  const ProfileDelete = async (userId) => {
+    try {
+      await apiFetch(`/users/${userId}`, { method: "DELETE" });
+
+      toast.success("Profile supprimé avec succès");
+    } catch (err) {
+      console.error(err);
+      toast.error("Impossible de supprimer le profile.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const isSeeker = user.role === "seeker";
   const isRH = user.role === "employer";
-
   const onSubmit = async (formData) => {
     try {
       const skills = formData.skills
@@ -180,7 +179,7 @@ export default function EditProfile() {
         </div>
 
         {/* FORM */}
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <form onSubmit={handleSubmit(onSubuser.controlmit)} className="form">
 
           {/* PRENOM / NOM */}
           <div className="input-row">
@@ -308,6 +307,9 @@ export default function EditProfile() {
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
             <span> {isSubmitting ? "Modification..." : "Enregistrer les modifications"}</span>
             {!isSubmitting && (<span className="arrow">→</span>)}
+          </button>
+          <button type="button" className="logout-btn" onClick={() => ProfileDelete(user.sub)}>
+            Supprimer le compte
           </button>
           <button type="button" className="logout-btn" onClick={handleLogout}>
             Se déconnecter
