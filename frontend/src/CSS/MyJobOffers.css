@@ -549,6 +549,36 @@
   margin-top: 12px;
 }
 
+.candidate-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.candidate-accept-btn,
+.candidate-reject-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.candidate-accept-btn {
+  background: #198754;
+  color: white;
+}
+
+.candidate-reject-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.candidate-accept-btn:disabled,
+.candidate-reject-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 
 @media (max-width: 768px) {

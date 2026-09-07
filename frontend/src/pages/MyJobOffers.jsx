@@ -101,6 +101,27 @@ export default function MyJobOffers() {
     setApplicationsError("");
   };
 
+const updateApplicationStatus = async (
+  applicationId,
+  status
+) => {
+  try {
+    const updated = await apiFetch(`/applications/${applicationId}/status`, { method: "PATCH", body: JSON.stringify({ status,}),});
+
+    setApplications((cur) =>
+      cur.map((app) =>
+        app.id === applicationId ? {...app, status: updated.status ?? status,} :app
+      )
+    );
+
+    toast.success(status === "accepted" ? "Candidature acceptée" : "Candidature refusée.");
+  } catch (error) {
+    console.error(error);
+    toast.error("Impossible de modifier la candidature.");
+  }
+};
+
+
   const handleEdit = (offer) => {
     setEditingOffer({ ...offer });
   };
@@ -392,13 +413,13 @@ export default function MyJobOffers() {
                             <strong>Statut</strong>
                               
                             <span>
-                              {application.status ||
-                                "Non renseigné"}
+                              {application.status === "waiting" && "En attente"}
+                              {application.status === "accepted" && "Acceptée"}
+                              {application.status === "rejected" && "Refusée"}
                             </span>
                           </div>
-                              
-                          {application.createdAt && (
-                            <div className="detail-row">
+
+                          <div className="detail-row">
                               <strong>Candidature reçue le</strong>
                           
                               <span>
@@ -407,7 +428,18 @@ export default function MyJobOffers() {
                                 ).toLocaleDateString("fr-FR")}
                               </span>
                             </div>
-                          )}
+
+                            <div className="candidate-actions">
+                              <button type="button" className="candidate-accept-btn" disabled={application.status === "accepted"}
+                              onClick={() => updateApplicationStatus(application.id, "accepted")} >
+                                Accepter
+                              </button>
+                        
+                              <button type="button" className="candidate-reject-btn" disabled={application.status === "rejected"}
+                              onClick={() => updateApplicationStatus(application.id, "rejected")}>
+                                Refuser      
+                              </button>
+                            </div>
                         </div>
                       );
                     })}
