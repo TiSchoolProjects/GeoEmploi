@@ -51,11 +51,8 @@ export default function JobOffer() {
         </div>
 
         {authError && (
-          <div className="server-error">
-            {authError}
-          </div>
+          <div className="server-error">{authError}</div>
         )}
-
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
             <label htmlFor="text">Titre</label>
@@ -80,7 +77,7 @@ export default function JobOffer() {
             <input
               id="adress"
               type="text"
-              placeholder="12 rue Jean-Louis Bertrand, 35000 Rennes"
+              placeholder="35000 Rennes"
               {...register("adress", {required: "L'Adresse est requise"})}
             />
             {errors.password && (<span className="error">{errors.password.message}</span>
