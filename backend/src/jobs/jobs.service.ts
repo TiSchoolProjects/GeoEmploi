@@ -154,7 +154,7 @@ export class JobsService {
     const res = await this.jobRepository.update(
       {archivedAt: IsNull(), createdAt: LessThanOrEqual(dateLim)},
       {archivedAt: new Date(),},);
-    
+
     return res.affected ?? 0;
   }
 
@@ -176,6 +176,25 @@ export class JobsService {
   async findAdmin(): Promise<Job[]> {
     return this.jobRepository.find({where: {GeocodingStatus: GeoCodingStatus.TO_VERIFY, archivedAt: IsNull(),},
       relations: {employer: true,}, order: {createdAt: 'DESC',},});
+  }
+
+  async incrementView(id: number): Promise<void> {
+    const job = await this.jobRepository.findOne({where: {id},});
+
+    if (!job) {
+      throw new NotFoundException("Offre non trouvée.");
+    }
+    await this.jobRepository.increment({id}, 'views', 1,);
+  }
+
+  async getView(id: number): Promise<number> {  
+    const job = await this.jobRepository.findOne({where: {id},});
+
+    if (!job) {
+      throw new NotFoundException("Offre non trouvée.");
+    }
+
+    return job.views;
   }
 
 }

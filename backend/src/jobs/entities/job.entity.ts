@@ -68,5 +68,8 @@ export class Job {
 
   @OneToMany('Application', (app: Application) => app.job)
   applications: Application[];
+
+  @Column({type: 'int', default: 0})
+  views: number;
 }
 
