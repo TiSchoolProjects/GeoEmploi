@@ -14,6 +14,7 @@ import config from './config/config'
 import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsModule } from './notifications/notifications.module';
 import { CartographyModule } from './cartography/cartography.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { CartographyModule } from './cartography/cartography.module';
     ScheduleModule.forRoot(),
     NotificationsModule,
     CartographyModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
