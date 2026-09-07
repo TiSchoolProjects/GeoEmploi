@@ -15,6 +15,9 @@ export default function AdminPanel() {
   const [jobsLoading, setJobsLoading] = useState(false)
   const [jobsError, setJobsError] = useState("")
 
+  const [addressEdits, setAddressEdits] = useState({})
+  const [savingJobId, setSavingJobId] = useState(null)
+
   const fetchReports = async () => {
     try {
       setLoading(true)
@@ -102,6 +105,50 @@ export default function AdminPanel() {
     } catch (error) {
       console.error(error)
       toast.error("Suppression impossible")
+    }
+  }
+
+  const handleAddressChange = (jobId, value) => {
+    setAddressEdits((current) => ({
+      ...current,
+      [jobId]: value,
+    }))
+  }
+
+  const correctJobAddress = async (job) => {
+    const newAddress = addressEdits[job.id]?.trim()
+
+    if (!newAddress) {
+      toast.error("Veuillez saisir une adresse.")
+      return
+    }
+
+    try {
+      setSavingJobId(job.id)
+
+      const updated = await apiFetch(`/jobs/${job.id}`, {method: "PATCH",
+          body: JSON.stringify({ adress: newAddress,}),})
+
+      if (updated.GeocodingStatus === "valid") {
+        setJobsToVerify((current) => current.filter((currentJob) => currentJob.id !== job.id))
+
+        setAddressEdits((current) => {
+          const next = { ...current }
+          delete next[job.id]
+          return next
+        })
+
+        toast.success("Adresse corrigée et offre regéocodée.")
+        return
+      }
+
+      setJobsToVerify((current) => current.map((currentJob) => currentJob.id === job.id ? updated : currentJob))
+      toast.error("L'adresse n'a pas pu être géocodée.")
+    } catch (error) {
+      console.error(error)
+      toast.error("Impossible de corriger l'adresse.")
+    } finally {
+      setSavingJobId(null)
     }
   }
 
@@ -333,17 +380,56 @@ export default function AdminPanel() {
                           {job.lng ?? "absente"}
                         </p>
                       </div>
+                      
+                      <div className="admin-address-edit">
+                        <label htmlFor={`address-${job.id}`}>
+                          Corriger l'adresse
+                        </label>
+
+                        <input
+                          id={`address-${job.id}`}
+                          type="text"
+                          value={
+                            addressEdits[job.id] ??
+                            job.adress ??
+                            ""
+                          }
+                          onChange={(event) =>
+                            handleAddressChange(
+                              job.id,
+                              event.target.value
+                            )
+                          }
+                          placeholder="Nouvelle adresse"
+                        />
+                      </div>
+
+                      <div className="admin-job-actions">
+                      <button
+                        type="button"
+                        className="admin-correct-btn"
+                        disabled={savingJobId === job.id}
+                        onClick={() =>
+                          correctJobAddress(job)
+                        }
+                      >
+                        {savingJobId === job.id
+                          ? "Vérification..."
+                          : "Corriger et regéocoder"}
+                      </button>
 
                       <button
                         type="button"
                         className="admin-delete-btn"
+                        disabled={savingJobId === job.id}
                         onClick={() =>
                           deleteJobToVerify(job.id)
                         }
                       >
                         Supprimer
                       </button>
-                    </article>
+                    </div>
+                  </article>
                   ))}
               </section>
             )}
