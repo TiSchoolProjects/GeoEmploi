@@ -54,7 +54,9 @@ export class ApplicationsService {
   }
 
   async findOne(id: number, currentUser: { userId: number; role: UserRole }) {
-    const application = await this.AppRepository.findOneBy({ id });
+    const application = await this.AppRepository.findOne({ where: {id},
+          relations: {job: true,
+          jobSeeker: {seekerProfile: true},},});
 
     if (!application) {
       throw new NotFoundException("Candidature non trouvée.");;
@@ -82,7 +84,7 @@ export class ApplicationsService {
 
   async findbyJobId(jobId: number, currentUser: { userId: number; role: UserRole }): Promise<Application[]> {
     const applications = await this.AppRepository.find({
-      where: { jobId }, relations: { jobSeeker: true }, order: { createdAt: 'DESC' },
+      where: { jobId }, relations: { jobSeeker: {seekerProfile: true} }, order: { createdAt: 'DESC' },
     });
 
     if (!applications) {
@@ -115,7 +117,7 @@ export class ApplicationsService {
       return await this.AppRepository.save(app);
     }
 
-    const employerId = await this.getEmployerId(id);
+    const employerId = await this.getEmployerId(app.id);
 
     if (currentUser.role === UserRole.EMPLOYER && currentUser.userId !== employerId) {
       throw new ForbiddenException("You do not own this resource.");
