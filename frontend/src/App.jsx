@@ -10,28 +10,88 @@ import Profile from "./pages/Profile";
 import JobOffer from "./pages/JobOffer";
 import MyJobOffers from "./pages/MyJobOffers";
 import Application from "./pages/Application";
+import { Map } from "maplibre-gl";
+import Footer from "./components/Footer";
+
+function ProtectedRoute({ allowedRoles, children }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!allowedRoles.includes(user.role)) {
+    return <Navigate to="/home" replace />;
+  }
+
+  return children;
+}
 
 export default function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <BrowserRouter>
-      {/* Gestion notif*/}
-      <Toaster position="top-center" toastOptions={{duration: 5000,}}/>
+      <div className="app">
+        {/* Gestion notif*/}
+        <Toaster position="top-center" toastOptions={{duration: 5000,}}/>
+        <main className="main-content">
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/Cgu" element={<Cgu />} />
+            <Route path="/register/:role" element={<Register />} />
+            <Route path="/map" element={<MapPage />} />
+            {/* Login */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute allowedRoles={["seeker", "employer", "admin"]}>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            {/* seeker */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute allowedRoles={["seeker", "admin"]}>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-application"
+              element={
+                <ProtectedRoute allowedRoles={["seeker", "admin"]}>
+                  <Application />
+                </ProtectedRoute>
+              }
+            />
+            {/* employer */}
+            <Route
+              path="/job-offers"
+              element={
+                <ProtectedRoute allowedRoles={["employer", "admin"]}>
+                  <JobOffer />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-job-offers"
+              element={
+                <ProtectedRoute allowedRoles={["employer", "admin"]}>
+                  <MyJobOffers />
+                </ProtectedRoute>
+              }
+            />
+            {/* admin */}
 
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/Cgu" element={<Cgu />} />
-        <Route path="/register/:role" element={<Register />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/job-offers" element={<JobOffer />} />
-        <Route path="/my-job-offers" element={<MyJobOffers />} />
-        <Route path="/my-application" element={<Application />} />
-        <Route path="/map" element={<MapPage />} />
-
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Routes>
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

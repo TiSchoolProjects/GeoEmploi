@@ -4,42 +4,52 @@ import logo from "../assets/jeb.png";
 import notif from "../assets/notification.png"
 import "./Navbar.css";
 import { getUser } from "../utils/auth.js";
+import { apiFetch } from "../api/client";
 
-function NavBar() {
+export default function NavBar() {
   const user = getUser();
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [error, setError] = useState("");
+  const [selectedApplication, setSelectedApplication] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
 
-  // replce with API fetch
-  const notifications = [
-    {
-      id: 1,
-      title: "Nouvelle candidature",
-      message: "Vous avez reçu une nouvelle candidature pour votre offre.",
-      date: "Aujourd'hui",
-      type: "application",
-    },
-    {
-      id: 1,
-      title: "Nouvelle candidature",
-      message: "Vous avez reçu une nouvelle candidature pour votre offre.",
-      date: "02/09/06",
-      type: "application",
-    },
-    {
-      id: 1,
-      title: "Nouvelle candidature",
-      message: "Vous avez reçu une nouvelle candidature pour votre offre.",
-      date: "Hier",
-      type: "application",
-    },
-    {
-      id: 1,
-      title: "Nouvelle candidature",
-      message: "Vous avez reçu une nouvelle candidature pour votre offre.",
-      date: "28/09/06",
-      type: "application",
-    },
-  ];
+  useEffect(() => {
+    if (selectedNotification) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedNotification]);
+
+  const fetchNotifications = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const notificationsData = await apiFetch("/notifications");
+      const data = Array.isArray(notificationsData) ? notificationsData: [];
+      setNotifications(data);
+      if (data.length > 0) {
+        setSelectedNotification(data[0]);
+      } else {
+        setSelectedNotification(null);
+      }
+      setIsNotificationModalOpen(true);
+
+    } catch (error) {
+      console.error(error);
+      setError(
+        error.message || "Impossible de charger vos notifications."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const openNotification = (notification) => {
     setSelectedNotification(notification);
@@ -47,6 +57,38 @@ function NavBar() {
 
   const closeNotification = () => {
     setSelectedNotification(null);
+    setIsNotificationModalOpen(false);
+  };
+
+  const markNotificationAsRead = async () => {
+    if (!selectedNotification?.id) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+      await apiFetch(`/notifications/${selectedNotification.id}/read`,
+        {
+          method: "PATCH",
+        }
+      );
+      const updatedNotification = {...selectedNotification, read: true, isRead: true,};
+      setSelectedNotification(updatedNotification);
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
+          notification.id === selectedNotification.id
+            ? {...notification, read: true, isRead: true} : notification
+        )
+      );
+    } catch (err) {
+      console.error(err);
+      setError(
+        err.message || "Impossible de marquer la notification comme lue."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -60,17 +102,16 @@ function NavBar() {
 
         <div className="nav-right">
           {/* NOTIFICATION BUTTON */}
-          <button
-            type="button"
-            className="notification-btn"
-            onClick={() => openNotification(notifications[0])}
-            aria-label="Notifications">
-            <img src={notif} alt="Notifications" className="notif-logo"/>
-            {/* Notification badge */}
-          </button>
-
+          {user?.role === "employer" && (
+            <button
+              type="button"
+              className="notification-btn"
+              onClick={fetchNotifications}
+              aria-label="Notifications">
+              <img src={notif} alt="Notifications" className="notif-logo" />
+            </button>
+          )}
           <Link to="/Cgu" className="nav-link">À propos</Link>
-
           {user?.role === "seeker" && (
             <Link to="/my-application" className="nav-link">Candidatures</Link>
           )}
@@ -84,7 +125,7 @@ function NavBar() {
         </div>
       </nav>
       {/*NOTIF ODAL*/}
-      {selectedNotification && (
+      {isNotificationModalOpen && (
         <div className="modal-overlay" onClick={closeNotification}>
           <div className="modal-content notification-modal" onClick={(e) => e.stopPropagation()}>
             {/* CLOSE BUTTON */}
@@ -92,19 +133,21 @@ function NavBar() {
             <h2>Notifications</h2>
 
             {/*NOTIF GALLERY*/}
+            {notifications.length === 0 && (
+              <p>Aucune notification pour le moment.</p>
+            )}
             <div className="notification-gallery">
-
               {notifications.map((notification) => (
                 <article
                   key={notification.id}
-                  className={`notification-card ${selectedNotification.id === notification.id ? "active" : ""}`}
+                  className={`notification-card ${selectedNotification?.id === notification.id ? "active" : ""}`}
                   onClick={() => openNotification(notification)}
                 >
                   <div className="notification-card-header">
                     <span className="notification-type">
-                      {notification.type === "application"}
-                      {notification.type === "job"}
-                      {notification.type === "system"}
+                      {notification.type === "application" && "Candidature"}
+                      {notification.type === "job" && "Offre"}
+                      {notification.type === "system" && "Système"}
                     </span>
                     <span className="notification-date">{notification.date}</span>
                   </div>
@@ -114,17 +157,23 @@ function NavBar() {
               ))}
             </div>
 
-            {/* SELECTED NOTIFICATION */}
-            <div className="notification-details">
-              <h3>{selectedNotification.title}</h3>
-              <p>{selectedNotification.message}</p>
-              <span className="notification-details-date">{selectedNotification.date}</span>
-            </div>
-
             {/* ACTIONS */}
-            <div className="modal-actions">
+            {selectedNotification && (
+              <div className="modal-actions">
+                {!selectedNotification.read &&
+                  !selectedNotification.isRead && (
+                    <button
+                      type="button"
+                      className="mark-read-btn"
+                      onClick={markNotificationAsRead}
+                      disabled={loading}
+                    >
+                      {loading ? "Enregistrement..." : "Marquer comme lue"}
+                    </button>
+                  )}
               <button type="button" className="modal-close-btn"onClick={closeNotification}>Fermer</button>
             </div>
+            )}
           </div>
         </div>
       )}
@@ -132,4 +181,3 @@ function NavBar() {
   );
 }
 
-export default NavBar;
