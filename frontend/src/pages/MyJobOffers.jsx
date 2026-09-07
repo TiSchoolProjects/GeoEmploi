@@ -15,6 +15,9 @@ export default function MyJobOffers() {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [editingOffer, setEditingOffer] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [applications, setApplications] = useState([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+  const [applicationsError, setApplicationsError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,12 +76,29 @@ export default function MyJobOffers() {
     }
   };
 
-  const handleDetails = (offer) => {
+  const handleDetails = async (offer) => {
     setSelectedOffer(offer);
+    setApplications([]);
+    setApplicationsError("");
+    setApplicationsLoading(true);
+
+    try {
+
+      const data = await apiFetch(`/applications/job/${offer.id}`);
+
+      setApplications(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error(error);
+      setApplicationsError("Impossible de charger les candidatures.");
+    } finally {
+      setApplicationsLoading(false);
+    }
   };
 
   const closeDetails = () => {
     setSelectedOffer(null);
+    setApplications([]);
+    setApplicationsError("");
   };
 
   const handleEdit = (offer) => {
@@ -271,8 +291,7 @@ export default function MyJobOffers() {
               </div>
             </div>
 
-            {selectedOffer.employer && (
-              <div className="details-section">
+            <div className="details-section">
                 <h3>Informations de l'entreprise</h3>
 
                 {selectedOffer.employer.companyName && (
@@ -296,7 +315,103 @@ export default function MyJobOffers() {
                   </div>
                 )}
               </div>
-            )}
+              <div className="details-section">
+                  <h3>
+                    Candidatures ({applications.length})
+                  </h3>
+                              
+                  {applicationsLoading && (
+                    <p>Chargement des candidatures...</p>
+                  )}
+                
+                  {applicationsError && (
+                    <p className="error-message">
+                      {applicationsError}
+                    </p>
+                  )}
+                
+                  {!applicationsLoading &&
+                    !applicationsError &&
+                    applications.length === 0 && (
+                      <p>
+                        Aucune candidature reçue pour cette offre.
+                      </p>
+                    )}
+                
+                  {!applicationsLoading &&
+                    applications.map((application) => {
+                      const seeker = application.jobSeeker;
+                      const profile = seeker?.seekerProfile;
+                    
+                      return (
+                        <div
+                          className="candidate-card"
+                          key={`application-${application.id}`}
+                        >
+                          <h4>
+                            {seeker?.firstname || "Prénom"}{" "}
+                            {seeker?.lastname || "Nom"}
+                          </h4>
+                      
+                          <div className="detail-row">
+                            <strong>Email</strong>
+                            <span>
+                              {seeker?.email || "Non renseigné"}
+                            </span>
+                          </div>
+                      
+                          <div className="detail-row">
+                            <strong>Compétences</strong>
+                      
+                            <span>
+                              {profile?.skills?.length
+                                ? profile.skills.join(", ")
+                                : "Non renseignées"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Expérience</strong>
+                              
+                            <span>
+                              {profile?.experience ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Disponibilité</strong>
+                              
+                            <span>
+                              {profile?.availability ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Statut</strong>
+                              
+                            <span>
+                              {application.status ||
+                                "Non renseigné"}
+                            </span>
+                          </div>
+                              
+                          {application.createdAt && (
+                            <div className="detail-row">
+                              <strong>Candidature reçue le</strong>
+                          
+                              <span>
+                                {new Date(
+                                  application.createdAt
+                                ).toLocaleDateString("fr-FR")}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+            </div>
 
             <div className="modal-actions">
               <button
