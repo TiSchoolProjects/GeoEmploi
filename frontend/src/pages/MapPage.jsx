@@ -234,6 +234,8 @@ export default function MapPage() {
     })
   }
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4242";
+
   useEffect(() => {
 
     const map = new MapLibreMap({
@@ -246,17 +248,7 @@ export default function MapPage() {
           ign: {
             type: 'raster',
             tiles: [
-              'https://data.geopf.fr/wmts?' +
-              'SERVICE=WMTS&' +
-              'VERSION=1.0.0&' +
-              'REQUEST=GetTile&' +
-              'LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&' +
-              'STYLE=normal&' +
-              'FORMAT=image/png&' +
-              'TILEMATRIXSET=PM_0_19&' +
-              'TILEMATRIX={z}&' +
-              'TILEROW={y}&' +
-              'TILECOL={x}'
+              `${API_URL}/cartography/tiles/{z}/{x}/{y}`
             ],
             tileSize: 256
           }
