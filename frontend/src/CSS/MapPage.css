@@ -269,6 +269,124 @@ body {
   padding: 8px;
 }
 
+.locationModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 22, 28, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.locationModal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(18, 22, 28, 0.25);
+  font-family: var(--font-body);
+}
+
+.locationModal h2 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--blue-primary);
+  margin-bottom: 12px;
+}
+
+.locationModal > p {
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.locationModalList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.locationModalList li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding-left: 14px;
+  border-left: 3px solid var(--border-light);
+}
+
+.locationModalList li strong {
+  color: var(--text-main);
+}
+
+.locationModalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.locationModalDecline,
+.locationModalAccept {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.locationModalDecline {
+  background: transparent;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-muted);
+}
+
+.locationModalDecline:hover {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+.locationModalAccept {
+  background: var(--orange-accent);
+  border: 1.5px solid var(--orange-accent);
+  color: #1a1a1a;
+}
+
+.locationModalAccept:hover {
+  background: var(--orange-hover);
+  border-color: var(--orange-hover);
+}
+
+.locationModalDecline:focus-visible,
+.locationModalAccept:focus-visible {
+  outline: 3px solid var(--blue-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .locationModal {
+    padding: 22px;
+  }
+
+  .locationModalActions {
+    flex-direction: column-reverse;
+  }
+
+  .locationModalDecline,
+  .locationModalAccept {
+    width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .searchBar {
     top: 72px;

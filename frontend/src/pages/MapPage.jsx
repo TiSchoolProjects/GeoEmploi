@@ -14,6 +14,7 @@ export default function MapPage() {
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
+  const [showLocationModal, setShowLocationModal] = useState(true)
 
   const zoom = 13
   const mapContainer = useRef(null)
@@ -300,21 +301,6 @@ export default function MapPage() {
     map.on('moveend', renderMarkersInView)
     map.on('load', handleLoad)
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (geoPosition) => {
-          if (hasSearchedRef.current) return
-
-          const userCoordinates = [geoPosition.coords.longitude, geoPosition.coords.latitude]
-          setCoordinates(userCoordinates)
-          map.setCenter(userCoordinates)
-        },
-        (error) => {
-          console.warn('Géolocalisation indisponible, position par défaut conservée :', error.message)
-        }
-      )
-    }
-
     const fetchJobOffers = async () => {
       try {
         const data = await apiFetch('/jobs');
@@ -336,6 +322,31 @@ export default function MapPage() {
     }
 
   }, [])
+
+  const handleAcceptLocation = () => {
+    setShowLocationModal(false)
+
+    if (!navigator.geolocation) return
+
+    navigator.geolocation.getCurrentPosition(
+      (geoPosition) => {
+        if (hasSearchedRef.current) return
+
+        const userCoordinates = [geoPosition.coords.longitude, geoPosition.coords.latitude]
+        setCoordinates(userCoordinates)
+        if (mapRef.current) {
+          mapRef.current.setCenter(userCoordinates)
+        }
+      },
+      (error) => {
+        console.warn('Géolocalisation indisponible, position par défaut conservée :', error.message)
+      }
+    )
+  }
+
+  const handleDeclineLocation = () => {
+    setShowLocationModal(false)
+  }
 
   const searchLocation = async (e) => {
     e.preventDefault()
@@ -410,6 +421,44 @@ export default function MapPage() {
   return (
     <div className="MapPage">
       <NavBar/>
+
+      {showLocationModal && (
+        <div className="locationModalOverlay">
+          <div
+            className="locationModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="location-modal-title"
+          >
+            <h2 id="location-modal-title">Utilisation de votre position</h2>
+
+            <p>
+              Avec votre autorisation, GéoEmploi utilise votre géolocalisation pour
+              afficher les offres d'emploi les plus proches de vous.
+            </p>
+
+            <ul className="locationModalList">
+              <li><strong>Données concernées :</strong> coordonnées GPS brutes (latitude, longitude).</li>
+              <li><strong>Finalité :</strong> filtrer les offres d'emploi selon la distance géographique de l'utilisateur.</li>
+              <li><strong>Base légale :</strong> votre consentement, exprimé via l'autorisation demandée par le navigateur.</li>
+              <li><strong>Destinataires :</strong> équipe technique et produit de GéoEmploi (logs techniques) ; IGN pour les tuiles cartographiques et le géocodage (API Adresse / Géoplateforme).</li>
+              <li><strong>Transfert hors UE :</strong> aucun ; données hébergées en France.</li>
+              <li><strong>Durée de conservation :</strong> donnée volatile, utilisée uniquement le temps de la requête, sans stockage en base de données.</li>
+              <li><strong>Vos droits :</strong> accès, effacement, limitation, et retrait du consentement à tout moment via les paramètres de géolocalisation de votre navigateur.</li>
+            </ul>
+
+            <div className="locationModalActions">
+              <button type="button" className="locationModalDecline" onClick={handleDeclineLocation}>
+                Refuser
+              </button>
+              <button type="button" className="locationModalAccept" onClick={handleAcceptLocation}>
+                J'accepte
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <form className="searchBar" onSubmit={searchLocation}>
       <label htmlFor="location-search" className="visuallyHidden">
           Rechercher une adresse ou une ville
