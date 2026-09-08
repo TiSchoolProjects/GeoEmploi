@@ -387,6 +387,102 @@ body {
   }
 }
 
+.jobReportBtn {
+  margin-top: 8px;
+  padding: 7px 12px;
+  border: 1px solid #c0392b;
+  border-radius: 6px;
+  background: transparent;
+  color: #c0392b;
+  cursor: pointer;
+}
+
+.jobReportBtn:hover {
+  background: #c0392b;
+  color: white;
+}
+
+.report-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.report-modal {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+
+  border-radius: 10px;
+  background: white;
+}
+
+.report-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.report-offer-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.report-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.report-form-group select,
+.report-form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.report-form-group textarea {
+  resize: vertical;
+}
+
+.report-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.report-modal-actions button {
+  padding: 9px 14px;
+  cursor: pointer;
+}
+
+.report-message {
+  margin: 10px 0;
+}
+
+.report-message--error {
+  color: #b42318;
+}
+
+.report-message--success {
+  color: #157347;
+}
+
 @media (max-width: 600px) {
   .searchBar {
     top: 72px;

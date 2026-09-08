@@ -20,7 +20,7 @@ export class ApplicationsService {
   private async getEmployerId(jobId: number): Promise<number> {
     const job = await this.JobRepository.findOneBy({ id: jobId });
 
-    if (!job) {
+    if (!job || job.archivedAt !== null) {
       throw new NotFoundException("Candidature non trouvée.");;
     }
 
@@ -117,7 +117,7 @@ export class ApplicationsService {
       return await this.AppRepository.save(app);
     }
 
-    const employerId = await this.getEmployerId(app.id);
+    const employerId = await this.getEmployerId(app.jobId);
 
     if (currentUser.role === UserRole.EMPLOYER && currentUser.userId !== employerId) {
       throw new ForbiddenException("You do not own this resource.");

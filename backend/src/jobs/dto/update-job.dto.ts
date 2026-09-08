@@ -16,7 +16,7 @@ export class UpdateJobDto {
   @ApiPropertyOptional({ description: 'Job address', example: '123 Elm Street, New York, NY 10001'})
   @IsString()
   @IsOptional()
-  adress: string;
+  commune: string;
 
 }
 

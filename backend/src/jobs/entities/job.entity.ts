@@ -31,8 +31,11 @@ export class Job {
   description: string;
 
   @ApiProperty({ description: 'Job address', example: '123 Elm Street, New York, NY 10001'})
-  @Column()
-  adress: string;
+  @Column({name: 'adress'})
+  commune: string;
+
+  @Column({type: 'varchar', default: 'commune',})
+  locationPrecision: string;
 
   @ApiProperty({ description: 'Job latitude', example: 40.7128})
   @Column('decimal', {precision: 10, scale: 7, nullable: true})

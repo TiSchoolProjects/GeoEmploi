@@ -1,0 +1,355 @@
+.admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 60px;
+}
+
+.admin-header {
+  margin-bottom: 24px;
+}
+
+.admin-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+}
+
+.admin-header p {
+  margin: 0;
+  color: #666;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-stat-card {
+  padding: 20px;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.admin-stat-card strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 30px;
+}
+
+.admin-stat-card span {
+  color: #666;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-tabs button {
+  padding: 10px 16px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: white;
+  color: #222;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-tabs button:hover {
+  background: #f5f5f5;
+}
+
+.admin-tabs button.active {
+  border-color: #1f2937;
+
+  background: #1f2937;
+  color: white;
+}
+
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-section h2 {
+  margin: 0 0 8px;
+}
+
+.admin-report-card,
+.admin-job-card,
+.admin-user-card,
+.admin-employer-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+
+  padding: 20px;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.admin-report-card h3,
+.admin-job-card h3,
+.admin-user-card h3,
+.admin-employer-card h3 {
+  margin: 0 0 12px;
+}
+
+.admin-report-card p,
+.admin-job-card p,
+.admin-user-card p,
+.admin-employer-card p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+.admin-report-actions,
+.admin-job-actions,
+.admin-user-actions,
+.admin-employer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+.admin-report-actions button,
+.admin-job-actions button,
+.admin-user-actions button,
+.admin-employer-actions button {
+  padding: 10px 14px;
+
+  border: 1px solid;
+  border-radius: 8px;
+
+  background-color: transparent;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.admin-resolve-btn {
+  border-color: #d9a441;
+  color: #d9a441;
+}
+
+.admin-resolve-btn:hover {
+  background-color: #d9a441;
+  color: white;
+}
+
+.admin-delete-btn {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.admin-delete-btn:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.admin-correct-btn {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.admin-correct-btn:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.admin-suspend-btn {
+  border-color: #d9a441;
+  color: #d9a441;
+}
+
+.admin-suspend-btn:hover {
+  background-color: #d9a441;
+  color: white;
+}
+
+.admin-reactivate-btn {
+  border-color: #198754;
+  color: #198754;
+}
+
+.admin-reactivate-btn:hover {
+  background-color: #198754;
+  color: white;
+}
+
+.admin-verify-btn {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.admin-verify-btn:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.admin-report-actions button:disabled,
+.admin-job-actions button:disabled,
+.admin-user-actions button:disabled,
+.admin-employer-actions button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+.admin-address-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  margin-top: 18px;
+}
+
+.admin-address-edit label {
+  font-weight: 600;
+}
+
+.admin-address-edit input {
+  width: min(500px, 100%);
+
+  padding: 10px 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: white;
+
+  font-size: 14px;
+}
+
+.admin-address-edit input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+
+  border-color: #2563eb;
+}
+
+.status-badge {
+  display: inline-block;
+
+  padding: 3px 8px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-active,
+.status-verified {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-suspended {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #664d03;
+}
+
+.admin-you-badge {
+  display: inline-block;
+
+  margin-left: 8px;
+  padding: 3px 7px;
+
+  border-radius: 999px;
+
+  background: #e5e7eb;
+  color: #374151;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.error-message {
+  padding: 12px;
+
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+
+  background: #fdecec;
+  color: #a61b1b;
+}
+
+@media (max-width: 700px) {
+  .admin-page {
+    padding: 90px 14px 40px;
+  }
+
+  .admin-report-card,
+  .admin-job-card,
+  .admin-user-card,
+  .admin-employer-card {
+    flex-direction: column;
+  }
+
+  .admin-report-actions,
+  .admin-job-actions,
+  .admin-user-actions,
+  .admin-employer-actions {
+    width: 100%;
+  }
+
+  .admin-report-actions button,
+  .admin-job-actions button,
+  .admin-user-actions button,
+  .admin-employer-actions button {
+    width: 100%;
+  }
+}
+
+.admin-unverify-btn {
+  border-color: #d9a441;
+  color: #d9a441;
+}
+
+.admin-unverify-btn:hover {
+  background-color: #d9a441;
+  color: white;
+}

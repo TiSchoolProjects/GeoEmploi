@@ -25,7 +25,7 @@ function sleep(ms: number) {
 }
 
 async function geocode(address: string): Promise<Partial<Job>> {
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&type=municipality&limit=1`;
     try {
       const reponse = await fetch(url);
 
@@ -66,8 +66,10 @@ async function geocode(address: string): Promise<Partial<Job>> {
 
 
       return {
+        commune: first.properties.city || first.properties.name || address,
         lat,
         lng,
+        locationPrecision: 'commune',
         geocodingSource: 'api-adresse',
         geocodingScore: score,
         geocodedAt: new Date(),
@@ -75,9 +77,11 @@ async function geocode(address: string): Promise<Partial<Job>> {
       }
     } catch (error) {
       console.log(`Erreur API pour "${address}"`);
-      return{
+      return {
+        commune: 'Commune à vérifier',
         lat: null,
         lng: null,
+        locationPrecision: 'commune',
         geocodingScore: null,
         geocodingSource: "api-adresse",
         geocodedAt: null,
@@ -117,17 +121,7 @@ async function main() {
 
   const repo = dataSource.getRepository(Job);
 
-  const toHandle = await repo.createQueryBuilder("job").where(
-    `job."GeocodingStatus" != :valid 
-    OR job."geocodingSource" IS DISTINCT FROM :source
-    OR job.lat IS NULL
-    OR job.lng IS NULL
-    `,
-    {
-      valid: GeoCodingStatus.VALID,
-      source: "api-adresse",
-    },
-  ).getMany();
+  const toHandle = await repo.find();
 
   console.log(`${toHandle.length} offre(s) à Re-géocoder.\n`);
 
@@ -138,11 +132,11 @@ async function main() {
   const movements: { id: number; address: string; distance: number;}[] = [];
 
   for (const job of toHandle) {
-    console.log(`Adresse n°${job.id} - ${job.adress}`);
+    console.log(`Adresse n°${job.id} - ${job.commune}`);
     
     const OldLat = job.lat != null ? Number(job.lat) : null;
     const OldLng = job.lng != null ? Number(job.lng) : null;
-    const result = await geocode(job.adress);
+    const result = await geocode(job.commune);
 
     await repo.update(job.id, result);
 
@@ -158,7 +152,7 @@ async function main() {
 
       moved++;
       totalDis += dis;
-      movements.push({id: job.id, address: job.adress, distance: dis});
+      movements.push({id: job.id, address: job.commune, distance: dis});
       console.log(` Déplacement: ${dis.toFixed(0)}mètre(s).`);
       }
     } else {

@@ -12,6 +12,7 @@ import MyJobOffers from "./pages/MyJobOffers";
 import Application from "./pages/Application";
 import { Map } from "maplibre-gl";
 import Footer from "./components/Footer";
+import AdminPanel from "./pages/AdminPanel"
 
 function ProtectedRoute({ allowedRoles, children }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -86,6 +87,13 @@ export default function App() {
               }
             />
             {/* admin */}
+            <Route
+              path="/admin" element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminPanel />
+              </ProtectedRoute>
+              }
+            />
 
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>

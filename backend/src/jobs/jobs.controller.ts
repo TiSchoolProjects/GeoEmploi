@@ -50,8 +50,8 @@ export class JobsController {
 
   @Public()
   @Get('/geocode')
-  async testGeocode(@Query('address') address: string) {
-    return await this.jobsService.geocodeAdress(address);
+  async testGeocode(@Query('commune') commune: string) {
+    return await this.jobsService.geocodeAdress(commune);
   }
 
   @Roles(UserRole.ADMIN)
@@ -69,7 +69,6 @@ export class JobsController {
 
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
-  @CheckOwnership('id')
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto,
     @Req() req: Request & { user: { userId: number; role: UserRole; }; },
@@ -86,7 +85,6 @@ export class JobsController {
 
   @removeDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
-  @CheckOwnership('id')
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number,
     @Req() req: Request & {user: { userId: number; role: UserRole; }; },

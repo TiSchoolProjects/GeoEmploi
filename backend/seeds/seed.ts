@@ -160,13 +160,14 @@ async function seed() {
       title: jobTitle,
       description:
         'NovaTech Solutions recherche un développeur Full Stack pour participer au développement et à la maintenance de ses applications web. Vous travaillerez principalement avec NestJS, React, PostgreSQL et Docker au sein d’une équipe produit pluridisciplinaire.',
-      adress: '55 Rue du Faubourg Saint-Honoré, 75008 Paris',
-      lat: 48.87063,
-      lng: 2.316931,
-      geocodingSource: 'api-adresse',
-      geocodingScore: 0.95,
-      geocodedAt: new Date(),
-      GeocodingStatus: GeoCodingStatus.VALID,
+      commune: '75008 Paris',
+      lat: null,
+      lng: null,
+      locationPrecision: 'commune',
+      geocodingSource: null,
+      geocodingScore: null,
+      geocodedAt: null,
+      GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       archivedAt: null,
     });
 

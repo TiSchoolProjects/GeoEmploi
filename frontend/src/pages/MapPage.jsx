@@ -15,6 +15,12 @@ export default function MapPage() {
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
   const [showLocationModal, setShowLocationModal] = useState(true)
+  const [reportOffer, setReportOffer] = useState(null)
+  const [reportReason, setReportReason] = useState("fraud")
+  const [reportDescription, setReportDescription] = useState("")
+  const [reportError, setReportError] = useState("")
+  const [reportSuccess, setReportSuccess] = useState("")
+  const [reportSending, setReportSending] = useState(false)
 
   const zoom = 13
   const mapContainer = useRef(null)
@@ -36,6 +42,15 @@ export default function MapPage() {
     if (description.length <= maxLength) return description
     return `${description.substring(0, maxLength).trimEnd()}...`
   }
+
+  const escapeHtml = (value) => {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  };
 
   const getCompanyName = async (offer) => {
     try {
@@ -86,6 +101,37 @@ export default function MapPage() {
       await apiFetch(`/jobs/views/${offerId}`, { method: "PATCH",});
   }
 
+  const submitReport = async (event) => {
+    event.preventDefault()
+
+    if (!reportOffer) {
+      return;
+    }
+    
+    setReportError("");
+    setReportSuccess("");
+
+    if (reportDescription.trim().length < 5) {
+      setReportError("La description est trop courte.")
+      return;
+    }
+
+    try {
+      setReportSending(true);
+
+      await apiFetch(`/reports/jobs/${reportOffer.id}`, {method: "POST",
+      body: JSON.stringify({reason: reportReason, description: reportDescription.trim(),}),})
+
+      setReportSuccess("Le signalement à été envoyé.")
+      setReportDescription("")
+    } catch (error) {
+      console.error(error);
+      setReportError(error.message || "Impossible d'envoyer le signalement.")
+    } finally {
+      setReportSending(false)
+    }
+  }
+
   const renderMarkersInView = () => {
     const map = mapRef.current
     if (!map || !mapLoadedRef.current) return
@@ -129,24 +175,30 @@ export default function MapPage() {
             const offerId = offer.id ?? offer._id ?? offer.index
             const companyName = companyNamesRef.current[offer.employerId] ?? "Chargement..."
             const statusId = `applyStatus-${offerId}`
+            const safeTitle = escapeHtml(offer.title);
+            const safeDescription = escapeHtml(truncateDescription(offer.description));
+            const safeCompanyName = escapeHtml(companyName);
+            const safeOfferId = escapeHtml(offerId);
+            const safeStatusId = escapeHtml(statusId);
 
             return `
-              <div class="jobOfferPopup" data-offer-id="${offerId}" role="group" aria-label="Offre d'emploi : ${offer.title}">
-                <h3>${offer.title}</h3>
-                <p>${truncateDescription(offer.description)}</p>
-                <p><strong>Entreprise :</strong> ${companyName}</p>
+              <div class="jobOfferPopup" data-offer-id="${safeOfferId}" role="group" aria-label="Offre d'emploi : ${safeTitle}">
+                <h3>${safeTitle}</h3>
+                <p>${safeDescription}</p> 
+                <p><strong>Entreprise :</strong> ${safeCompanyName}</p>
                 ${role === "seeker" ? `
                   <button
                     type="button"
                     class="jobDetailsBtn"
-                    data-offer-id="${offerId}"
-                    aria-describedby="${statusId}"
+                    data-offer-id="${safeOfferId}"
+                    aria-describedby="${safeStatusId}"
                   >
                     Postuler
                   </button>
                 ` : ""}
+                ${user ? `<button type="button" class="jobReportBtn" data-report-offer-id="${safeOfferId}"> Signaler cette offre </button>` : ""}
                 <p
-                  id="${statusId}"
+                  id="${safeStatusId}"
                   class="applyStatus"
                   role="alert"
                 ></p>
@@ -215,6 +267,26 @@ export default function MapPage() {
         })
 
         detailsBtns[0]?.focus()
+
+        const reportBtns = popupEl.querySelectorAll('.jobReportBtn')
+
+        reportBtns.forEach((reportBtn) => {
+          reportBtn.addEventListener('click', (event) => {
+            event.stopPropagation()
+
+            const offerId = reportBtn.getAttribute('data-report-offer-id')
+
+            const offer = offers.find((currentOffer) => String(currentOffer.id ?? currentOffer._id ?? currentOffer.index) === String(offerId))
+
+            if (!offer) return
+
+            setReportOffer(offer)
+            setReportReason("fraud")
+            setReportDescription("")
+            setReportError("")
+            setReportSuccess("")
+          })
+        })
       })
 
       const marker = new Marker()
@@ -362,7 +434,7 @@ export default function MapPage() {
     const data = await response.json()
 
     if (data.GeocodingStatus != "valid" || !data.lat || !data.lng) {
-      setSearchError("Adresse ou ville introuvable. Veuillez réessayer.")
+      setSearchError("Commune ou ville introuvable. Veuillez réessayer.")
       return
     }
 
@@ -461,7 +533,7 @@ export default function MapPage() {
 
       <form className="searchBar" onSubmit={searchLocation}>
       <label htmlFor="location-search" className="visuallyHidden">
-          Rechercher une adresse ou une ville
+          Rechercher une commune ou une ville
         </label>
         <input
         id="location-search"
@@ -486,6 +558,114 @@ export default function MapPage() {
         role="application"
         aria-label="Carte des offres d'emploi"
       />
+      {reportOffer && (
+      <div
+        className="report-modal-overlay"
+        onClick={() => setReportOffer(null)}
+      >
+        <div
+          className="report-modal"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button
+            type="button"
+            className="report-modal-close"
+            onClick={() => setReportOffer(null)}
+          >
+            ×
+          </button>
+
+          <h2>Signaler cette offre</h2>
+
+          <p>{reportOffer.title}</p>
+
+          <form onSubmit={submitReport}>
+            <div className="report-form-group">
+              <label htmlFor="report-reason">
+                Motif
+              </label>
+
+              <select
+                id="report-reason"
+                value={reportReason}
+                onChange={(event) =>
+                  setReportReason(event.target.value)
+                }
+              >
+                <option value="fraud">
+                  Offre frauduleuse
+                </option>
+              
+                <option value="misleading">
+                  Informations trompeuses
+                </option>
+              
+                <option value="discriminatory">
+                  Contenu discriminatoire
+                </option>
+              
+                <option value="non_compliant">
+                  Offre non conforme
+                </option>
+              
+                <option value="other">
+                  Autre
+                </option>
+              </select>
+            </div>
+              
+            <div className="report-form-group">
+              <label htmlFor="report-description">
+                Description
+              </label>
+              
+              <textarea
+                id="report-description"
+                rows="5"
+                maxLength={1000}
+                value={reportDescription}
+                onChange={(event) =>
+                  setReportDescription(event.target.value)
+                }
+                required
+              />
+            </div>
+              
+            {reportError && (
+              <p className="report-message report-message--error">
+                {reportError}
+              </p>
+            )}
+
+            {reportSuccess && (
+              <p className="report-message report-message--success">
+                {reportSuccess}
+              </p>
+            )}
+
+            <div className="report-modal-actions">
+              <button
+                type="button"
+                onClick={() => setReportOffer(null)}
+              >
+                Annuler
+              </button>
+          
+              <button
+                type="submit"
+                disabled={reportSending || Boolean(reportSuccess)}
+              >
+                {reportSending
+                  ? "Envoi..."
+                  : reportSuccess
+                    ? "Signalement envoyé"
+                    : "Envoyer"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      )}
     </div>
   )
 }

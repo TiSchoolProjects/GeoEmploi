@@ -15,6 +15,9 @@ export default function MyJobOffers() {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [editingOffer, setEditingOffer] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [applications, setApplications] = useState([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+  const [applicationsError, setApplicationsError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,13 +76,51 @@ export default function MyJobOffers() {
     }
   };
 
-  const handleDetails = (offer) => {
+  const handleDetails = async (offer) => {
     setSelectedOffer(offer);
+    setApplications([]);
+    setApplicationsError("");
+    setApplicationsLoading(true);
+
+    try {
+
+      const data = await apiFetch(`/applications/job/${offer.id}`);
+
+      setApplications(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error(error);
+      setApplicationsError("Impossible de charger les candidatures.");
+    } finally {
+      setApplicationsLoading(false);
+    }
   };
 
   const closeDetails = () => {
     setSelectedOffer(null);
+    setApplications([]);
+    setApplicationsError("");
   };
+
+const updateApplicationStatus = async (
+  applicationId,
+  status
+) => {
+  try {
+    const updated = await apiFetch(`/applications/${applicationId}/status`, { method: "PATCH", body: JSON.stringify({ status,}),});
+
+    setApplications((cur) =>
+      cur.map((app) =>
+        app.id === applicationId ? {...app, status: updated.status ?? status,} :app
+      )
+    );
+
+    toast.success(status === "accepted" ? "Candidature acceptée" : "Candidature refusée.");
+  } catch (error) {
+    console.error(error);
+    toast.error("Impossible de modifier la candidature.");
+  }
+};
+
 
   const handleEdit = (offer) => {
     setEditingOffer({ ...offer });
@@ -108,7 +149,7 @@ export default function MyJobOffers() {
         body: JSON.stringify({
           title: editingOffer.title,
           description: editingOffer.description,
-          adress: editingOffer.adress,
+          commune: editingOffer.commune,
         }),
       });
       const updatedOfferWithEmployer = { ...updatedOffer, employer: employer };
@@ -191,8 +232,8 @@ export default function MyJobOffers() {
                     </div>
                   )}
 
-                  {offer.adress && (
-                    <p className="offer-location"> Adresse: {offer.adress}</p>
+                  {offer.commune && (
+                    <p className="offer-location"> Commune: {offer.commune}</p>
                   )}
 
                   {offer.description && (
@@ -256,8 +297,8 @@ export default function MyJobOffers() {
               </div>
 
               <div className="detail-row">
-                <strong>Adresse</strong>
-                <span>{selectedOffer.adress || "Non renseignée"}</span>
+                <strong>Commune</strong>
+                <span>{selectedOffer.commune || "Non renseignée"}</span>
               </div>
 
               <div className="detail-row detail-description">
@@ -271,8 +312,7 @@ export default function MyJobOffers() {
               </div>
             </div>
 
-            {selectedOffer.employer && (
-              <div className="details-section">
+            <div className="details-section">
                 <h3>Informations de l'entreprise</h3>
 
                 {selectedOffer.employer.companyName && (
@@ -296,7 +336,114 @@ export default function MyJobOffers() {
                   </div>
                 )}
               </div>
-            )}
+              <div className="details-section">
+                  <h3>
+                    Candidatures ({applications.length})
+                  </h3>
+                              
+                  {applicationsLoading && (
+                    <p>Chargement des candidatures...</p>
+                  )}
+                
+                  {applicationsError && (
+                    <p className="error-message">
+                      {applicationsError}
+                    </p>
+                  )}
+                
+                  {!applicationsLoading &&
+                    !applicationsError &&
+                    applications.length === 0 && (
+                      <p>
+                        Aucune candidature reçue pour cette offre.
+                      </p>
+                    )}
+                
+                  {!applicationsLoading &&
+                    applications.map((application) => {
+                      const seeker = application.jobSeeker;
+                      const profile = seeker?.seekerProfile;
+                    
+                      return (
+                        <div
+                          className="candidate-card"
+                          key={`application-${application.id}`}
+                        >
+                          <h4>
+                            {seeker?.firstname || "Prénom"}{" "}
+                            {seeker?.lastname || "Nom"}
+                          </h4>
+                      
+                          <div className="detail-row">
+                            <strong>Email</strong>
+                            <span>
+                              {seeker?.email || "Non renseigné"}
+                            </span>
+                          </div>
+                      
+                          <div className="detail-row">
+                            <strong>Compétences</strong>
+                      
+                            <span>
+                              {profile?.skills?.length
+                                ? profile.skills.join(", ")
+                                : "Non renseignées"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Expérience</strong>
+                              
+                            <span>
+                              {profile?.experience ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Disponibilité</strong>
+                              
+                            <span>
+                              {profile?.availability ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Statut</strong>
+                              
+                            <span>
+                              {application.status === "waiting" && "En attente"}
+                              {application.status === "accepted" && "Acceptée"}
+                              {application.status === "rejected" && "Refusée"}
+                            </span>
+                          </div>
+
+                          <div className="detail-row">
+                              <strong>Candidature reçue le</strong>
+                          
+                              <span>
+                                {new Date(
+                                  application.createdAt
+                                ).toLocaleDateString("fr-FR")}
+                              </span>
+                            </div>
+
+                            <div className="candidate-actions">
+                              <button type="button" className="candidate-accept-btn" disabled={application.status === "accepted"}
+                              onClick={() => updateApplicationStatus(application.id, "accepted")} >
+                                Accepter
+                              </button>
+                        
+                              <button type="button" className="candidate-reject-btn" disabled={application.status === "rejected"}
+                              onClick={() => updateApplicationStatus(application.id, "rejected")}>
+                                Refuser      
+                              </button>
+                            </div>
+                        </div>
+                      );
+                    })}
+            </div>
 
             <div className="modal-actions">
               <button
@@ -345,13 +492,13 @@ export default function MyJobOffers() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="adress">Adresse</label>
+                <label htmlFor="commune">Commune</label>
 
                 <input
-                  id="adress"
+                  id="commune"
                   type="text"
-                  name="adress"
-                  value={editingOffer.adress || ""}
+                  name="commune"
+                  value={editingOffer.commune || ""}
                   onChange={handleEditChange}
                 />
               </div>

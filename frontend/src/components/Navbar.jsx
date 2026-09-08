@@ -121,6 +121,11 @@ export default function NavBar() {
               <Link to="/job-offers" className="nav-link">Créer une offre</Link>
             </div>
           )}
+          {user?.role === "admin" && (
+            <Link to ="/admin" className="nav-link">
+              Administration
+            </Link>  
+          )}
           <Link to={user ? "/profile" : "/login"}className="profile-btn" aria-label="Account"> 👤 </Link>
         </div>
       </nav>
