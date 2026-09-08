@@ -44,17 +44,17 @@ export default function JobOffer() {
       <NavBar />
       <div className="form-card">
         <div className="form-header">
-          <h1>{t("jobOffer.title")}</h1>
+          <h1>{t("jobOffer.pageTitle")}</h1>
         </div>
 
         {authError && <div className="server-error">{authError}</div>}
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
-            <label htmlFor="title">{t("jobOffer.jobTitleLabel")}</label>
+            <label htmlFor="title">{t("jobOffer.titleLabel")}</label>
             <input
               id="title"
               type="text"
-              placeholder={t("jobOffer.jobTitlePlaceholder")}
+              placeholder={t("jobOffer.titlePlaceholder")}
               {...register("title", { required: t("jobOffer.validation.titleRequired") })}
             />
             {errors.title && <span className="error">{errors.title.message}</span>}
@@ -80,7 +80,7 @@ export default function JobOffer() {
             {errors.commune && <span className="error">{errors.commune.message}</span>}
           </div>
           <button type="submit" className="submit-btn">
-            <span>{t("jobOffer.submit")}</span>
+            <span>{t("jobOffer.submitButton")}</span>
             <span className="arrow">→</span>
           </button>
         </form>
