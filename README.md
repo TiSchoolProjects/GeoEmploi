@@ -114,6 +114,10 @@ GeoEmploi/
 │       ├── employers/
 │       ├── seekers/
 │       ├── applications/
+│       ├── cartography/
+│       ├── export/
+│       ├── notifications/
+│       ├── reports/
 │       └── auth/
 ├── frontend/
 │   └── src/
