@@ -1,0 +1,699 @@
+{
+  "home": {
+    "title": "Ezagutu Frantziako",
+    "subtitle": "lan-merkatua",
+    "mapButton": "Arakatu mapa",
+    "imageAlt": "Ilustrazioa"
+  },
+  "account": {
+    "title": "Ongi etorri GéoEmploi-ra",
+    "subtitle": "Sortu zure kontua eta hasi zure esperientzia orain.",
+    "button1": "Sortu HR kontua",
+    "button2": "Sortu Eskatzaile kontua",
+    "question": "Baduzu konturik lehendik?",
+    "link": "Hasi saioa"
+  },
+  "more": {
+    "title": "Informazioa",
+    "subtitle": "GéoEmploi-ren erabilera-baldintzak eta gardentasuna",
+    "summary": "Aurkibidea",
+    "articleLabel": "Artikulua",
+    "tabs": {
+      "cgu": "EB",
+      "transparency": "Gardentasuna"
+    },
+    "cgu": {
+      "title": "Erabilera-baldintza orokorrak",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Hitzaurrea eta zerbitzuaren aurkezpena",
+          "corps": [
+            "Lan eta Zoriontasun Ministerioak GéoEmploi plataforma digital publikoa jartzen du erabiltzaileen eskura. Bitartekotza-zerbitzu publiko honen helburua da hautagaien eta hautatzaileen arteko harreman zuzena erraztea, lan-eskaintzak udalerri mailan geolokalizatuta kontsultatzeko aukera emanez.",
+            "Erabilera Baldintza Orokor (EBO) hauek zehazten dituzte Administrazio argitaratzailearen eta zerbitzuaren erabiltzaileen arteko harremanak arautzen dituzten sarbide-, erabilera- eta datu-babesaren arauak. Kontua sortzeak edo zerbitzura sartzeak xedapen hauek guztiz onartzea dakar."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Definizioak",
+          "liste": [
+            ["Plataforma", "GéoEmploi zerbitzu digitala, linean eskuragarri."],
+            ["Hautagaia", "Zerbitzuan lana bilatzeko, eskaintzak kontsultatzeko edo izena emateko sartzen den pertsona fisikoa."],
+            ["Enplegatzailea / Hautatzailea", "Kontu dedikatu baten bidez lan-eskaintzak argitaratzen dituen pertsona moral edo profesionala."],
+            ["Kartografia-datuak", "IGN Geoplateforme-k emandako mapa-oinarriak eta Helbide Nazionalaren API-tik (api-adresse.data.gouv.fr) lortutako helbide-datuak."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Zerbitzurako sarbidea eta enplegatzaileen tarifak",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Hautagaien sarbidea",
+              "corps": [
+                "Hautagaien eskura jarritako funtzionalitate guztiak —mapa kontsultatzea, iragarkiak bistaratzea, hurbiltasuna kalkulatzea eta hautagaitzak bidaltzea— erabat doakoak dira eta ez dute inolako harpidetzarik behar."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Geolokalizazioa eta pribatutasunaren errespetua",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Aldi baterako tratamendua eta GPS datuen biltegiratzerik eza",
+              "corps": [
+                "Eskaintzak hurbiltasun geografikoaren arabera sailkatzeko, erabiltzaileak bere gailuaren kokapena aktiba dezake nabigatzailearen APIaren bidez. Ekintza honek berariazko baimen teknikoa eskatzen du.",
+                "Ez da erabiltzaileen GPS koordenaturik gordetzen, erregistratzen edo trazatzen Ministerioaren datu-baseetan edo aplikazio-erregistroetan. Eskaintzekiko distantziaren kalkulua aldi baterako eta modu lurrunkorrean egiten da soilik RAM memorian, saio aktiboak irauten duen bitartean."
+              ]
+            },
+            {
+              "soustitre": "4.2. Geolokalizaziorik gabeko aukera",
+              "corps": [
+                "Kokapen-baimena aukerakoa da. Ukatuz gero, erabiltzaileak funtzionalitate guztiez balia daiteke erreferentziako udalerri edo posta-kode bat eskuz idatziz."
+              ]
+            },
+            {
+              "soustitre": "4.3. Enplegatzaileen helbideen babesa",
+              "corps": [
+                "Enplegatzaileen egoitzen lasaitasuna zaintzeko, posta-helbide zehatzak ez dira mapa publikoan erakusten: eskaintzari lotutako udalerria soilik ikus dezakete erabiltzaileek."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Datu pertsonalen babesa eta eskubideen erabilera",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Izena ematean bildutako datu-kategoriak",
+              "corps": [
+                "Datuak minimizatzeko printzipioa aplikatuz (DBEO 5.1.c art.), GéoEmploi-k enplegurako bitartekotzarako guztiz beharrezkoak diren datuak soilik biltzen ditu:"
+              ],
+              "liste": [
+                ["Hautagaia", "Izena, abizena, harremanetarako helbide elektronikoa, pasahitz segurua (zifratua/hash-atua), CV dokumentua (PDF/DOC formatua)."],
+                ["Enplegatzailea", "Sozietatearen izena, SIRET zenbakia, egoitzaren helbidea, kudeatzailearen izen-abizenak, posta elektroniko profesionala, telefono zenbakia."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Kontserbazio-epeak",
+              "table": [
+                ["Profilaren datuak eta hautagaitzak", "Erabilera aktiboaren iraupena, eta ondoren ezabatzea etengabeko 2 urteko ez-aktibotasunaren ostean"],
+                ["Konexio-erregistroak", "IPak 24 ordutan anonimizatuak, erregistro teknikoak 12 hilabetetan garbituak"],
+                ["GPS datuak", "0 segundoko atxikipena (aldi baterako kalkulua, artxibatu gabe)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Eskubideak erabiltzeko modu zehatzak",
+              "corps": [
+                "Datuak Babesteko Erregelamendu Orokorraren (DBEO) eta aplikagarri den datu-babesaren legearen arabera, erabiltzaile bakoitzak bere datuak eskuratzeko, zuzentzeko, ezabatzeko, mugatzeko eta tratamenduari aurka egiteko eskubidea du."
+              ],
+              "liste": [
+                ["Autonomia zuzena", "Informazioa aldatzea edo kontua berehala ezabatzea « Nire kontua » > « Ezabatu nire kontua » atalean."],
+                ["DPOari helaraztea", "Posta elektronikoz: dpo@job-et-bonheur.fr helbidera. Gehienez hilabeteko epe legalaren barruan erantzungo da."],
+                ["Erreklamazio-eskubidea", "Datuen Babeserako Agintaritzaren aurrean (CNIL - www.cnil.fr), eskubideak errespetatzen ez badira."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Erantzukizunak",
+          "corps": [
+            "Ministerioak behar diren ahaleginak egiten ditu zerbitzuaren erabilgarritasuna eta segurtasuna bermatzeko. Ezingo zaio erantzukizunik eskatu ezinbesteko kasuetan, mantentze-lanengatik aldi baterako etenaldietan, enplegatzaileek idatzitako eskaintzetako zehaztasun-gabezietan edo hautagaitza baten ezezko emaitzan."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Zuzenbide aplikagarria eta jurisdikzio eskumenduna",
+          "corps": [
+            "EBO hauek Frantziako legediak arautzen ditu. Adiskidantzazko konponbiderik ezean, haien baliozkotasunari edo betearazpenari buruzko edozein auzi Frantziako auzitegi eskudunen esku utziko da."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Gardentasuna",
+      "intro": "GéoEmploi lan-eskaintzak kontsultatzeko, izena emateko eta, enplegatzaileentzat, eskaintzak doan argitaratzeko balio duen zerbitzua da.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Doako argitalpena",
+          "corps": [
+            "GéoEmploi-n lan-eskaintza bat argitaratzea guztiz doakoa da.",
+            "Ez zaie inolako harpidetzarik, tarifarik edo ordainik eskatzen enplegatzaileei eskaintza bat argitaratzeagatik."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Eskaintzen kokapena",
+          "corps": [
+            "Lan-eskaintzak udalerri mailan kokatzen dira. Haien udalerriaren erdigunean kokatzen dira eta ez helbide zehatzean.",
+            "Erabiltzailearen posizioa inguruko eskaintzak ikusteko erabil daiteke. Posizio hori ez du GéoEmploi-k gordetzen.",
+            "Gordetzen diren kokapen-datu bakarrak lan-eskaintzei lotutakoak dira."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Kokapen-datuen kontserbazioa",
+          "corps": [
+            "Erabiltzaileen posizioa ez da erregistratzen ezta gordetzen ere.",
+            "Lan-eskaintzei lotutako kokapen-datuak tratamendu-erregistroan zehaztutako arauen arabera gordetzen dira.",
+            "Eskaintzen kokapen-historiak automatikoki ezabatzen dira 90 egun igaro ondoren."
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Datuen babesa",
+          "corps": [
+            "GéoEmploi-k datuak minimizatzeko printzipioa aplikatzen du: zerbitzuaren funtzionamendurako beharrezkoak diren datuak soilik biltzen eta gordetzen dira.",
+            "Zure datu pertsonalen babesari edo zure eskubideen erabilerari buruzko edozein galdera egiteko, datuak babesteko ordezkariarekin (DPO) harremanetan jar zaitezke: dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Kudeaketa",
+    "subtitle": "GéoEmploi-ren kudeaketa eta moderazioa",
+    "pendingReportsStat": "Izapidetzeke dauden jakinarazpenak",
+    "loading": "Kargatzen...",
+    "youBadge": "Zu",
+    "notProvided": "Ezarri gabe",
+    "notProvidedFem": "Ezarri gabe",
+    "absent": "falta da",
+    "tabs": {
+      "reports": "Salaketak",
+      "jobs": "Egiaztatzeko eskaintzak",
+      "users": "Erabiltzaileak",
+      "employers": "Enplegatzaileak"
+    },
+    "actions": {
+      "delete": "Ezabatu",
+      "cancel": "Utzi",
+      "resolve": "Ebatzi",
+      "deleteOffer": "Ezabatu eskaintza",
+      "suspend": "Eseki",
+      "reactivate": "Berraktibatu",
+      "deleteAccount": "Ezabatu kontua",
+      "verifyCompany": "Egiaztatu enpresa",
+      "removeVerification": "Kendu egiaztapena"
+    },
+    "errors": {
+      "fetchReports": "Ezin izan dira salaketak kargatu.",
+      "fetchJobs": "Ezin izan dira egiaztatzeko eskaintzak kargatu.",
+      "fetchUsers": "Ezin izan dira erabiltzaileak kargatu.",
+      "fetchEmployers": "Ezin izan dira enplegatzaileak kargatu."
+    },
+    "reports": {
+      "empty": "Ez dago salaketarik.",
+      "deletedJob": "Ezabatutako eskaintza",
+      "reason": "Arrazoia",
+      "description": "Deskribapena",
+      "reportedBy": "Nork salatua",
+      "deletedUser": "Ezabatutako erabiltzailea",
+      "date": "Data",
+      "status": "Egoera",
+      "pending": "Izapidetzeke",
+      "resolved": "Ebatzi da",
+      "resolveSuccess": "Salaketa ebatzi da",
+      "resolveError": "Ezin izan da salaketa ebatzi."
+    },
+    "jobs": {
+      "toVerifyCount": "Egiaztatzeko eskaintzak ({{count}})",
+      "noneToVerify": "Ez dago egiaztatzeko eskaintzarik.",
+      "commune": "Udalerria",
+      "description": "Deskribapena",
+      "geocodeStatus": "Geokodetze egoera",
+      "latitude": "Latitudea",
+      "longitude": "Longitudea",
+      "correctAddressLabel": "Zuzendu udalerria",
+      "newAddressPlaceholder": "Udalerri berria",
+      "checking": "Egiaztatzen...",
+      "correctAndGeocode": "Zuzendu eta berriz geokodetu",
+      "enterCityPrompt": "Mesedez, idatzi udalerri bat.",
+      "addressCorrected": "Udalerria zuzendu da eta eskaintza berriz geokodetu da.",
+      "geocodeFailed": "Ezin izan da udalerria geokodetu.",
+      "correctError": "Ezin izan da udalerria zuzendu.",
+      "deleteConfirmTitle": "Ezabatu lana?",
+      "deleteConfirmText": "Ziur zaude eskaintza hau ezabatu nahi duzula?",
+      "deleteSuccess": "Eskaintza ezabatu da",
+      "deleteError": "Ezin izan da ezabatu"
+    },
+    "users": {
+      "count": "Erabiltzaileak ({{count}})",
+      "none": "Ez dago erabiltzailerik.",
+      "email": "Helbide elektronikoa",
+      "role": "Rola",
+      "status": "Egoera",
+      "createdAt": "Sortze-data",
+      "cannotSuspendSelf": "Ezin duzu zure kontua eseki.",
+      "cannotDeleteSelf": "Ezin duzu zure kontua ezabatu.",
+      "suspendedSuccess": "Erabiltzailea eseki da",
+      "reactivatedSuccess": "Erabiltzailea berraktibatu da",
+      "deletedSuccess": "Erabiltzailea ezabatu da",
+      "statusError": "Ezin izan da egoera aldatu.",
+      "deleteConfirmTitle": "Ezabatu kontua?",
+      "deleteConfirmText": "Ziur zaude kontu hau ezabatu nahi duzula?",
+      "deleteError": "Ezin izan da erabiltzailea ezabatu."
+    },
+    "employers": {
+      "count": "Enplegatzaileak ({{count}})",
+      "none": "Ez dago enplegatzailerik.",
+      "manager": "Arduraduna",
+      "email": "Helbide elektronikoa",
+      "description": "Deskribapena",
+      "accountStatus": "Kontua",
+      "verification": "Egiaztapena",
+      "verifiedAt": "Egiaztatze-data",
+      "verifySuccess": "Enpresa egiaztatu da",
+      "verifyError": "Ezin izan da enpresa egiaztatu.",
+      "unverifySuccess": "Enpresaren egiaztapena kendu da",
+      "unverifyError": "Ezin izan da egiaztapena kendu."
+    },
+    "status": {
+      "active": "Aktiboa",
+      "suspended": "Esekita",
+      "verified": "Egiaztatua",
+      "toVerify": "Egiaztatzeke"
+    }
+  },
+  "map": {
+    "unknownCompany": "Enpresa ezezaguna",
+    "mustBeLoggedIn": "Saioa hasi behar duzu izena emateko.",
+    "applicationSent": "Hautagaitza ondo bidali da.",
+    "alreadyApplied": "Dagoeneko eman duzu izena eskaintza honetan.",
+    "reportDescTooShort": "Deskribapena motzegia da.",
+    "reportSent": "Salaketa bidali da.",
+    "reportError": "Ezin izan da salaketa bidali.",
+    "loading": "Kargatzen...",
+    "jobOfferAria": "Lan-eskaintza",
+    "companyLabel": "Enpresa",
+    "applyBtn": "Eman izena",
+    "reportBtn": "Salatu eskaintza hau",
+    "closePopup": "Itxi eskaintzaren xehetasunak",
+    "sending": "Bidaltzen...",
+    "applied": "Hautagaitza bidalita",
+    "singleOfferAria": "Erakutsi lan-eskaintza kokapen honetan",
+    "multipleOffersAria": "Erakutsi lan-eskaintzak kokapen honetan",
+    "locationNotFound": "Udalerria edo hiria ez da aurkitu. Saiatu berriro.",
+    "locationModalTitle": "Zure kokapenaren erabilera",
+    "locationModalDesc": "Zure baimenarekin, GéoEmploi-k zure geolokalizazioa erabiltzen du zuregandik gertuen dauden lan-eskaintzak erakusteko.",
+    "decline": "Ukatu",
+    "accept": "Onartzen dut",
+    "searchLabel": "Bilatu udalerri edo hiri bat",
+    "searchPlaceholder": "Bilatu leku bat",
+    "searchBtn": "Bilatu",
+    "mapAriaLabel": "Lan-eskaintzen mapa",
+    "reportModalTitle": "Salatu eskaintza hau",
+    "reasonLabel": "Arrazoia",
+    "descriptionLabel": "Deskribapena",
+    "cancel": "Utzi",
+    "send": "Bidali",
+    "reasons": {
+      "fraud": "Eskaintza iruzurgilea",
+      "misleading": "Informazio engainagarria",
+      "discriminatory": "Eduki diskriminatzailea",
+      "nonCompliant": "Arauak betetzen ez dituen eskaintza",
+      "other": "Besterik"
+    }
+  },
+  "myOffers": {
+    "title": "Nire eskaintzak",
+    "subtitle": "Aurkitu hemen argitaratu dituzun eskaintza guztiak.",
+    "loading": "Eskaintzak kargatzen...",
+    "emptyTitle": "Ez dago argitaratutako eskaintzarik",
+    "emptyText": "Oraindik ez duzu lan-eskaintzarik sortu.",
+    "viewsCount_zero": "0 ikustaldi",
+    "viewsCount_one": "Ikustaldi 1",
+    "viewsCount_other": "{{count}} ikustaldi",
+    "companyPrefix": "Enpresa:",
+    "communePrefix": "Udalerria:",
+    "descPrefix": "Deskribapena:",
+    "detailsTitle": "Ikusi xehetasunak",
+    "editTitle": "Aldatu eskaintza",
+    "deleteTitle": "Ezabatu eskaintza",
+    "deleteConfirmTitle": "Ezabatu eskaintza?",
+    "deleteConfirmText": "Ziur zaude eskaintza hau ezabatu nahi duzula?",
+    "deleteSuccess": "Eskaintza ondo ezabatu da",
+    "deleteError": "Ezin izan da eskaintza ezabatu.",
+    "editSuccess": "Eskaintza ondo aldatu da",
+    "editError": "Ezin izan da aldatu",
+    "actions": {
+      "details": "Xehetasuna",
+      "edit": "Editatu",
+      "delete": "Ezabatu",
+      "cancel": "Utzi",
+      "close": "Itxi",
+      "modify": "Aldatu",
+      "save": "Gorde",
+      "accept": "Onartu",
+      "reject": "Ukatu"
+    },
+    "errors": {
+      "fetchEmployerId": "Ezin izan da enplegatzailearen identifikatzailea eskuratu.",
+      "fetchOffers": "Ezin izan dira zure eskaintzak kargatu.",
+      "fetchApplications": "Ezin izan dira hautagaitzak kargatu."
+    },
+    "modal": {
+      "offerInfoTitle": "Eskaintzaren informazioa",
+      "companyInfoTitle": "Enpresaren informazioa",
+      "titleLabel": "Izenburua",
+      "communeLabel": "Udalerria",
+      "descLabel": "Deskribapena",
+      "viewsLabel": "Ikustaldi kopurua",
+      "companyLabel": "Enpresa",
+      "emailLabel": "Helbide elektronikoa",
+      "notProvided": "Ezarri gabe",
+      "notProvidedFem": "Ezarri gabe",
+      "notProvidedPlur": "Ezarri gabe",
+      "noDescription": "Ez dago deskribapenik eskuragarri."
+    },
+    "applications": {
+      "titleCount": "Hautagaitzak ({{count}})",
+      "loading": "Hautagaitzak kargatzen...",
+      "empty": "Ez da hautagaitzarik jaso eskaintza honetarako.",
+      "acceptedToast": "Hautagaitza onartu da",
+      "rejectedToast": "Hautagaitza ukatu da.",
+      "statusError": "Ezin izan da hautagaitza aldatu."
+    },
+    "candidate": {
+      "defaultFirstname": "Izena",
+      "defaultLastname": "Abizena",
+      "email": "Helbide elektronikoa",
+      "skills": "Gaitasunak",
+      "experience": "Esperientzia",
+      "availability": "Eskuragarritasuna",
+      "status": "Egoera",
+      "receivedAt": "Hautagaitza jasotze-data:"
+    },
+    "status": {
+      "waiting": "Izapidetzeke",
+      "accepted": "Onartua",
+      "rejected": "Ukatua"
+    },
+    "editModal": {
+      "title": "Aldatu eskaintza",
+      "titleLabel": "Eskaintzaren izenburua",
+      "communeLabel": "Udalerria",
+      "descLabel": "Deskribapena",
+      "saving": "Gordetzen..."
+    }
+  },
+  "consent": {
+    "saveError": "Ezin izan da baimena gorde:"
+  },
+  "application": {
+    "title": "Nire hautagaitzak",
+    "subtitle": "Aurkitu hemen izena eman duzun eskaintza guztiak.",
+    "loading": "Hautagaitzak kargatzen...",
+    "emptyTitle": "Ez dago hautagaitzarik",
+    "emptyText": "Oraindik ez duzu lan-eskaintza batean izena eman.",
+    "untitledOffer": "Izenbururik gabeko eskaintza",
+    "company": "Enpresa:",
+    "location": "Udalerria:",
+    "description": "Deskribapena:",
+    "detailsButton": "Xehetasuna",
+    "detailsTitle": "Ikusi xehetasunak",
+    "deleteButton": "Ezabatu",
+    "deleteTitle": "Ezabatu hautagaitza",
+    "deleting": "...",
+    "deletingInProgress": "Ezabatzen...",
+    "deleteConfirmTitle": "Ezabatu hautagaitza?",
+    "deleteConfirmText": "Ziur zaude hautagaitza hau ezabatu nahi duzula?",
+    "deleteConfirmButton": "Ezabatu",
+    "deleteCancelButton": "Utzi",
+    "deleteSuccess": "Hautagaitza ondo ezabatu da",
+    "deleteError": "Ezin izan da hautagaitza ezabatu.",
+    "fetchUserError": "Ezin izan da erabiltzailearen identifikatzailea eskuratu.",
+    "fetchError": "Ezin izan dira zure hautagaitzak kargatu.",
+    "modalDefaultTitle": "Hautagaitzaren xehetasunak",
+    "modalApplicationInfo": "Hautagaitzaren informazioa",
+    "status": "Egoera",
+    "notProvided": "Ezarri gabe",
+    "notProvidedFem": "Ezarri gabe",
+    "applicationDate": "Hautagaitza-data",
+    "modalOfferInfo": "Eskaintzaren informazioa",
+    "offerTitle": "Izenburua",
+    "contractType": "Kontratu mota",
+    "noDescription": "Ez dago deskribapenik eskuragarri.",
+    "close": "Itxi"
+  },
+  "cgu": {
+    "pageTitle": "Erabilera Baldintza Orokorrak",
+    "intro": "Ongi etorri gure gunera. Erabilera Baldintza Orokor hauek gure plataforma erabiltzeko arauak zehazten dituzte.",
+    "section1": {
+      "heading": "1. Xedea",
+      "p1": "Erabilera Baldintza Orokor hauen xedea da erabiltzaileak gunera sartzeko eta eskainitako zerbitzuak erabiltzeko baldintzak zehaztea.",
+      "p2": "Gunea erabiltzeak baldintza hauek erabat eta baldintzarik gabe onartzea dakar. Baldintza hauek onartzen ez badituzu, gunea ez erabiltzeko eskatzen dizugu."
+    },
+    "section2": {
+      "heading": "2. Gunerako sarbidea",
+      "p1": "Gunea doan eskuragarri dago Interneterako sarbidea duen edozein erabiltzailerentzat. Sarearen sarbideari lotutako kostuak, bereziki konexio- edo ekipamendu-gastuak, erabiltzailearen kontura geratzen dira.",
+      "p2": "Eskubidea dugu gunea osorik edo zati batean aldatzeko, eteteko edo aldi baterako gelditzeko, bereziki mantentze- edo eguneratze-lanengatik."
+    },
+    "section3": {
+      "heading": "3. Zerbitzuaren erabilera",
+      "intro": "Erabiltzaileak gunea modu arduratsuan eta indarrean dauden lege eta araudiekin bat etorriz erabiltzeko konpromisoa hartzen du.",
+      "list": [
+        "Gunea iruzurrezko edo legez kanpoko helburuetarako ez erabiltzea.",
+        "Gunearen funtzionamendua oztopatzen ez saiatzea.",
+        "Beste erabiltzaile batzuen eskubideak edo segurtasuna ez urratzea.",
+        "Zerbitzua kaltetu dezakeen eduki gaiztorik ez sartzea."
+      ]
+    },
+    "section4": {
+      "heading": "4. Erabiltzaile-kontua",
+      "p1": "Zerbitzu jakin batzuetara sartzeko kontu bat sortzea beharrezkoa denean, erabiltzaileak informazio zehatza, osoa eta eguneratua emateko konpromisoa hartzen du.",
+      "p2": "Erabiltzailea da bere konexio-kredentzialen konfidentzialtasunaren eta bere kontutik egiten den edozein jardueraren arduraduna."
+    },
+    "section5": {
+      "heading": "5. Jabetza intelektuala",
+      "p1": "Guneko elementu guztiak, bereziki testuak, irudiak, logotipoak, grafikoak, interfazeak, edukiak eta softwareak, jabetza intelektualeko xedapenen bidez babestuta daude.",
+      "p2": "Gunea osorik edo zati batean aldez aurretik baimenik gabe erreproduzitu, irudikatu, aldatu edo ustiatzeak jabetza intelektualeko eskubideen urraketa ekar dezake."
+    },
+    "section6": {
+      "heading": "6. Erantzukizuna",
+      "p1": "Ahalegin guztiak egiten ditugu gunean dagoen informazioaren zehaztasuna eta eskuragarritasuna bermatzeko. Hala ere, ezin dugu bermatu gunea uneoro eskuragarri egongo denik edo akatsik gabea izango denik.",
+      "p2": "Erabiltzaileak onartzen du gunea bere ardurapean erabiltzen duela eta bera dela bere ekipoen, Interneteko konexioaren eta zerbitzuen erabileraren arduraduna."
+    },
+    "section7": {
+      "heading": "7. Datu pertsonalak",
+      "p1": "Gunea erabiltzearen esparruan, zenbait datu pertsonal bil eta trata daitezke.",
+      "p2": "Tratamendu hauek datu pertsonalen babesaren arloan aplikagarria den araudiaren arabera egiten dira.",
+      "p3": "Informazio gehiago lortzeko, kontsultatu gure pribatutasun-politika."
+    },
+    "section8": {
+      "heading": "8. Kanpoko estekak",
+      "p1": "Guneak kanpoko gune edo zerbitzuetarako estekak izan ditzake. Ez gara hirugarrenen gune horien edukiaren, erabilgarritasunaren edo jardunbideen arduradun."
+    },
+    "section9": {
+      "heading": "9. Baldintzen aldaketa",
+      "p1": "Eskubidea dugu Erabilera Baldintza Orokor hauek edozein unetan aldatzeko, gunearen, zerbitzuen edo araudiaren bilakaerara egokitzeko.",
+      "p2": "Baldintza berriek gunean argitaratzen diren unetik aurrera izango dute eragina."
+    },
+    "section10": {
+      "heading": "10. Zuzenbide aplikagarria",
+      "p1": "Erabilera Baldintza Orokor hauek gunearen editorea kokatuta dagoen herrialdeko legediaren menpe daude.",
+      "p2": "Gatazkarik izanez gero, alderdiak adiskidantzazko irtenbide bat bilatzen ahaleginduko dira edozein auzibide hasi aurretik."
+    },
+    "section11": {
+      "heading": "11. Harremanetarako",
+      "p1": "Erabilera Baldintza Orokor hauei buruzko edozein galdera egiteko, gurekin harremanetan jar zaitezke gure gunean eskuragarri dauden harremanetarako bideen bidez."
+    },
+    "backHome": "Itzuli hasierara",
+    "lastUpdate": "Azken eguneraketa: 2026ko irailaren 1a"
+  },
+  "geoConsentNotice": {
+    "dataLabel": "Eragindako datuak:",
+    "dataValue": "GPS koordenatu gordinak (latitudea, longitudea).",
+    "purposeLabel": "Helburua:",
+    "purposeValue": "lan-eskaintzak erabiltzailearen distantzia geografikoaren arabera iragaztea.",
+    "legalBasisLabel": "Oinarri legala:",
+    "legalBasisValue": "zure baimena, nabigatzaileak eskatutako baimenaren bidez emana.",
+    "recipientsLabel": "Hartzaileak:",
+    "recipientsValue": "GéoEmploi-ren talde teknikoa eta produktukoa (erregistro teknikoak); IGN mapa-lauzetarako eta geokodetzarako (Helbide APIa / Géoplateforme).",
+    "transferLabel": "EBtik kanpoko transferentzia:",
+    "transferValue": "bat ere ez; datuak Frantzian ostatatzen dira.",
+    "retentionLabel": "Kontserbazio-epea:",
+    "retentionValue": "aldi baterako datua, eskaerak irauten duen bitartean soilik erabilia, datu-basean gorde gabe.",
+    "rightsLabel": "Zure eskubideak:",
+    "rightsValue": "eskuratzea, ezabatzea, mugatzea eta baimena edozein unetan kentzea, baita zure profil-orrialdetik ere."
+  },
+  "jobOffer": {
+    "pageTitle": "Sortu lan-eskaintza",
+    "titleLabel": "Izenburua",
+    "titlePlaceholder": "Mugagabea - funtzio anitzeko langilea",
+    "titleRequired": "Lanaren izenburua derrigorrezkoa da",
+    "descriptionLabel": "Deskribapena",
+    "descriptionPlaceholder": "Lanaren deskribapena",
+    "descriptionRequired": "Deskribapena derrigorrezkoa da",
+    "communeLabel": "Udalerria",
+    "communePlaceholder": "35000 Rennes",
+    "communeRequired": "Udalerria derrigorrezkoa da",
+    "submitButton": "Argitaratu eskaintza",
+    "createSuccess": "Eskaintza ondo sortu da",
+    "createError": "Ezin izan da eskaintza sortu"
+  },
+  "login": {
+    "welcomeTitle": "Ongi etorri",
+    "subtitle": "Hasi saioa zure kontuan.",
+    "emailLabel": "Helbide elektronikoa",
+    "emailPlaceholder": "adibidea@adibide.eus",
+    "emailRequired": "Helbide elektronikoa derrigorrezkoa da",
+    "emailInvalid": "Helbide elektroniko baliogabea",
+    "passwordLabel": "Pasahitza",
+    "passwordPlaceholder": "Zure pasahitza",
+    "passwordRequired": "Pasahitza derrigorrezkoa da",
+    "submitButton": "Hasi saioa",
+    "noAccount": "Ez duzu konturik oraindik?",
+    "registerLink": "Erregistratu",
+    "loginSuccess": "Saioa ondo hasi da",
+    "loginError": "Kredentzial okerrak",
+    "invalidCredentials": "Kredentzial baliogabeak",
+    "noToken": "Ez da access_token-ik jaso zerbitzaritik"
+  },
+  "profile": {
+    "pageTitle": "Aldatu nire profila",
+    "subtitle": "Aldatu zure informazio pertsonala eta profesionala.",
+    "firstNameLabel": "Izena",
+    "firstNamePlaceholder": "Izena",
+    "firstNameRequired": "Izena derrigorrezkoa da",
+    "lastNameLabel": "Abizena",
+    "lastNamePlaceholder": "Abizena",
+    "lastNameRequired": "Abizena derrigorrezkoa da",
+    "emailLabel": "Helbide elektronikoa",
+    "emailPlaceholder": "adibidea@adibide.eus",
+    "emailRequired": "Helbide elektronikoa derrigorrezkoa da",
+    "emailInvalid": "Helbide elektroniko baliogabea",
+    "skillsLabel": "Gaitasunak",
+    "skillsPlaceholder": "Adib.: React, JavaScript, Marketing...",
+    "skillsRequired": "Gaitasunak derrigorrezkoak dira",
+    "experienceLabel": "Esperientzia",
+    "experiencePlaceholder": "Adib.: 2 urte",
+    "experienceRequired": "Esperientzia derrigorrezkoa da",
+    "availabilityLabel": "Eskuragarritasuna",
+    "availabilityPlaceholder": "Adib.: Lanaldi osoa",
+    "availabilityRequired": "Eskuragarritasuna derrigorrezkoa da",
+    "companyNameLabel": "Enpresa",
+    "companyNamePlaceholder": "Zure enpresaren izena",
+    "companyNameRequired": "Enpresaren izena derrigorrezkoa da",
+    "companyDescLabel": "Zure enpresaren deskribapena",
+    "companyDescPlaceholder": "Adib.: Segurtasun enpresa",
+    "companyDescRequired": "Deskribapena derrigorrezkoa da",
+    "saveButton": "Gorde aldaketak",
+    "saving": "Aldatzen...",
+    "logoutButton": "Amaitu saioa",
+    "exportButton": "Esportatu nire datuak",
+    "exportSuccess": "Esportazioa arrakastatsua izan da!",
+    "exportError": "Ezin izan dira datuak esportatu",
+    "exportEmptyError": "Ez dago esportatzeko daturik",
+    "saveSuccess": "Profila ondo aldatu da!",
+    "userUpdateError": "Errorea erabiltzailea aldatzean",
+    "profileUpdateError": "Errorea profila aldatzean",
+    "unsupportedRole": "Onartzen ez den erabiltzaile-rola: {{role}}",
+    "fetchProfileError": "Ezin izan da profila eskuratu",
+    "privacyHeading": "Konfidentzialtasuna eta geolokalizazioa",
+    "privacyText": "Zure baimenarekin, GéoEmploi-k zure kokapena erabiltzen du mapan zuregandik gertuen dauden lan-eskaintzak erakusteko.",
+    "consentStatusLabel": "Uneko egoera:",
+    "consentAccepted": "Geolokalizazioa baimenduta",
+    "consentDeclined": "Geolokalizazioa ukatuta",
+    "consentUnset": "Ez dago aukerarik erregistratuta",
+    "consentAcceptedToast": "Geolokalizazioa baimenduta.",
+    "consentDeclinedToast": "Geolokalizazioa ukatuta.",
+    "viewNoticeButton": "Ikusi informazio-oharra",
+    "allowGeoButton": "Baimendu geolokalizazioa",
+    "declineGeoButton": "Ukatu geolokalizazioa",
+    "noticeTitle": "Informazio-oharra — Geolokalizazioa",
+    "noticeIntro": "Zure baimenarekin, GéoEmploi-k zure geolokalizazioa erabiltzen du zuregandik gertuen dauden lan-eskaintzak erakusteko.",
+    "closeButton": "Itxi",
+    "backLink": "← Itzuli",
+    "deleteAccountButton": "Ezabatu kontua",
+    "deleteAccountTitle": "Ezabatu kontua?",
+    "deleteAccountText": "Ziur zaude kontu hau ezabatu nahi duzula?",
+    "deleteAccountConfirm": "Ezabatu",
+    "deleteAccountCancel": "Utzi",
+    "deleteAccountSuccess": "Profila ondo ezabatu da",
+    "deleteAccountError": "Ezin izan da profila ezabatu."
+  },
+  "register": {
+    "invalidRoleTitle": "Kontu mota baliogabea",
+    "invalidRoleText": "Mesedez, aukeratu kontu mota bat.",
+    "backButton": "Itzuli",
+    "titleSeeker": "Sortu Eskatzaile kontua",
+    "titleRH": "Sortu HR kontua",
+    "subtitle": "Bete zure datuak hasteko.",
+    "firstNameLabel": "Izena",
+    "firstNamePlaceholder": "Izena",
+    "firstNameRequired": "Izena derrigorrezkoa da",
+    "lastNameLabel": "Abizena",
+    "lastNamePlaceholder": "Abizena",
+    "lastNameRequired": "Abizena derrigorrezkoa da",
+    "emailLabel": "Helbide elektronikoa",
+    "emailPlaceholder": "adibidea@adibide.eus",
+    "emailRequired": "Helbide elektronikoa derrigorrezkoa da",
+    "emailInvalid": "Helbide elektroniko baliogabea",
+    "passwordLabel": "Pasahitza",
+    "passwordPlaceholder": "Pasahitza",
+    "passwordRequired": "Pasahitza derrigorrezkoa da",
+    "skillsLabel": "Gaitasunak",
+    "skillsPlaceholder": "Adib.: React, JavaScript, Marketing...",
+    "skillsRequired": "Gaitasunak derrigorrezkoak dira",
+    "experienceLabel": "Esperientzia",
+    "experiencePlaceholder": "Adib.: 2 urte",
+    "experienceRequired": "Esperientzia derrigorrezkoa da",
+    "availabilityLabel": "Eskuragarritasuna",
+    "availabilityPlaceholder": "Adib.: Lanaldi osoa",
+    "availabilityRequired": "Eskuragarritasuna derrigorrezkoa da",
+    "companyNameLabel": "Enpresa",
+    "companyNamePlaceholder": "Zure enpresaren izena",
+    "companyNameRequired": "Enpresaren izena derrigorrezkoa da",
+    "companyDescLabel": "Zure enpresaren deskribapena",
+    "companyDescPlaceholder": "Adib.: Segurtasun enpresa",
+    "companyDescRequired": "Deskribapena derrigorrezkoa da",
+    "submitSeeker": "Sortu nire Eskatzaile kontua",
+    "submitRH": "Sortu nire HR kontua",
+    "alreadyAccount": "Baduzu konturik lehendik?",
+    "loginLink": "Hasi saioa",
+    "seekerCreateError": "Errorea Eskatzaile kontua sortzean",
+    "rhCreateError": "Errorea HR kontua sortzean",
+    "createSuccess": "Kontua ondo sortu da.",
+    "createError": "Ezin izan da zure kontua sortu."
+  },
+  "footer": {
+    "text": "Erakusle teknikoa, ez da martxan dagoen zerbitzu publikoa."
+  },
+  "navbar": {
+    "siteName": "GéoEmploi",
+    "notificationsAria": "Jakinarazpenak",
+    "aboutLink": "Honi buruz",
+    "applicationsLink": "Hautagaitzak",
+    "myOffersLink": "Ikusi nire eskaintzak",
+    "createOfferLink": "Sortu eskaintza",
+    "adminLink": "Kudeaketa",
+    "accountAria": "Kontua",
+    "notificationsTitle": "Jakinarazpenak",
+    "noNotifications": "Ez dago jakinarazpenik une honetan.",
+    "typeApplication": "Hautagaitza",
+    "typeJob": "Eskaintza",
+    "typeSystem": "Sistema",
+    "read": "irakurria",
+    "unread": "irakurri gabea",
+    "markAsRead": "Markatu irakurrita bezala",
+    "markingAsRead": "Gordetzen...",
+    "close": "Itxi",
+    "closeAria": "Itxi",
+    "fetchError": "Ezin izan dira zure jakinarazpenak kargatu.",
+    "markReadError": "Ezin izan da jakinarazpena irakurrita bezala markatu."
+  }
+}

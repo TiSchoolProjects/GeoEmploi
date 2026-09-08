@@ -14,7 +14,7 @@ function Account() {
         <p className="subtitle">{t("account.subtitle")}</p>
         <div className="buttons-container">
           <Link to="/register/rh" className="role-button rh-button">{t("account.button1")}</Link>
-          <Link to="/register/seeker" className="role-button seeker-button">{t("accoutn.button2")}</Link>
+          <Link to="/register/seeker" className="role-button seeker-button">{t("account.button2")}</Link>
         </div>
         <p className="footer">{t("account.question")}{" "}<Link to="/login">{t("account.link")}</Link></p>
       </div>

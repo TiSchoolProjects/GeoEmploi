@@ -1,0 +1,700 @@
+{
+  "home": {
+    "title": "Ontdek de",
+    "subtitle": "Franse arbeidsmarkt",
+    "mapButton": "Verken de kaart",
+    "imageAlt": "Illustratie"
+  },
+  "account": {
+    "title": "Welkom bij GéoEmploi",
+    "subtitle": "Maak uw account aan en start nu uw ervaring.",
+    "button1": "Maak een HR-account aan",
+    "button2": "Maak een Werkzoekende-account aan",
+    "question": "Heeft u al een account?",
+    "link": "Inloggen"
+  },
+  "more": {
+    "title": "Informatie",
+    "subtitle": "Gebruiksvoorwaarden en transparantie van GéoEmploi",
+    "summary": "Inhoudsopgave",
+    "articleLabel": "Artikel",
+    "tabs": {
+      "cgu": "Gebruiksvoorwaarden",
+      "transparency": "Transparantie"
+    },
+    "cgu": {
+      "title": "Algemene gebruiksvoorwaarden",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Preambule en presentatie van de dienst",
+          "corps": [
+            "Het Ministerie van Werk en Geluk stelt het openbare digitale platform GéoEmploi ter beschikking aan gebruikers. Deze openbare bemiddelingsdienst heeft als doel het rechtstreekse contact tussen kandidaten en recruiters te vergemakkelijken door het geolokaliseerd raadplegen van vacatures op gemeentelijk niveau mogelijk te maken.",
+            "Deze Algemene Gebruiksvoorwaarden (AGV) bepalen de regels voor toegang, gebruik en gegevensbescherming die de relatie tussen de publicerende administratie en de gebruikers van de dienst regelen. Elke toegang of aanmaak van een account houdt de volledige en onvoorwaardelijke aanvaarding van deze bepalingen in."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Definities",
+          "liste": [
+            ["Platform", "De online digitale dienst GéoEmploi."],
+            ["Kandidaat", "Elke natuurlijke persoon die de dienst bezoekt om werk te zoeken, vacatures te bekijken of te solliciteren."],
+            ["Werkgever / Recruiter", "Elke rechtspersoon of professional die wervingsadvertenties plaatst via een speciaal account."],
+            ["Cartografische gegevens", "Kaartlagen geleverd door het IGN Geoplateforme en adresgegevens afkomstig van de nationale Adres-API (api-adresse.data.gouv.fr)."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Toegang tot de dienst en tarieven voor werkgevers",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Toegang voor kandidaten",
+              "corps": [
+                "Alle functionaliteiten die ter beschikking worden gesteld van kandidaten — raadplegen van de kaart, weergave van vacatures, berekenen van afstand en verzenden van sollicitaties — zijn strikt gratis en vrij van elk abonnement."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Geolocatie en respect voor de privacy",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Tijdelijke verwerking en geen GPS-opslag",
+              "corps": [
+                "Om te profiteren van het sorteren van vacatures op geografische nabijheid, kan de gebruiker de locatie van zijn apparaat activeren via de API van zijn browser. Deze handeling vereist een uitdrukkelijke technische toestemming.",
+                "Er worden geen GPS-coördinaten van gebruikers opgeslagen, geregistreerd of getraceerd in de databases of applicatielogs van het Ministerie. De afstandsberekening ten opzichte van vacatures gebeurt uitsluitend op tijdelijke en vluchtige wijze in het werkgeheugen tijdens de duur van de actieve sessie."
+              ]
+            },
+            {
+              "soustitre": "4.2. Alternatief zonder locatiebepaling",
+              "corps": [
+                "Toestemming voor locatiedeling is optioneel. Bij weigering behoudt de gebruiker toegang tot alle functionaliteiten door handmatig een referentiegemeente of postcode in te voeren."
+              ]
+            },
+            {
+              "soustitre": "4.3. Bescherming van adressen van werkgevers",
+              "corps": [
+                "Om de privacy en rust van werkgevers te waarborgen, worden exacte postadressen niet op de openbare kaart getoond: alleen de gemeente waaraan de vacature gekoppeld is, is zichtbaar voor gebruikers."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Bescherming van persoonsgegevens en uitoefening van rechten",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Categorieën van verzamelde gegevens bij registratie",
+              "corps": [
+                "Met toepassing van het beginsel van minimale gegevensverwerking (Art. 5.1.c AVG) verzamelt GéoEmploi uitsluitend gegevens die strikt noodzakelijk zijn voor arbeidsbemiddeling:"
+              ],
+              "liste": [
+                ["Kandidaat", "Naam, voornaam, contact-e-mailadres, beveiligd wachtwoord (versleuteld/gehasht), cv-document (PDF/DOC-formaat)."],
+                ["Werkgever", "Bedrijfsnaam, SIRET-nummer, statutaire zetel, naam/voornaam van de beheerder, zakelijk e-mailadres, telefoonnummer."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Bewaartermijnen",
+              "table": [
+                ["Profielgegevens en sollicitaties", "Duur van actief gebruik, daarna verwijdering na 2 jaar continue inactiviteit"],
+                ["Verbindingslogs", "IP-adressen geanonimiseerd binnen 24 uur, technische logs gewist na 12 maanden"],
+                ["GPS-gegevens", "Bewaartermijn van 0 seconden (tijdelijke berekening, zonder archivering)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Concrete modaliteiten voor het uitoefenen van rechten",
+              "corps": [
+                "Overeenkomstig de Algemene Verordening Gegevensbescherming (AVG) en de toepasselijke privacywetgeving beschikt elke gebruiker over het recht op inzage, rectificatie, wissing, beperking en bezwaar tegen de verwerking van zijn gegevens."
+              ],
+              "liste": [
+                ["Directe autonomie", "Wijziging van gegevens of onmiddellijke verwijdering van het account via « Mijn account » > « Mijn account verwijderen »."],
+                ["Contact opnemen met de FG", "Per e-mail via dpo@job-et-bonheur.fr. Antwoord binnen de wettelijke termijn van maximaal één maand."],
+                ["Klachtrecht", "Bij de toezichthoudende autoriteit (CNIL - www.cnil.fr) in geval van niet-naleving van uw rechten."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Aansprakelijkheid",
+          "corps": [
+            "Het Ministerie spant zich naar behoren in om de beschikbaarheid en beveiliging van de dienst te waarborgen. Het kan niet aansprakelijk worden gesteld in geval van overmacht, tijdelijke onderbreking voor onderhoud, onjuistheden in advertenties opgesteld door werkgevers of een afwijzing van een sollicitatie."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Toepasselijk recht en bevoegde rechtbank",
+          "corps": [
+            "Deze gebruiksvoorwaarden worden beheerst door het Franse recht. Indien een minnelijke schikking uitblijft, wordt elk geschil over de geldigheid of uitvoering ervan voorgelegd aan de bevoegde Franse rechtbanken."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Transparantie",
+      "intro": "GéoEmploi is een dienst waarmee vacatures kunnen worden geraadpleegd, sollicitaties kunnen worden ingediend en werkgevers gratis vacatures kunnen plaatsen.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Gratis publicatie",
+          "corps": [
+            "Het publiceren van een vacature op GéoEmploi is geheel gratis.",
+            "Er wordt geen abonnement, vergoeding of financiële tegenprestatie gevraagd aan werkgevers om een vacature te plaatsen."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Locatie van de vacatures",
+          "corps": [
+            "Vacatures worden gelokaliseerd op gemeentelijk niveau. Ze worden gepositioneerd in het centrum van de gemeente en niet op hun exacte adres.",
+            "De locatie van de gebruiker kan worden gebruikt om vacatures in de buurt te tonen. Deze locatie wordt niet bewaard door GéoEmploi.",
+            "De enige bewaarde locatiegegevens zijn gekoppeld aan de gepubliceerde vacatures."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Bewaring van locatiegegevens",
+          "corps": [
+            "De positie van gebruikers wordt niet geregistreerd of bewaard.",
+            "Locatiegegevens gekoppeld aan vacatures worden bewaard volgens de regels die zijn vastgelegd in het verwerkingsregister.",
+            "De locatiegeschiedenis van vacatures wordt automatisch verwijderd na 90 dagen."
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Gegevensbescherming",
+          "corps": [
+            "GéoEmploi past het principe van minimale gegevensverwerking toe: alleen gegevens die noodzakelijk zijn voor de werking van de dienst worden verzameld en bewaard.",
+            "Voor vragen over de bescherming van uw persoonsgegevens of de uitoefening van uw rechten kunt u contact opnemen met de functionaris voor gegevensbescherming (FG): dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Beheer",
+    "subtitle": "Beheer en moderatie van GéoEmploi",
+    "pendingReportsStat": "Meldingen in behandeling",
+    "loading": "Laden...",
+    "youBadge": "U",
+    "notProvided": "Niet opgegeven",
+    "notProvidedFem": "Niet opgegeven",
+    "absent": "ontbreekt",
+    "tabs": {
+      "reports": "Meldingen",
+      "jobs": "Te verifiëren vacatures",
+      "users": "Gebruikers",
+      "employers": "Werkgevers"
+    },
+    "actions": {
+      "delete": "Verwijderen",
+      "cancel": "Annuleren",
+      "resolve": "Oplossen",
+      "deleteOffer": "Vacature verwijderen",
+      "suspend": "Schorsen",
+      "reactivate": "Heractiveren",
+      "deleteAccount": "Account verwijderen",
+      "verifyCompany": "Bedrijf verifiëren",
+      "removeVerification": "Verificatie intrekken"
+    },
+    "errors": {
+      "fetchReports": "Kan meldingen niet laden.",
+      "fetchJobs": "Kan te verifiëren vacatures niet laden.",
+      "fetchUsers": "Kan gebruikers niet laden.",
+      "fetchEmployers": "Kan werkgevers niet laden."
+    },
+    "reports": {
+      "empty": "Geen meldingen.",
+      "deletedJob": "Verwijderde vacature",
+      "reason": "Reden",
+      "description": "Beschrijving",
+      "reportedBy": "Gemeld door",
+      "deletedUser": "Verwijderde gebruiker",
+      "date": "Datum",
+      "status": "Status",
+      "pending": "In behandeling",
+      "resolved": "Opgelost",
+      "resolveSuccess": "Melding opgelost",
+      "resolveError": "Kan melding niet oplossen."
+    },
+    "jobs": {
+      "toVerifyCount": "Te verifiëren vacatures ({{count}})",
+      "noneToVerify": "Geen vacatures om te verifiëren.",
+      "commune": "Gemeente",
+      "description": "Beschrijving",
+      "geocodeStatus": "Geocoderingstatus",
+      "latitude": "Breedtegraad",
+      "longitude": "Lengtegraad",
+      "correctAddressLabel": "Gemeente corrigeren",
+      "newAddressPlaceholder": "Nieuwe gemeente",
+      "checking": "Verifiëren...",
+      "correctAndGeocode": "Corrigeren en opnieuw geocoderen",
+      "enterCityPrompt": "Voer een gemeente in.",
+      "addressCorrected": "Gemeente gecorrigeerd en vacature opnieuw geocodeerd.",
+      "geocodeFailed": "Gemeente kon niet worden geocodeerd.",
+      "correctError": "Kan gemeente niet corrigeren.",
+      "deleteConfirmTitle": "Vacature verwijderen?",
+      "deleteConfirmText": "Weet u zeker dat u deze vacature wilt verwijderen?",
+      "deleteSuccess": "Vacature verwijderd",
+      "deleteError": "Verwijderen mislukt"
+    },
+    "users": {
+      "count": "Gebruikers ({{count}})",
+      "none": "Geen gebruikers.",
+      "email": "E-mail",
+      "role": "Rol",
+      "status": "Status",
+      "createdAt": "Aangemaakt op",
+      "cannotSuspendSelf": "U kunt uw eigen account niet schorsen.",
+      "cannotDeleteSelf": "U kunt uw eigen account niet verwijderen.",
+      "suspendedSuccess": "Gebruiker geschorst",
+      "reactivatedSuccess": "Gebruiker heractiveerd",
+      "deletedSuccess": "Gebruiker verwijderd",
+      "statusError": "Kan status niet wijzigen.",
+      "deleteConfirmTitle": "Account verwijderen?",
+      "deleteConfirmText": "Weet u zeker dat u dit account wilt verwijderen?",
+      "deleteError": "Kan gebruiker niet verwijderen."
+    },
+    "employers": {
+      "count": "Werkgevers ({{count}})",
+      "none": "Geen werkgevers.",
+      "manager": "Verantwoordelijke",
+      "email": "E-mail",
+      "description": "Beschrijving",
+      "accountStatus": "Account",
+      "verification": "Verificatie",
+      "verifiedAt": "Geverifieerd op",
+      "verifySuccess": "Bedrijf geverifieerd",
+      "verifyError": "Kan bedrijf niet verifiëren.",
+      "unverifySuccess": "Bedrijfsverificatie ingetrokken",
+      "unverifyError": "Kan verificatie niet intrekken."
+    },
+    "status": {
+      "active": "Actief",
+      "suspended": "Geschorst",
+      "verified": "Geverifieerd",
+      "toVerify": "Te verifiëren"
+    }
+  },
+  "map": {
+    "unknownCompany": "Onbekend bedrijf",
+    "mustBeLoggedIn": "U moet ingelogd zijn om te solliciteren.",
+    "applicationSent": "Sollicitatie succesvol verzonden.",
+    "alreadyApplied": "U heeft al gesolliciteerd op deze vacature.",
+    "reportDescTooShort": "De beschrijving is te kort.",
+    "reportSent": "De melding is verzonden.",
+    "reportError": "Kan melding niet verzenden.",
+    "loading": "Laden...",
+    "jobOfferAria": "Vacature",
+    "companyLabel": "Bedrijf",
+    "applyBtn": "Solliciteren",
+    "reportBtn": "Deze vacature melden",
+    "closePopup": "Vacaturedetails sluiten",
+    "sending": "Verzenden...",
+    "applied": "Sollicitatie verzonden",
+    "singleOfferAria": "Bekijk de vacature op deze locatie",
+    "multipleOffersAria": "Bekijk de vacatures op deze locatie",
+    "locationNotFound": "Gemeente of stad niet gevonden. Probeer het opnieuw.",
+    "locationModalTitle": "Gebruik van uw locatie",
+    "locationModalDesc": "Met uw toestemming gebruikt GéoEmploi uw geolocatie om vacatures te tonen die het dichtst bij u in de buurt zijn.",
+    "decline": "Weigeren",
+    "accept": "Ik ga akkoord",
+    "searchLabel": "Zoek een gemeente of stad",
+    "searchPlaceholder": "Zoek een locatie",
+    "searchBtn": "Zoeken",
+    "mapAriaLabel": "Kaart met vacatures",
+    "reportModalTitle": "Deze vacature melden",
+    "reasonLabel": "Reden",
+    "descriptionLabel": "Beschrijving",
+    "cancel": "Annuleren",
+    "send": "Verzenden",
+    "reasons": {
+      "fraud": "Frauduleuze vacature",
+      "misleading": "Misleidende informatie",
+      "discriminatory": "Discriminerende inhoud",
+      "nonCompliant": "Niet-conforme vacature",
+      "other": "Overig"
+    }
+  },
+  "myOffers": {
+    "title": "Mijn vacatures",
+    "subtitle": "Hier vindt u alle vacatures die u heeft geplaatst.",
+    "loading": "Vacatures laden...",
+    "emptyTitle": "Geen vacatures geplaatst",
+    "emptyText": "U heeft nog geen vacatures aangemaakt.",
+    "viewsCount_zero": "0 weergaven",
+    "viewsCount_one": "1 weergave",
+    "viewsCount_other": "{{count}} weergaven",
+    "companyPrefix": "Bedrijf:",
+    "communePrefix": "Gemeente:",
+    "descPrefix": "Beschrijving:",
+    "detailsTitle": "Details bekijken",
+    "editTitle": "Vacature bewerken",
+    "deleteTitle": "Vacature verwijderen",
+    "deleteConfirmTitle": "Vacature verwijderen?",
+    "deleteConfirmText": "Weet u zeker dat u deze vacature wilt verwijderen?",
+    "deleteSuccess": "Vacature succesvol verwijderd",
+    "deleteError": "Kan vacature niet verwijderen.",
+    "editSuccess": "Vacature succesvol bijgewerkt",
+    "editError": "Kan vacature niet bijwerken",
+    "actions": {
+      "details": "Details",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "cancel": "Annuleren",
+      "close": "Sluiten",
+      "modify": "Bewerken",
+      "save": "Opslaan",
+      "accept": "Accepteren",
+      "reject": "Weigeren"
+    },
+    "errors": {
+      "fetchEmployerId": "Kan het id van de werkgever niet ophalen.",
+      "fetchOffers": "Kan uw vacatures niet laden.",
+      "fetchApplications": "Kan sollicitaties niet laden."
+    },
+    "modal": {
+      "offerInfoTitle": "Vacature-informatie",
+      "companyInfoTitle": "Bedrijfsinformatie",
+      "titleLabel": "Titel",
+      "communeLabel": "Gemeente",
+      "descLabel": "Beschrijving",
+      "viewsLabel": "Aantal weergaven",
+      "companyLabel": "Bedrijf",
+      "emailLabel": "E-mail",
+      "notProvided": "Niet opgegeven",
+      "notProvidedFem": "Niet opgegeven",
+      "notProvidedPlur": "Niet opgegeven",
+      "noDescription": "Geen beschrijving beschikbaar."
+    },
+    "applications": {
+      "titleCount": "Sollicitaties ({{count}})",
+      "loading": "Sollicitaties laden...",
+      "empty": "Geen sollicitaties ontvangen voor deze vacature.",
+      "acceptedToast": "Sollicitatie geaccepteerd",
+      "rejectedToast": "Sollicitatie afgewezen.",
+      "statusError": "Kan sollicitatie niet bijwerken."
+    },
+    "candidate": {
+      "defaultFirstname": "Voornaam",
+      "defaultLastname": "Achternaam",
+      "email": "E-mail",
+      "skills": "Vaardigheden",
+      "experience": "Ervaring",
+      "availability": "Beschikbaarheid",
+      "status": "Status",
+      "receivedAt": "Sollicitatie ontvangen op"
+    },
+    "status": {
+      "waiting": "In behandeling",
+      "accepted": "Geaccepteerd",
+      "rejected": "Afgewezen"
+    },
+    "editModal": {
+      "title": "Vacature bewerken",
+      "titleLabel": "Titel van de vacature",
+      "communeLabel": "Gemeente",
+      "descLabel": "Beschrijving",
+      "saving": "Opslaan...",
+      "save": "Opslaan"
+    }
+  },
+  "consent": {
+    "saveError": "Kan toestemming niet opslaan:"
+  },
+  "application": {
+    "title": "Mijn sollicitaties",
+    "subtitle": "Hier vindt u alle vacatures waarop u heeft gesolliciteerd.",
+    "loading": "Sollicitaties laden...",
+    "emptyTitle": "Geen sollicitaties",
+    "emptyText": "U heeft nog niet op een vacature gesolliciteerd.",
+    "untitledOffer": "Naamloze vacature",
+    "company": "Bedrijf:",
+    "location": "Gemeente:",
+    "description": "Beschrijving:",
+    "detailsButton": "Details",
+    "detailsTitle": "Details bekijken",
+    "deleteButton": "Verwijderen",
+    "deleteTitle": "Sollicitatie verwijderen",
+    "deleting": "...",
+    "deletingInProgress": "Verwijderen...",
+    "deleteConfirmTitle": "Sollicitatie verwijderen?",
+    "deleteConfirmText": "Weet u zeker dat u deze sollicitatie wilt verwijderen?",
+    "deleteConfirmButton": "Verwijderen",
+    "deleteCancelButton": "Annuleren",
+    "deleteSuccess": "Sollicitatie succesvol verwijderd",
+    "deleteError": "Kan sollicitatie niet verwijderen.",
+    "fetchUserError": "Kan gebruikers-id niet ophalen.",
+    "fetchError": "Kan uw sollicitaties niet laden.",
+    "modalDefaultTitle": "Sollicitatiedetails",
+    "modalApplicationInfo": "Sollicitatie-informatie",
+    "status": "Status",
+    "notProvided": "Niet opgegeven",
+    "notProvidedFem": "Niet opgegeven",
+    "applicationDate": "Sollicitatiedatum",
+    "modalOfferInfo": "Vacature-informatie",
+    "offerTitle": "Titel",
+    "contractType": "Type contract",
+    "noDescription": "Geen beschrijving beschikbaar.",
+    "close": "Sluiten"
+  },
+  "cgu": {
+    "pageTitle": "Algemene Gebruiksvoorwaarden",
+    "intro": "Welkom op onze site. Deze Algemene Gebruiksvoorwaarden bepalen de regels voor het gebruik van ons platform.",
+    "section1": {
+      "heading": "1. Doel",
+      "p1": "Deze Algemene Gebruiksvoorwaarden hebben tot doel de voorwaarden te bepalen waaronder gebruikers toegang hebben tot de site en gebruik kunnen maken van de aangeboden diensten.",
+      "p2": "Elk gebruik van de site houdt de volledige en onvoorwaardelijke aanvaarding van deze voorwaarden in. Indien u deze voorwaarden niet aanvaardt, verzoeken wij u de site niet te gebruiken."
+    },
+    "section2": {
+      "heading": "2. Toegang tot de site",
+      "p1": "De site is gratis toegankelijk voor elke gebruiker met internettoegang. Eventuele kosten voor netwerktoegang, met name verbindings- of apparatuurkosten, blijven voor rekening van de gebruiker.",
+      "p2": "Wij behouden ons het recht voor om de site geheel of gedeeltelijk tijdelijk te wijzigen, op te schorten of te onderbreken, met name voor onderhoud of updates."
+    },
+    "section3": {
+      "heading": "3. Gebruik van de dienst",
+      "intro": "De gebruiker verbindt zich ertoe de site op verantwoorde wijze en in overeenstemming met de geldende wet- en regelgeving te gebruiken.",
+      "list": [
+        "De site niet voor frauduleuze of illegale doeleinden te gebruiken.",
+        "Niet te proberen de werking van de site te verstoren.",
+        "Geen inbreuk te maken op de rechten of veiligheid van andere gebruikers.",
+        "Geen kwaadaardige inhoud in te voeren die de dienst kan beschadigen."
+      ]
+    },
+    "section4": {
+      "heading": "4. Gebruikersaccount",
+      "p1": "Wanneer het aanmaken van een account noodzakelijk is om toegang te krijgen tot bepaalde diensten, verbindt de gebruiker zich ertoe juiste, volledige en actuele informatie te verstrekken.",
+      "p2": "De gebruiker is verantwoordelijk voor de vertrouwelijkheid van zijn inloggegevens en voor alle activiteiten die vanaf zijn account worden uitgevoerd."
+    },
+    "section5": {
+      "heading": "5. Intellectuele eigendom",
+      "p1": "Alle elementen op de site, waaronder teksten, afbeeldingen, logo's, grafische elementen, interfaces, inhoud en software, worden beschermd door intellectuele eigendomsrechten.",
+      "p2": "Elke reproductie, weergave, wijziging of exploitatie van de site, geheel of gedeeltelijk, zonder voorafgaande toestemming kan een inbreuk op intellectuele eigendomsrechten opleveren."
+    },
+    "section6": {
+      "heading": "6. Aansprakelijkheid",
+      "p1": "Wij doen ons uiterste best om de juistheid en beschikbaarheid van de informatie op de site te waarborgen. We kunnen echter niet garanderen dat de site te allen tijde beschikbaar of foutloos is.",
+      "p2": "De gebruiker erkent de site op eigen verantwoordelijkheid te gebruiken en blijft verantwoordelijk voor zijn apparatuur, internetverbinding en het gebruik van de diensten."
+    },
+    "section7": {
+      "heading": "7. Persoonsgegevens",
+      "p1": "In het kader van het gebruik van de site kunnen bepaalde persoonsgegevens worden verzameld en verwerkt.",
+      "p2": "Deze verwerkingen worden uitgevoerd in overeenstemming met de geldende regelgeving inzake de bescherming van persoonsgegevens.",
+      "p3": "Raadpleeg ons privacybeleid voor meer informatie."
+    },
+    "section8": {
+      "heading": "8. Externe links",
+      "p1": "De site kan links bevatten naar externe websites of diensten. Wij zijn niet verantwoordelijk voor de inhoud, beschikbaarheid of praktijken van deze websites van derden."
+    },
+    "section9": {
+      "heading": "9. Wijziging van de voorwaarden",
+      "p1": "Wij behouden ons het recht voor om deze Algemene Gebruiksvoorwaarden op elk moment te wijzigen om ze aan te passen aan wijzigingen van de site, de diensten of de regelgeving.",
+      "p2": "De nieuwe voorwaarden worden van kracht zodra ze op de site worden gepubliceerd."
+    },
+    "section10": {
+      "heading": "10. Toepasselijk recht",
+      "p1": "Deze Algemene Gebruiksvoorwaarden zijn onderworpen aan het recht van het land waar de uitgever van de site is gevestigd.",
+      "p2": "In geval van een geschil zullen partijen trachten een minnelijke oplossing te vinden alvorens een gerechtelijke procedure te starten."
+    },
+    "section11": {
+      "heading": "11. Contact",
+      "p1": "Voor vragen over deze Algemene Gebruiksvoorwaarden kunt u contact met ons opnemen via de contactgegevens op onze site."
+    },
+    "backHome": "Terug naar startpagina",
+    "lastUpdate": "Laatste update: 1 september 2026"
+  },
+  "geoConsentNotice": {
+    "dataLabel": "Betrokken gegevens:",
+    "dataValue": "ruwe GPS-coördinaten (breedtegraad, lengtegraad).",
+    "purposeLabel": "Doel:",
+    "purposeValue": "vacatures filteren op basis van de geografische afstand van de gebruiker.",
+    "legalBasisLabel": "Rechtsgrond:",
+    "legalBasisValue": "uw toestemming, verleend via de door de browser gevraagde autorisatie.",
+    "recipientsLabel": "Ontvangers:",
+    "recipientsValue": "technisch en productteam van GéoEmploi (technische logs); IGN voor kaarttegels en geocodering (Adres-API / Géoplateforme).",
+    "transferLabel": "Doorgifte buiten de EU:",
+    "transferValue": "geen; gegevens worden gehost in Frankrijk.",
+    "retentionLabel": "Bewaartermijn:",
+    "retentionValue": "vluchtige gegevens, uitsluitend gebruikt voor de duur van het verzoek, zonder opslag in de database.",
+    "rightsLabel": "Uw rechten:",
+    "rightsValue": "inzage, wissing, beperking en intrekking van toestemming op elk moment, inclusief vanaf uw profielpagina."
+  },
+  "jobOffer": {
+    "pageTitle": "Vacature aanmaken",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "Vast contract - allround medewerker",
+    "titleRequired": "Functietitel is verplicht",
+    "descriptionLabel": "Beschrijving",
+    "descriptionPlaceholder": "Functiebeschrijving",
+    "descriptionRequired": "Beschrijving is verplicht",
+    "communeLabel": "Gemeente",
+    "communePlaceholder": "35000 Rennes",
+    "communeRequired": "Gemeente is verplicht",
+    "submitButton": "Vacature plaatsen",
+    "createSuccess": "Vacature succesvol aangemaakt",
+    "createError": "Kan vacature niet aanmaken"
+  },
+  "login": {
+    "welcomeTitle": "Welkom",
+    "subtitle": "Log in op uw account.",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "voorbeeld@voorbeeld.nl",
+    "emailRequired": "E-mailadres is verplicht",
+    "emailInvalid": "Ongeldig e-mailadres",
+    "passwordLabel": "Wachtwoord",
+    "passwordPlaceholder": "Uw wachtwoord",
+    "passwordRequired": "Wachtwoord is verplicht",
+    "submitButton": "Inloggen",
+    "noAccount": "Nog geen account?",
+    "registerLink": "Registreren",
+    "loginSuccess": "Succesvol ingelogd",
+    "loginError": "Onjuiste inloggegevens",
+    "invalidCredentials": "Ongeldige inloggegevens",
+    "noToken": "Geen access_token ontvangen van de server"
+  },
+  "profile": {
+    "pageTitle": "Mijn profiel bewerken",
+    "subtitle": "Bewerk uw persoonlijke en professionele gegevens.",
+    "firstNameLabel": "Voornaam",
+    "firstNamePlaceholder": "Voornaam",
+    "firstNameRequired": "Voornaam is verplicht",
+    "lastNameLabel": "Achternaam",
+    "lastNamePlaceholder": "Achternaam",
+    "lastNameRequired": "Achternaam is verplicht",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "voorbeeld@voorbeeld.nl",
+    "emailRequired": "E-mail is verplicht",
+    "emailInvalid": "Ongeldig e-mailadres",
+    "skillsLabel": "Vaardigheden",
+    "skillsPlaceholder": "Bijv.: React, JavaScript, Marketing...",
+    "skillsRequired": "Vaardigheden zijn verplicht",
+    "experienceLabel": "Ervaring",
+    "experiencePlaceholder": "Bijv.: 2 jaar",
+    "experienceRequired": "Ervaring is verplicht",
+    "availabilityLabel": "Beschikbaarheid",
+    "availabilityPlaceholder": "Bijv.: Voltijds",
+    "availabilityRequired": "Beschikbaarheid is verplicht",
+    "companyNameLabel": "Bedrijf",
+    "companyNamePlaceholder": "Naam van uw bedrijf",
+    "companyNameRequired": "Bedrijfsnaam is verplicht",
+    "companyDescLabel": "Beschrijving van uw bedrijf",
+    "companyDescPlaceholder": "Bijv.: Beveiligingsbedrijf",
+    "companyDescRequired": "Beschrijving is verplicht",
+    "saveButton": "Wijzigingen opslaan",
+    "saving": "Opslaan...",
+    "logoutButton": "Uitloggen",
+    "exportButton": "Mijn gegevens exporteren",
+    "exportSuccess": "Exporteren geslaagd!",
+    "exportError": "Kan gegevens niet exporteren",
+    "exportEmptyError": "Geen gegevens om te exporteren",
+    "saveSuccess": "Profiel succesvol bijgewerkt!",
+    "userUpdateError": "Fout bij het bijwerken van de gebruiker",
+    "profileUpdateError": "Fout bij het bijwerken van het profiel",
+    "unsupportedRole": "Niet-ondersteunde gebruikersrol: {{role}}",
+    "fetchProfileError": "Kan profiel niet ophalen",
+    "privacyHeading": "Privacy & geolocatie",
+    "privacyText": "Met uw toestemming gebruikt GéoEmploi uw locatie om de dichtstbijzijnde vacatures op de kaart te tonen.",
+    "consentStatusLabel": "Huidige status:",
+    "consentAccepted": "Geolocatie toegestaan",
+    "consentDeclined": "Geolocatie geweigerd",
+    "consentUnset": "Geen keuze geregistreerd",
+    "consentAcceptedToast": "Geolocatie toegestaan.",
+    "consentDeclinedToast": "Geolocatie geweigerd.",
+    "viewNoticeButton": "Bekijk de informatiekennisgeving",
+    "allowGeoButton": "Geolocatie toestaan",
+    "declineGeoButton": "Geolocatie weigeren",
+    "noticeTitle": "Informatiekennisgeving — Geolocatie",
+    "noticeIntro": "Met uw toestemming gebruikt GéoEmploi uw geolocatie om vacatures te tonen die het dichtst bij u in de buurt zijn.",
+    "closeButton": "Sluiten",
+    "backLink": "← Terug",
+    "deleteAccountButton": "Account verwijderen",
+    "deleteAccountTitle": "Account verwijderen?",
+    "deleteAccountText": "Weet u zeker dat u dit account wilt verwijderen?",
+    "deleteAccountConfirm": "Verwijderen",
+    "deleteAccountCancel": "Annuleren",
+    "deleteAccountSuccess": "Profiel succesvol verwijderd",
+    "deleteAccountError": "Kan profiel niet verwijderen."
+  },
+  "register": {
+    "invalidRoleTitle": "Ongeldig accounttype",
+    "invalidRoleText": "Kies een accounttype.",
+    "backButton": "Terug",
+    "titleSeeker": "Maak een Werkzoekende-account aan",
+    "titleRH": "Maak een HR-account aan",
+    "subtitle": "Vul uw gegevens in om aan de slag te gaan.",
+    "firstNameLabel": "Voornaam",
+    "firstNamePlaceholder": "Voornaam",
+    "firstNameRequired": "Voornaam is verplicht",
+    "lastNameLabel": "Achternaam",
+    "lastNamePlaceholder": "Achternaam",
+    "lastNameRequired": "Achternaam is verplicht",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "voorbeeld@voorbeeld.nl",
+    "emailRequired": "E-mail is verplicht",
+    "emailInvalid": "Ongeldig e-mailadres",
+    "passwordLabel": "Wachtwoord",
+    "passwordPlaceholder": "Wachtwoord",
+    "passwordRequired": "Wachtwoord is verplicht",
+    "skillsLabel": "Vaardigheden",
+    "skillsPlaceholder": "Bijv.: React, JavaScript, Marketing...",
+    "skillsRequired": "Vaardigheden zijn verplicht",
+    "experienceLabel": "Ervaring",
+    "experiencePlaceholder": "Bijv.: 2 jaar",
+    "experienceRequired": "Ervaring is verplicht",
+    "availabilityLabel": "Beschikbaarheid",
+    "availabilityPlaceholder": "Bijv.: Voltijds",
+    "availabilityRequired": "Beschikbaarheid is verplicht",
+    "companyNameLabel": "Bedrijf",
+    "companyNamePlaceholder": "Naam van uw bedrijf",
+    "companyNameRequired": "Bedrijfsnaam is verplicht",
+    "companyDescLabel": "Beschrijving van uw bedrijf",
+    "companyDescPlaceholder": "Bijv.: Beveiligingsbedrijf",
+    "companyDescRequired": "Beschrijving is verplicht",
+    "submitSeeker": "Mijn Werkzoekende-account aanmaken",
+    "submitRH": "Mijn HR-account aanmaken",
+    "alreadyAccount": "Heeft u al een account?",
+    "loginLink": "Inloggen",
+    "seekerCreateError": "Fout bij het aanmaken van het Werkzoekende-account",
+    "rhCreateError": "Fout bij het aanmaken van het HR-account",
+    "createSuccess": "Account succesvol aangemaakt.",
+    "createError": "Kan uw account niet aanmaken."
+  },
+  "footer": {
+    "text": "Technisch demonstratiemodel, vormt geen openbare dienst in bedrijf."
+  },
+  "navbar": {
+    "siteName": "GéoEmploi",
+    "notificationsAria": "Meldingen",
+    "aboutLink": "Over ons",
+    "applicationsLink": "Sollicitaties",
+    "myOffersLink": "Mijn vacatures bekijken",
+    "createOfferLink": "Vacature plaatsen",
+    "adminLink": "Beheer",
+    "accountAria": "Account",
+    "notificationsTitle": "Meldingen",
+    "noNotifications": "Geen meldingen op dit moment.",
+    "typeApplication": "Sollicitatie",
+    "typeJob": "Vacature",
+    "typeSystem": "Systeem",
+    "read": "gelezen",
+    "unread": "ongelezen",
+    "markAsRead": "Markeren als gelezen",
+    "markingAsRead": "Opslaan...",
+    "close": "Sluiten",
+    "closeAria": "Sluiten",
+    "fetchError": "Kan uw meldingen niet laden.",
+    "markReadError": "Kan de melding niet als gelezen markeren."
+  }
+}

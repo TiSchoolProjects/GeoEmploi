@@ -13,6 +13,406 @@
     "question": "Déjà un compte ?",
     "link": "Se connecter"
   },
+  "more": {
+    "title": "Informations",
+    "subtitle": "Conditions d'utilisation et transparence de GéoEmploi",
+    "summary": "Sommaire",
+    "articleLabel": "Article",
+    "tabs": {
+      "cgu": "CGU",
+      "transparency": "Transparence"
+    },
+    "cgu": {
+      "title": "Conditions générales d'utilisation",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Préambule et présentation du service",
+          "corps": [
+            "Le Ministère du Job et Bonheur met à disposition des usagers la plateforme numérique publique GéoEmploi. Ce service public d'intermédiation a pour mission de faciliter la mise en relation directe entre candidats et recruteurs en permettant la consultation géolocalisée d'offres d'emploi à l'échelle de la commune.",
+            "Les présentes Conditions Générales d'Utilisation (CGU) déterminent les règles d'accès, d'utilisation et de protection des données régissant les relations entre l'Administration éditrice et les utilisateurs du service. Tout accès ou création de compte emporte adhésion pleine et entière aux présentes dispositions."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Définitions",
+          "liste": [
+            ["Plateforme", "Le service numérique GéoEmploi, accessible en ligne."],
+            ["Candidat", "Toute personne physique accédant au service à des fins de recherche d'emploi, de consultation d'offres ou de candidature."],
+            ["Employeur / Recruteur", "Toute personne morale ou professionnelle procédant à la publication d'annonces de recrutement via un compte dédié."],
+            ["Données cartographiques", "Fonds cartographiques fournis par la Géoplateforme IGN et données d'adresses issues de l'API Adresse nationale (api-adresse.data.gouv.fr)."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Accès au service et tarification employeurs",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Accès candidats",
+              "corps": [
+                "L'ensemble des fonctionnalités mises à disposition des candidats — consultation de la carte, affichage des annonces, calcul de proximité et transmission de candidatures — est strictement gratuit et libre de tout abonnement."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Géolocalisation et respect de la vie privée",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Traitement transitoire et absence de stockage GPS",
+              "corps": [
+                "Pour bénéficier du tri d'offres par proximité géographique, l'utilisateur peut activer la localisation de son appareil via l'API de son navigateur. Cette action requiert une autorisation technique expresse.",
+                "Aucune coordonnée GPS d'utilisateur n'est stockée, enregistrée ou tracée dans les bases de données ou les journaux applicatifs du Ministère. Le calcul de distance par rapport aux offres s'effectue exclusivement de façon transitoire et volatile en mémoire vive pendant la durée de la session active."
+              ]
+            },
+            {
+              "soustitre": "4.2. Alternative sans localisation",
+              "corps": [
+                "L'autorisation de localisation est facultative. En cas de refus, l'utilisateur bénéficie de l'intégralité des fonctionnalités en saisissant manuellement une commune ou un code postal de référence."
+              ]
+            },
+            {
+              "soustitre": "4.3. Protection des adresses des employeurs",
+              "corps": [
+                "Afin de préserver la tranquillité des établissements employeurs, les adresses postales exactes ne sont pas affichées sur la carte publique : seule la commune de rattachement de l'offre est visible des usagers."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Protection des données personnelles et exercice des droits",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Catégories de données collectées à l'inscription",
+              "corps": [
+                "En application du principe de minimisation (Art. 5.1.c RGPD), GéoEmploi collecte uniquement les données strictement nécessaires à l'intermédiation pour l'emploi :"
+              ],
+              "liste": [
+                ["Candidat", "Nom, prénom, adresse e-mail de contact, mot de passe sécurisé (chiffré/haché), document de CV (format PDF/DOC)."],
+                ["Employeur", "Raison sociale, numéro SIRET, adresse de siège, nom/prénom du gestionnaire, adresse e-mail professionnelle, numéro de téléphone."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Durées de conservation",
+              "table": [
+                ["Données de profil et candidatures", "Durée d'utilisation active, puis suppression après 2 ans d'inactivité continue"],
+                ["Logs de connexion", "IP anonymisées sous 24 h, logs techniques purgés sous 12 mois"],
+                ["Données GPS", "Rétention de 0 seconde (calcul transitoire, sans archivage)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Modalités concrètes d'exercice des droits",
+              "corps": [
+                "Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, chaque utilisateur dispose d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition au traitement de ses données."
+              ],
+              "liste": [
+                ["Autonomie directe", "Modification des informations ou suppression immédiate du compte depuis « Mon Compte » > « Supprimer mon compte »."],
+                ["Saisine du DPO", "Par e-mail à dpo@job-et-bonheur.fr. Réponse sous un délai légal maximal d'un mois."],
+                ["Droit de réclamation", "Auprès de la CNIL (www.cnil.fr) en cas de non-respect des droits."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Responsabilités",
+          "corps": [
+            "Le Ministère met en œuvre les diligences requises pour assurer la disponibilité et la sécurité du service. Sa responsabilité ne saurait être engagée en cas de force majeure, d'interruption temporaire pour maintenance, d'inexactitude dans les annonces rédigées par les employeurs ou d'issue négative à une candidature."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Droit applicable et juridiction compétente",
+          "corps": [
+            "Les présentes CGU sont régies par le droit français. À défaut de résolution amiable, tout différend relatif à leur validité ou leur exécution sera soumis aux tribunaux français territorialement compétents."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Transparence",
+      "intro": "GéoEmploi est un service permettant de consulter des offres d'emploi, de candidater et, pour les employeurs, de publier gratuitement des offres.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Publication gratuite",
+          "corps": [
+            "La publication d'une offre d'emploi sur GéoEmploi est entièrement gratuite.",
+            "Aucun abonnement, tarif ou contrepartie financière n'est demandé aux employeurs pour publier une offre."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Localisation des offres",
+          "corps": [
+            "Les offres d'emploi sont localisées à la maille de la commune. Elles sont positionnées sur le centre de leur commune et non à leur adresse exacte.",
+            "La position de l'utilisateur peut être utilisée pour lui permettre de consulter les offres à proximité. Cette position n'est pas conservée par GéoEmploi.",
+            "Les seules données de localisation conservées concernent la localisation associée aux offres d'emploi."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Conservation des données de localisation",
+          "corps": [
+            "La position des utilisateurs n'est pas enregistrée ni conservée.",
+            "Les données de localisation associées aux offres d'emploi sont conservées conformément aux règles définies dans le registre des traitements.",
+            "Les historiques de localisation des offres sont automatiquement supprimés au-delà de 90 jours"
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Protection des données",
+          "corps": [
+            "GéoEmploi applique le principe de minimisation des données : seules les données nécessaires au fonctionnement du service sont collectées et conservées.",
+            "Pour toute question concernant la protection de vos données personnelles ou l'exercice de vos droits, vous pouvez contacter le délégué à la protection des données (DPO) : dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "subtitle": "Gestion et modération de GéoEmploi",
+    "pendingReportsStat": "Signalements en attente",
+    "loading": "Chargement...",
+    "youBadge": "Vous",
+    "notProvided": "Non renseigné",
+    "notProvidedFem": "Non renseignée",
+    "absent": "absente",
+    "tabs": {
+      "reports": "Signalements",
+      "jobs": "Offres à vérifier",
+      "users": "Utilisateurs",
+      "employers": "Employeurs"
+    },
+    "actions": {
+      "delete": "Supprimer",
+      "cancel": "Annuler",
+      "resolve": "Résoudre",
+      "deleteOffer": "Supprimer l'offre",
+      "suspend": "Suspendre",
+      "reactivate": "Réactiver",
+      "deleteAccount": "Supprimer le compte",
+      "verifyCompany": "Vérifier l'entreprise",
+      "removeVerification": "Retirer la vérification"
+    },
+    "errors": {
+      "fetchReports": "Impossible de charger les signalements.",
+      "fetchJobs": "Impossible de charger les offres à vérifier.",
+      "fetchUsers": "Impossible de charger les utilisateurs.",
+      "fetchEmployers": "Impossible de charger les employeurs."
+    },
+    "reports": {
+      "empty": "Aucun signalement.",
+      "deletedJob": "Offre supprimée",
+      "reason": "Motif",
+      "description": "Description",
+      "reportedBy": "Signalé par",
+      "deletedUser": "Utilisateur supprimé",
+      "date": "Date",
+      "status": "Statut",
+      "pending": "En attente",
+      "resolved": "Résolu",
+      "resolveSuccess": "Signalement résolu",
+      "resolveError": "Impossible de résoudre le signalement."
+    },
+    "jobs": {
+      "toVerifyCount": "Offres à vérifier ({{count}})",
+      "noneToVerify": "Aucune offre à vérifier.",
+      "commune": "Commune",
+      "description": "Description",
+      "geocodeStatus": "Statut géocodage",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "correctAddressLabel": "Corriger la commune",
+      "newAddressPlaceholder": "Nouvelle commune",
+      "checking": "Vérification...",
+      "correctAndGeocode": "Corriger et regéocoder",
+      "enterCityPrompt": "Veuillez saisir une commune.",
+      "addressCorrected": "Commune corrigée et offre regéocodée.",
+      "geocodeFailed": "La commune n'a pas pu être géocodée.",
+      "correctError": "Impossible de corriger la commune.",
+      "deleteConfirmTitle": "Supprimer le job ?",
+      "deleteConfirmText": "Êtes-vous sûr de vouloir supprimer cette offre ?",
+      "deleteSuccess": "Offre supprimée",
+      "deleteError": "Suppression impossible"
+    },
+    "users": {
+      "count": "Utilisateurs ({{count}})",
+      "none": "Aucun utilisateur.",
+      "email": "Email",
+      "role": "Rôle",
+      "status": "Statut",
+      "createdAt": "Créé le",
+      "cannotSuspendSelf": "Vous ne pouvez pas suspendre votre propre compte.",
+      "cannotDeleteSelf": "Vous ne pouvez pas supprimer votre propre compte.",
+      "suspendedSuccess": "Utilisateur suspendu",
+      "reactivatedSuccess": "Utilisateur réactivé",
+      "deletedSuccess": "Utilisateur supprimé",
+      "statusError": "Impossible de modifier le statut.",
+      "deleteConfirmTitle": "Supprimer le compte ?",
+      "deleteConfirmText": "Êtes-vous sûr de vouloir supprimer ce compte ?",
+      "deleteError": "Impossible de supprimer l'utilisateur."
+    },
+    "employers": {
+      "count": "Employeurs ({{count}})",
+      "none": "Aucun employeur.",
+      "manager": "Responsable",
+      "email": "Email",
+      "description": "Description",
+      "accountStatus": "Compte",
+      "verification": "Vérification",
+      "verifiedAt": "Vérifié le",
+      "verifySuccess": "Entreprise vérifiée",
+      "verifyError": "Impossible de vérifier l'entreprise.",
+      "unverifySuccess": "Vérification de l'entreprise retirée",
+      "unverifyError": "Impossible de retirer la vérification."
+    },
+    "status": {
+      "active": "Actif",
+      "suspended": "Suspendu",
+      "verified": "Vérifié",
+      "toVerify": "À vérifier"
+    }
+  },
+  "map": {
+    "unknownCompany": "Entreprise inconnue",
+    "mustBeLoggedIn": "Vous devez être connecté pour postuler.",
+    "applicationSent": "Candidature envoyée avec succès.",
+    "alreadyApplied": "Vous avez déjà postulé à cette offre.",
+    "reportDescTooShort": "La description est trop courte.",
+    "reportSent": "Le signalement a été envoyé.",
+    "reportError": "Impossible d'envoyer le signalement.",
+    "loading": "Chargement...",
+    "jobOfferAria": "Offre d'emploi",
+    "companyLabel": "Entreprise",
+    "applyBtn": "Postuler",
+    "reportBtn": "Signaler cette offre",
+    "closePopup": "Fermer les détails de l'offre",
+    "sending": "Envoi en cours...",
+    "applied": "Candidature envoyée",
+    "singleOfferAria": "Afficher l'offre d'emploi à cet endroit",
+    "multipleOffersAria": "Afficher les offres d'emploi à cet endroit",
+    "locationNotFound": "Commune ou ville introuvable. Veuillez réessayer.",
+    "locationModalTitle": "Utilisation de votre position",
+    "locationModalDesc": "Avec votre autorisation, GéoEmploi utilise votre géolocalisation pour afficher les offres d'emploi les plus proches de vous.",
+    "decline": "Refuser",
+    "accept": "J'accepte",
+    "searchLabel": "Rechercher une commune ou une ville",
+    "searchPlaceholder": "Rechercher un lieu",
+    "searchBtn": "Rechercher",
+    "mapAriaLabel": "Carte des offres d'emploi",
+    "reportModalTitle": "Signaler cette offre",
+    "reasonLabel": "Motif",
+    "descriptionLabel": "Description",
+    "cancel": "Annuler",
+    "send": "Envoyer",
+    "reasons": {
+      "fraud": "Offre frauduleuse",
+      "misleading": "Informations trompeuses",
+      "discriminatory": "Contenu discriminatoire",
+      "nonCompliant": "Offre non conforme",
+      "other": "Autre"
+    }
+  },
+  "myOffers": {
+    "title": "Mes offres",
+    "subtitle": "Retrouvez ici toutes les offres que vous avez publiées.",
+    "loading": "Chargement des offres...",
+    "emptyTitle": "Aucune offre publiée",
+    "emptyText": "Vous n'avez pas encore créé d'offre d'emploi.",
+    "viewsCount_zero": "0 vue",
+    "viewsCount_one": "1 vue",
+    "viewsCount_other": "{{count}} vues",
+    "companyPrefix": "Entreprise :",
+    "communePrefix": "Commune :",
+    "descPrefix": "Description :",
+    "detailsTitle": "Voir les détails",
+    "editTitle": "Modifier l'offre",
+    "deleteTitle": "Supprimer l'offre",
+    "deleteConfirmTitle": "Supprimer l'offre ?",
+    "deleteConfirmText": "Êtes-vous sûr de vouloir supprimer cette offre ?",
+    "deleteSuccess": "Offre supprimée avec succès",
+    "deleteError": "Impossible de supprimer l'offre.",
+    "editSuccess": "Offre modifiée avec succès",
+    "editError": "Modification impossible",
+    "actions": {
+      "details": "Détail",
+      "edit": "Editer",
+      "delete": "Supprimer",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "modify": "Modifier",
+      "save": "Enregistrer",
+      "accept": "Accepter",
+      "reject": "Refuser"
+    },
+    "errors": {
+      "fetchEmployerId": "Impossible de récupérer l'identifiant de l'employeur.",
+      "fetchOffers": "Impossible de charger vos offres.",
+      "fetchApplications": "Impossible de charger les candidatures."
+    },
+    "modal": {
+      "offerInfoTitle": "Informations de l'offre",
+      "companyInfoTitle": "Informations de l'entreprise",
+      "titleLabel": "Titre",
+      "communeLabel": "Commune",
+      "descLabel": "Description",
+      "viewsLabel": "Nombre de vues",
+      "companyLabel": "Entreprise",
+      "emailLabel": "Email",
+      "notProvided": "Non renseigné",
+      "notProvidedFem": "Non renseignée",
+      "notProvidedPlur": "Non renseignées",
+      "noDescription": "Aucune description disponible."
+    },
+    "applications": {
+      "titleCount": "Candidatures ({{count}})",
+      "loading": "Chargement des candidatures...",
+      "empty": "Aucune candidature reçue pour cette offre.",
+      "acceptedToast": "Candidature acceptée",
+      "rejectedToast": "Candidature refusée.",
+      "statusError": "Impossible de modifier la candidature."
+    },
+    "candidate": {
+      "defaultFirstname": "Prénom",
+      "defaultLastname": "Nom",
+      "email": "Email",
+      "skills": "Compétences",
+      "experience": "Expérience",
+      "availability": "Disponibilité",
+      "status": "Statut",
+      "receivedAt": "Candidature reçue le"
+    },
+    "status": {
+      "waiting": "En attente",
+      "accepted": "Acceptée",
+      "rejected": "Refusée"
+    },
+    "editModal": {
+      "title": "Modifier l'offre",
+      "titleLabel": "Titre de l'offre",
+      "communeLabel": "Commune",
+      "descLabel": "Description",
+      "saving": "Enregistrement..."
+    }
+  },
+  "consent": {
+    "saveError": "Impossible d'enregistrer le consentement :"
+  },
   "application": {
     "title": "Mes candidatures",
     "subtitle": "Retrouvez ici toutes les offres auxquelles vous avez postulé.",
