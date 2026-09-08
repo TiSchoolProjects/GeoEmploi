@@ -15,6 +15,8 @@ export function createDoc() {
             description: 'Seeker information',
         }),
         ApiResponse({ status: 201, description: 'Seeker info', type: Seeker }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
     );
 }
 

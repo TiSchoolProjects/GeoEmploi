@@ -15,6 +15,8 @@ export function createDoc() {
             description: 'Job information',
         }),
         ApiResponse({ status: 201, description: 'Job info', type: Job }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
     );
 }
 
@@ -71,7 +73,7 @@ export function findAdminDoc() {
 export function findOneDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Find an job through their id' }),
-        ApiParam({ name: 'id', description: 'Job id'}),
+        ApiParam({ name: 'id', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'Found job info', type: Job }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
     );
@@ -81,7 +83,7 @@ export function updateDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Update job info' }),
-        ApiParam({ name: 'id', description: 'Job id'}),
+        ApiParam({ name: 'id', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'Updated job info', type: Job }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
@@ -93,7 +95,7 @@ export function archiveDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Archive job, making it unavailable for viewing or application' }),
-        ApiParam({ name: 'id', description: 'Job id'}),
+        ApiParam({ name: 'id', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'Archived job', type: Job }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
@@ -105,7 +107,7 @@ export function removeDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove job from database' }),
-        ApiParam({ name: 'id', description: 'Job id'}),
+        ApiParam({ name: 'id', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'Removed job', type: DeleteResult }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
@@ -116,7 +118,7 @@ export function removeDoc() {
 export function increaseViewDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Increase view by one on an offer' }),
-        ApiParam({ name: 'id', description: 'Job id'}),
+        ApiParam({ name: 'id', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'Increased view', type: UpdateResult }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
     );

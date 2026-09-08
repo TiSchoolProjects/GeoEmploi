@@ -15,6 +15,8 @@ export function createDoc() {
             description: 'Basic user information',
         }),
         ApiResponse({ status: 201, description: 'User info', type: User }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
         ApiResponse({ status: 409, description: 'Conflict', type: undefined }),
     );
 }
