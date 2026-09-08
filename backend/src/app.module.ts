@@ -15,6 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsModule } from './notifications/notifications.module';
 import { CartographyModule } from './cartography/cartography.module';
 import { ReportsModule } from './reports/reports.module';
+import { ExportModule } from './export/export.module';
 
 @Module({
   imports: [
@@ -41,11 +42,12 @@ import { ReportsModule } from './reports/reports.module';
     JobsModule,
     SeekersModule,
     ApplicationsModule,
-    AuthModule,
-    ScheduleModule.forRoot(),
     NotificationsModule,
     CartographyModule,
     ReportsModule,
+    ExportModule,
+    AuthModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
