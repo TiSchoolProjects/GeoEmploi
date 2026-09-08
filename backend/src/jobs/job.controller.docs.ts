@@ -1,9 +1,9 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiParam, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { Job } from './entities/job.entity';
-import { DeleteResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateJobDto } from './dto/create-job.dto';
-import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
+import { SearchJobDto } from './dto/update-job.dto';
 
 export function createDoc() {
     return applyDecorators(
@@ -45,6 +45,24 @@ export function findByEmployerDoc() {
     );
 }
 
+export function testGeocodeDoc() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Test the geocoding API' }),
+        ApiQuery({ name: 'commune', description: 'Name of the municipality' }),
+        ApiResponse({ status: 200, description: 'Geocoding result', type: Job }),
+
+    )
+}
+
+export function findAdminDoc() {
+    return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
+        ApiOperation({ summary: 'Find all job offers that need their geocoding be verified' }),
+        ApiResponse({ status: 200, description: 'All corresponding job offers', type: [Job] }),
+
+    )
+}
+
 export function findOneDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Find an job through their id' }),
@@ -76,6 +94,14 @@ export function removeDoc() {
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove job from database' }),
         ApiResponse({ status: 200, description: 'Removed job', type: DeleteResult }),
+        ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
+    );
+}
+
+export function increaseViewDoc() {
+    return applyDecorators(
+        ApiOperation({ summary: 'Increase view by one on an offer' }),
+        ApiResponse({ status: 200, description: 'Increased view', type: UpdateResult }),
         ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
     );
 }
