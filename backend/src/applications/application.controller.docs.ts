@@ -49,7 +49,7 @@ export function findBySeekerDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find an application through seeker id' }),
-        ApiParam({ name: 'id', description: 'Seeker id' }),
+        ApiParam({ name: 'seekerId', description: 'Seeker id' }),
         ApiResponse({ status: 200, description: 'List of all applications from seeker', type: [Application] }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
@@ -61,7 +61,7 @@ export function findByJobDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find an application through job id' }),
-        ApiParam({ name: 'id', description: 'Job id' }),
+        ApiParam({ name: 'jobId', description: 'Job id' }),
         ApiResponse({ status: 200, description: 'List of all applications from employer', type: [Application] }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),

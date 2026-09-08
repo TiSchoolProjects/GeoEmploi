@@ -82,6 +82,7 @@ export function removeDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove employer from database' }),
+        ApiParam({ name: 'id', description: 'Employer id' }),
         ApiResponse({ status: 200, description: 'Removed employer', type: DeleteResult }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
