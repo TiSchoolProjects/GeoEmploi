@@ -230,6 +230,62 @@ export default function AdminPanel() {
     }
   }
 
+  const fetchEmployers = async () => {
+    try {
+      setEmployersLoading(true)
+      setEmployersError("")
+
+      const data =
+        await apiFetch("/employers")
+
+      setEmployers(
+        Array.isArray(data) ? data : []
+      )
+    } catch (error) {
+      console.error(error)
+
+      setEmployersError(
+        "Impossible de charger les employeurs."
+      )
+    } finally {
+      setEmployersLoading(false)
+    }
+  }
+
+  const verifyEmployer = async (userId) => {
+    try {
+      const updated = await apiFetch(
+        `/employers/${userId}/verify`,
+        {
+          method: "PATCH",
+        }
+      )
+
+      setEmployers((current) =>
+        current.map((employer) =>
+          employer.userId === userId
+            ? {
+                ...employer,
+                user: employer.user
+                  ? {
+                      ...employer.user,
+                      status: updated.status,
+                    }
+                  : employer.user,
+              }
+            : employer
+        )
+      )
+      toast.success("Employeur vérifié")
+    } catch (error) {
+      console.error(error)
+
+      toast.error(
+        "Impossible de vérifier l'employeur."
+      )
+    }
+  }
+
   const pendingReports = reports.filter((report) => report.status === "pending");
 
   return (
@@ -294,11 +350,17 @@ export default function AdminPanel() {
               >
                 Utilisateurs
               </button>
-                <button
+              <button
                 type="button"
-                onClick={() =>
-                  setActiveTab("employers")
+                className={
+                  activeTab === "employers"
+                    ? "active"
+                    : ""
                 }
+                onClick={() => {
+                  setActiveTab("employers")
+                  fetchEmployers()
+                }}
               >
                 Employeurs
               </button>
@@ -635,11 +697,158 @@ export default function AdminPanel() {
               </section>
             )}
 
-            {activeTab === "employers" && (
-              <section className="admin-section">
-                <h2>Employeurs</h2>
-              </section>
-            )}
+                      {activeTab === "employers" && (
+            <section className="admin-section">
+              <h2>
+                Employeurs ({employers.length})
+              </h2>
+
+              {employersLoading && (
+                <p>Chargement...</p>
+              )}
+
+              {employersError && (
+                <p className="error-message">
+                  {employersError}
+                </p>
+              )}
+
+              {!employersLoading &&
+                !employersError &&
+                employers.length === 0 && (
+                  <p>Aucun employeur.</p>
+                )}
+
+              {!employersLoading &&
+                !employersError &&
+                employers.map((employer) => (
+                  <article
+                    className="admin-employer-card"
+                    key={employer.userId}
+                  >
+                    <div>
+                      <h3>
+                        {employer.companyName}
+                      </h3>
+
+                      <p>
+                        <strong>Responsable :</strong>{" "}
+                        {employer.user
+                          ? `${employer.user.firstname} ${employer.user.lastname}`
+                          : "Non renseigné"}
+                      </p>
+
+                      <p>
+                        <strong>Email :</strong>{" "}
+                        {employer.user?.email ||
+                          "Non renseigné"}
+                      </p>
+
+                      <p>
+                        <strong>Description :</strong>{" "}
+                        {employer.companyDesc ||
+                          "Non renseignée"}
+                      </p>
+
+                      <p>
+                        <strong>Compte :</strong>{" "}
+
+                        <span
+                          className={
+                            employer.user?.status === "active"
+                              ? "status-badge status-active"
+                              : "status-badge status-suspended"
+                          }
+                        >
+                          {employer.user?.status === "active"
+                            ? "Actif"
+                            : "Suspendu"}
+                        </span>
+                      </p>
+
+                      <p>
+                        <strong>Vérification :</strong>{" "}
+
+                        {employer.verifiedAt ? (
+                          <span className="status-badge status-verified">
+                            Vérifié
+                          </span>
+                        ) : (
+                          <span className="status-badge status-pending">
+                            À vérifier
+                          </span>
+                        )}
+                      </p>
+
+                      {employer.verifiedAt && (
+                        <p>
+                          <strong>Vérifié le :</strong>{" "}
+                          {new Date(
+                            employer.verifiedAt
+                          ).toLocaleDateString("fr-FR")}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="admin-employer-actions">
+                      {!employer.verifiedAt && (
+                        <button
+                          type="button"
+                          className="admin-verify-btn"
+                          onClick={() =>
+                            verifyEmployer(
+                              employer.userId
+                            )
+                          }
+                        >
+                          Vérifier
+                        </button>
+                      )}
+
+                      {employer.user?.status === "active" ? (
+                        <button
+                          type="button"
+                          className="admin-suspend-btn"
+                          onClick={() =>
+                            updateUserStatus(
+                              employer.userId,
+                              "suspended"
+                            )
+                          }
+                        >
+                          Suspendre
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="admin-reactivate-btn"
+                          onClick={() =>
+                            updateUserStatus(
+                              employer.userId,
+                              "active"
+                            )
+                          }
+                        >
+                          Réactiver
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        className="admin-delete-btn"
+                        onClick={() =>
+                          deleteUser(
+                            employer.userId
+                          )
+                        }
+                      >
+                        Supprimer le compte
+                      </button>
+                    </div>
+                  </article>
+                ))}
+            </section>
+          )}
           </main>
         </>
       )
