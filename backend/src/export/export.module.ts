@@ -15,6 +15,7 @@ import { Seeker } from '../seekers/entities/seeker.entity';
 import { Job } from '../jobs/entities/job.entity';
 import { Application } from '../applications/entities/application.entity';
 import { Notification } from '../notifications/entities/notification.entity';
+import { CoordinatesModule } from '../common/coordinates.module';
 
 @Module({
     controllers: [ExportController],
@@ -27,7 +28,7 @@ import { Notification } from '../notifications/entities/notification.entity';
         NotificationsService,
         ConfigService,
     ],
-    imports: [TypeOrmModule.forFeature([User, Employer, Seeker, Job, Application, Notification])],
+    imports: [TypeOrmModule.forFeature([User, Employer, Seeker, Job, Application, Notification]), CoordinatesModule],
     exports: [ExportService]
 })
 export class ExportModule { }
