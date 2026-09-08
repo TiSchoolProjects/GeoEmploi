@@ -442,7 +442,7 @@ export default function MapPage() {
     setSearchError("")
 
     const response = await fetch(
-      `http://localhost:4242/jobs/geocode?address=${encodeURIComponent(position)}`
+      `http://localhost:4242/jobs/geocode?commune=${encodeURIComponent(position)}`
     )
 
     const data = await response.json()
