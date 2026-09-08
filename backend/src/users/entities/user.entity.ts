@@ -4,7 +4,7 @@ import { Seeker } from "../../seekers/entities/seeker.entity";
 import { Job } from "../../jobs/entities/job.entity";
 import { Application } from "../../applications/entities/application.entity";
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from "../../auth/roles.enum";
+import { UserRole } from '../../auth/roles.enum';
 
 export enum UserStatus {
   ACTIVE = 'active',
@@ -33,11 +33,11 @@ export class User {
   @Column()
   lastname: string;
 
-  @ApiProperty({ description: 'Account type and permissions', example: UserRole.SEEKER })
+  @ApiProperty({ description: 'Account type and permissions', enum: UserRole, example: UserRole.SEEKER })
   @Column({ type: 'enum', enum: UserRole, default: UserRole.SEEKER })
   role: UserRole;
 
-  @ApiProperty({ description: 'Activation status of the account', example: UserStatus.ACTIVE })
+  @ApiProperty({ description: 'Activation status of the account', enum: UserStatus, example: UserStatus.ACTIVE })
   @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVE })
   status: UserStatus;
 

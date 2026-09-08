@@ -57,7 +57,7 @@ export class Job {
   @Column({type: 'timestamp', nullable: true, default: null})
   geocodedAt: Date | null;
 
-  @ApiProperty({ description: 'Verification status of the geocoding', example: GeoCodingStatus.VALID})
+  @ApiProperty({ description: 'Verification status of the geocoding', enum: GeoCodingStatus, example: GeoCodingStatus.VALID})
   @Column({type: 'enum', enum: GeoCodingStatus, default: GeoCodingStatus.TO_VERIFY})
   GeocodingStatus: GeoCodingStatus;
 
