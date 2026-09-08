@@ -100,8 +100,8 @@ const legacyJobs: LegacyJobSeed[] = [
   },
   {
     title: 'Agent logistique - localisation à vérifier',
-    description: 'Offre volontairement seedée avec une adresse non exploitable pour tester le cas d’échec.',
-    commune: 'quai bleu, France',
+    description: 'Offre volontairement seedée avec une commune non exploitable pour tester le cas d’échec.',
+    commune: 'faussecommune3',
     employerEmail: 'employer.sud@demo.fr',
   },
   {
@@ -171,7 +171,7 @@ const legacyJobs: LegacyJobSeed[] = [
     employerEmail: 'employer.lyon@demo.fr',
   },
   {
-    title: 'Support applicatif - adresse ambiguë',
+    title: 'Support applicatif - cas ambiguë',
     description: 'Cas volontairement ambigu pour vérifier le traitement des résultats de faible confiance.',
     commune: 'France',
     employerEmail: 'employer.sud@demo.fr',
@@ -366,7 +366,6 @@ async function seed() {
   let inserted = 0;
   let skipped = 0;
 
-  // Date volontairement antérieure à la migration IGN / API Adresse.
   const legacyGeocodedAt = new Date('2026-08-28T10:30:00Z');
 
   for (const item of legacyJobs) {
