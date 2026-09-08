@@ -4,7 +4,6 @@ import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, LessThanOrEqual, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
-import { IsNotIn } from 'class-validator';
 
 @Injectable()
 export class JobsService {
@@ -15,14 +14,17 @@ export class JobsService {
 
   private geocodingFail(): Partial<Job> {
     return {
+      lat: null,
+      lng: null,
       GeocodingStatus: GeoCodingStatus.TO_VERIFY,
       geocodingScore: null,
       geocodingSource: 'api-adresse',
+      geocodedAt: null,
     };
   }
 
   async geocodeAdress(address: string): Promise<Partial<Job>> {
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&type=municipality&limit=1`;
     try {
       const reponse = await fetch(url);
 
@@ -49,6 +51,7 @@ export class JobsService {
       const score = first.properties.score;
 
       return {
+        commune: first.properties.city || first.properties.name || address,
         lat: lat,
         lng: lng,
         geocodingSource: 'api-adresse',
@@ -63,14 +66,15 @@ export class JobsService {
 
 
   async create(data: Partial<Job>) {
-    if (!data.adress) {
-      throw new BadRequestException("Adresse obligatoire.")
+    if (!data.commune) {
+      throw new BadRequestException("Commune obligatoire.")
     }
-    const geoc = await this.geocodeAdress(data.adress);
+    const geoc = await this.geocodeAdress(data.commune);
 
     const job = this.jobRepository.create({
       ...data,
       ...geoc,
+      locationPrecision: 'commune',
     });
     return await this.jobRepository.save(job);
   }
@@ -111,7 +115,14 @@ export class JobsService {
       throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
     }
 
+    const changed = updateJobDto.commune !== undefined && updateJobDto.commune != job.commune;
+
     Object.assign(job, updateJobDto);
+
+    if (changed && updateJobDto.commune) {
+      const geocoding = await this.geocodeAdress(updateJobDto.commune);
+      Object.assign(job, geocoding);
+    }
     return await this.jobRepository.save(job);
   }
 
@@ -145,7 +156,7 @@ export class JobsService {
     const res = await this.jobRepository.update(
       {archivedAt: IsNull(), createdAt: LessThanOrEqual(dateLim)},
       {archivedAt: new Date(),},);
-    
+
     return res.affected ?? 0;
   }
 
@@ -163,4 +174,29 @@ export class JobsService {
     return R * c;
 
   }
+
+  async findAdmin(): Promise<Job[]> {
+    return this.jobRepository.find({where: {GeocodingStatus: GeoCodingStatus.TO_VERIFY, archivedAt: IsNull(),},
+      relations: {employer: true,}, order: {createdAt: 'DESC',},});
+  }
+
+  async incrementView(id: number) {
+    const job = await this.jobRepository.findOne({where: {id},});
+
+    if (!job) {
+      throw new NotFoundException("Offre non trouvée.");
+    }
+    return await this.jobRepository.increment({id}, 'views', 1,);
+  }
+
+  async getView(id: number): Promise<number> {  
+    const job = await this.jobRepository.findOne({where: {id},});
+
+    if (!job) {
+      throw new NotFoundException("Offre non trouvée.");
+    }
+
+    return job.views;
+  }
+
 }

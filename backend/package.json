@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "regeocode": "ts-node -r tsconfig-paths/register src/jobs/scripts/regeocode.ts",
     "seed": "ts-node -r tsconfig-paths/register seeds/seed.ts",
-    "seed-geocode": "ts-node -r tsconfig-paths/register seeds/seed-geocoding.ts"
+    "seed-geocode": "ts-node -r tsconfig-paths/register seeds/seed-geocoding.ts",
+    "seed-adresse": "ts-node -r tsconfig-paths/register seeds/seed-adresse.ts"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",
@@ -37,11 +38,13 @@
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "fs": "^0.0.1-security",
     "mysql2": "^3.24.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.23.0",
+    "proj4": "^2.22.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "swagger": "^0.7.5",
@@ -55,7 +58,7 @@
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.13.3",
     "@types/passport-jwt": "^4.0.1",
     "@types/passport-local": "^1.0.38",
     "@types/supertest": "^7.0.0",

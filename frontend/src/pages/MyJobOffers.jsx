@@ -12,14 +12,14 @@ export default function MyJobOffers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [deletingId, setDeletingId] = useState(null);
-
   const [selectedOffer, setSelectedOffer] = useState(null);
-
   const [editingOffer, setEditingOffer] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [applications, setApplications] = useState([]);
+  const [applicationsLoading, setApplicationsLoading] = useState(false);
+  const [applicationsError, setApplicationsError] = useState("");
 
   useEffect(() => {
-    const token = getToken();
     const fetchData = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -33,7 +33,8 @@ export default function MyJobOffers() {
         const employerData = await apiFetch(`/employers/${employerId}`);
 
         setEmployer(employerData);
-        const offersWithEmployer = Array.isArray(offersData) ? offersData.map((offer) => ({...offer, employer: employerData,})): [];
+        const offersWithEmployer = Array.isArray(offersData)
+          ? offersData.map((offer) => ({ ...offer, employer: employerData })) : [];
         setOffers(offersWithEmployer);
       } catch (err) {
         console.error(err);
@@ -56,35 +57,73 @@ export default function MyJobOffers() {
       cancelButtonText: "Annuler",
       reverseButtons: true,
     });
-
     if (!result.isConfirmed) return;
-
     try {
       setDeletingId(offerId);
       setError("");
 
-      await apiFetch(`/jobs/${offerId}`, {method: "DELETE"}); 
-
-      setOffers((currentOffers) => currentOffers.filter((offer) => offer.id !== offerId));
+      await apiFetch(`/jobs/${offerId}`, { method: "DELETE" });
+      setOffers((currentOffers) =>
+        currentOffers.filter((offer) => offer.id !== offerId)
+      );
       toast.success("Offre supprimé avec succès");
     } catch (err) {
       console.error(err);
       setError("Impossible de supprimer l'offre.");
+      toast.error("Impossible de supprimer l'offre.");
     } finally {
       setDeletingId(null);
     }
   };
 
-  const handleDetails = (offer) => {
+  const handleDetails = async (offer) => {
     setSelectedOffer(offer);
+    setApplications([]);
+    setApplicationsError("");
+    setApplicationsLoading(true);
+
+    try {
+
+      const data = await apiFetch(`/applications/job/${offer.id}`);
+
+      setApplications(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error(error);
+      setApplicationsError("Impossible de charger les candidatures.");
+    } finally {
+      setApplicationsLoading(false);
+    }
   };
 
   const closeDetails = () => {
     setSelectedOffer(null);
+    setApplications([]);
+    setApplicationsError("");
   };
 
+const updateApplicationStatus = async (
+  applicationId,
+  status
+) => {
+  try {
+    const updated = await apiFetch(`/applications/${applicationId}/status`, { method: "PATCH", body: JSON.stringify({ status,}),});
+
+    setApplications((cur) =>
+      cur.map((app) =>
+        app.id === applicationId ? {...app, status: updated.status ?? status,} :app
+      )
+    );
+
+    toast.success(status === "accepted" ? "Candidature acceptée" : "Candidature refusée.");
+  } catch (error) {
+    console.error(error);
+    toast.error("Impossible de modifier la candidature.");
+  }
+};
+
+
   const handleEdit = (offer) => {
-    setEditingOffer({...offer,});
+    setEditingOffer({ ...offer });
   };
 
   const closeEdit = () => {
@@ -92,16 +131,14 @@ export default function MyJobOffers() {
   };
 
   const handleEditChange = (e) => {
-    const {name, value} = e.target;
-
-    setEditingOffer((current) => ({...current, [name]: value,}));
+    const { name, value } = e.target;
+    setEditingOffer((current) => ({ ...current, [name]: value }));
   };
 
   const handleSaveEdit = async (e) => {
-    const token = getToken();
     e.preventDefault();
 
-    if (!editingOffer)return;
+    if (!editingOffer) return;
 
     try {
       setSaving(true);
@@ -112,10 +149,10 @@ export default function MyJobOffers() {
         body: JSON.stringify({
           title: editingOffer.title,
           description: editingOffer.description,
-          adress: editingOffer.adress,
+          commune: editingOffer.commune,
         }),
       });
-      const updatedOfferWithEmployer = {...updatedOffer,employer: employer,};
+      const updatedOfferWithEmployer = { ...updatedOffer, employer: employer };
 
       setOffers((currentOffers) =>
         currentOffers.map((offer) =>
@@ -138,16 +175,18 @@ export default function MyJobOffers() {
 
   const truncateDescription = (description, maxLength = 120) => {
     if (!description) return "";
+
     if (description.length <= maxLength) {
       return description;
     }
+
     return description.substring(0, maxLength).trimEnd() + "...";
   };
-
 
   return (
     <>
       <NavBar />
+
       <main className="job-offers-page">
         <div className="job-offers-header">
           <h1>Mes offres</h1>
@@ -179,28 +218,38 @@ export default function MyJobOffers() {
               <div className="offer-card" key={`offer-${offer.id}`}>
                 <div className="offer-card-content">
                   <h2>{offer.title}</h2>
+
+                  <p className="offer-views">
+                    {offer.views ?? 0} vue{(offer.views ?? 0) > 1 ? "s" : ""}
+                  </p>
+
                   {offer.employer && (
                     <div className="offer-company-info">
                       {offer.employer.companyName && (
-                        <p className="offer-company">Entreprise: {offer.employer.companyName}</p>
+                        <p className="offer-company"> Entreprise: {offer.employer.companyName}</p>
                       )}
-                      {offer.employer.email && (
-                        <p>{offer.employer.email}</p>
-                      )}
+                      {offer.employer.email && <p>{offer.employer.email}</p>}
                     </div>
                   )}
-                  {offer.adress && (
-                    <p className="offer-location"> Adresse: {offer.adress}</p>
+
+                  {offer.commune && (
+                    <p className="offer-location"> Commune: {offer.commune}</p>
                   )}
+
                   {offer.description && (
-                    <p className="offer-description"> Description: {truncateDescription(offer.description, 120)}</p>
+                    <p className="offer-description"> {" "} Description: {truncateDescription(offer.description, 120)}</p>
                   )}
                 </div>
 
                 {/* ACTIONS */}
                 <div className="offer-card-footer">
                   {/* DETAILS */}
-                  <button type="button" className="offer-action-btn details-btn" onClick={() => handleDetails(offer)} title="Voir les détails">
+                  <button
+                    type="button"
+                    className="offer-action-btn details-btn"
+                    onClick={() => handleDetails(offer)}
+                    title="Voir les détails"
+                  >
                     Détail
                   </button>
 
@@ -210,7 +259,8 @@ export default function MyJobOffers() {
                     className="offer-action-btn edit-btn"
                     onClick={() => handleEdit(offer)}
                     disabled={deletingId === offer.id}
-                    title="Modifier l'offre">
+                    title="Modifier l'offre"
+                  >
                     Editer
                   </button>
 
@@ -220,7 +270,8 @@ export default function MyJobOffers() {
                     className="offer-action-btn delete-btn"
                     onClick={() => handleDelete(offer.id)}
                     disabled={deletingId === offer.id}
-                    title="Supprimer l'offre">
+                    title="Supprimer l'offre"
+                  >
                     {deletingId === offer.id ? "..." : "Supprimer"}
                   </button>
                 </div>
@@ -230,13 +281,11 @@ export default function MyJobOffers() {
         )}
       </main>
 
-      {/* POPUP */}
+      {/* POPUP DETAILS */}
       {selectedOffer && (
         <div className="modal-overlay" onClick={closeDetails}>
           <div className="modal-content details-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeDetails} type="button">
-              x
-            </button>
+            <button className="modal-close" onClick={closeDetails} type="button">x</button>
 
             <h2>{selectedOffer.title}</h2>
             <div className="details-section">
@@ -248,18 +297,22 @@ export default function MyJobOffers() {
               </div>
 
               <div className="detail-row">
-                <strong>Adresse</strong>
-                <span>{selectedOffer.adress || "Non renseignée"}</span>
+                <strong>Commune</strong>
+                <span>{selectedOffer.commune || "Non renseignée"}</span>
               </div>
 
               <div className="detail-row detail-description">
                 <strong>Description</strong>
-                <p>{selectedOffer.description || "Aucune description disponible."}</p>
+                <p> {selectedOffer.description || "Aucune description disponible."}</p>
+              </div>
+
+              <div className="detail-row">
+                <strong>Nombre de vues</strong>
+                <span>{selectedOffer.views ?? 0}</span>
               </div>
             </div>
 
-            {selectedOffer.employer && (
-              <div className="details-section">
+            <div className="details-section">
                 <h3>Informations de l'entreprise</h3>
 
                 {selectedOffer.employer.companyName && (
@@ -283,14 +336,132 @@ export default function MyJobOffers() {
                   </div>
                 )}
               </div>
-            )}
+              <div className="details-section">
+                  <h3>
+                    Candidatures ({applications.length})
+                  </h3>
+                              
+                  {applicationsLoading && (
+                    <p>Chargement des candidatures...</p>
+                  )}
+                
+                  {applicationsError && (
+                    <p className="error-message">
+                      {applicationsError}
+                    </p>
+                  )}
+                
+                  {!applicationsLoading &&
+                    !applicationsError &&
+                    applications.length === 0 && (
+                      <p>
+                        Aucune candidature reçue pour cette offre.
+                      </p>
+                    )}
+                
+                  {!applicationsLoading &&
+                    applications.map((application) => {
+                      const seeker = application.jobSeeker;
+                      const profile = seeker?.seekerProfile;
+                    
+                      return (
+                        <div
+                          className="candidate-card"
+                          key={`application-${application.id}`}
+                        >
+                          <h4>
+                            {seeker?.firstname || "Prénom"}{" "}
+                            {seeker?.lastname || "Nom"}
+                          </h4>
+                      
+                          <div className="detail-row">
+                            <strong>Email</strong>
+                            <span>
+                              {seeker?.email || "Non renseigné"}
+                            </span>
+                          </div>
+                      
+                          <div className="detail-row">
+                            <strong>Compétences</strong>
+                      
+                            <span>
+                              {profile?.skills?.length
+                                ? profile.skills.join(", ")
+                                : "Non renseignées"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Expérience</strong>
+                              
+                            <span>
+                              {profile?.experience ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Disponibilité</strong>
+                              
+                            <span>
+                              {profile?.availability ||
+                                "Non renseignée"}
+                            </span>
+                          </div>
+                              
+                          <div className="detail-row">
+                            <strong>Statut</strong>
+                              
+                            <span>
+                              {application.status === "waiting" && "En attente"}
+                              {application.status === "accepted" && "Acceptée"}
+                              {application.status === "rejected" && "Refusée"}
+                            </span>
+                          </div>
+
+                          <div className="detail-row">
+                              <strong>Candidature reçue le</strong>
+                          
+                              <span>
+                                {new Date(
+                                  application.createdAt
+                                ).toLocaleDateString("fr-FR")}
+                              </span>
+                            </div>
+
+                            <div className="candidate-actions">
+                              <button type="button" className="candidate-accept-btn" disabled={application.status === "accepted"}
+                              onClick={() => updateApplicationStatus(application.id, "accepted")} >
+                                Accepter
+                              </button>
+                        
+                              <button type="button" className="candidate-reject-btn" disabled={application.status === "rejected"}
+                              onClick={() => updateApplicationStatus(application.id, "rejected")}>
+                                Refuser      
+                              </button>
+                            </div>
+                        </div>
+                      );
+                    })}
+            </div>
 
             <div className="modal-actions">
-              <button type="button" className="modal-secondary-btn"onClick={closeDetails}>Fermer</button> 
-              <button type="button" className="modal-edit-btn"
-                onClick={() => {closeDetails(); handleEdit(selectedOffer);}}
+              <button
+                type="button"
+                className="modal-secondary-btn"
+                onClick={closeDetails}
               >
-                 Modifier
+                Fermer
+              </button>
+              <button
+                type="button"
+                className="modal-edit-btn"
+                onClick={() => {
+                  closeDetails();
+                  handleEdit(selectedOffer);
+                }}
+              >
+                Modifier
               </button>
             </div>
           </div>
@@ -298,14 +469,13 @@ export default function MyJobOffers() {
       )}
 
       {/* POPUP EDIT */}
-
       {editingOffer && (
         <div className="modal-overlay" onClick={closeEdit}>
-          <div className="modal-content edit-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeEdit} type="button">
-              x
-            </button>
-
+          <div
+            className="modal-content edit-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="modal-close" onClick={closeEdit} type="button">x</button>
             <h2>Modifier l'offre</h2>
             <form onSubmit={handleSaveEdit}>
               <div className="form-group">
@@ -322,13 +492,13 @@ export default function MyJobOffers() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="adress">Adresse</label>
+                <label htmlFor="commune">Commune</label>
 
                 <input
-                  id="adress"
+                  id="commune"
                   type="text"
-                  name="adress"
-                  value={editingOffer.adress || ""}
+                  name="commune"
+                  value={editingOffer.commune || ""}
                   onChange={handleEditChange}
                 />
               </div>
@@ -355,7 +525,11 @@ export default function MyJobOffers() {
                   Annuler
                 </button>
 
-                <button type="submit" className="modal-save-btn" disabled={saving}>
+                <button
+                  type="submit"
+                  className="modal-save-btn"
+                  disabled={saving}
+                >
                   {saving ? "Enregistrement..." : "Enregistrer"}
                 </button>
               </div>

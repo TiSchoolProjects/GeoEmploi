@@ -8,13 +8,21 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe({whitelist:true, forbidNonWhitelisted: true,}));
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, }));
 
   const config = new DocumentBuilder()
     .setTitle('API Doc')
     .setDescription('Documentation of api endpoint')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth({
+      name: 'Authorization',
+      description: 'Default JWT Authorization',
+      type: 'http',
+      in: 'Header',
+      scheme: 'Bearer',
+      bearerFormat: 'Bearer',
+    },
+      'JWT-Auth')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

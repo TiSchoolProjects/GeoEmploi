@@ -5,11 +5,11 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { createDoc, findAllDoc, findOneDoc, updateDoc, removeDoc, } from './seekers.controller.doc'
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
-import { Req, ForbiddenException } from '@nestjs/common';
+import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('seekers')
 export class SeekersController {
-  constructor(private readonly seekersService: SeekersService) {}
+  constructor(private readonly seekersService: SeekersService) { }
 
   @createDoc()
   @Roles(UserRole.ADMIN)
@@ -19,12 +19,14 @@ export class SeekersController {
   }
 
   @findAllDoc()
+  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.seekersService.findAll();
   }
 
   @findOneDoc()
+  @CheckOwnership('id')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.seekersService.findOne(+id);
@@ -32,20 +34,17 @@ export class SeekersController {
 
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.SEEKER)
+  @CheckOwnership('id')
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateSeekerDto: UpdateSeekerDto,
-      @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
-  ) {
-      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
-        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
-      }
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateSeekerDto: UpdateSeekerDto) {
     return this.seekersService.update(Number(id), updateSeekerDto);
   }
 
   @removeDoc()
   @Roles(UserRole.ADMIN, UserRole.SEEKER)
+  @CheckOwnership('id')
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.seekersService.remove(+id);
   }
 }

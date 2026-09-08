@@ -22,8 +22,8 @@
   position: relative;
   z-index: 10;
   width: 50%;
-  color: #1B3A6B;
-  font-family: "Marianne", Arial, sans-serif;
+  color: #1A1F26;
+  font-family: "Outfit", Arial, sans-serif;
   font-size: 50px;
   font-weight: 800;
   line-height: 1.1;
@@ -63,15 +63,15 @@
   gap: 25px;
   padding: 15px 22px;
 
-  background-color: #E07A3F;
+  background-color: #D9A441;
   color: #FFFFFF;
 
   text-decoration: none;
 
-  border: 2px solid #E07A3F;
+  border: 2px solid #D9A441;
   border-radius: 8px;
 
-  font-family: "Marianne", Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
 
@@ -83,10 +83,10 @@
 }
 
 .map-btn:hover {
-  background-color: #C96532;
-  border-color: #C96532;
+  background-color: #B8862F;
+  border-color: #B8862F;
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(201, 101, 50, 0.18);
+  box-shadow: 0 5px 12px rgba(184, 134, 47, 0.18);
 }
 
 .map-btn:active {
@@ -95,7 +95,7 @@
 }
 
 .map-btn:focus-visible {
-  outline: 3px solid rgba(27, 58, 107, 0.3);
+  outline: 3px solid rgba(26, 31, 38, 0.3);
   outline-offset: 3px;
 }
 

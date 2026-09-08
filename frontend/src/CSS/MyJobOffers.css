@@ -1,17 +1,17 @@
 :root {
-  --blue-primary: #1B3A6B;
-  --blue-dark: #142B4D;
-  --blue-light: #EAF0F8;
+  --blue-primary: #1A1F26;
+  --blue-dark: #12161C;
+  --blue-light: #F5EFE0;
 
-  --orange-accent: #E07A3F;
-  --orange-hover: #C96532;
+  --orange-accent: #D9A441;
+  --orange-hover: #B8862F;
 
   --text-main: #1F2937;
   --text-muted: #5F6B7A;
   --text-light: #6B7280;
 
   --border-light: #D9E0E8;
-  --border-focus: #1B3A6B;
+  --border-focus: #1A1F26;
 
   --bg-page: #F5F7FB;
   --bg-white: #FFFFFF;
@@ -77,10 +77,9 @@
   margin: 0 auto 35px;
   background: var(--bg-white);
   border: 1px solid var(--border-light);
-  border-left: 5px solid var(--blue-primary);
   border-radius: 12px;
   padding: 25px 30px;
-  box-shadow: 0 3px 12px rgba(20, 43, 77, 0.06);
+  box-shadow: 0 3px 12px rgba(18, 22, 28, 0.06);
 }
 
 .job-offers-header h1 {
@@ -133,7 +132,7 @@
   border-radius: 14px;
   padding: 25px;
   box-sizing: border-box;
-  box-shadow: 0 4px 15px rgba(20, 43, 77, 0.07);
+  box-shadow: 0 4px 15px rgba(18, 22, 28, 0.07);
   text-align: justify;
   transition:
     transform 0.2s ease,
@@ -144,7 +143,7 @@
 .offer-card:hover {
   transform: translateY(-5px);
   border-color: var(--blue-primary);
-  box-shadow: 0 10px 25px rgba(20, 43, 77, 0.12);
+  box-shadow: 0 10px 25px rgba(18, 22, 28, 0.12);
 }
 
 .offer-card-content h2 {
@@ -265,7 +264,7 @@
   background: var(--bg-white);
   border: 1px dashed var(--border-light);
   border-radius: 14px;
-  box-shadow: 0 3px 12px rgba(20, 43, 77, 0.04);
+  box-shadow: 0 3px 12px rgba(18, 22, 28, 0.04);
 }
 
 .empty-offers h2 {
@@ -310,7 +309,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(20, 43, 77, 0.65);
+  background: rgba(18, 22, 28, 0.65);
   backdrop-filter: blur(4px);
 }
 
@@ -324,7 +323,7 @@
   border-radius: 18px;
   padding: 32px;
   text-align: justify;
-  box-shadow: 0 25px 70px rgba(20, 43, 77, 0.25);
+  box-shadow: 0 25px 70px rgba(18, 22, 28, 0.25);
   animation: modalAppear 0.2s ease-out;
 }
 
@@ -452,7 +451,7 @@
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.1);
+  box-shadow: 0 0 0 3px rgba(26, 31, 38, 0.1);
 }
 
 .form-group textarea {
@@ -511,12 +510,12 @@
 }
 
 .modal-save-btn {
-  background: #E07A3F;
+  background: #D9A441;
   color: #FFFFFF;
 }
 
 .modal-save-btn:hover:not(:disabled) {
-  background: #C85F2D;
+  background: #B8862F;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -526,9 +525,61 @@
 .offer-action-btn:focus-visible,
 .modal-close:focus-visible,
 .modal-actions button:focus-visible {
-  outline: 3px solid rgba(224, 122, 63, 0.35);
+  outline: 3px solid rgba(217, 164, 65, 0.35);
   outline-offset: 2px;
 }
+
+.offer-tag {
+  color: #12161C;
+}
+
+.candidate-card {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.candidate-card h4 {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.candidate-card + .candidate-card {
+  margin-top: 12px;
+}
+
+.candidate-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.candidate-accept-btn,
+.candidate-reject-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.candidate-accept-btn {
+  background: #198754;
+  color: white;
+}
+
+.candidate-reject-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.candidate-accept-btn:disabled,
+.candidate-reject-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 @media (max-width: 768px) {
   .job-offers-page {

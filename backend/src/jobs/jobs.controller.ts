@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Req } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
-import { SearchJobDto, UpdateJobDto } from './dto/update-job.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UpdateJobDto } from './dto/update-job.dto';
 import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, updateDoc, archiveDoc, removeDoc } from './job.controller.docs';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
+import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('jobs')
 export class JobsController {
@@ -25,14 +25,14 @@ export class JobsController {
   }
 
   @findAllDoc()
-  @Get()
   @Public()
+  @Get()
   findAll() {
     return this.jobsService.findAll();
   }
 
-  @Public()
   @findAroundDoc()
+  @Public()
   @Get('/search')
   findAround(
     @Query('lat') lat: string,
@@ -42,6 +42,7 @@ export class JobsController {
   }
 
   @findByEmployerDoc()
+  @Public()
   @Get('/employer/:id')
   findByEmployer(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.findByEmployer(id);
@@ -49,12 +50,18 @@ export class JobsController {
 
   @Public()
   @Get('/geocode')
-  async testGeocode(@Query('address') address: string) {
-    return await this.jobsService.geocodeAdress(address);
+  async testGeocode(@Query('commune') commune: string) {
+    return await this.jobsService.geocodeAdress(commune);
   }
 
-  @Public()
+  @Roles(UserRole.ADMIN)
+  @Get('to-verify')
+  findAdmin() {
+    return this.jobsService.findAdmin();
+  }
+
   @findOneDoc()
+  @Public()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.findOne(id);
@@ -64,9 +71,8 @@ export class JobsController {
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateJobDto: UpdateJobDto,
-        @Req() req: Request & {user: {userId: number; role: UserRole;};},
+    @Req() req: Request & { user: { userId: number; role: UserRole; }; },
   ) {
-
     return this.jobsService.update(id, updateJobDto, req.user.userId, req.user.role);
   }
 
@@ -81,11 +87,15 @@ export class JobsController {
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number,
-    @Req() req: Request & {
-      user: { userId: number; role: UserRole; };
-    },
+    @Req() req: Request & {user: { userId: number; role: UserRole; }; },
   ) {
     return this.jobsService.remove(id, req.user.userId, req.user.role);
+  }
+
+  @Public()
+  @Patch('views/:id')
+  increaseView(@Param('id', ParseIntPipe) id: number) {
+    this.jobsService.incrementView(id);
   }
 
 }

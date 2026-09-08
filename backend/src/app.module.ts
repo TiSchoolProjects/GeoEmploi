@@ -12,6 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import config from './config/config'
 import { ScheduleModule } from '@nestjs/schedule';
+import { NotificationsModule } from './notifications/notifications.module';
+import { CartographyModule } from './cartography/cartography.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -40,6 +43,9 @@ import { ScheduleModule } from '@nestjs/schedule';
     ApplicationsModule,
     AuthModule,
     ScheduleModule.forRoot(),
+    NotificationsModule,
+    CartographyModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

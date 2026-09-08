@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, ForbiddenException, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { createDoc, findAllDoc, findOneDoc, findbyEmailDoc, updateDoc, removeDoc } from './user.controller.doc';
-import { UserStatus } from './entities/user.entity';
+import { createDoc, findAllDoc, findOneDoc, updateStatusDoc, updateDoc, removeDoc } from './user.controller.doc';
 import { UpdateStatusDto, UpdateUserDto } from './dto/update-user.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
+import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -26,35 +26,34 @@ export class UsersController {
   }
 
   @findOneDoc()
+  @CheckOwnership('id')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @updateDoc()
+  @updateStatusDoc()
+  @Roles(UserRole.ADMIN)
   @Patch('/status/:id')
   updateStatus(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateStatusDto: UpdateStatusDto,
   ) {
-      return this.usersService.UpdateStatus(id, updateStatusDto);
-    }
+    return this.usersService.UpdateStatus(id, updateStatusDto);
+  }
 
   @updateDoc()
+  @CheckOwnership('id')
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
-    @Req() req: Request & {user: {userId: number; role: UserRole;};}, 
+    @Body() updateUserDto: UpdateUserDto
   ) {
-      if (req.user.role !== UserRole.ADMIN && req.user.userId !== id) {
-        throw new ForbiddenException("Vous ne pouvez pas modifier les informations un autre utilisateur.",);
-      }
-      return this.usersService.UpdateUser(id, updateUserDto);
-    }
+    return this.usersService.UpdateUser(id, updateUserDto);
+  }
 
   @removeDoc()
-  @Roles(UserRole.ADMIN)
+  @CheckOwnership('id')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

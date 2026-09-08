@@ -1,13 +1,17 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiParam, getSchemaPath } from '@nestjs/swagger';
+import { LoginDto } from './dto/login.dto';
 import { RegisterEmployerDto } from './dto/register-employer.dto';
 import { RegisterSeekerDto } from './dto/register-seeker.dto';
 
 export function loginDoc() {
     return applyDecorators(
         ApiOperation({ summary: 'Login page' }),
-        ApiParam({ name: 'email', type: String}),
-        ApiParam({ name: 'password', type: String}),
+        ApiParam({
+            name: 'loginDto',
+            type: LoginDto,
+            description: 'Login information',
+        }),
         ApiResponse({ status: 200, description: 'Successfully authenticated, returns JWT token.' }),
         ApiResponse({ status: 401, description: 'Invalid credentials.' })
     );

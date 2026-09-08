@@ -36,6 +36,18 @@ export class EmployersService {
     return await this.employerRepository.save(acc);
   }
 
+  async resetValidation(userId: number): Promise<Employer> {
+    const acc = await this.employerRepository.findOne({ where: { userId } });
+
+    if (!acc) {
+      throw new NotFoundException("Compte non trouvé.");
+    }
+
+    acc.verifiedAt = null;
+
+    return await this.employerRepository.save(acc);
+  }
+
   async update(userId: number, updateEmployerDto: UpdateEmployerDto) {
     const employer = await this.employerRepository.findOne({ where: { userId } });
 

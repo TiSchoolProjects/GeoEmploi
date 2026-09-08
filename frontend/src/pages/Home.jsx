@@ -3,6 +3,7 @@ import logo from "../assets/jeb.png";
 import { Link } from "react-router-dom";
 import "../CSS/Home.css";
 import NavBar from "../components/Navbar";
+import Footer from "../components/Footer"
 import LocLogo from "../assets/LogoCarte.png";
 
 
@@ -15,7 +16,7 @@ a
       {/* BODY */}
       <main className="body-container">
         <div className="body-style-container">
-          <p>Découvrez le marché <br /> de l'emploi <br /> français</p>
+          <p>Découvrez le marché <br /> de l'emploi français</p>
           <div className="map-button-container">
             <Link to="/map" className="map-btn"> <span>Découvrir la carte</span> <span className="arrow">→</span> </Link>
           </div>

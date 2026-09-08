@@ -21,5 +21,5 @@ export class CreateJobDto {
   @ApiProperty({ description: 'Job address', example: '123 Elm Street, New York, NY 10001'})
   @IsString()
   @IsNotEmpty()
-  adress: string;
+  commune: string;
 }
