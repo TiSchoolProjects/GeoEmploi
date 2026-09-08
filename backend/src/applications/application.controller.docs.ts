@@ -17,7 +17,8 @@ export function applyDoc() {
         ApiResponse({ status: 201, description: 'Application info', type: Application }),
         ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
         ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
-        ApiResponse({ status: 404, description: 'No job found with given id', type: undefined })
+        ApiResponse({ status: 404, description: 'No job found with given id', type: undefined }),
+        ApiResponse({ status: 409, description: 'Conflict', type: undefined }),
     );
 }
 

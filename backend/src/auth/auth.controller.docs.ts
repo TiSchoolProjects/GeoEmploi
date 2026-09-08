@@ -13,7 +13,7 @@ export function loginDoc() {
             description: 'Login information',
         }),
         ApiResponse({ status: 200, description: 'Successfully authenticated, returns JWT token.' }),
-        ApiResponse({ status: 401, description: 'Invalid credentials.' })
+        ApiResponse({ status: 401, description: 'Invalid credentials.' }),
     );
 }
 
@@ -26,7 +26,7 @@ export function registerSeekersDoc() {
             description: 'Seeker information',
         }),
         ApiResponse({ status: 201, description: 'Seeker registered successfully.', type: String}),
-        ApiResponse({ status: 400, description: 'Validation failed or email already exists.' }),
+        ApiResponse({ status: 409, description: 'Conflict', type: undefined }),
     );
 }
 
@@ -39,6 +39,6 @@ export function registerEmployerDoc() {
             description: 'Employer information',
         }),
         ApiResponse({ status: 201, description: 'Employer registered successfully.', type: String}),
-        ApiResponse({ status: 400, description: 'Validation failed or email already exists.' }),
+        ApiResponse({ status: 409, description: 'Conflict', type: undefined }),
     );
 }
