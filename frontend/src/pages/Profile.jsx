@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../CSS/Login.css";
+import { useTranslation } from "react-i18next";
+import "../CSS/Form.css";
 import "../CSS/PrivacyNotice.css";
 import NavBar from "../components/Navbar";
 import GeoConsentNotice from "./GeoconsentNotice";
@@ -13,6 +14,7 @@ import { getGeoConsent, setGeoConsent } from "./Consent";
 
 export default function EditProfile() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showPrivacyNotice, setShowPrivacyNotice] = useState(false);
   const [geoConsent, setGeoConsentState] = useState(() => getGeoConsent());
 
@@ -21,8 +23,8 @@ export default function EditProfile() {
     setGeoConsentState(value);
     toast.success(
       status === "accepted"
-        ? "Géolocalisation autorisée."
-        : "Géolocalisation refusée."
+        ? t("profile.consentAcceptedToast")
+        : t("profile.consentDeclinedToast")
     );
   };
 
@@ -55,7 +57,7 @@ export default function EditProfile() {
         };
         const profileEndpoint = profileEndpoints[user.role];
         if (!profileEndpoint) {
-          throw new Error(`Rôle utilisateur non supporté : ${user.role}`);
+          throw new Error(t("profile.unsupportedRole", { role: user.role }));
         }
 
         const [userData, profileData] = await Promise.all([
@@ -80,13 +82,13 @@ export default function EditProfile() {
         console.error("Erreur récupération profil :", error);
 
         toast.error(
-          error.message || "Impossible de récupérer le profil"
+          error.message || t("profile.fetchProfileError")
         );
       }
     };
 
     getProfile();
-  }, [navigate, reset, token, user]);
+  }, [navigate, reset, token, user, t]);
 
   if (!user) {
     return null;
@@ -94,24 +96,24 @@ export default function EditProfile() {
 
   const ProfileDelete = async (userId) => {
     const result = await Swal.fire({
-      title: "Supprimer le compte?",
-      text: "Êtes-vous sûr de vouloir supprimer ce compte ?",
+      title: t("profile.deleteAccountTitle"),
+      text: t("profile.deleteAccountText"),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: t("profile.deleteAccountConfirm"),
+      cancelButtonText: t("profile.deleteAccountCancel"),
       reverseButtons: true,
     });
     if (!result.isConfirmed) return;
     try {
       await apiFetch(`/users/${userId}`, { method: "DELETE" });
 
-      toast.success("Profile supprimé avec succès");
+      toast.success(t("profile.deleteAccountSuccess"));
       logout();
       navigate("/login");
     } catch (err) {
       console.error(err);
-      toast.error("Impossible de supprimer le profile.");
+      toast.error(t("profile.deleteAccountError"));
     }
   };
 
@@ -153,7 +155,7 @@ export default function EditProfile() {
       if (!userData) {
         throw new Error(
           Array.isArray(userData.message)
-            ? userData.message.join(", ") : userData.message || "Erreur dans la modification de l'utilisateur"
+            ? userData.message.join(", ") : userData.message || t("profile.userUpdateError")
         );
       }
 
@@ -166,7 +168,7 @@ export default function EditProfile() {
       if (!profileData) {
         throw new Error(
           Array.isArray(profileData.message)
-            ? profileData.message.join(", ") : profileData.message || "Erreur dans la modification du profil"
+            ? profileData.message.join(", ") : profileData.message || t("profile.profileUpdateError")
         );
       }
 
@@ -178,7 +180,7 @@ export default function EditProfile() {
       };
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      toast.success("Profil modifié avec succès !");
+      toast.success(t("profile.saveSuccess"));
 
       navigate("/profile");
     } catch (error) {
@@ -199,7 +201,7 @@ export default function EditProfile() {
       })
 
       if (!exportData) {
-        throw new Error("Aucune donnée à exporter");
+        throw new Error(t("profile.exportEmptyError"));
       }
 
       const blob = new Blob([JSON.stringify(exportData, null, 2)], {
@@ -215,10 +217,10 @@ export default function EditProfile() {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      toast.success("Export réussi !");
+      toast.success(t("profile.exportSuccess"));
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "Impossible d'exporter les données");
+      toast.error(error.message || t("profile.exportError"));
     }
   };
 
@@ -230,8 +232,8 @@ export default function EditProfile() {
 
         {/* HEADER */}
         <div className="form-header">
-          <h1>Modifier mon profil</h1>
-          <p>Modifiez vos informations personnelles et professionnelles.</p>
+          <h1>{t("profile.pageTitle")}</h1>
+          <p>{t("profile.subtitle")}</p>
         </div>
 
         {/* FORM */}
@@ -241,24 +243,24 @@ export default function EditProfile() {
           <div className="input-row">
 
             <div className="form-group">
-              <label htmlFor="firstName">Prénom</label>
+              <label htmlFor="firstName">{t("profile.firstNameLabel")}</label>
 
               <input
                 id="firstName"
                 type="text"
-                placeholder="Prénom"
-                {...register("firstName", {required: "Le prénom est obligatoire",})}
+                placeholder={t("profile.firstNamePlaceholder")}
+                {...register("firstName", {required: t("profile.firstNameRequired"),})}
               />
               {errors.firstName && (<span className="error">{errors.firstName.message}</span>)}
             </div>
 
             <div className="form-group">
-              <label htmlFor="lastName">Nom</label>
+              <label htmlFor="lastName">{t("profile.lastNameLabel")}</label>
               <input
                 id="lastName"
                 type="text"
-                placeholder="Nom"
-                {...register("lastName", {required: "Le nom est obligatoire",})}
+                placeholder={t("profile.lastNamePlaceholder")}
+                {...register("lastName", {required: t("profile.lastNameRequired"),})}
               />
               {errors.lastName && (<span className="error">{errors.lastName.message}</span>)}
             </div>
@@ -267,14 +269,14 @@ export default function EditProfile() {
           {/* EMAIL*/}
 
           <div className="form-group">
-            <label htmlFor="email">Adresse Email</label>
+            <label htmlFor="email">{t("profile.emailLabel")}</label>
 
             <input
               id="email"
               type="email"
-              placeholder="example@example.com"
+              placeholder={t("profile.emailPlaceholder")}
               {...register("email", {
-                required: "L'email est obligatoire",pattern: {value: /^\S+@\S+\.\S+$/,message: "Email invalide",}})}
+                required: t("profile.emailRequired"),pattern: {value: /^\S+@\S+\.\S+$/,message: t("profile.emailInvalid"),}})}
             />
 
             {errors.email && (<span className="error">{errors.email.message}</span>)}
@@ -283,13 +285,13 @@ export default function EditProfile() {
           {isSeeker && (
             <>
               <div className="form-group">
-                <label htmlFor="skills">Compétences</label>
+                <label htmlFor="skills">{t("profile.skillsLabel")}</label>
 
                 <input
                   id="skills"
                   type="text"
-                  placeholder="Ex: React, JavaScript, Marketing..."
-                  {...register("skills", {required:"Les compétences sont obligatoires",})}
+                  placeholder={t("profile.skillsPlaceholder")}
+                  {...register("skills", {required:t("profile.skillsRequired"),})}
                 />
 
                 {errors.skills && (<span className="error">{errors.skills.message}</span>)}
@@ -298,26 +300,26 @@ export default function EditProfile() {
               <div className="input-row">
 
                 <div className="form-group">
-                  <label htmlFor="experience">Expérience</label>
+                  <label htmlFor="experience">{t("profile.experienceLabel")}</label>
 
                   <input
                     id="experience"
                     type="text"
-                    placeholder="Ex: 2 ans"
-                    {...register("experience", {required:"L'expérience est obligatoire"})}
+                    placeholder={t("profile.experiencePlaceholder")}
+                    {...register("experience", {required:t("profile.experienceRequired")})}
                   />
 
                   {errors.experience && (<span className="error">{errors.experience.message}</span>)}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="availability">Disponibilité</label>
+                  <label htmlFor="availability">{t("profile.availabilityLabel")}</label>
 
                   <input
                     id="availability"
                     type="text"
-                    placeholder="Ex: Temps plein"
-                    {...register("availability", {required:"La disponibilité est obligatoire"})}
+                    placeholder={t("profile.availabilityPlaceholder")}
+                    {...register("availability", {required:t("profile.availabilityRequired")})}
                   />
 
                   {errors.availability && (<span className="error">{errors.availability.message}</span>)}
@@ -331,26 +333,26 @@ export default function EditProfile() {
             <div className="input-row">
 
               <div className="form-group">
-                <label htmlFor="companyName">Entreprise</label>
+                <label htmlFor="companyName">{t("profile.companyNameLabel")}</label>
 
                 <input
                   id="companyName"
                   type="text"
-                  placeholder="Nom de votre entreprise"
-                  {...register("companyName", {required:"Le nom de l'entreprise est obligatoire"})}
+                  placeholder={t("profile.companyNamePlaceholder")}
+                  {...register("companyName", {required:t("profile.companyNameRequired")})}
                 />
 
                 {errors.companyName && (<span className="error">{errors.companyName.message}</span>)}
               </div>
 
               <div className="form-group">
-                <label htmlFor="companyDesc">Description de votre entreprise</label>
+                <label htmlFor="companyDesc">{t("profile.companyDescLabel")}</label>
 
                 <input
                   id="companyDesc"
                   type="text"
-                  placeholder="Ex: Entreprise de sécurité"
-                  {...register("companyDesc", {required:"La description est obligatoire",})}
+                  placeholder={t("profile.companyDescPlaceholder")}
+                  {...register("companyDesc", {required:t("profile.companyDescRequired"),})}
                 />
 
                 {errors.companyDesc && (<span className="error">{errors.companyDesc.message}</span>)}
@@ -361,32 +363,31 @@ export default function EditProfile() {
 
           {/* BUTTON */}
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
-            <span> {isSubmitting ? "Modification..." : "Enregistrer les modifications"}</span>
+            <span> {isSubmitting ? t("profile.saving") : t("profile.saveButton")}</span>
             {!isSubmitting && (<span className="arrow">→</span>)}
           </button>
           
           <button type="button" className="logout-btn" onClick={handleLogout}>
-            Se déconnecter
+            {t("profile.logoutButton")}
           </button>
 
         </form>
 
         <div className="export-btn">
           <button type="button" onClick={handleExportData}>
-            Exporter mes données
+            {t("profile.exportButton")}
           </button>
         </div>
 
         {/* CONFIDENTIALITÉ / CONSENTEMENT GÉOLOCALISATION */}
         <div className="privacySection">
-          <h2>Confidentialité &amp; géolocalisation</h2>
+          <h2>{t("profile.privacyHeading")}</h2>
           <p>
-            Avec votre accord, GéoEmploi utilise votre position pour afficher les
-            offres d'emploi les plus proches de vous sur la carte.
+            {t("profile.privacyText")}
           </p>
 
           <div className="consentStatus">
-            Statut actuel :
+            {t("profile.consentStatusLabel")}
             <span
               className={`consentBadge ${
                 geoConsent?.status === "accepted"
@@ -397,10 +398,10 @@ export default function EditProfile() {
               }`}
             >
               {geoConsent?.status === "accepted"
-                ? "Géolocalisation autorisée"
+                ? t("profile.consentAccepted")
                 : geoConsent?.status === "declined"
-                  ? "Géolocalisation refusée"
-                  : "Aucun choix enregistré"}
+                  ? t("profile.consentDeclined")
+                  : t("profile.consentUnset")}
             </span>
           </div>
 
@@ -410,7 +411,7 @@ export default function EditProfile() {
               className="privacyNoticeLink"
               onClick={() => setShowPrivacyNotice(true)}
             >
-              Voir la mention d'information
+              {t("profile.viewNoticeButton")}
             </button>
             <button
               type="button"
@@ -418,7 +419,7 @@ export default function EditProfile() {
               onClick={() => handleChangeConsent("accepted")}
               disabled={geoConsent?.status === "accepted"}
             >
-              Autoriser la géolocalisation
+              {t("profile.allowGeoButton")}
             </button>
             <button
               type="button"
@@ -426,7 +427,7 @@ export default function EditProfile() {
               onClick={() => handleChangeConsent("declined")}
               disabled={geoConsent?.status === "declined"}
             >
-              Refuser la géolocalisation
+              {t("profile.declineGeoButton")}
             </button>
           </div>
         </div>
@@ -443,11 +444,10 @@ export default function EditProfile() {
               aria-labelledby="privacy-notice-title"
               onClick={(event) => event.stopPropagation()}
             >
-              <h2 id="privacy-notice-title">Mention d'information — Géolocalisation</h2>
+              <h2 id="privacy-notice-title">{t("profile.noticeTitle")}</h2>
 
               <p>
-                Avec votre autorisation, GéoEmploi utilise votre géolocalisation pour
-                afficher les offres d'emploi les plus proches de vous.
+                {t("profile.noticeIntro")}
               </p>
 
               <GeoConsentNotice />
@@ -458,7 +458,7 @@ export default function EditProfile() {
                   className="locationModalAccept"
                   onClick={() => setShowPrivacyNotice(false)}
                 >
-                  Fermer
+                  {t("profile.closeButton")}
                 </button>
               </div>
             </div>
@@ -466,9 +466,9 @@ export default function EditProfile() {
         )}
 
         {/* FOOTER */}
-        <p className="form-footer"><Link to="/home">← Retour</Link></p>
+        <p className="form-footer"><Link to="/home">{t("profile.backLink")}</Link></p>
         <button type="button" className="form-footer-button" onClick={() => ProfileDelete(user.sub)}>
-            Supprimer le compte
+            {t("profile.deleteAccountButton")}
           </button>
       </div>
     </div>

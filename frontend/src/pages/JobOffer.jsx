@@ -1,21 +1,19 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../CSS/Login.css";
+import "../CSS/Form.css";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import { getToken } from "../utils/auth";
 import { apiFetch } from "../api/client";
+import { useTranslation } from "react-i18next";
 
 export default function JobOffer() {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const token = getToken();
 
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
@@ -23,7 +21,7 @@ export default function JobOffer() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await apiFetch("/jobs", {
+      await apiFetch("/jobs", {
         method: "POST",
         body: JSON.stringify({
           title: data.title,
@@ -33,58 +31,56 @@ export default function JobOffer() {
         }),
       });
 
-      toast.success("Offre crée avec succès")
+      toast.success(t("jobOffer.createSuccess"));
       navigate("/map");
     } catch (error) {
-      toast.error("Impossible de crée l'offre")
+      toast.error(t("jobOffer.createError"));
       console.error("Post Failed :", error);
     }
   };
-
 
   return (
     <div className="page">
       <NavBar />
       <div className="form-card">
         <div className="form-header">
-          <h1>Création d'offre d'emploi</h1>
+          <h1>{t("jobOffer.title")}</h1>
         </div>
 
-        {authError && (
-          <div className="server-error">{authError}</div>
-        )}
+        {authError && <div className="server-error">{authError}</div>}
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
-            <label htmlFor="text">Titre</label>
+            <label htmlFor="title">{t("jobOffer.jobTitleLabel")}</label>
             <input
               id="title"
               type="text"
-              placeholder="CDI - employée polyvalent"
-              {...register("title", {required: "L'intitulé du job est requis"})}
+              placeholder={t("jobOffer.jobTitlePlaceholder")}
+              {...register("title", { required: t("jobOffer.validation.titleRequired") })}
             />
-            {errors.email && (<span className="error">{errors.email.message}</span>)}
+            {errors.title && <span className="error">{errors.title.message}</span>}
           </div>
           <div className="form-group">
-            <label htmlFor="text">Description</label>
-            <textarea id="description" placeholder="Description du job" rows="6"
-              {...register("description", {required: "La description est requise",})}
+            <label htmlFor="description">{t("jobOffer.descriptionLabel")}</label>
+            <textarea
+              id="description"
+              placeholder={t("jobOffer.descriptionPlaceholder")}
+              rows="6"
+              {...register("description", { required: t("jobOffer.validation.descRequired") })}
             />
-            {errors.password && (<span className="error">{errors.password.message}</span>
-            )}
+            {errors.description && <span className="error">{errors.description.message}</span>}
           </div>
           <div className="form-group">
-            <label htmlFor="text">Commune</label>
+            <label htmlFor="commune">{t("jobOffer.communeLabel")}</label>
             <input
               id="commune"
               type="text"
-              placeholder="35000 Rennes"
-              {...register("commune", {required: "La commune est requise"})}
+              placeholder={t("jobOffer.communePlaceholder")}
+              {...register("commune", { required: t("jobOffer.validation.communeRequired") })}
             />
-            {errors.password && (<span className="error">{errors.password.message}</span>
-            )}
+            {errors.commune && <span className="error">{errors.commune.message}</span>}
           </div>
           <button type="submit" className="submit-btn">
-            <span>Poster l'offre</span>
+            <span>{t("jobOffer.submit")}</span>
             <span className="arrow">→</span>
           </button>
         </form>

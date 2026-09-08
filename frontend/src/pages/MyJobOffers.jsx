@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
-import "../CSS/MyJobOffers.css";
+import "../CSS/Dashboard.css";
 import { getToken } from "../utils/auth";
 import { apiFetch } from "../api/client";
+import { useTranslation } from "react-i18next";
 
 export default function MyJobOffers() {
+  const { t, i18n } = useTranslation();
+
   const [offers, setOffers] = useState([]);
   const [employer, setEmployer] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +29,7 @@ export default function MyJobOffers() {
         const employerId = user?.sub;
 
         if (!employerId) {
-          throw new Error("Impossible de récupérer l'identifiant de l'employeur.");
+          throw new Error(t("myOffers.errors.fetchEmployerId"));
         }
 
         const offersData = await apiFetch(`/jobs/employer/${employerId}`);
@@ -34,30 +37,32 @@ export default function MyJobOffers() {
 
         setEmployer(employerData);
         const offersWithEmployer = Array.isArray(offersData)
-          ? offersData.map((offer) => ({ ...offer, employer: employerData })) : [];
+          ? offersData.map((offer) => ({ ...offer, employer: employerData }))
+          : [];
         setOffers(offersWithEmployer);
       } catch (err) {
         console.error(err);
-        setError(err.message || "Impossible de charger vos offres.");
+        setError(err.message || t("myOffers.errors.fetchOffers"));
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [t]);
 
   const handleDelete = async (offerId) => {
     const result = await Swal.fire({
-      title: "Supprimer l'offre ?",
-      text: "Êtes-vous sûr de vouloir supprimer cette offre ?",
+      title: t("myOffers.deleteConfirmTitle"),
+      text: t("myOffers.deleteConfirmText"),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: t("myOffers.actions.delete"),
+      cancelButtonText: t("myOffers.actions.cancel"),
       reverseButtons: true,
     });
     if (!result.isConfirmed) return;
+
     try {
       setDeletingId(offerId);
       setError("");
@@ -66,11 +71,11 @@ export default function MyJobOffers() {
       setOffers((currentOffers) =>
         currentOffers.filter((offer) => offer.id !== offerId)
       );
-      toast.success("Offre supprimé avec succès");
+      toast.success(t("myOffers.deleteSuccess"));
     } catch (err) {
       console.error(err);
-      setError("Impossible de supprimer l'offre.");
-      toast.error("Impossible de supprimer l'offre.");
+      setError(t("myOffers.deleteError"));
+      toast.error(t("myOffers.deleteError"));
     } finally {
       setDeletingId(null);
     }
@@ -83,13 +88,11 @@ export default function MyJobOffers() {
     setApplicationsLoading(true);
 
     try {
-
       const data = await apiFetch(`/applications/job/${offer.id}`);
-
       setApplications(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error(error);
-      setApplicationsError("Impossible de charger les candidatures.");
+      setApplicationsError(t("myOffers.errors.fetchApplications"));
     } finally {
       setApplicationsLoading(false);
     }
@@ -101,26 +104,31 @@ export default function MyJobOffers() {
     setApplicationsError("");
   };
 
-const updateApplicationStatus = async (
-  applicationId,
-  status
-) => {
-  try {
-    const updated = await apiFetch(`/applications/${applicationId}/status`, { method: "PATCH", body: JSON.stringify({ status,}),});
+  const updateApplicationStatus = async (applicationId, status) => {
+    try {
+      const updated = await apiFetch(`/applications/${applicationId}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      });
 
-    setApplications((cur) =>
-      cur.map((app) =>
-        app.id === applicationId ? {...app, status: updated.status ?? status,} :app
-      )
-    );
+      setApplications((cur) =>
+        cur.map((app) =>
+          app.id === applicationId
+            ? { ...app, status: updated.status ?? status }
+            : app
+        )
+      );
 
-    toast.success(status === "accepted" ? "Candidature acceptée" : "Candidature refusée.");
-  } catch (error) {
-    console.error(error);
-    toast.error("Impossible de modifier la candidature.");
-  }
-};
-
+      toast.success(
+        status === "accepted"
+          ? t("myOffers.applications.acceptedToast")
+          : t("myOffers.applications.rejectedToast")
+      );
+    } catch (error) {
+      console.error(error);
+      toast.error(t("myOffers.applications.statusError"));
+    }
+  };
 
   const handleEdit = (offer) => {
     setEditingOffer({ ...offer });
@@ -159,12 +167,12 @@ const updateApplicationStatus = async (
           offer.id === updatedOffer.id ? updatedOfferWithEmployer : offer
         )
       );
-      toast.success("Offre modifié avec succès");
+      toast.success(t("myOffers.editSuccess"));
       setEditingOffer(null);
     } catch (err) {
       console.error(err);
-      toast.error("Modification impossible");
-      setError("Modification impossible");
+      toast.error(t("myOffers.editError"));
+      setError(t("myOffers.editError"));
       setTimeout(() => {
         setError(null);
       }, 3000);
@@ -187,15 +195,15 @@ const updateApplicationStatus = async (
     <>
       <NavBar />
 
-      <main className="job-offers-page">
-        <div className="job-offers-header">
-          <h1>Mes offres</h1>
-          <p>Retrouvez ici toutes les offres que vous avez publiées.</p>
+      <main className="dashboard-page">
+        <div className="dashboard-header">
+          <h1>{t("myOffers.title")}</h1>
+          <p>{t("myOffers.subtitle")}</p>
         </div>
 
         {loading && (
           <div className="loading-message">
-            <p>Chargement des offres...</p>
+            <p>{t("myOffers.loading")}</p>
           </div>
         )}
 
@@ -206,73 +214,84 @@ const updateApplicationStatus = async (
         )}
 
         {!loading && !error && offers.length === 0 && (
-          <div className="empty-offers">
-            <h2>Aucune offre publiée</h2>
-            <p>Vous n'avez pas encore créé d'offre d'emploi.</p>
+          <div className="empty-items">
+            <h2>{t("myOffers.emptyTitle")}</h2>
+            <p>{t("myOffers.emptyText")}</p>
           </div>
         )}
 
         {!loading && !error && offers.length > 0 && (
-          <div className="offers-gallery">
+          <div className="items-gallery">
             {offers.map((offer) => (
-              <div className="offer-card" key={`offer-${offer.id}`}>
-                <div className="offer-card-content">
+              <div className="item-card" key={`offer-${offer.id}`}>
+                <div className="item-card-content">
                   <h2>{offer.title}</h2>
 
-                  <p className="offer-views">
-                    {offer.views ?? 0} vue{(offer.views ?? 0) > 1 ? "s" : ""}
+                  <p className="item-views">
+                    {t("myOffers.viewsCount", { count: offer.views ?? 0 })}
                   </p>
 
                   {offer.employer && (
-                    <div className="offer-company-info">
+                    <div className="item-company-info">
                       {offer.employer.companyName && (
-                        <p className="offer-company"> Entreprise: {offer.employer.companyName}</p>
+                        <p className="item-company">
+                          {t("myOffers.companyPrefix")}{" "}
+                          {offer.employer.companyName}
+                        </p>
                       )}
                       {offer.employer.email && <p>{offer.employer.email}</p>}
                     </div>
                   )}
 
                   {offer.commune && (
-                    <p className="offer-location"> Commune: {offer.commune}</p>
+                    <p className="item-location">
+                      {t("myOffers.communePrefix")} {offer.commune}
+                    </p>
                   )}
 
                   {offer.description && (
-                    <p className="offer-description"> {" "} Description: {truncateDescription(offer.description, 120)}</p>
+                    <p className="item-description">
+                      {" "}
+                      {t("myOffers.descPrefix")}{" "}
+                      {truncateDescription(offer.description, 120)}
+                    </p>
                   )}
                 </div>
 
                 {/* ACTIONS */}
-                <div className="offer-card-footer">
+                <div className="item-card-footer">
                   {/* DETAILS */}
                   <button
                     type="button"
-                    className="offer-action-btn details-btn"
+                    className="item-action-btn details-btn"
                     onClick={() => handleDetails(offer)}
-                    title="Voir les détails"
+                    title={t("myOffers.detailsTitle")}
                   >
-                    Détail
+                    {t("myOffers.actions.details")}
                   </button>
 
                   {/* EDIT */}
                   <button
                     type="button"
-                    className="offer-action-btn edit-btn"
+                    className="item-action-btn edit-btn"
                     onClick={() => handleEdit(offer)}
                     disabled={deletingId === offer.id}
-                    title="Modifier l'offre"
+                    title={t("myOffers.editTitle")}
                   >
-                    Editer
+                    {t("myOffers.actions.edit")}
                   </button>
 
                   {/* DELETE */}
                   <button
                     type="button"
-                    className="offer-action-btn delete-btn"
+                    className="item-action-btn delete-btn"
                     onClick={() => handleDelete(offer.id)}
                     disabled={deletingId === offer.id}
-                    title="Supprimer l'offre"
+                    title={t("myOffers.deleteTitle")}
                   >
-                    {deletingId === offer.id ? "..." : "Supprimer"}
+                    {deletingId === offer.id
+                      ? "..."
+                      : t("myOffers.actions.delete")}
                   </button>
                 </div>
               </div>
@@ -284,165 +303,186 @@ const updateApplicationStatus = async (
       {/* POPUP DETAILS */}
       {selectedOffer && (
         <div className="modal-overlay" onClick={closeDetails}>
-          <div className="modal-content details-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeDetails} type="button">x</button>
+          <div
+            className="modal-content details-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="modal-close" onClick={closeDetails} type="button">
+              x
+            </button>
 
             <h2>{selectedOffer.title}</h2>
             <div className="details-section">
-              <h3>Informations de l'offre</h3>
+              <h3>{t("myOffers.modal.offerInfoTitle")}</h3>
 
               <div className="detail-row">
-                <strong>Titre</strong>
-                <span>{selectedOffer.title || "Non renseigné"}</span>
+                <strong>{t("myOffers.modal.titleLabel")}</strong>
+                <span>
+                  {selectedOffer.title || t("myOffers.modal.notProvided")}
+                </span>
               </div>
 
               <div className="detail-row">
-                <strong>Commune</strong>
-                <span>{selectedOffer.commune || "Non renseignée"}</span>
+                <strong>{t("myOffers.modal.communeLabel")}</strong>
+                <span>
+                  {selectedOffer.commune || t("myOffers.modal.notProvidedFem")}
+                </span>
               </div>
 
               <div className="detail-row detail-description">
-                <strong>Description</strong>
-                <p> {selectedOffer.description || "Aucune description disponible."}</p>
+                <strong>{t("myOffers.modal.descLabel")}</strong>
+                <p>
+                  {selectedOffer.description ||
+                    t("myOffers.modal.noDescription")}
+                </p>
               </div>
 
               <div className="detail-row">
-                <strong>Nombre de vues</strong>
+                <strong>{t("myOffers.modal.viewsLabel")}</strong>
                 <span>{selectedOffer.views ?? 0}</span>
               </div>
             </div>
 
             <div className="details-section">
-                <h3>Informations de l'entreprise</h3>
+              <h3>{t("myOffers.modal.companyInfoTitle")}</h3>
 
-                {selectedOffer.employer.companyName && (
-                  <div className="detail-row">
-                    <strong>Entreprise</strong>
-                    <span>{selectedOffer.employer.companyName}</span>
-                  </div>
+              {selectedOffer.employer.companyName && (
+                <div className="detail-row">
+                  <strong>{t("myOffers.modal.companyLabel")}</strong>
+                  <span>{selectedOffer.employer.companyName}</span>
+                </div>
+              )}
+
+              {selectedOffer.employer.email && (
+                <div className="detail-row">
+                  <strong>{t("myOffers.modal.emailLabel")}</strong>
+                  <span>{selectedOffer.employer.email}</span>
+                </div>
+              )}
+
+              {selectedOffer.employer.companyDesc && (
+                <div className="detail-row">
+                  <strong>{t("myOffers.modal.descLabel")}</strong>
+                  <span>{selectedOffer.employer.companyDesc}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="details-section">
+              <h3>
+                {t("myOffers.applications.titleCount", {
+                  count: applications.length,
+                })}
+              </h3>
+
+              {applicationsLoading && (
+                <p>{t("myOffers.applications.loading")}</p>
+              )}
+
+              {applicationsError && (
+                <p className="error-message">{applicationsError}</p>
+              )}
+
+              {!applicationsLoading &&
+                !applicationsError &&
+                applications.length === 0 && (
+                  <p>{t("myOffers.applications.empty")}</p>
                 )}
 
-                {selectedOffer.employer.email && (
-                  <div className="detail-row">
-                    <strong>Email</strong>
-                    <span>{selectedOffer.employer.email}</span>
-                  </div>
-                )}
+              {!applicationsLoading &&
+                applications.map((application) => {
+                  const seeker = application.jobSeeker;
+                  const profile = seeker?.seekerProfile;
 
-                {selectedOffer.employer.companyDesc && (
-                  <div className="detail-row">
-                    <strong>Description</strong>
-                    <span>{selectedOffer.employer.companyDesc}</span>
-                  </div>
-                )}
-              </div>
-              <div className="details-section">
-                  <h3>
-                    Candidatures ({applications.length})
-                  </h3>
-                              
-                  {applicationsLoading && (
-                    <p>Chargement des candidatures...</p>
-                  )}
-                
-                  {applicationsError && (
-                    <p className="error-message">
-                      {applicationsError}
-                    </p>
-                  )}
-                
-                  {!applicationsLoading &&
-                    !applicationsError &&
-                    applications.length === 0 && (
-                      <p>
-                        Aucune candidature reçue pour cette offre.
-                      </p>
-                    )}
-                
-                  {!applicationsLoading &&
-                    applications.map((application) => {
-                      const seeker = application.jobSeeker;
-                      const profile = seeker?.seekerProfile;
-                    
-                      return (
-                        <div
-                          className="candidate-card"
-                          key={`application-${application.id}`}
+                  return (
+                    <div
+                      className="candidate-card"
+                      key={`application-${application.id}`}
+                    >
+                      <h4>
+                        {seeker?.firstname || t("myOffers.candidate.defaultFirstname")}{" "}
+                        {seeker?.lastname || t("myOffers.candidate.defaultLastname")}
+                      </h4>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.email")}</strong>
+                        <span>
+                          {seeker?.email || t("myOffers.modal.notProvided")}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.skills")}</strong>
+                        <span>
+                          {profile?.skills?.length
+                            ? profile.skills.join(", ")
+                            : t("myOffers.modal.notProvidedPlur")}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.experience")}</strong>
+                        <span>
+                          {profile?.experience ||
+                            t("myOffers.modal.notProvidedFem")}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.availability")}</strong>
+                        <span>
+                          {profile?.availability ||
+                            t("myOffers.modal.notProvidedFem")}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.status")}</strong>
+                        <span>
+                          {application.status === "waiting" &&
+                            t("myOffers.status.waiting")}
+                          {application.status === "accepted" &&
+                            t("myOffers.status.accepted")}
+                          {application.status === "rejected" &&
+                            t("myOffers.status.rejected")}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <strong>{t("myOffers.candidate.receivedAt")}</strong>
+                        <span>
+                          {new Date(application.createdAt).toLocaleDateString(
+                            i18n.language
+                          )}
+                        </span>
+                      </div>
+
+                      <div className="candidate-actions">
+                        <button
+                          type="button"
+                          className="candidate-accept-btn"
+                          disabled={application.status === "accepted"}
+                          onClick={() =>
+                            updateApplicationStatus(application.id, "accepted")
+                          }
                         >
-                          <h4>
-                            {seeker?.firstname || "Prénom"}{" "}
-                            {seeker?.lastname || "Nom"}
-                          </h4>
-                      
-                          <div className="detail-row">
-                            <strong>Email</strong>
-                            <span>
-                              {seeker?.email || "Non renseigné"}
-                            </span>
-                          </div>
-                      
-                          <div className="detail-row">
-                            <strong>Compétences</strong>
-                      
-                            <span>
-                              {profile?.skills?.length
-                                ? profile.skills.join(", ")
-                                : "Non renseignées"}
-                            </span>
-                          </div>
-                              
-                          <div className="detail-row">
-                            <strong>Expérience</strong>
-                              
-                            <span>
-                              {profile?.experience ||
-                                "Non renseignée"}
-                            </span>
-                          </div>
-                              
-                          <div className="detail-row">
-                            <strong>Disponibilité</strong>
-                              
-                            <span>
-                              {profile?.availability ||
-                                "Non renseignée"}
-                            </span>
-                          </div>
-                              
-                          <div className="detail-row">
-                            <strong>Statut</strong>
-                              
-                            <span>
-                              {application.status === "waiting" && "En attente"}
-                              {application.status === "accepted" && "Acceptée"}
-                              {application.status === "rejected" && "Refusée"}
-                            </span>
-                          </div>
+                          {t("myOffers.actions.accept")}
+                        </button>
 
-                          <div className="detail-row">
-                              <strong>Candidature reçue le</strong>
-                          
-                              <span>
-                                {new Date(
-                                  application.createdAt
-                                ).toLocaleDateString("fr-FR")}
-                              </span>
-                            </div>
-
-                            <div className="candidate-actions">
-                              <button type="button" className="candidate-accept-btn" disabled={application.status === "accepted"}
-                              onClick={() => updateApplicationStatus(application.id, "accepted")} >
-                                Accepter
-                              </button>
-                        
-                              <button type="button" className="candidate-reject-btn" disabled={application.status === "rejected"}
-                              onClick={() => updateApplicationStatus(application.id, "rejected")}>
-                                Refuser      
-                              </button>
-                            </div>
-                        </div>
-                      );
-                    })}
+                        <button
+                          type="button"
+                          className="candidate-reject-btn"
+                          disabled={application.status === "rejected"}
+                          onClick={() =>
+                            updateApplicationStatus(application.id, "rejected")
+                          }
+                        >
+                          {t("myOffers.actions.reject")}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
 
             <div className="modal-actions">
@@ -451,7 +491,7 @@ const updateApplicationStatus = async (
                 className="modal-secondary-btn"
                 onClick={closeDetails}
               >
-                Fermer
+                {t("myOffers.actions.close")}
               </button>
               <button
                 type="button"
@@ -461,7 +501,7 @@ const updateApplicationStatus = async (
                   handleEdit(selectedOffer);
                 }}
               >
-                Modifier
+                {t("myOffers.actions.modify")}
               </button>
             </div>
           </div>
@@ -475,12 +515,13 @@ const updateApplicationStatus = async (
             className="modal-content edit-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <button className="modal-close" onClick={closeEdit} type="button">x</button>
-            <h2>Modifier l'offre</h2>
+            <button className="modal-close" onClick={closeEdit} type="button">
+              x
+            </button>
+            <h2>{t("myOffers.editModal.title")}</h2>
             <form onSubmit={handleSaveEdit}>
               <div className="form-group">
-                <label htmlFor="title">Titre de l'offre</label>
-
+                <label htmlFor="title">{t("myOffers.editModal.titleLabel")}</label>
                 <input
                   id="title"
                   type="text"
@@ -492,8 +533,7 @@ const updateApplicationStatus = async (
               </div>
 
               <div className="form-group">
-                <label htmlFor="commune">Commune</label>
-
+                <label htmlFor="commune">{t("myOffers.editModal.communeLabel")}</label>
                 <input
                   id="commune"
                   type="text"
@@ -504,8 +544,9 @@ const updateApplicationStatus = async (
               </div>
 
               <div className="form-group">
-                <label htmlFor="description">Description</label>
-
+                <label htmlFor="description">
+                  {t("myOffers.editModal.descLabel")}
+                </label>
                 <textarea
                   id="description"
                   name="description"
@@ -522,7 +563,7 @@ const updateApplicationStatus = async (
                   onClick={closeEdit}
                   disabled={saving}
                 >
-                  Annuler
+                  {t("myOffers.actions.cancel")}
                 </button>
 
                 <button
@@ -530,7 +571,9 @@ const updateApplicationStatus = async (
                   className="modal-save-btn"
                   disabled={saving}
                 >
-                  {saving ? "Enregistrement..." : "Enregistrer"}
+                  {saving
+                    ? t("myOffers.editModal.saving")
+                    : t("myOffers.actions.save")}
                 </button>
               </div>
             </form>

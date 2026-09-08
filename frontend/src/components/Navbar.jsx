@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/jeb.png";
-import notif from "../assets/notification.png"
+import notif from "../assets/notification.png";
 import "./Navbar.css";
 import { getUser } from "../utils/auth.js";
 import { apiFetch } from "../api/client";
+import { useTranslation } from "react-i18next";
 
 export default function NavBar() {
+  const { t } = useTranslation();
   const user = getUser();
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState([]);
@@ -32,7 +34,7 @@ export default function NavBar() {
       setLoading(true);
       setError("");
       const notificationsData = await apiFetch("/notifications");
-      const data = Array.isArray(notificationsData) ? notificationsData: [];
+      const data = Array.isArray(notificationsData) ? notificationsData : [];
       setNotifications(data);
       if (data.length > 0) {
         setSelectedNotification(data[0]);
@@ -40,11 +42,10 @@ export default function NavBar() {
         setSelectedNotification(null);
       }
       setIsNotificationModalOpen(true);
-
     } catch (error) {
       console.error(error);
       setError(
-        error.message || "Impossible de charger vos notifications."
+        error.message || t("navbar.fetchError")
       );
     } finally {
       setLoading(false);
@@ -68,24 +69,23 @@ export default function NavBar() {
     try {
       setLoading(true);
       setError("");
-      await apiFetch(`/notifications/${selectedNotification.id}/read`,
-        {
-          method: "PATCH",
-        }
-      );
+      await apiFetch(`/notifications/${selectedNotification.id}/read`, {
+        method: "PATCH",
+      });
       const readAt = new Date().toISOString();
-      const updatedNotification = {...selectedNotification,readAt};
+      const updatedNotification = { ...selectedNotification, readAt };
       setSelectedNotification(updatedNotification);
       setNotifications((prevNotifications) =>
         prevNotifications.map((notification) =>
           notification.id === selectedNotification.id
-            ? {...notification, readAt} : notification
+            ? { ...notification, readAt }
+            : notification
         )
       );
     } catch (err) {
       console.error(err);
       setError(
-        err.message || "Impossible de marquer la notification comme lue."
+        err.message || t("navbar.markReadError")
       );
     } finally {
       setLoading(false);
@@ -97,7 +97,7 @@ export default function NavBar() {
       <nav className="nav-bar-container">
         <div className="logo-section">
           <Link to="/Home" className="logo-container">
-            <p className="site-name">GéoEmploi</p>
+            <p className="site-name">{t("navbar.siteName")}</p>
           </Link>
         </div>
 
@@ -108,53 +108,81 @@ export default function NavBar() {
               type="button"
               className="notification-btn"
               onClick={fetchNotifications}
-              aria-label="Notifications">
-              <img src={notif} alt="Notifications" className="notif-logo" />
+              aria-label={t("navbar.notificationsAria")}
+            >
+              <img src={notif} alt={t("navbar.notificationsAria")} className="notif-logo" />
             </button>
           )}
+          <Link to="/more" className="nav-link">
+            {t("navbar.aboutLink")}
+          </Link>
           {user?.role === "seeker" && (
-            <Link to="/my-application" className="nav-link">Candidatures</Link>
+            <Link to="/my-application" className="nav-link">
+              {t("navbar.applicationsLink")}
+            </Link>
           )}
           {user?.role === "employer" && (
             <div className="employer-actions">
-              <Link to="/my-job-offers" className="nav-link">Voir mes offres</Link>
-              <Link to="/job-offers" className="nav-link">Créer une offre</Link>
+              <Link to="/my-job-offers" className="nav-link">
+                {t("navbar.myOffersLink")}
+              </Link>
+              <Link to="/job-offers" className="nav-link">
+                {t("navbar.createOfferLink")}
+              </Link>
             </div>
           )}
           {user?.role === "admin" && (
-            <Link to ="/admin" className="nav-link">
-              Administration
-            </Link>  
+            <Link to="/admin" className="nav-link">
+              {t("navbar.adminLink")}
+            </Link>
           )}
-          <Link to={user ? "/profile" : "/login"}className="profile-btn" aria-label="Account"> 👤 </Link>
+          <Link
+            to={user ? "/profile" : "/login"}
+            className="profile-btn"
+            aria-label={t("navbar.accountAria")}
+          >
+            👤
+          </Link>
         </div>
       </nav>
-      {/*NOTIF ODAL*/}
+
+      {/* NOTIF MODAL */}
       {isNotificationModalOpen && (
         <div className="modal-overlay" onClick={closeNotification}>
           <div className="modal-content notification-modal" onClick={(e) => e.stopPropagation()}>
             {/* CLOSE BUTTON */}
-            <button className="modal-close" onClick={closeNotification} type="button" aria-label="Fermer">×</button>
-            <h2>Notifications</h2>
+            <button
+              className="modal-close"
+              onClick={closeNotification}
+              type="button"
+              aria-label={t("navbar.closeAria")}
+            >
+              ×
+            </button>
+            <h2>{t("navbar.notificationsTitle")}</h2>
 
-            {/*NOTIF GALLERY*/}
+            {/* NOTIF GALLERY */}
             {notifications.length === 0 && (
-              <p>Aucune notification pour le moment.</p>
+              <p>{t("navbar.noNotifications")}</p>
             )}
             <div className="notification-gallery">
               {notifications.map((notification) => (
                 <article
                   key={notification.id}
-                  className={`notification-card ${selectedNotification?.id === notification.id ? "active" : ""}`}
+                  className={`notification-card ${
+                    selectedNotification?.id === notification.id ? "active" : ""
+                  }`}
                   onClick={() => openNotification(notification)}
                 >
                   <div className="notification-card-header">
                     <span className="notification-type">
-                      {notification.type === "application" && "Candidature"}
-                      {notification.type === "job" && "Offre"}
-                      {notification.type === "system" && "Système"}
+                      {notification.type === "application" && t("navbar.typeApplication")}
+                      {notification.type === "job" && t("navbar.typeJob")}
+                      {notification.type === "system" && t("navbar.typeSystem")}
                     </span>
-                    <span className="notification-date">{notification.readAt ? "lu" : "non lu"}</span>
+                    <span className="notification-date">
+                      {notification.readAt ? t("navbar.read") : t("navbar.unread")}
+                    </span>
                   </div>
                   <h3>{notification.title}</h3>
                   <p>{notification.message}</p>
@@ -165,18 +193,24 @@ export default function NavBar() {
             {/* ACTIONS */}
             {selectedNotification && (
               <div className="modal-actions">
-                {!selectedNotification.readAt === null &&
-                    <button
-                      type="button"
-                      className="mark-read-btn"
-                      onClick={markNotificationAsRead}
-                      disabled={loading}
-                    >
-                      {loading ? "Enregistrement..." : "Marquer comme lue"}
-                    </button>
-                  }
-              <button type="button" className="modal-close-btn"onClick={closeNotification}>Fermer</button>
-            </div>
+                {selectedNotification.readAt === null && (
+                  <button
+                    type="button"
+                    className="mark-read-btn"
+                    onClick={markNotificationAsRead}
+                    disabled={loading}
+                  >
+                    {loading ? t("navbar.markingAsRead") : t("navbar.markAsRead")}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="modal-close-btn"
+                  onClick={closeNotification}
+                >
+                  {t("navbar.close")}
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -184,4 +218,3 @@ export default function NavBar() {
     </main>
   );
 }
-

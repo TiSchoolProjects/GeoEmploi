@@ -1,0 +1,700 @@
+{
+  "home": {
+    "title": "Discover the",
+    "subtitle": "French job market",
+    "mapButton": "Explore the map",
+    "imageAlt": "Illustration"
+  },
+  "account": {
+    "title": "Welcome to GéoEmploi",
+    "subtitle": "Create your account and start your experience now.",
+    "button1": "Create an HR account",
+    "button2": "Create a Seeker account",
+    "question": "Already have an account?",
+    "link": "Log in"
+  },
+  
+  "more": {
+    "title": "Information",
+    "subtitle": "Terms of Service and Transparency of GéoEmploi",
+    "summary": "Summary",
+    "articleLabel": "Article",
+    "tabs": {
+      "cgu": "Terms of Service",
+      "transparency": "Transparency"
+    },
+    "cgu": {
+      "title": "General Terms of Service",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Preamble and Service Overview",
+          "corps": [
+            "The Ministry of Job and Happiness provides users with the public digital platform GéoEmploi. This public matching service aims to facilitate direct connections between applicants and recruiters through the localized consultation of job offers at the municipality level.",
+            "These Terms of Service govern the access, usage, and data protection rules between the publishing Administration and the service users. Any access or account creation implies full and unreserved acceptance of these provisions."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Definitions",
+          "liste": [
+            ["Platform", "The online digital service GéoEmploi."],
+            ["Applicant", "Any natural person accessing the service to look for jobs, view job listings, or apply."],
+            ["Employer / Recruiter", "Any legal entity or professional posting job offers via a dedicated account."],
+            ["Map Data", "Map layers provided by IGN Geoplateforme and address data provided by the National Address API (api-adresse.data.gouv.fr)."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Service Access and Employer Pricing",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Applicant Access",
+              "corps": [
+                "All features available to applicants — map browsing, viewing listings, distance calculation, and application submission — are completely free and require no subscription."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Geolocation and Privacy",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Transient Processing and No GPS Storage",
+              "corps": [
+                "To sort listings by geographical proximity, users can enable device location through their browser's API. This action requires express technical authorization.",
+                "No user GPS coordinates are stored, saved, or tracked in the Ministry's databases or server logs. Proximity calculations are handled entirely in volatile memory during the active session."
+              ]
+            },
+            {
+              "soustitre": "4.2. Alternative Without Geolocation",
+              "corps": [
+                "Location permission is optional. If refused, users retain full platform capabilities by entering a reference city or postal code manually."
+              ]
+            },
+            {
+              "soustitre": "4.3. Protection of Employer Addresses",
+              "corps": [
+                "To protect employer privacy and peace of mind, exact postal addresses are not displayed on the public map: only the municipality tied to the listing is visible to users."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Personal Data Protection and User Rights",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Categories of Data Collected at Registration",
+              "corps": [
+                "Under the data minimization principle (Art. 5.1.c GDPR), GéoEmploi collects only data strictly necessary for employment matching:"
+              ],
+              "liste": [
+                ["Applicant", "First name, last name, contact email address, secured password (hashed/encrypted), resume document (PDF/DOC)."],
+                ["Employer", "Company name, SIRET number, headquarters address, manager first/last name, professional email address, phone number."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Retention Periods",
+              "table": [
+                ["Profile data and applications", "Period of active use, then deletion after 2 years of continuous inactivity"],
+                ["Connection logs", "IPs anonymized within 24 hours, technical logs purged after 12 months"],
+                ["GPS data", "0-second retention (transient calculation without archiving)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Exercising Your Rights",
+              "corps": [
+                "In compliance with the General Data Protection Regulation (GDPR) and national data protection laws, every user has the right to access, rectify, erase, restrict, and object to the processing of their data."
+              ],
+              "liste": [
+                ["Direct Control", "Update profile details or immediately delete account via « My Account » > « Delete my account »."],
+                ["Contact the DPO", "Via email at dpo@job-et-bonheur.fr. Response within the statutory limit of one month."],
+                ["Lodge a Complaint", "With the CNIL (www.cnil.fr) in case of non-compliance with your rights."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Liability",
+          "corps": [
+            "The Ministry exercises due diligence to ensure platform availability and security. It shall not be held liable in cases of force majeure, temporary maintenance disruptions, inaccurate employer listings, or unsuccessful applications."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Governing Law and Jurisdiction",
+          "corps": [
+            "These Terms of Service are governed by French law. In the absence of an amicable settlement, any dispute regarding their validity or performance shall be submitted to the competent French courts."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Transparency",
+      "intro": "GéoEmploi is a service designed to browse job offers, submit applications, and, for employers, post listings free of charge.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Free Publication",
+          "corps": [
+            "Publishing a job listing on GéoEmploi is entirely free of charge.",
+            "No subscription, fee, or financial compensation is required from employers to publish an offer."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Job Location",
+          "corps": [
+            "Job listings are geolocated at the municipality level. They are mapped to the municipality center, not the precise postal address.",
+            "User location may be used to display nearby jobs. This position is not retained by GéoEmploi.",
+            "The only retained location data is that tied to the published job listings."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Location Data Retention",
+          "corps": [
+            "User positions are neither recorded nor retained.",
+            "Location data associated with job listings is retained according to records of processing activities.",
+            "Location history for listings is automatically deleted after 90 days."
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Data Protection",
+          "corps": [
+            "GéoEmploi adheres to data minimization: only data necessary for service operation is collected and retained.",
+            "For any inquiry regarding personal data protection or exercising rights, contact the Data Protection Officer (DPO): dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "subtitle": "Management and moderation of GéoEmploi",
+    "pendingReportsStat": "Pending reports",
+    "loading": "Loading...",
+    "youBadge": "You",
+    "notProvided": "Not provided",
+    "notProvidedFem": "Not provided",
+    "absent": "missing",
+    "tabs": {
+      "reports": "Reports",
+      "jobs": "Offers to verify",
+      "users": "Users",
+      "employers": "Employers"
+    },
+    "actions": {
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "resolve": "Resolve",
+      "deleteOffer": "Delete offer",
+      "suspend": "Suspend",
+      "reactivate": "Reactivate",
+      "deleteAccount": "Delete account",
+      "verifyCompany": "Verify company",
+      "removeVerification": "Remove verification"
+    },
+    "errors": {
+      "fetchReports": "Unable to load reports.",
+      "fetchJobs": "Unable to load offers to verify.",
+      "fetchUsers": "Unable to load users.",
+      "fetchEmployers": "Unable to load employers."
+    },
+    "reports": {
+      "empty": "No reports.",
+      "deletedJob": "Deleted offer",
+      "reason": "Reason",
+      "description": "Description",
+      "reportedBy": "Reported by",
+      "deletedUser": "Deleted user",
+      "date": "Date",
+      "status": "Status",
+      "pending": "Pending",
+      "resolved": "Resolved",
+      "resolveSuccess": "Report resolved",
+      "resolveError": "Unable to resolve report."
+    },
+    "jobs": {
+      "toVerifyCount": "Offers to verify ({{count}})",
+      "noneToVerify": "No offers to verify.",
+      "commune": "Location",
+      "description": "Description",
+      "geocodeStatus": "Geocoding status",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "correctAddressLabel": "Correct location",
+      "newAddressPlaceholder": "New location",
+      "checking": "Checking...",
+      "correctAndGeocode": "Correct and geocode",
+      "enterCityPrompt": "Please enter a location.",
+      "addressCorrected": "Location corrected and offer regeocoded.",
+      "geocodeFailed": "The location could not be geocoded.",
+      "correctError": "Unable to correct the location.",
+      "deleteConfirmTitle": "Delete job?",
+      "deleteConfirmText": "Are you sure you want to delete this offer?",
+      "deleteSuccess": "Offer deleted",
+      "deleteError": "Deletion failed"
+    },
+    "users": {
+      "count": "Users ({{count}})",
+      "none": "No users.",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "createdAt": "Created on",
+      "cannotSuspendSelf": "You cannot suspend your own account.",
+      "cannotDeleteSelf": "You cannot delete your own account.",
+      "suspendedSuccess": "User suspended",
+      "reactivatedSuccess": "User reactivated",
+      "deletedSuccess": "User deleted",
+      "statusError": "Unable to update status.",
+      "deleteConfirmTitle": "Delete account?",
+      "deleteConfirmText": "Are you sure you want to delete this account?",
+      "deleteError": "Unable to delete user."
+    },
+    "employers": {
+      "count": "Employers ({{count}})",
+      "none": "No employers.",
+      "manager": "Manager",
+      "email": "Email",
+      "description": "Description",
+      "accountStatus": "Account",
+      "verification": "Verification",
+      "verifiedAt": "Verified on",
+      "verifySuccess": "Company verified",
+      "verifyError": "Unable to verify company.",
+      "unverifySuccess": "Company verification removed",
+      "unverifyError": "Unable to remove verification."
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "verified": "Verified",
+      "toVerify": "To verify"
+    }
+  },
+  "myOffers": {
+    "title": "My job offers",
+    "subtitle": "Find all the job offers you have published here.",
+    "loading": "Loading job offers...",
+    "emptyTitle": "No offers published",
+    "emptyText": "You haven't created any job offers yet.",
+    "viewsCount_zero": "0 views",
+    "viewsCount_one": "1 view",
+    "viewsCount_other": "{{count}} views",
+    "companyPrefix": "Company:",
+    "communePrefix": "Location:",
+    "descPrefix": "Description:",
+    "detailsTitle": "View details",
+    "editTitle": "Edit offer",
+    "deleteTitle": "Delete offer",
+    "deleteConfirmTitle": "Delete offer?",
+    "deleteConfirmText": "Are you sure you want to delete this offer?",
+    "deleteSuccess": "Offer deleted successfully",
+    "deleteError": "Unable to delete the offer.",
+    "editSuccess": "Offer updated successfully",
+    "editError": "Unable to update offer",
+    "actions": {
+      "details": "Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "close": "Close",
+      "modify": "Edit",
+      "save": "Save",
+      "accept": "Accept",
+      "reject": "Reject"
+    },
+    "errors": {
+      "fetchEmployerId": "Unable to retrieve the employer ID.",
+      "fetchOffers": "Unable to load your offers.",
+      "fetchApplications": "Unable to load applications."
+    },
+    "modal": {
+      "offerInfoTitle": "Offer information",
+      "companyInfoTitle": "Company information",
+      "titleLabel": "Title",
+      "communeLabel": "Location",
+      "descLabel": "Description",
+      "viewsLabel": "View count",
+      "companyLabel": "Company",
+      "emailLabel": "Email",
+      "notProvided": "Not provided",
+      "notProvidedFem": "Not provided",
+      "notProvidedPlur": "Not provided",
+      "noDescription": "No description available."
+    },
+    "applications": {
+      "titleCount": "Applications ({{count}})",
+      "loading": "Loading applications...",
+      "empty": "No applications received for this offer.",
+      "acceptedToast": "Application accepted",
+      "rejectedToast": "Application rejected.",
+      "statusError": "Unable to update application."
+    },
+    "candidate": {
+      "defaultFirstname": "First name",
+      "defaultLastname": "Last name",
+      "email": "Email",
+      "skills": "Skills",
+      "experience": "Experience",
+      "availability": "Availability",
+      "status": "Status",
+      "receivedAt": "Application received on"
+    },
+    "status": {
+      "waiting": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    },
+    "editModal": {
+      "title": "Edit offer",
+      "titleLabel": "Offer title",
+      "communeLabel": "Location",
+      "descLabel": "Description",
+      "saving": "Saving..."
+    }
+  },
+  "map": {
+    "unknownCompany": "Unknown company",
+    "mustBeLoggedIn": "You must be logged in to apply.",
+    "applicationSent": "Application submitted successfully.",
+    "alreadyApplied": "You have already applied to this offer.",
+    "reportDescTooShort": "Description is too short.",
+    "reportSent": "The report has been submitted.",
+    "reportError": "Unable to send the report.",
+    "loading": "Loading...",
+    "jobOfferAria": "Job offer",
+    "companyLabel": "Company",
+    "applyBtn": "Apply",
+    "reportBtn": "Report this offer",
+    "closePopup": "Close offer details",
+    "sending": "Sending...",
+    "applied": "Application submitted",
+    "singleOfferAria": "Show job offer at this location",
+    "multipleOffersAria": "Show job offers at this location",
+    "locationNotFound": "Location or city not found. Please try again.",
+    "locationModalTitle": "Use of your location",
+    "locationModalDesc": "With your permission, GéoEmploi uses your location to display nearby job offers.",
+    "decline": "Decline",
+    "accept": "I accept",
+    "searchLabel": "Search for a city or town",
+    "searchPlaceholder": "Search a location",
+    "searchBtn": "Search",
+    "mapAriaLabel": "Job offers map",
+    "reportModalTitle": "Report this offer",
+    "reasonLabel": "Reason",
+    "descriptionLabel": "Description",
+    "cancel": "Cancel",
+    "send": "Send",
+    "reasons": {
+      "fraud": "Fraudulent offer",
+      "misleading": "Misleading information",
+      "discriminatory": "Discriminatory content",
+      "nonCompliant": "Non-compliant offer",
+      "other": "Other"
+    }
+  },
+  "consent": {
+    "saveError": "Failed to save consent:"
+  },
+  "application": {
+    "title": "My applications",
+    "subtitle": "Find here all the job offers you have applied to.",
+    "loading": "Loading applications...",
+    "emptyTitle": "No applications",
+    "emptyText": "You haven't applied to any job offer yet.",
+    "untitledOffer": "Untitled offer",
+    "company": "Company:",
+    "location": "Location:",
+    "description": "Description:",
+    "detailsButton": "Details",
+    "detailsTitle": "View details",
+    "deleteButton": "Delete",
+    "deleteTitle": "Delete application",
+    "deleting": "...",
+    "deletingInProgress": "Deleting...",
+    "deleteConfirmTitle": "Delete this application?",
+    "deleteConfirmText": "Are you sure you want to delete this application?",
+    "deleteConfirmButton": "Delete",
+    "deleteCancelButton": "Cancel",
+    "deleteSuccess": "Application deleted successfully",
+    "deleteError": "Unable to delete the application.",
+    "fetchUserError": "Unable to retrieve the user ID.",
+    "fetchError": "Unable to load your applications.",
+    "modalDefaultTitle": "Application details",
+    "modalApplicationInfo": "Application information",
+    "status": "Status",
+    "notProvided": "Not provided",
+    "notProvidedFem": "Not provided",
+    "applicationDate": "Application date",
+    "modalOfferInfo": "Offer information",
+    "offerTitle": "Title",
+    "contractType": "Contract type",
+    "noDescription": "No description available.",
+    "close": "Close"
+  },
+  "cgu": {
+    "pageTitle": "Terms of Use",
+    "intro": "Welcome to our site. These Terms of Use define the rules applicable to the use of our platform.",
+    "section1": {
+      "heading": "1. Purpose",
+      "p1": "These Terms of Use aim to define the conditions under which users may access the site and use the services offered.",
+      "p2": "Any use of the site implies full and unconditional acceptance of these terms. If you do not accept these terms, we invite you not to use the site."
+    },
+    "section2": {
+      "heading": "2. Access to the site",
+      "p1": "The site is accessible free of charge to any user with internet access. Any costs related to network access, in particular connection or hardware fees, remain the user's responsibility.",
+      "p2": "We reserve the right to modify, suspend, or temporarily interrupt all or part of the site, in particular for maintenance or update purposes."
+    },
+    "section3": {
+      "heading": "3. Use of the service",
+      "intro": "The user agrees to use the site responsibly and in accordance with applicable laws and regulations.",
+      "list": [
+        "Not to use the site for fraudulent or illegal purposes.",
+        "Not to attempt to disrupt the operation of the site.",
+        "Not to infringe on the rights or safety of other users.",
+        "Not to introduce malicious content or content likely to damage the service."
+      ]
+    },
+    "section4": {
+      "heading": "4. User account",
+      "p1": "Where creating an account is necessary to access certain services, the user agrees to provide accurate, complete, and up-to-date information.",
+      "p2": "The user is responsible for the confidentiality of their login credentials and for any activity carried out from their account."
+    },
+    "section5": {
+      "heading": "5. Intellectual property",
+      "p1": "All elements present on the site, including texts, images, logos, graphics, interfaces, content, and software, are protected by intellectual property provisions.",
+      "p2": "Any reproduction, representation, modification, or use of all or part of the site without prior authorization may constitute an infringement of intellectual property rights."
+    },
+    "section6": {
+      "heading": "6. Liability",
+      "p1": "We do our best to ensure the accuracy and availability of the information on the site. However, we cannot guarantee that the site will be permanently available or error-free.",
+      "p2": "The user acknowledges using the site at their own responsibility and remains responsible for their equipment, their internet connection, and their use of the services."
+    },
+    "section7": {
+      "heading": "7. Personal data",
+      "p1": "As part of the use of the site, certain personal data may be collected and processed.",
+      "p2": "This processing is carried out in accordance with applicable regulations on the protection of personal data.",
+      "p3": "For more information, please refer to our privacy policy."
+    },
+    "section8": {
+      "heading": "8. External links",
+      "p1": "The site may contain links to external sites or services. We are not responsible for the content, availability, or practices of these third-party sites."
+    },
+    "section9": {
+      "heading": "9. Changes to the terms",
+      "p1": "We reserve the right to modify these Terms of Use at any time in order to adapt them to changes in the site, its services, or applicable regulations.",
+      "p2": "The new terms take effect as soon as they are published on the site."
+    },
+    "section10": {
+      "heading": "10. Applicable law",
+      "p1": "These Terms of Use are governed by the law applicable in the country where the site publisher is established.",
+      "p2": "In the event of a dispute, the parties will endeavor to seek an amicable solution before any legal proceedings."
+    },
+    "section11": {
+      "heading": "11. Contact",
+      "p1": "For any questions regarding these Terms of Use, you may contact us using the contact details available on our site."
+    },
+    "backHome": "Back to home",
+    "lastUpdate": "Last updated: September 1, 2026"
+  },
+  "geoConsentNotice": {
+    "dataLabel": "Data concerned:",
+    "dataValue": "raw GPS coordinates (latitude, longitude).",
+    "purposeLabel": "Purpose:",
+    "purposeValue": "filter job offers based on the user's geographic distance.",
+    "legalBasisLabel": "Legal basis:",
+    "legalBasisValue": "your consent, given through the permission requested by your browser.",
+    "recipientsLabel": "Recipients:",
+    "recipientsValue": "GéoEmploi's technical and product team (technical logs); IGN for map tiles and geocoding (Adresse API / Géoplateforme).",
+    "transferLabel": "Transfer outside the EU:",
+    "transferValue": "none; data hosted in France.",
+    "retentionLabel": "Retention period:",
+    "retentionValue": "volatile data, used only for the duration of the request, with no database storage.",
+    "rightsLabel": "Your rights:",
+    "rightsValue": "access, erasure, restriction, and withdrawal of consent at any time, including from your profile page."
+  },
+  "jobOffer": {
+    "pageTitle": "Create a job offer",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Permanent contract - multi-skilled employee",
+    "titleRequired": "Job title is required",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Job description",
+    "descriptionRequired": "Description is required",
+    "communeLabel": "Location",
+    "communePlaceholder": "35000 Rennes",
+    "communeRequired": "Location is required",
+    "submitButton": "Post the offer",
+    "createSuccess": "Offer created successfully",
+    "createError": "Unable to create the offer"
+  },
+  "login": {
+    "welcomeTitle": "Welcome",
+    "subtitle": "Log in to your account.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "example@example.com",
+    "emailRequired": "Email address is required",
+    "emailInvalid": "Invalid email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "passwordRequired": "Password is required",
+    "submitButton": "Log in",
+    "noAccount": "Don't have an account yet?",
+    "registerLink": "Sign up",
+    "loginSuccess": "Logged in successfully",
+    "loginError": "Incorrect credentials",
+    "invalidCredentials": "Invalid credentials",
+    "noToken": "No access_token received from the server"
+  },
+  "profile": {
+    "pageTitle": "Edit my profile",
+    "subtitle": "Edit your personal and professional information.",
+    "firstNameLabel": "First name",
+    "firstNamePlaceholder": "First name",
+    "firstNameRequired": "First name is required",
+    "lastNameLabel": "Last name",
+    "lastNamePlaceholder": "Last name",
+    "lastNameRequired": "Last name is required",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "example@example.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email",
+    "skillsLabel": "Skills",
+    "skillsPlaceholder": "E.g.: React, JavaScript, Marketing...",
+    "skillsRequired": "Skills are required",
+    "experienceLabel": "Experience",
+    "experiencePlaceholder": "E.g.: 2 years",
+    "experienceRequired": "Experience is required",
+    "availabilityLabel": "Availability",
+    "availabilityPlaceholder": "E.g.: Full-time",
+    "availabilityRequired": "Availability is required",
+    "companyNameLabel": "Company",
+    "companyNamePlaceholder": "Your company's name",
+    "companyNameRequired": "Company name is required",
+    "companyDescLabel": "Description of your company",
+    "companyDescPlaceholder": "E.g.: Security company",
+    "companyDescRequired": "Description is required",
+    "saveButton": "Save changes",
+    "saving": "Saving...",
+    "logoutButton": "Log out",
+    "exportButton": "Export my data",
+    "exportSuccess": "Export successful!",
+    "exportError": "Unable to export data",
+    "exportEmptyError": "No data to export",
+    "saveSuccess": "Profile updated successfully!",
+    "userUpdateError": "Error updating the user",
+    "profileUpdateError": "Error updating the profile",
+    "unsupportedRole": "Unsupported user role: {{role}}",
+    "fetchProfileError": "Unable to retrieve the profile",
+    "privacyHeading": "Privacy & geolocation",
+    "privacyText": "With your consent, GéoEmploi uses your location to display the job offers closest to you on the map.",
+    "consentStatusLabel": "Current status:",
+    "consentAccepted": "Geolocation allowed",
+    "consentDeclined": "Geolocation declined",
+    "consentUnset": "No choice recorded",
+    "consentAcceptedToast": "Geolocation allowed.",
+    "consentDeclinedToast": "Geolocation declined.",
+    "viewNoticeButton": "View the information notice",
+    "allowGeoButton": "Allow geolocation",
+    "declineGeoButton": "Decline geolocation",
+    "noticeTitle": "Information notice — Geolocation",
+    "noticeIntro": "With your permission, GéoEmploi uses your geolocation to display the job offers closest to you.",
+    "closeButton": "Close",
+    "backLink": "← Back",
+    "deleteAccountButton": "Delete account",
+    "deleteAccountTitle": "Delete account?",
+    "deleteAccountText": "Are you sure you want to delete this account?",
+    "deleteAccountConfirm": "Delete",
+    "deleteAccountCancel": "Cancel",
+    "deleteAccountSuccess": "Profile deleted successfully",
+    "deleteAccountError": "Unable to delete the profile."
+  },
+  "register": {
+    "invalidRoleTitle": "Invalid account type",
+    "invalidRoleText": "Please choose an account type.",
+    "backButton": "Back",
+    "titleSeeker": "Create a Seeker account",
+    "titleRH": "Create an HR account",
+    "subtitle": "Fill in your details to get started.",
+    "firstNameLabel": "First name",
+    "firstNamePlaceholder": "First name",
+    "firstNameRequired": "First name is required",
+    "lastNameLabel": "Last name",
+    "lastNamePlaceholder": "Last name",
+    "lastNameRequired": "Last name is required",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "example@example.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "passwordRequired": "Password is required",
+    "skillsLabel": "Skills",
+    "skillsPlaceholder": "E.g.: React, JavaScript, Marketing...",
+    "skillsRequired": "Skills are required",
+    "experienceLabel": "Experience",
+    "experiencePlaceholder": "E.g.: 2 years",
+    "experienceRequired": "Experience is required",
+    "availabilityLabel": "Availability",
+    "availabilityPlaceholder": "E.g.: Full-time",
+    "availabilityRequired": "Availability is required",
+    "companyNameLabel": "Company",
+    "companyNamePlaceholder": "Your company's name",
+    "companyNameRequired": "Company name is required",
+    "companyDescLabel": "Description of your company",
+    "companyDescPlaceholder": "E.g.: Security company",
+    "companyDescRequired": "Description is required",
+    "submitSeeker": "Create my Seeker account",
+    "submitRH": "Create my HR account",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "seekerCreateError": "Error creating the Seeker account",
+    "rhCreateError": "Error creating the HR account",
+    "createSuccess": "Account created successfully.",
+    "createError": "Unable to create your account."
+  },
+  "footer": {
+    "text": "Technical demonstrator, does not constitute a public service in operation."
+  },
+  "navbar": {
+    "siteName": "GéoEmploi",
+    "notificationsAria": "Notifications",
+    "aboutLink": "About",
+    "applicationsLink": "Applications",
+    "myOffersLink": "View my offers",
+    "createOfferLink": "Create an offer",
+    "adminLink": "Administration",
+    "accountAria": "Account",
+    "notificationsTitle": "Notifications",
+    "noNotifications": "No notifications at the moment.",
+    "typeApplication": "Application",
+    "typeJob": "Offer",
+    "typeSystem": "System",
+    "read": "read",
+    "unread": "unread",
+    "markAsRead": "Mark as read",
+    "markingAsRead": "Saving...",
+    "close": "Close",
+    "closeAria": "Close",
+    "fetchError": "Unable to load your notifications.",
+    "markReadError": "Unable to mark the notification as read."
+  }
+}

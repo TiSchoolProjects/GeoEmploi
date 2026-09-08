@@ -1,3 +1,5 @@
+import i18n from "../i18n"; // ajuste le chemin vers ton fichier d'initialisation i18n
+
 const GEO_CONSENT_KEY = "geoConsent";
 
 export function getGeoConsent() {
@@ -14,7 +16,7 @@ export function setGeoConsent(status) {
   try {
     localStorage.setItem(GEO_CONSENT_KEY, JSON.stringify(value));
   } catch (error) {
-    console.error("Impossible d'enregistrer le consentement :", error);
+    console.error(i18n.t("consent.saveError", "Impossible d'enregistrer le consentement :"), error);
   }
   return value;
 }
