@@ -66,8 +66,10 @@ async function geocode(address: string): Promise<Partial<Job>> {
 
 
       return {
+        commune: first.properties.city || first.properties.name || address,
         lat,
         lng,
+        locationPrecision: 'commune',
         geocodingSource: 'api-adresse',
         geocodingScore: score,
         geocodedAt: new Date(),
@@ -75,9 +77,11 @@ async function geocode(address: string): Promise<Partial<Job>> {
       }
     } catch (error) {
       console.log(`Erreur API pour "${address}"`);
-      return{
+      return {
+        commune: 'Commune à vérifier',
         lat: null,
         lng: null,
+        locationPrecision: 'commune',
         geocodingScore: null,
         geocodingSource: "api-adresse",
         geocodedAt: null,
@@ -117,17 +121,7 @@ async function main() {
 
   const repo = dataSource.getRepository(Job);
 
-  const toHandle = await repo.createQueryBuilder("job").where(
-    `job."GeocodingStatus" != :valid 
-    OR job."geocodingSource" IS DISTINCT FROM :source
-    OR job.lat IS NULL
-    OR job.lng IS NULL
-    `,
-    {
-      valid: GeoCodingStatus.VALID,
-      source: "api-adresse",
-    },
-  ).getMany();
+  const toHandle = await repo.find();
 
   console.log(`${toHandle.length} offre(s) à Re-géocoder.\n`);
 

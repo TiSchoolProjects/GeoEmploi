@@ -50,8 +50,8 @@ export class JobsController {
 
   @Public()
   @Get('/geocode')
-  async testGeocode(@Query('address') address: string) {
-    return await this.jobsService.geocodeAdress(address);
+  async testGeocode(@Query('commune') commune: string) {
+    return await this.jobsService.geocodeAdress(commune);
   }
 
   @Roles(UserRole.ADMIN)
