@@ -30,7 +30,10 @@ export function findOneDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Find a seeker through their id' }),
+        ApiParam({ name: 'id', description: 'Seeker id' }),
         ApiResponse({ status: 200, description: 'Found seeker info', type: Seeker }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
         ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
     );
 }
@@ -39,12 +42,15 @@ export function updateDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Update seeker info' }),
+        ApiParam({ name: 'id', description: 'Seeker id' }),
         ApiParam({
             name: 'updateSeekerDto',
             type: UpdateSeekerDto,
             description: 'New seeker information',
         }),
         ApiResponse({ status: 200, description: 'Updated seeker info', type: Seeker }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
         ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
     );
 }
@@ -53,7 +59,10 @@ export function removeDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Remove seeker from database' }),
+        ApiParam({ name: 'id', description: 'Seeker id' }),
         ApiResponse({ status: 200, description: 'Removed seeker', type: DeleteResult }),
+        ApiResponse({ status: 401, description: 'Invalid credentials', type: undefined }),
+        ApiResponse({ status: 403, description: 'Missing permissions', type: undefined }),
         ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
     );
 }
