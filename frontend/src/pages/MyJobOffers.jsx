@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
-import "../CSS/MyJobOffers.css";
+import "../CSS/Dashboard.css";
 import { getToken } from "../utils/auth";
 import { apiFetch } from "../api/client";
 
@@ -83,9 +83,7 @@ export default function MyJobOffers() {
     setApplicationsLoading(true);
 
     try {
-
       const data = await apiFetch(`/applications/job/${offer.id}`);
-
       setApplications(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error(error);
@@ -187,8 +185,8 @@ const updateApplicationStatus = async (
     <>
       <NavBar />
 
-      <main className="job-offers-page">
-        <div className="job-offers-header">
+      <main className="dashboard-page">
+        <div className="dashboard-header">
           <h1>Mes offres</h1>
           <p>Retrouvez ici toutes les offres que vous avez publiées.</p>
         </div>
@@ -206,47 +204,47 @@ const updateApplicationStatus = async (
         )}
 
         {!loading && !error && offers.length === 0 && (
-          <div className="empty-offers">
+          <div className="empty-items">
             <h2>Aucune offre publiée</h2>
             <p>Vous n'avez pas encore créé d'offre d'emploi.</p>
           </div>
         )}
 
         {!loading && !error && offers.length > 0 && (
-          <div className="offers-gallery">
+          <div className="items-gallery">
             {offers.map((offer) => (
-              <div className="offer-card" key={`offer-${offer.id}`}>
-                <div className="offer-card-content">
+              <div className="item-card" key={`offer-${offer.id}`}>
+                <div className="item-card-content">
                   <h2>{offer.title}</h2>
 
-                  <p className="offer-views">
+                  <p className="item-views">
                     {offer.views ?? 0} vue{(offer.views ?? 0) > 1 ? "s" : ""}
                   </p>
 
                   {offer.employer && (
-                    <div className="offer-company-info">
+                    <div className="item-company-info">
                       {offer.employer.companyName && (
-                        <p className="offer-company"> Entreprise: {offer.employer.companyName}</p>
+                        <p className="item-company"> Entreprise: {offer.employer.companyName}</p>
                       )}
                       {offer.employer.email && <p>{offer.employer.email}</p>}
                     </div>
                   )}
 
                   {offer.commune && (
-                    <p className="offer-location"> Commune: {offer.commune}</p>
+                    <p className="item-location"> Commune: {offer.commune}</p>
                   )}
 
                   {offer.description && (
-                    <p className="offer-description"> {" "} Description: {truncateDescription(offer.description, 120)}</p>
+                    <p className="item-description"> {" "} Description: {truncateDescription(offer.description, 120)}</p>
                   )}
                 </div>
 
                 {/* ACTIONS */}
-                <div className="offer-card-footer">
+                <div className="item-card-footer">
                   {/* DETAILS */}
                   <button
                     type="button"
-                    className="offer-action-btn details-btn"
+                    className="item-action-btn details-btn"
                     onClick={() => handleDetails(offer)}
                     title="Voir les détails"
                   >
@@ -256,7 +254,7 @@ const updateApplicationStatus = async (
                   {/* EDIT */}
                   <button
                     type="button"
-                    className="offer-action-btn edit-btn"
+                    className="item-action-btn edit-btn"
                     onClick={() => handleEdit(offer)}
                     disabled={deletingId === offer.id}
                     title="Modifier l'offre"
@@ -267,7 +265,7 @@ const updateApplicationStatus = async (
                   {/* DELETE */}
                   <button
                     type="button"
-                    className="offer-action-btn delete-btn"
+                    className="item-action-btn delete-btn"
                     onClick={() => handleDelete(offer.id)}
                     disabled={deletingId === offer.id}
                     title="Supprimer l'offre"
@@ -340,55 +338,44 @@ const updateApplicationStatus = async (
                   <h3>
                     Candidatures ({applications.length})
                   </h3>
-                              
+
                   {applicationsLoading && (
                     <p>Chargement des candidatures...</p>
                   )}
-                
+
                   {applicationsError && (
                     <p className="error-message">
                       {applicationsError}
                     </p>
                   )}
-                
+
                   {!applicationsLoading &&
                     !applicationsError &&
                     applications.length === 0 && (
-                      <p>
-                        Aucune candidature reçue pour cette offre.
-                      </p>
+                      <p>Aucune candidature reçue pour cette offre.</p>
                     )}
-                
+
                   {!applicationsLoading &&
                     applications.map((application) => {
                       const seeker = application.jobSeeker;
                       const profile = seeker?.seekerProfile;
-                    
+
                       return (
                         <div
                           className="candidate-card"
                           key={`application-${application.id}`}
                         >
-                          <h4>
-                            {seeker?.firstname || "Prénom"}{" "}
-                            {seeker?.lastname || "Nom"}
-                          </h4>
-                      
+                          <h4>{seeker?.firstname || "Prénom"}{" "} {seeker?.lastname || "Nom"} </h4>
+
                           <div className="detail-row">
                             <strong>Email</strong>
-                            <span>
-                              {seeker?.email || "Non renseigné"}
-                            </span>
+                            <span>{seeker?.email || "Non renseigné"}</span>
                           </div>
-                      
+
                           <div className="detail-row">
                             <strong>Compétences</strong>
-                      
-                            <span>
-                              {profile?.skills?.length
-                                ? profile.skills.join(", ")
-                                : "Non renseignées"}
-                            </span>
+
+                            <span>{profile?.skills?.length ? profile.skills.join(", ") : "Non renseignées"}</span>
                           </div>
                               
                           <div className="detail-row">

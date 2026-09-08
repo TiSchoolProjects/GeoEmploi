@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../CSS/Login.css";
+import "../CSS/Form.css";
 import NavBar from "../components/Navbar";
 import { getToken, logout } from "../utils/auth";
 import { apiFetch } from "../api/client";

@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
-import Cgu from "./pages/Cgu";
+import More from "./pages/Cgu";
 import Home from "./pages/Home";
 import MapPage from "./pages/MapPage";
 import Profile from "./pages/Profile";
@@ -40,7 +40,7 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/account" element={<Account />} />
-            <Route path="/Cgu" element={<Cgu />} />
+            <Route path="/more" element={<More />} />
             <Route path="/register/:role" element={<Register />} />
             <Route path="/map" element={<MapPage />} />
             {/* Login */}

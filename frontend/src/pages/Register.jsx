@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../CSS/Login.css";
+import "../CSS/Form.css";
 import NavBar from "../components/Navbar";
 // import { seekerpath } from '../utils/config.js';
 
