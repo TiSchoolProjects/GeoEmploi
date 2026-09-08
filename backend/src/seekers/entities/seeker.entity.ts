@@ -8,6 +8,10 @@ export class Seeker {
   @PrimaryColumn()
   userId: number;
 
+  @OneToOne('User', (user: User) => user.seekerProfile, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user: User;
+
   @ApiProperty({ description: 'Array of skills', example: ['Management', 'Python', 'Fullstack'] })
   @Column('simple-array', { nullable: true })
   skills: string[];
@@ -20,7 +24,4 @@ export class Seeker {
   @Column({ nullable: true })
   availability: string;
 
-  @OneToOne('User', (user: User) => user.seekerProfile, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' })
-  user: User;
 }

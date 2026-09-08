@@ -21,7 +21,7 @@ export class SeekersService {
   }
 
   async findOne(userId: number) {
-    const seeker = await this.seekerRepository.findOne({ where: { userId } });
+    const seeker = await this.seekerRepository.findOne({ where: { userId }, relations: { user: true } });
 
     if (!seeker) {
       throw new NotFoundException("Rechercheur d'emploi non trouvé.");
