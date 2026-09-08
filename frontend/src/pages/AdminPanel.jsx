@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiFetch } from "../api/client";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
 import "../CSS/AdminPanel.css"
 
@@ -74,9 +75,16 @@ export default function AdminPanel() {
       return
     }
 
-    const confirmed = window.confirm("Supprimer définitivement cette offre ?")
-
-    if (!confirmed) return 
+    const result = await Swal.fire({
+          title: "Supprimer le job ?",
+          text: "Êtes-vous sûr de vouloir supprimer ce job ?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Supprimer",
+          cancelButtonText: "Annuler",
+          reverseButtons: true,
+        });
+    if (!result.isConfirmed) return;
 
     try {
       await apiFetch(`/jobs/${jobId}`, {
@@ -107,8 +115,16 @@ export default function AdminPanel() {
   }
 
   const deleteJobToVerify = async (jobId) =>  {
-    const confirmed = window.confirm("Supprimer définitivement cette offre ?")
-    if (!confirmed) return
+    const result = await Swal.fire({
+          title: "Supprimer l'offre ?",
+          text: "Êtes-vous sûr de vouloir supprimer cette offre ?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Supprimer",
+          cancelButtonText: "Annuler",
+          reverseButtons: true,
+        });
+    if (!result.isConfirmed) return;
 
     try {
       await apiFetch(`/jobs/${jobId}`, {method: "DELETE"})
@@ -196,6 +212,9 @@ export default function AdminPanel() {
 
       setUsers((current) => current.map((user) => user.id === userId ? {
         ...user, status: updated.status,}: user))
+      
+      setEmployers((current) => current.map((employer) => employer.userId === userId ? {
+        ...employer, user: { ...employer.user, status: updated.status}} : employer))
 
       toast.success( status === "suspended" ? "Utilisateur suspendu" : "Utilisateur réactivé")
     } catch (error) {
@@ -210,11 +229,16 @@ export default function AdminPanel() {
       return
     }
 
-    const confirmed = window.confirm("Supprimer définitivement cet utilisateur ?")
-
-    if (!confirmed) {
-      return
-    }
+    const result = await Swal.fire({
+          title: "Supprimer le compte ?",
+          text: "Êtes-vous sûr de vouloir supprimer ce compte ?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Supprimer",
+          cancelButtonText: "Annuler",
+          reverseButtons: true,
+        });
+    if (!result.isConfirmed) return;
 
     try {
       await apiFetch(`/users/${userId}`, { method: "DELETE",})
@@ -819,7 +843,7 @@ export default function AdminPanel() {
                     </div>
 
                     <div className="admin-employer-actions">
-                          {employer.verifiedAt ? (
+                          {employer.verifiedAt ? (  
                       <button
                         type="button"
                         className="admin-unverify-btn"

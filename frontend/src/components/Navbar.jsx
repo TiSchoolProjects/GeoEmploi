@@ -73,12 +73,13 @@ export default function NavBar() {
           method: "PATCH",
         }
       );
-      const updatedNotification = {...selectedNotification, read: true, isRead: true,};
+      const readAt = new Date().toISOString();
+      const updatedNotification = {...selectedNotification,readAt};
       setSelectedNotification(updatedNotification);
       setNotifications((prevNotifications) =>
         prevNotifications.map((notification) =>
           notification.id === selectedNotification.id
-            ? {...notification, read: true, isRead: true} : notification
+            ? {...notification, readAt} : notification
         )
       );
     } catch (err) {
@@ -111,7 +112,6 @@ export default function NavBar() {
               <img src={notif} alt="Notifications" className="notif-logo" />
             </button>
           )}
-          <Link to="/Cgu" className="nav-link">À propos</Link>
           {user?.role === "seeker" && (
             <Link to="/my-application" className="nav-link">Candidatures</Link>
           )}
@@ -154,7 +154,7 @@ export default function NavBar() {
                       {notification.type === "job" && "Offre"}
                       {notification.type === "system" && "Système"}
                     </span>
-                    <span className="notification-date">{notification.date}</span>
+                    <span className="notification-date">{notification.readAt ? "lu" : "non lu"}</span>
                   </div>
                   <h3>{notification.title}</h3>
                   <p>{notification.message}</p>
@@ -165,8 +165,7 @@ export default function NavBar() {
             {/* ACTIONS */}
             {selectedNotification && (
               <div className="modal-actions">
-                {!selectedNotification.read &&
-                  !selectedNotification.isRead && (
+                {!selectedNotification.readAt === null &&
                     <button
                       type="button"
                       className="mark-read-btn"
@@ -175,7 +174,7 @@ export default function NavBar() {
                     >
                       {loading ? "Enregistrement..." : "Marquer comme lue"}
                     </button>
-                  )}
+                  }
               <button type="button" className="modal-close-btn"onClick={closeNotification}>Fermer</button>
             </div>
             )}
