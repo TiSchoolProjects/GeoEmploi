@@ -177,6 +177,36 @@ export default function EditProfile() {
     navigate("/login");
   };
 
+  const handleExportData = async () => {
+    try {
+      const exportData = await apiFetch(`/export/json`, {
+        method: "GET"
+      })
+
+      if (!exportData) {
+        throw new Error("Aucune donnée à exporter");
+      }
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+        type: "application/json",
+      });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `mes-donnees-${user.sub}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      toast.success("Export réussi !");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || "Impossible d'exporter les données");
+    }
+  };
+
   return (
     <div className="page">
       <NavBar />
@@ -327,6 +357,12 @@ export default function EditProfile() {
           </button>
 
         </form>
+
+        <div className="export-btn">
+          <button type="button" onClick={handleExportData}>
+            Exporter mes données
+          </button>
+        </div>
 
         {/* FOOTER */}
         <p className="form-footer"><Link to="/home">← Retour</Link></p>
