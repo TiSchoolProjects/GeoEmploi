@@ -2,7 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, LessThanOrEqual, Repository, Not } from 'typeorm';
+import { IsNull, LessThanOrEqual, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
 
 @Injectable()
@@ -189,7 +189,7 @@ export class JobsService {
     return await this.jobRepository.increment({id}, 'views', 1,);
   }
 
-  async getView(id: number): Promise<number> {
+  async getView(id: number): Promise<number> {  
     const job = await this.jobRepository.findOne({where: {id},});
 
     if (!job) {
@@ -197,16 +197,6 @@ export class JobsService {
     }
 
     return job.views;
-  }
-
-  async purge(): Promise<void> {
-    const archivedJobs = await this.jobRepository.find({where: {archivedAt: Not(IsNull())}});
-
-    if (!archivedJobs) {
-      throw new NotFoundException("Offres non trouvées.");
-    }
-
-    this.jobRepository.remove(archivedJobs);
   }
 
 }

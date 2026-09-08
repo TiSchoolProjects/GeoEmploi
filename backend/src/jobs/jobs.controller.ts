@@ -98,10 +98,4 @@ export class JobsController {
     this.jobsService.incrementView(id);
   }
 
-  @Roles(UserRole.ADMIN)
-  @Delete('/purge')
-  purge() {
-    return this.jobsService
-  }
-
 }
