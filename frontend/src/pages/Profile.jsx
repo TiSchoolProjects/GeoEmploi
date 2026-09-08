@@ -349,9 +349,7 @@ export default function EditProfile() {
             <span> {isSubmitting ? "Modification..." : "Enregistrer les modifications"}</span>
             {!isSubmitting && (<span className="arrow">→</span>)}
           </button>
-          <button type="button" className="logout-btn" onClick={() => ProfileDelete(user.sub)}>
-            Supprimer le compte
-          </button>
+          
           <button type="button" className="logout-btn" onClick={handleLogout}>
             Se déconnecter
           </button>
@@ -366,6 +364,9 @@ export default function EditProfile() {
 
         {/* FOOTER */}
         <p className="form-footer"><Link to="/home">← Retour</Link></p>
+        <button type="button" className="form-footer-button" onClick={() => ProfileDelete(user.sub)}>
+            Supprimer le compte
+          </button>
       </div>
     </div>
   );
