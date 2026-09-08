@@ -2,11 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe,
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
-import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, updateDoc, archiveDoc, removeDoc } from './job.controller.docs';
+import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, updateDoc, archiveDoc, removeDoc, testGeocodeDoc, findAdminDoc, increaseViewDoc } from './job.controller.docs';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
-import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('jobs')
 export class JobsController {
@@ -48,12 +47,14 @@ export class JobsController {
     return this.jobsService.findByEmployer(id);
   }
 
+  @testGeocodeDoc()
   @Public()
   @Get('/geocode')
   async testGeocode(@Query('commune') commune: string) {
     return await this.jobsService.geocodeAdress(commune);
   }
 
+  @findAdminDoc()
   @Roles(UserRole.ADMIN)
   @Get('to-verify')
   findAdmin() {
@@ -92,6 +93,7 @@ export class JobsController {
     return this.jobsService.remove(id, req.user.userId, req.user.role);
   }
 
+  @increaseViewDoc()
   @Public()
   @Patch('views/:id')
   increaseView(@Param('id', ParseIntPipe) id: number) {
