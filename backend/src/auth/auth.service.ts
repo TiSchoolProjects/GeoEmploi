@@ -9,8 +9,8 @@ import { Seeker } from '../seekers/entities/seeker.entity';
 import { User, UserStatus } from '../users/entities/user.entity';
 import { UserRole } from './roles.enum';
 import { ConflictException } from '@nestjs/common';
-import { Employer } from '../employers/entities/employer.entity.js';
-import { RegisterEmployerDto } from './dto/register-employer.dto.js';
+import { Employer } from '../employers/entities/employer.entity';
+import { RegisterEmployerDto } from './dto/register-employer.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
