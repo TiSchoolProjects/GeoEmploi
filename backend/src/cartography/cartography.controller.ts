@@ -12,7 +12,7 @@ export class CartographyController {
   async getTiles(@Param('z', ParseIntPipe) z: number, @Param('x', ParseIntPipe) x: number,
                  @Param('y', ParseIntPipe) y: number, @Res() response: Response,) {
     const tile = await this.cartographyService.getTile(z, x, y);
-    
+
     response.setHeader(
       'Content-Type',
       'image/png',

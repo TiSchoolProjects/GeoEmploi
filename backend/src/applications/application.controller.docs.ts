@@ -38,7 +38,7 @@ export function findOneDoc() {
 export function findBySeekerDoc() {
     return applyDecorators(
         ApiBearerAuth('JWT-Auth'),
-        ApiOperation({ summary: 'Find an application through seeked id' }),
+        ApiOperation({ summary: 'Find an application through seeker id' }),
         ApiResponse({ status: 200, description: 'List of all applications from seeker', type: [Application] }),
         ApiResponse({ status: 404, description: 'No seeker found with given id', type: undefined })
     );

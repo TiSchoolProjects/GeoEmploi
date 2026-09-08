@@ -155,20 +155,12 @@ async function seed() {
   });
 
   if (!job) {
-    job = await jobRepository.save({
+    job = jobRepository.create({
       employerId: employerUser.id,
       title: jobTitle,
       description:
         'NovaTech Solutions recherche un développeur Full Stack pour participer au développement et à la maintenance de ses applications web. Vous travaillerez principalement avec NestJS, React, PostgreSQL et Docker au sein d’une équipe produit pluridisciplinaire.',
-      commune: '75008 Paris',
-      lat: null,
-      lng: null,
-      locationPrecision: 'commune',
-      geocodingSource: null,
-      geocodingScore: null,
-      geocodedAt: null,
-      GeocodingStatus: GeoCodingStatus.TO_VERIFY,
-      archivedAt: null,
+      commune: 'Paris',
     });
 
     console.log(`Offre créée : ${job.title}`);
