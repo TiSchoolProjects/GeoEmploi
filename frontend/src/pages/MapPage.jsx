@@ -6,6 +6,8 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import '../CSS/MapPage.css'
 import NavBar from "../components/Navbar";
 import { apiFetch } from '../api/client'
+import { getGeoConsent, setGeoConsent} from './Consent'
+import GeoConsentNotice from './GeoconsentNotice'
 setWorkerUrl(workerUrl)
 
 export default function MapPage() {
@@ -14,7 +16,7 @@ export default function MapPage() {
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
-  const [showLocationModal, setShowLocationModal] = useState(true)
+  const [showLocationModal, setShowLocationModal] = useState(() => !getGeoConsent())
   const [reportOffer, setReportOffer] = useState(null)
   const [reportReason, setReportReason] = useState("fraud")
   const [reportDescription, setReportDescription] = useState("")
@@ -395,9 +397,7 @@ export default function MapPage() {
 
   }, [])
 
-  const handleAcceptLocation = () => {
-    setShowLocationModal(false)
-
+  const applyGeolocation = () => {
     if (!navigator.geolocation) return
 
     navigator.geolocation.getCurrentPosition(
@@ -416,9 +416,23 @@ export default function MapPage() {
     )
   }
 
+  const handleAcceptLocation = () => {
+    setShowLocationModal(false)
+    setGeoConsent("accepted")
+    applyGeolocation()
+  }
+
   const handleDeclineLocation = () => {
     setShowLocationModal(false)
+    setGeoConsent("declined")
   }
+
+  useEffect(() => {
+    const consent = getGeoConsent()
+    if (consent?.status === "accepted") {
+      applyGeolocation()
+    }
+  }, [])
 
   const searchLocation = async (e) => {
     e.preventDefault()
@@ -509,15 +523,7 @@ export default function MapPage() {
               afficher les offres d'emploi les plus proches de vous.
             </p>
 
-            <ul className="locationModalList">
-              <li><strong>Données concernées :</strong> coordonnées GPS brutes (latitude, longitude).</li>
-              <li><strong>Finalité :</strong> filtrer les offres d'emploi selon la distance géographique de l'utilisateur.</li>
-              <li><strong>Base légale :</strong> votre consentement, exprimé via l'autorisation demandée par le navigateur.</li>
-              <li><strong>Destinataires :</strong> équipe technique et produit de GéoEmploi (logs techniques) ; IGN pour les tuiles cartographiques et le géocodage (API Adresse / Géoplateforme).</li>
-              <li><strong>Transfert hors UE :</strong> aucun ; données hébergées en France.</li>
-              <li><strong>Durée de conservation :</strong> donnée volatile, utilisée uniquement le temps de la requête, sans stockage en base de données.</li>
-              <li><strong>Vos droits :</strong> accès, effacement, limitation, et retrait du consentement à tout moment via les paramètres de géolocalisation de votre navigateur.</li>
-            </ul>
+            <GeoConsentNotice />
 
             <div className="locationModalActions">
               <button type="button" className="locationModalDecline" onClick={handleDeclineLocation}>
