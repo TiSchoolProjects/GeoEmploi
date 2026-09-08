@@ -13,7 +13,7 @@ export class UpdateJobDto {
   @IsOptional()
   description: string;
 
-  @ApiPropertyOptional({ description: 'Job address', example: 'Rennes, 35000'})
+  @ApiPropertyOptional({ description: 'Job city', example: 'Rennes, 35000'})
   @IsString()
   @IsOptional()
   commune: string;

@@ -6,6 +6,8 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import '../CSS/MapPage.css'
 import NavBar from "../components/Navbar";
 import { apiFetch } from '../api/client'
+import { getGeoConsent, setGeoConsent} from './Consent'
+import GeoConsentNotice from './GeoconsentNotice'
 setWorkerUrl(workerUrl)
 
 export default function MapPage() {
@@ -14,6 +16,7 @@ export default function MapPage() {
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
+  const [showLocationModal, setShowLocationModal] = useState(() => !getGeoConsent())
   const [reportOffer, setReportOffer] = useState(null)
   const [reportReason, setReportReason] = useState("fraud")
   const [reportDescription, setReportDescription] = useState("")
@@ -372,21 +375,6 @@ export default function MapPage() {
     map.on('moveend', renderMarkersInView)
     map.on('load', handleLoad)
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (geoPosition) => {
-          if (hasSearchedRef.current) return
-
-          const userCoordinates = [geoPosition.coords.longitude, geoPosition.coords.latitude]
-          setCoordinates(userCoordinates)
-          map.setCenter(userCoordinates)
-        },
-        (error) => {
-          console.warn('Géolocalisation indisponible, position par défaut conservée :', error.message)
-        }
-      )
-    }
-
     const fetchJobOffers = async () => {
       try {
         const data = await apiFetch('/jobs');
@@ -409,6 +397,43 @@ export default function MapPage() {
 
   }, [])
 
+  const applyGeolocation = () => {
+    if (!navigator.geolocation) return
+
+    navigator.geolocation.getCurrentPosition(
+      (geoPosition) => {
+        if (hasSearchedRef.current) return
+
+        const userCoordinates = [geoPosition.coords.longitude, geoPosition.coords.latitude]
+        setCoordinates(userCoordinates)
+        if (mapRef.current) {
+          mapRef.current.setCenter(userCoordinates)
+        }
+      },
+      (error) => {
+        console.warn('Géolocalisation indisponible, position par défaut conservée :', error.message)
+      }
+    )
+  }
+
+  const handleAcceptLocation = () => {
+    setShowLocationModal(false)
+    setGeoConsent("accepted")
+    applyGeolocation()
+  }
+
+  const handleDeclineLocation = () => {
+    setShowLocationModal(false)
+    setGeoConsent("declined")
+  }
+
+  useEffect(() => {
+    const consent = getGeoConsent()
+    if (consent?.status === "accepted") {
+      applyGeolocation()
+    }
+  }, [])
+
   const searchLocation = async (e) => {
     e.preventDefault()
 
@@ -417,7 +442,7 @@ export default function MapPage() {
     setSearchError("")
 
     const response = await fetch(
-      `http://localhost:4242/jobs/geocode?address=${encodeURIComponent(position)}`
+      `http://localhost:4242/jobs/geocode?commune=${encodeURIComponent(position)}`
     )
 
     const data = await response.json()
@@ -482,6 +507,36 @@ export default function MapPage() {
   return (
     <div className="MapPage">
       <NavBar/>
+
+      {showLocationModal && (
+        <div className="locationModalOverlay">
+          <div
+            className="locationModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="location-modal-title"
+          >
+            <h2 id="location-modal-title">Utilisation de votre position</h2>
+
+            <p>
+              Avec votre autorisation, GéoEmploi utilise votre géolocalisation pour
+              afficher les offres d'emploi les plus proches de vous.
+            </p>
+
+            <GeoConsentNotice />
+
+            <div className="locationModalActions">
+              <button type="button" className="locationModalDecline" onClick={handleDeclineLocation}>
+                Refuser
+              </button>
+              <button type="button" className="locationModalAccept" onClick={handleAcceptLocation}>
+                J'accepte
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <form className="searchBar" onSubmit={searchLocation}>
       <label htmlFor="location-search" className="visuallyHidden">
           Rechercher une commune ou une ville

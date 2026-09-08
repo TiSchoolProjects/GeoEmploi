@@ -30,8 +30,8 @@ export class ApplicationsService {
   async apply(jobSeekerId: number, jobId: number): Promise<Application> {
     const job = await this.JobRepository.findOne({ where: { id: jobId }, });
 
-    if (!job) {
-      throw new NotFoundException("Offre non trouvée.");
+    if (!job || job.archivedAt !== null) {
+      throw new NotFoundException("L'offre demandée n'existe pas.");
     }
 
     const exist = await this.AppRepository.findOne({ where: { jobSeekerId, jobId } });
