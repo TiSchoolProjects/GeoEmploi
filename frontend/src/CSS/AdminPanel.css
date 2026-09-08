@@ -343,3 +343,13 @@
     width: 100%;
   }
 }
+
+.admin-unverify-btn {
+  border-color: #d9a441;
+  color: #d9a441;
+}
+
+.admin-unverify-btn:hover {
+  background-color: #d9a441;
+  color: white;
+}

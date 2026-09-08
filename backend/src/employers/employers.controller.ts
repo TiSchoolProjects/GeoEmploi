@@ -40,6 +40,12 @@ export class EmployersController {
     return this.employersService.validate(id);
   }
 
+  @Roles(UserRole.ADMIN)
+  @Patch(':id/unverify')
+  resetValid(@Param('id', ParseIntPipe) id: number) {
+    return this.employersService.resetValidation(id);
+  }
+
   @updateDoc()
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @CheckOwnership('id')

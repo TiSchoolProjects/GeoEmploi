@@ -266,22 +266,50 @@ export default function AdminPanel() {
           employer.userId === userId
             ? {
                 ...employer,
-                user: employer.user
-                  ? {
-                      ...employer.user,
-                      status: updated.status,
-                    }
-                  : employer.user,
+                verifiedAt: updated.verifiedAt,
               }
             : employer
         )
       )
-      toast.success("Employeur vérifié")
+
+      toast.success("Entreprise vérifiée")
     } catch (error) {
       console.error(error)
 
       toast.error(
-        "Impossible de vérifier l'employeur."
+        "Impossible de vérifier l'entreprise."
+      )
+    }
+  }
+
+  const unverifyEmployer = async (userId) => {
+    try {
+      const updated = await apiFetch(
+        `/employers/${userId}/unverify`,
+        {
+          method: "PATCH",
+        }
+      )
+
+      setEmployers((current) =>
+        current.map((employer) =>
+          employer.userId === userId
+            ? {
+                ...employer,
+                verifiedAt: updated.verifiedAt,
+              }
+            : employer
+        )
+      )
+
+      toast.success(
+        "Vérification de l'entreprise retirée"
+      )
+    } catch (error) {
+      console.error(error)
+
+      toast.error(
+        "Impossible de retirer la vérification."
       )
     }
   }
@@ -791,19 +819,31 @@ export default function AdminPanel() {
                     </div>
 
                     <div className="admin-employer-actions">
-                      {!employer.verifiedAt && (
-                        <button
-                          type="button"
-                          className="admin-verify-btn"
-                          onClick={() =>
-                            verifyEmployer(
-                              employer.userId
-                            )
-                          }
-                        >
-                          Vérifier
-                        </button>
-                      )}
+                          {employer.verifiedAt ? (
+                      <button
+                        type="button"
+                        className="admin-unverify-btn"
+                        onClick={() =>
+                          unverifyEmployer(
+                            employer.userId
+                          )
+                        }
+                      >
+                        Retirer la vérification
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="admin-verify-btn"
+                        onClick={() =>
+                          verifyEmployer(
+                            employer.userId
+                          )
+                        }
+                      >
+                        Vérifier l'entreprise
+                      </button>
+                    )}
 
                       {employer.user?.status === "active" ? (
                         <button
