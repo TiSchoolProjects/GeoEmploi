@@ -132,7 +132,7 @@ export default function AdminPanel() {
     const newAddress = addressEdits[job.id]?.trim()
 
     if (!newAddress) {
-      toast.error("Veuillez saisir une adresse.")
+      toast.error("Veuillez saisir une commune.")
       return
     }
 
@@ -140,7 +140,7 @@ export default function AdminPanel() {
       setSavingJobId(job.id)
 
       const updated = await apiFetch(`/jobs/${job.id}`, {method: "PATCH",
-          body: JSON.stringify({ adress: newAddress,}),})
+          body: JSON.stringify({ commune: newAddress,}),})
 
       if (updated.GeocodingStatus === "valid") {
         setJobsToVerify((current) => current.filter((currentJob) => currentJob.id !== job.id))
@@ -151,15 +151,15 @@ export default function AdminPanel() {
           return next
         })
 
-        toast.success("Adresse corrigée et offre regéocodée.")
+        toast.success("Commune corrigée et offre regéocodée.")
         return
       }
 
       setJobsToVerify((current) => current.map((currentJob) => currentJob.id === job.id ? updated : currentJob))
-      toast.error("L'adresse n'a pas pu être géocodée.")
+      toast.error("La commune n'a pas pu être géocodée.")
     } catch (error) {
       console.error(error)
-      toast.error("Impossible de corriger l'adresse.")
+      toast.error("Impossible de corriger la commune.")
     } finally {
       setSavingJobId(null)
     }
@@ -498,8 +498,8 @@ export default function AdminPanel() {
                         <h3>{job.title}</h3>
 
                         <p>
-                          <strong>Adresse :</strong>{" "}
-                          {job.adress || "Non renseignée"}
+                          <strong>Commune :</strong>{" "}
+                          {job.commune || "Non renseignée"}
                         </p>
 
                         <p>
@@ -525,7 +525,7 @@ export default function AdminPanel() {
                       
                       <div className="admin-address-edit">
                         <label htmlFor={`address-${job.id}`}>
-                          Corriger l'adresse
+                          Corriger la commune
                         </label>
 
                         <input
@@ -533,7 +533,7 @@ export default function AdminPanel() {
                           type="text"
                           value={
                             addressEdits[job.id] ??
-                            job.adress ??
+                            job.commune ??
                             ""
                           }
                           onChange={(event) =>
@@ -542,7 +542,7 @@ export default function AdminPanel() {
                               event.target.value
                             )
                           }
-                          placeholder="Nouvelle adresse"
+                          placeholder="Nouvelle commune"
                         />
                       </div>
 

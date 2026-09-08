@@ -24,7 +24,7 @@ export class JobsService {
   }
 
   async geocodeAdress(address: string): Promise<Partial<Job>> {
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&type=municipality&limit=1`;
     try {
       const reponse = await fetch(url);
 
@@ -51,6 +51,7 @@ export class JobsService {
       const score = first.properties.score;
 
       return {
+        commune: first.properties.city || first.properties.name || address,
         lat: lat,
         lng: lng,
         geocodingSource: 'api-adresse',
@@ -65,14 +66,15 @@ export class JobsService {
 
 
   async create(data: Partial<Job>) {
-    if (!data.adress) {
-      throw new BadRequestException("Adresse obligatoire.")
+    if (!data.commune) {
+      throw new BadRequestException("Commune obligatoire.")
     }
-    const geoc = await this.geocodeAdress(data.adress);
+    const geoc = await this.geocodeAdress(data.commune);
 
     const job = this.jobRepository.create({
       ...data,
       ...geoc,
+      locationPrecision: 'commune',
     });
     return await this.jobRepository.save(job);
   }
@@ -113,12 +115,12 @@ export class JobsService {
       throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
     }
 
-    const changed = updateJobDto.adress !== undefined && updateJobDto.adress != job.adress;
+    const changed = updateJobDto.commune !== undefined && updateJobDto.commune != job.commune;
 
     Object.assign(job, updateJobDto);
 
-    if (changed && updateJobDto.adress) {
-      const geocoding = await this.geocodeAdress(updateJobDto.adress);
+    if (changed && updateJobDto.commune) {
+      const geocoding = await this.geocodeAdress(updateJobDto.commune);
       Object.assign(job, geocoding);
     }
     return await this.jobRepository.save(job);

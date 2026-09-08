@@ -25,7 +25,7 @@ function sleep(ms: number) {
 }
 
 async function geocode(address: string): Promise<Partial<Job>> {
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&type=municipality&limit=1`;
     try {
       const reponse = await fetch(url);
 
@@ -138,11 +138,11 @@ async function main() {
   const movements: { id: number; address: string; distance: number;}[] = [];
 
   for (const job of toHandle) {
-    console.log(`Adresse n°${job.id} - ${job.adress}`);
+    console.log(`Adresse n°${job.id} - ${job.commune}`);
     
     const OldLat = job.lat != null ? Number(job.lat) : null;
     const OldLng = job.lng != null ? Number(job.lng) : null;
-    const result = await geocode(job.adress);
+    const result = await geocode(job.commune);
 
     await repo.update(job.id, result);
 
@@ -158,7 +158,7 @@ async function main() {
 
       moved++;
       totalDis += dis;
-      movements.push({id: job.id, address: job.adress, distance: dis});
+      movements.push({id: job.id, address: job.commune, distance: dis});
       console.log(` Déplacement: ${dis.toFixed(0)}mètre(s).`);
       }
     } else {

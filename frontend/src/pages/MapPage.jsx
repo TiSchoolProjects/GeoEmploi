@@ -423,7 +423,7 @@ export default function MapPage() {
     const data = await response.json()
 
     if (data.GeocodingStatus != "valid" || !data.lat || !data.lng) {
-      setSearchError("Adresse ou ville introuvable. Veuillez réessayer.")
+      setSearchError("Commune ou ville introuvable. Veuillez réessayer.")
       return
     }
 
@@ -484,7 +484,7 @@ export default function MapPage() {
       <NavBar/>
       <form className="searchBar" onSubmit={searchLocation}>
       <label htmlFor="location-search" className="visuallyHidden">
-          Rechercher une adresse ou une ville
+          Rechercher une commune ou une ville
         </label>
         <input
         id="location-search"

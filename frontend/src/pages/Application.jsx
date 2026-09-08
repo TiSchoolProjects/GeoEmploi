@@ -125,8 +125,8 @@ export default function Application() {
                       <p className="offer-company"> Entreprise : {job.company}</p>
                     )}
 
-                    {job?.adress && (
-                      <p className="offer-location">Adresse : {job.adress}</p>
+                    {job?.commune && (
+                      <p className="offer-location">Commune : {job.commune}</p>
                     )}
 
                     {job?.description && (
@@ -217,8 +217,8 @@ export default function Application() {
                 </div>
 
                 <div className="detail-row">
-                  <strong>Adresse</strong>
-                  <span>{selectedApplication.job.adress || "Non renseignée"}</span>
+                  <strong>Commune</strong>
+                  <span>{selectedApplication.job.commune || "Non renseignée"}</span>
                 </div>
 
                 {selectedApplication.job.contractType && (

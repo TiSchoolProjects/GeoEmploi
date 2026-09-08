@@ -149,7 +149,7 @@ const updateApplicationStatus = async (
         body: JSON.stringify({
           title: editingOffer.title,
           description: editingOffer.description,
-          adress: editingOffer.adress,
+          commune: editingOffer.commune,
         }),
       });
       const updatedOfferWithEmployer = { ...updatedOffer, employer: employer };
@@ -232,8 +232,8 @@ const updateApplicationStatus = async (
                     </div>
                   )}
 
-                  {offer.adress && (
-                    <p className="offer-location"> Adresse: {offer.adress}</p>
+                  {offer.commune && (
+                    <p className="offer-location"> Commune: {offer.commune}</p>
                   )}
 
                   {offer.description && (
@@ -297,8 +297,8 @@ const updateApplicationStatus = async (
               </div>
 
               <div className="detail-row">
-                <strong>Adresse</strong>
-                <span>{selectedOffer.adress || "Non renseignée"}</span>
+                <strong>Commune</strong>
+                <span>{selectedOffer.commune || "Non renseignée"}</span>
               </div>
 
               <div className="detail-row detail-description">
@@ -492,13 +492,13 @@ const updateApplicationStatus = async (
               </div>
 
               <div className="form-group">
-                <label htmlFor="adress">Adresse</label>
+                <label htmlFor="commune">Commune</label>
 
                 <input
-                  id="adress"
+                  id="commune"
                   type="text"
-                  name="adress"
-                  value={editingOffer.adress || ""}
+                  name="commune"
+                  value={editingOffer.commune || ""}
                   onChange={handleEditChange}
                 />
               </div>

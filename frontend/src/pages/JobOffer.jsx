@@ -28,7 +28,7 @@ export default function JobOffer() {
         body: JSON.stringify({
           title: data.title,
           description: data.description,
-          adress: data.adress,
+          commune: data.commune,
           employerId: user.sub,
         }),
       });
@@ -73,12 +73,12 @@ export default function JobOffer() {
             )}
           </div>
           <div className="form-group">
-            <label htmlFor="text">Adresse</label>
+            <label htmlFor="text">Commune</label>
             <input
-              id="adress"
+              id="commune"
               type="text"
               placeholder="35000 Rennes"
-              {...register("adress", {required: "L'Adresse est requise"})}
+              {...register("commune", {required: "La commune est requise"})}
             />
             {errors.password && (<span className="error">{errors.password.message}</span>
             )}
