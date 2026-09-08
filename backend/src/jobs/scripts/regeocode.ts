@@ -25,71 +25,107 @@ function sleep(ms: number) {
 }
 
 async function geocode(address: string): Promise<Partial<Job>> {
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&type=municipality&limit=1`;
-    try {
-      const reponse = await fetch(url);
+  const addressUrl =
+    `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(address)}&limit=1`;
 
-      if (!reponse.ok) {
-        throw new Error(
-          `Erreur Api: ${reponse.status} ${reponse.statusText}`);
-      }
+  const addressResponse =
+    await fetch(addressUrl);
 
-      const data = await reponse.json();
-      const feats = data.features;
-      
-      if (!feats || feats.length === 0) {
-        return {
-          lat: null,
-          lng: null,
-          geocodingScore: null,
-          geocodingSource: "api-adresse",
-          geocodedAt: null,
-          GeocodingStatus: GeoCodingStatus.TO_VERIFY,
-        };
-      }
+  const addressData =
+    await addressResponse.json();
 
-      const first = feats[0];
+  if (
+    !addressData.features ||
+    addressData.features.length === 0
+  ) {
+    return {
+      commune: 'Commune à vérifier',
+      lat: null,
+      lng: null,
+      locationPrecision: 'commune',
+      geocodingSource: 'api-adresse',
+      geocodingScore: null,
+      geocodedAt: null,
+      GeocodingStatus:
+        GeoCodingStatus.TO_VERIFY,
+    };
+  }
 
-      if (first.properties.score < 0.7) {
-        return {
-          lat: null,
-          lng: null,
-          geocodingScore: null,
-          geocodingSource: "api-adresse",
-          geocodedAt: null,
-          GeocodingStatus: GeoCodingStatus.TO_VERIFY,
-        };
-      }
+  const addressFeature =
+    addressData.features[0];
 
-      const[lng, lat] = first.geometry.coordinates;
-      const score = first.properties.score;
+  const city =
+    addressFeature.properties.city ||
+    addressFeature.properties.name;
 
+  if (!city) {
+    return {
+      commune: 'Commune à vérifier',
+      lat: null,
+      lng: null,
+      locationPrecision: 'commune',
+      geocodingSource: 'api-adresse',
+      geocodingScore: null,
+      geocodedAt: null,
+      GeocodingStatus:
+        GeoCodingStatus.TO_VERIFY,
+    };
+  }
 
-      return {
-        commune: first.properties.city || first.properties.name || address,
-        lat,
-        lng,
-        locationPrecision: 'commune',
-        geocodingSource: 'api-adresse',
-        geocodingScore: score,
-        geocodedAt: new Date(),
-        GeocodingStatus: GeoCodingStatus.VALID,
-      }
-    } catch (error) {
-      console.log(`Erreur API pour "${address}"`);
-      return {
-        commune: 'Commune à vérifier',
-        lat: null,
-        lng: null,
-        locationPrecision: 'commune',
-        geocodingScore: null,
-        geocodingSource: "api-adresse",
-        geocodedAt: null,
-        GeocodingStatus: GeoCodingStatus.TO_VERIFY,
-      }
-    }
+  const communeUrl =
+    `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(city)}&type=municipality&limit=1`;
+
+  const communeResponse =
+    await fetch(communeUrl);
+
+  const communeData =
+    await communeResponse.json();
+
+  if (
+    !communeData.features ||
+    communeData.features.length === 0
+  ) {
+    return {
+      commune: city,
+      lat: null,
+      lng: null,
+      locationPrecision: 'commune',
+      geocodingSource: 'api-adresse',
+      geocodingScore: null,
+      geocodedAt: null,
+      GeocodingStatus:
+        GeoCodingStatus.TO_VERIFY,
+    };
+  }
+
+  const feature =
+    communeData.features[0];
+
+  const [lng, lat] =
+    feature.geometry.coordinates;
+
+  return {
+    commune:
+      feature.properties.city ||
+      feature.properties.name ||
+      city,
+
+    lat,
+    lng,
+
+    locationPrecision: 'commune',
+
+    geocodingSource: 'api-adresse',
+
+    geocodingScore:
+      feature.properties.score ?? null,
+
+    geocodedAt: new Date(),
+
+    GeocodingStatus:
+      GeoCodingStatus.VALID,
+  };
 }
-
 function calculateDistance(
   lat1: number,
   lng1: number,
