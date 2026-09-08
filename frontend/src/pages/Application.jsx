@@ -5,6 +5,7 @@ import NavBar from "../components/Navbar";
 import "../CSS/Dashboard.css";
 import { getToken } from "../utils/auth";
 import { apiFetch } from "../api/client";
+import { useTranslation } from "react-i18next";
 
 export default function Application() {
   const [applications, setApplications] = useState([]);
@@ -14,34 +15,36 @@ export default function Application() {
 
   const [selectedApplication, setSelectedApplication] = useState(null);
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     const fetchApplications = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         const seekerId = user?.sub;
         if (!seekerId) {
-          throw new Error("Impossible de récupérer l'identifiant de l'utilisateur.");
+          throw new Error(t("application.fetchUserError"));
         }
         const applicationsData = await apiFetch(`/applications/seeker/${seekerId}`);
         setApplications(Array.isArray(applicationsData) ? applicationsData : []);
       } catch (err) {
         console.error(err);
-        setError(err.message || "Impossible de charger vos candidatures.");
+        setError(err.message || t("application.fetchError"));
       } finally {
         setLoading(false);
       }
     };
     fetchApplications();
-  }, []);
+  }, [t]);
 
   const handleDelete = async (applicationId) => {
     const result = await Swal.fire({
-      title: "Supprimer la candidature ?",
-      text: "Êtes-vous sûr de vouloir supprimer cette candidature ?",
+      title: t("application.deleteConfirmTitle"),
+      text: t("application.deleteConfirmText"),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Supprimer",
-      cancelButtonText: "Annuler",
+      confirmButtonText: t("application.deleteConfirmButton"),
+      cancelButtonText: t("application.deleteCancelButton"),
       reverseButtons: true,
     });
 
@@ -55,11 +58,11 @@ export default function Application() {
         currentApplications.filter((application) => application.id !== applicationId)
       );
       setSelectedApplication(null);
-      toast.success("Candidature supprimée avec succès");
+      toast.success(t("application.deleteSuccess"));
     } catch (err) {
       console.error(err);
-      toast.error("Impossible de supprimer la candidature.");
-      setError("Impossible de supprimer la candidature.");
+      toast.error(t("application.deleteError"));
+      setError(t("application.deleteError"));
     } finally {
       setDeletingId(null);
     }
@@ -89,13 +92,13 @@ export default function Application() {
 
       <main className="dashboard-page">
         <div className="dashboard-header">
-          <h1>Mes candidatures</h1>
-          <p>Retrouvez ici toutes les offres auxquelles vous avez postulé.</p>
+          <h1>{t("application.title")}</h1>
+          <p>{t("application.subtitle")}</p>
         </div>
 
         {loading && (
           <div className="loading-message">
-            <p>Chargement des candidatures...</p>
+            <p>{t("application.loading")}</p>
           </div>
         )}
 
@@ -107,8 +110,8 @@ export default function Application() {
 
         {!loading && !error && applications.length === 0 && (
           <div className="empty-items">
-            <h2>Aucune candidature</h2>
-            <p>Vous n'avez pas encore postulé à une offre d'emploi.</p>
+            <h2>{t("application.emptyTitle")}</h2>
+            <p>{t("application.emptyText")}</p>
           </div>
         )}
 
@@ -120,17 +123,17 @@ export default function Application() {
               return (
                 <div className="item-card" key={`application-${application.id}`}>
                   <div className="item-card-content">
-                    <h2>{job?.title || "Offre sans titre"}</h2>
+                    <h2>{job?.title || t("application.untitledOffer")}</h2>
                     {job?.company && (
-                      <p className="item-company"> Entreprise : {job.company}</p>
+                      <p className="item-company"> {t("application.company")} {job.company}</p>
                     )}
 
                     {job?.commune && (
-                      <p className="item-location">Commune : {job.commune}</p>
+                      <p className="item-location">{t("application.location")} {job.commune}</p>
                     )}
 
                     {job?.description && (
-                      <p className="item-description"> Description :{" "} {truncateDescription(job.description, 120)}</p>
+                      <p className="item-description"> {t("application.description")}{" "} {truncateDescription(job.description, 120)}</p>
                     )}
 
                     {job?.contractType && (
@@ -138,7 +141,7 @@ export default function Application() {
                     )}
 
                     {application.status && (
-                      <span className="item-tag"> Statut : {application.status}</span>
+                      <span className="item-tag"> {t("application.status")} : {application.status}</span>
                     )}
                   </div>
 
@@ -150,9 +153,9 @@ export default function Application() {
                       className="item-action-btn details-btn"
                       onClick={() => handleDetails(application)}
                       disabled={deletingId === application.id}
-                      title="Voir les détails"
+                      title={t("application.detailsTitle")}
                     >
-                      Détail
+                      {t("application.detailsButton")}
                     </button>
 
                     {/* DELETE */}
@@ -161,9 +164,9 @@ export default function Application() {
                       className="item-action-btn delete-btn"
                       onClick={() => handleDelete(application.id)}
                       disabled={deletingId === application.id}
-                      title="Supprimer la candidature"
+                      title={t("application.deleteTitle")}
                     >
-                      {deletingId === application.id ? "..." : "Supprimer"}
+                      {deletingId === application.id ? t("application.deleting") : t("application.deleteButton")}
                     </button>
                   </div>
                 </div>
@@ -183,21 +186,21 @@ export default function Application() {
             className="modal-content details-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <button className="modal-close" onClick={closeDetails}type="button">x</button>
-            <h2>{selectedApplication.job?.title || "Détails de la candidature"}</h2>
+            <button className="modal-close" onClick={closeDetails} type="button">x</button>
+            <h2>{selectedApplication.job?.title || t("application.modalDefaultTitle")}</h2>
 
             {/* INFORMATIONS CANDIDATURE */}
             <div className="details-section">
-              <h3>Informations de la candidature</h3>
+              <h3>{t("application.modalApplicationInfo")}</h3>
               <div className="detail-row">
-                <strong>Statut</strong>
-                <span>{selectedApplication.status || "Non renseigné"}</span>
+                <strong>{t("application.status")}</strong>
+                <span>{selectedApplication.status || t("application.notProvided")}</span>
               </div>
 
               {selectedApplication.createdAt && (
                 <div className="detail-row">
-                  <strong>Date de candidature</strong>
-                  <span>{new Date(selectedApplication.createdAt).toLocaleDateString("fr-FR")}</span>
+                  <strong>{t("application.applicationDate")}</strong>
+                  <span>{new Date(selectedApplication.createdAt).toLocaleDateString(i18n.language)}</span>
                 </div>
               )}
             </div>
@@ -205,38 +208,38 @@ export default function Application() {
             {/* INFORMATIONS OFFRE */}
             {selectedApplication.job && (
               <div className="details-section">
-                <h3>Informations de l'offre</h3>
+                <h3>{t("application.modalOfferInfo")}</h3>
                 <div className="detail-row">
-                  <strong>Titre</strong>
-                  <span>{selectedApplication.job.title || "Non renseigné"}</span>
+                  <strong>{t("application.offerTitle")}</strong>
+                  <span>{selectedApplication.job.title || t("application.notProvided")}</span>
                 </div>
 
                 <div className="detail-row">
-                  <strong>Entreprise</strong>
-                  <span>{selectedApplication.job.company || "Non renseignée"}</span>
+                  <strong>{t("application.company")}</strong>
+                  <span>{selectedApplication.job.company || t("application.notProvidedFem")}</span>
                 </div>
 
                 <div className="detail-row">
-                  <strong>Commune</strong>
-                  <span>{selectedApplication.job.commune || "Non renseignée"}</span>
+                  <strong>{t("application.location")}</strong>
+                  <span>{selectedApplication.job.commune || t("application.notProvidedFem")}</span>
                 </div>
 
                 {selectedApplication.job.contractType && (
                   <div className="detail-row">
-                    <strong>Type de contrat</strong>
+                    <strong>{t("application.contractType")}</strong>
                     <span>{selectedApplication.job.contractType}</span>
                   </div>
                 )}
 
                 <div className="detail-row detail-description">
-                  <strong>Description</strong>
-                  <p>{selectedApplication.job.description || "Aucune description disponible."}</p>
+                  <strong>{t("application.description")}</strong>
+                  <p>{selectedApplication.job.description || t("application.noDescription")}</p>
                 </div>
               </div>
             )}
 
             <div className="modal-actions">
-              <button type="button" className="modal-secondary-btn" onClick={closeDetails}>Fermer</button>
+              <button type="button" className="modal-secondary-btn" onClick={closeDetails}>{t("application.close")}</button>
 
               <button
                 type="button"
@@ -248,7 +251,7 @@ export default function Application() {
                   deletingId === selectedApplication.id
                 }
               >
-                {deletingId === selectedApplication.id ? "Suppression..." : "Supprimer"}
+                {deletingId === selectedApplication.id ? t("application.deletingInProgress") : t("application.deleteButton")}
               </button>
             </div>
           </div>
