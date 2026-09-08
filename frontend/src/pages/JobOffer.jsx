@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../CSS/Login.css";
+import "../CSS/Form.css";
 import NavBar from "../components/Navbar";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";

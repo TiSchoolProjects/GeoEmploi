@@ -112,7 +112,7 @@ export default function NavBar() {
               <img src={notif} alt="Notifications" className="notif-logo" />
             </button>
           )}
-          <Link to="/Cgu" className="nav-link">À propos</Link>
+          <Link to="/more" className="nav-link">À propos</Link>
           {user?.role === "seeker" && (
             <Link to="/my-application" className="nav-link">Candidatures</Link>
           )}

@@ -1,0 +1,279 @@
+.content-container h1 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: .5rem;
+}
+
+.content-container h2 {margin-top: 2rem;
+    color: #1a3c6e;
+}
+.content-container h3 {
+    margin-top: 1.2rem;
+    color: #444;
+}
+
+.content-container blockquote {
+  border-left: 4px solid #1a3c6e;
+  background: #f4f6fa;
+  padding: .8rem 1rem;
+  margin: 1rem 0;
+}
+.content-container table { 
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.content-container th, .content-container td {
+  border: 1px solid #ddd; padding: .6rem; text-align: left;
+}
+
+.content-container th {
+    background: #f0f0f0;
+}
+
+.more-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 60px;
+}
+
+.more-header {
+  margin-bottom: 24px;
+}
+
+.more-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+}
+
+.more-header p {
+  margin: 0;
+  color: #666;
+}
+
+
+.more-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.more-tabs button {
+  padding: 10px 16px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background: white;
+  color: #222;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.more-tabs button:hover {
+  background: #f5f5f5;
+}
+
+.more-tabs button.active {
+  border-color: #1f2937;
+
+  background: #1f2937;
+  color: white;
+}
+
+
+.more-section .content-meta {
+  margin: 0 0 24px;
+  color: #666;
+  font-size: 14px;
+}
+
+.content-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.content-sommaire {
+  flex: 0 0 240px;
+  position: sticky;
+  top: 100px;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.content-sommaire-title {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.content-summary-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  padding: 8px 0 8px 12px;
+  margin-bottom: 2px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.content-summary-item:hover {
+  background: #f5f5f5;
+  color: #1a3c6e;
+}
+
+.content-summary-item.active {
+  border-left-color: #1a3c6e;
+  color: #1a3c6e;
+  font-weight: 600;
+  background: #f4f6fa;
+}
+
+.content-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-article {
+  margin-bottom: 48px;
+  scroll-margin-top: 100px;
+}
+
+.content-article-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.content-article-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #1a3c6e;
+}
+
+.content-article-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #b3261e;
+  white-space: nowrap;
+}
+
+.content-block {
+  margin-bottom: 20px;
+}
+
+.content-undertitle {
+  margin: 0 0 8px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #333;
+}
+
+.content-paragraphe {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  max-width: 68ch;
+}
+
+.content-list {
+  margin: 0 0 12px;
+  max-width: 68ch;
+}
+
+.content-list-item {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.content-list-item dt {
+  flex: 0 0 170px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a3c6e;
+}
+
+.content-list-item dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.content-table {
+  margin: 0 0 12px;
+  max-width: 68ch;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.content-table-row {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.content-table-row:last-child {
+  border-bottom: none;
+}
+
+.content-table-row:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.content-table-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.content-table-value {
+  font-size: 14px;
+  color: #333;
+}
+
+.under-title {
+    font-size: 16px;
+}
+
+@media (max-width: 780px) {
+  .cgu-layout {
+    flex-direction: column;
+  }
+
+  .cgu-sommaire {
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 16px;
+  }
+}

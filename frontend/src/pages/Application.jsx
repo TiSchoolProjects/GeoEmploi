@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NavBar from "../components/Navbar";
-import "../CSS/MyJobOffers.css";
+import "../CSS/Dashboard.css";
 import { getToken } from "../utils/auth";
 import { apiFetch } from "../api/client";
 
@@ -87,8 +87,8 @@ export default function Application() {
     <>
       <NavBar />
 
-      <main className="job-offers-page">
-        <div className="job-offers-header">
+      <main className="dashboard-page">
+        <div className="dashboard-header">
           <h1>Mes candidatures</h1>
           <p>Retrouvez ici toutes les offres auxquelles vous avez postulé.</p>
         </div>
@@ -106,48 +106,48 @@ export default function Application() {
         )}
 
         {!loading && !error && applications.length === 0 && (
-          <div className="empty-offers">
+          <div className="empty-items">
             <h2>Aucune candidature</h2>
             <p>Vous n'avez pas encore postulé à une offre d'emploi.</p>
           </div>
         )}
 
         {!loading && !error && applications.length > 0 && (
-          <div className="offers-gallery">
+          <div className="items-gallery">
             {applications.map((application) => {
               const job = application.job;
 
               return (
-                <div className="offer-card" key={`application-${application.id}`}>
-                  <div className="offer-card-content">
+                <div className="item-card" key={`application-${application.id}`}>
+                  <div className="item-card-content">
                     <h2>{job?.title || "Offre sans titre"}</h2>
                     {job?.company && (
-                      <p className="offer-company"> Entreprise : {job.company}</p>
+                      <p className="item-company"> Entreprise : {job.company}</p>
                     )}
 
                     {job?.commune && (
-                      <p className="offer-location">Commune : {job.commune}</p>
+                      <p className="item-location">Commune : {job.commune}</p>
                     )}
 
                     {job?.description && (
-                      <p className="offer-description"> Description :{" "} {truncateDescription(job.description, 120)}</p>
+                      <p className="item-description"> Description :{" "} {truncateDescription(job.description, 120)}</p>
                     )}
 
                     {job?.contractType && (
-                      <span className="offer-tag">{job.contractType}</span>
+                      <span className="item-tag">{job.contractType}</span>
                     )}
 
                     {application.status && (
-                      <span className="offer-tag"> Statut : {application.status}</span>
+                      <span className="item-tag"> Statut : {application.status}</span>
                     )}
                   </div>
 
                   {/* ACTIONS */}
-                  <div className="offer-card-footer">
+                  <div className="item-card-footer">
                     {/* DETAILS */}
                     <button
                       type="button"
-                      className="offer-action-btn details-btn"
+                      className="item-action-btn details-btn"
                       onClick={() => handleDetails(application)}
                       disabled={deletingId === application.id}
                       title="Voir les détails"
@@ -158,7 +158,7 @@ export default function Application() {
                     {/* DELETE */}
                     <button
                       type="button"
-                      className="offer-action-btn delete-btn"
+                      className="item-action-btn delete-btn"
                       onClick={() => handleDelete(application.id)}
                       disabled={deletingId === application.id}
                       title="Supprimer la candidature"
