@@ -18,6 +18,19 @@ export default function AdminPanel() {
   const [addressEdits, setAddressEdits] = useState({})
   const [savingJobId, setSavingJobId] = useState(null)
 
+  const [users, setUsers] = useState([])
+  const [usersLoading, setUsersLoading] = useState(false)
+  const [usersError, setUsersError] = useState("")
+
+  const [employers, setEmployers] = useState([])
+  const [employersLoading, setEmployersLoading] = useState(false)
+  const [employersError, setEmployersError] = useState("")
+
+  const currentUser =
+    JSON.parse(localStorage.getItem("user") || "null")
+
+  const currentAdminId = currentUser?.sub
+
   const fetchReports = async () => {
     try {
       setLoading(true)
@@ -152,6 +165,71 @@ export default function AdminPanel() {
     }
   }
 
+  const fetchUsers = async () => {
+    try {
+      setUsersLoading(true)
+      setUsersError("")
+
+      const data = await apiFetch("/users")
+
+      setUsers(Array.isArray(data) ? data : [])
+    } catch (error) {
+      console.error(error)
+
+      setUsersError("Impossible de charger les utilisateurs.")
+    } finally {
+      setUsersLoading(false)
+    }
+  }
+
+  const updateUserStatus = async (userId, status) => {
+    if (userId === currentAdminId) {
+      toast.error("Vous ne pouvez pas suspendre votre propre compte.")
+      return
+    }
+
+    try {
+      const updated = await apiFetch(`/users/status/${userId}`,{ method: "PATCH",
+          body: JSON.stringify({status,}),
+        }
+      )
+
+      setUsers((current) => current.map((user) => user.id === userId ? {
+        ...user, status: updated.status,}: user))
+
+      toast.success( status === "suspended" ? "Utilisateur suspendu" : "Utilisateur réactivé")
+    } catch (error) {
+      console.error(error)
+      toast.error("Impossible de modifier le statut.")
+    }
+  }
+
+  const deleteUser = async (userId) => {
+    if (userId === currentAdminId) {
+      toast.error("Vous ne pouvez pas supprimer votre propre compte.")
+      return
+    }
+
+    const confirmed = window.confirm("Supprimer définitivement cet utilisateur ?")
+
+    if (!confirmed) {
+      return
+    }
+
+    try {
+      await apiFetch(`/users/${userId}`, { method: "DELETE",})
+
+      setUsers((current) => current.filter((user) => user.id !== userId))
+
+      setEmployers((current) => current.filter((employer) => employer.userId !== userId))
+
+      toast.success("Utilisateur supprimé")
+    } catch (error) {
+      console.error(error)
+      toast.error("Impossible de supprimer l'utilisateur.")
+    }
+  }
+
   const pendingReports = reports.filter((report) => report.status === "pending");
 
   return (
@@ -207,14 +285,16 @@ export default function AdminPanel() {
 
               <button
                 type="button"
-                onClick={() =>
+                className={
+                  activeTab === "users" ? "active" : ""}
+                onClick={() => {
                   setActiveTab("users")
-                }
+                  fetchUsers()
+                }}
               >
                 Utilisateurs
               </button>
-
-              <button
+                <button
                 type="button"
                 onClick={() =>
                   setActiveTab("employers")
@@ -436,7 +516,122 @@ export default function AdminPanel() {
 
             {activeTab === "users" && (
               <section className="admin-section">
-                <h2>Utilisateurs</h2>
+                <h2>
+                  Utilisateurs ({users.length})
+                </h2>
+
+                {usersLoading && (
+                  <p>Chargement...</p>
+                )}
+
+                {usersError && (
+                  <p className="error-message">
+                    {usersError}
+                  </p>
+                )}
+
+                {!usersLoading &&
+                  !usersError &&
+                  users.length === 0 && (
+                    <p>Aucun utilisateur.</p>
+                  )}
+
+                {!usersLoading &&
+                  !usersError &&
+                  users.map((user) => (
+                    <article
+                      className="admin-user-card"
+                      key={user.id}
+                    >
+                      <div>
+                        <h3>
+                          {user.firstname}{" "}
+                          {user.lastname}
+
+                          {user.id === currentAdminId && (
+                            <span className="admin-you-badge">
+                              Vous
+                            </span>
+                          )}
+                        </h3>
+
+                        <p>
+                          <strong>Email :</strong>{" "}
+                          {user.email}
+                        </p>
+
+                        <p>
+                          <strong>Rôle :</strong>{" "}
+                          {user.role}
+                        </p>
+
+                        <p>
+                          <strong>Statut :</strong>{" "}
+
+                          <span
+                            className={
+                              user.status === "active"
+                                ? "status-badge status-active"
+                                : "status-badge status-suspended"
+                            }
+                          >
+                            {user.status === "active"
+                              ? "Actif"
+                              : "Suspendu"}
+                          </span>
+                        </p>
+
+                        <p>
+                          <strong>Créé le :</strong>{" "}
+                          {new Date(
+                            user.createdAt
+                          ).toLocaleDateString("fr-FR")}
+                        </p>
+                      </div>
+
+                      {user.id !== currentAdminId && (
+                        <div className="admin-user-actions">
+                          {user.status === "active" ? (
+                            <button
+                              type="button"
+                              className="admin-suspend-btn"
+                              onClick={() =>
+                                updateUserStatus(
+                                  user.id,
+                                  "suspended"
+                                )
+                              }
+                            >
+                              Suspendre
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              className="admin-reactivate-btn"
+                              onClick={() =>
+                                updateUserStatus(
+                                  user.id,
+                                  "active"
+                                )
+                              }
+                            >
+                              Réactiver
+                            </button>
+                          )}
+
+                          <button
+                            type="button"
+                            className="admin-delete-btn"
+                            onClick={() =>
+                              deleteUser(user.id)
+                            }
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      )}
+                    </article>
+                  ))}
               </section>
             )}
 
