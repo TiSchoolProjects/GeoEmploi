@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe, Req, ForbiddenException } from '@nestjs/common';
 import { EmployersService } from './employers.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
-import { createDoc, findAllDoc, findOneDoc, validateDoc, updateDoc, removeDoc } from './employers.controller.docs';
+import { createDoc, findAllDoc, findOneDoc, validateDoc, resetValidDoc, updateDoc, removeDoc } from './employers.controller.docs';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
@@ -40,6 +40,7 @@ export class EmployersController {
     return this.employersService.validate(id);
   }
 
+  @resetValidDoc()
   @Roles(UserRole.ADMIN)
   @Patch(':id/unverify')
   resetValid(@Param('id', ParseIntPipe) id: number) {
