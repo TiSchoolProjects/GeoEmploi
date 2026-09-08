@@ -109,10 +109,10 @@ export class JobsService {
     const job = await this.jobRepository.findOne({ where: { id } });
 
     if (!job) {
-      throw new NotFoundException("Offre non trouvé.");
+      throw new NotFoundException("Offre non trouvée.");
     }
     if (role !== UserRole.ADMIN && job.employerId !== curId) {
-      throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     const changed = updateJobDto.commune !== undefined && updateJobDto.commune != job.commune;
@@ -143,7 +143,7 @@ export class JobsService {
     }
 
     if (role !== UserRole.ADMIN && job.employerId !== curId) {
-      throw new ForbiddenException("Cette offre ne vous appartient pas.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     await this.jobRepository.remove(job);

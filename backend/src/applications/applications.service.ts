@@ -31,7 +31,7 @@ export class ApplicationsService {
     const job = await this.JobRepository.findOne({ where: { id: jobId }, });
 
     if (!job) {
-      throw new NotFoundException("L'offre demandée n'existe pas.");
+      throw new NotFoundException("Offre non trouvée.");
     }
 
     const exist = await this.AppRepository.findOne({ where: { jobSeekerId, jobId } });
@@ -70,7 +70,7 @@ export class ApplicationsService {
 
     if ((currentUser.role === UserRole.SEEKER && currentUser.userId !== application.jobSeekerId)
       || (currentUser.role === UserRole.EMPLOYER && currentUser.userId !== employerId)) {
-      throw new ForbiddenException("You do not own this resource.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     return application;
@@ -98,7 +98,7 @@ export class ApplicationsService {
     const employerId = await this.getEmployerId(jobId);
 
     if (currentUser.role === UserRole.EMPLOYER && currentUser.userId !== employerId) {
-      throw new ForbiddenException("You do not own this resource.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     return applications;
@@ -120,7 +120,7 @@ export class ApplicationsService {
     const employerId = await this.getEmployerId(app.jobId);
 
     if (currentUser.role === UserRole.EMPLOYER && currentUser.userId !== employerId) {
-      throw new ForbiddenException("You do not own this resource.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     return await this.AppRepository.save(app);
@@ -139,7 +139,7 @@ export class ApplicationsService {
     }
 
     if (currentUser.role === UserRole.SEEKER && currentUser.userId !== application.jobSeekerId) {
-      throw new ForbiddenException("You do not own this resource.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     await this.AppRepository.remove(application);
