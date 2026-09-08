@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "Découvrez le marché",
+    "subtitle": "de l'emploi français",
+    "mapButton": "Découvrir la carte",
+    "imageAlt": "Illustration"
+  },
+  "account": {
+    "title": "Bienvenue sur GéoEmploi",
+    "subtitle": "Créez votre compte et commencez votre expérience dès maintenant.",
+    "button1": "Créer un compte RH",
+    "button2": "Créer un compte Seeker",
+    "question": "Déjà un compte ?",
+    "link": "Se connecter"
+  }
+}
