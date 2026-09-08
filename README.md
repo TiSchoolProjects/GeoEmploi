@@ -58,7 +58,7 @@ backend/seed.ts
 
 ### Seed de géocodage historique
 
-Le seed de géocodage permet de simuler une base déjà alimentée avec des coordonnées provenant de l'ancienne manière de sauvegarder a la rue près.
+Le seed de géocodage permet de simuler une base déjà alimentée avec des coordonnées provenant de l'ancienne manière de sauvegarder à la rue près.
 
 ```bash
 docker compose exec backend npm run seed-adresse
