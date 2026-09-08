@@ -30,7 +30,7 @@ export class Job {
   @Column('text')
   description: string;
 
-  @ApiProperty({ description: 'Job address', example: '123 Elm Street, New York, NY 10001'})
+  @ApiProperty({ description: 'Job city', example: 'Rennes, 35000'})
   @Column({name: 'adress'})
   commune: string;
 
@@ -57,7 +57,7 @@ export class Job {
   @Column({type: 'timestamp', nullable: true, default: null})
   geocodedAt: Date | null;
 
-  @ApiProperty({ description: 'Verification status of the geocoding', example: GeoCodingStatus.VALID})
+  @ApiProperty({ description: 'Verification status of the geocoding', enum: GeoCodingStatus, example: GeoCodingStatus.VALID})
   @Column({type: 'enum', enum: GeoCodingStatus, default: GeoCodingStatus.TO_VERIFY})
   GeocodingStatus: GeoCodingStatus;
 

@@ -6,6 +6,7 @@ import { EmployersService } from '../employers/employers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { NotificationsService } from '../notifications/notifications.service';
+import { CoordinatesService } from '../common/coordinates.service';
 
 @Injectable()
 export class ExportService {
@@ -15,8 +16,31 @@ export class ExportService {
         private employerService: EmployersService,
         private jobService: JobsService,
         private applicationService: ApplicationsService,
-        private notificationService: NotificationsService
-    ) { }
+        private notificationService: NotificationsService,
+        private coordinatesService: CoordinatesService
+    ) {}
+
+    private addLambertToJob(job: any) {
+      const { lat, lng, ...jobWithoutWgs84 } = job;
+
+      if (lat == null || lng == null) {
+        return jobWithoutWgs84;
+      }
+
+      const lambert = this.coordinatesService.convertLambert(
+        Number(lat),
+        Number(lng),
+      );
+
+      return {
+        ...jobWithoutWgs84,
+        lambert93: {
+          epsg: 'EPSG:2154',
+          x: lambert.x,
+          y: lambert.y,
+        },
+      };
+    }
 
     async export(userId: number, userRole: UserRole): Promise<StreamableFile> {
         let exportData: Record<string, any>;
@@ -31,9 +55,12 @@ export class ExportService {
 
                 const applications = await this.applicationService.findbySeekerId(userId);
 
+                const applicationsconvert = applications.map((application) => ({...application,
+                  job: application.job ? this.addLambertToJob(application.job) : application.job,}));
+
                 exportData = {
                     profile: seeker,
-                    applications: applications ?? [],
+                    applications: applicationsconvert ?? [],
                 }
                 break;
             case UserRole.EMPLOYER:
@@ -44,11 +71,12 @@ export class ExportService {
                 }
 
                 const jobs = await this.jobService.findByEmployer(userId);
+                const jobsconvert = jobs.map((job) => this.addLambertToJob(job));
                 const notifications = await this.notificationService.findMe(userId);
 
                 exportData = {
                     profile: employer,
-                    jobs: jobs ?? [],
+                    jobs: jobsconvert ?? [],
                     notifications: notifications ?? []
                 }
 

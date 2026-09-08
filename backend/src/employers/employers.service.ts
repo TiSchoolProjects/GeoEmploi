@@ -28,7 +28,7 @@ export class EmployersService {
     const acc = await this.employerRepository.findOne({ where: { userId } });
 
     if (!acc) {
-      throw new NotFoundException("Compte non trouvé.");
+      throw new NotFoundException("Employeur non trouvé.");
     }
 
     acc.verifiedAt = new Date();
@@ -40,7 +40,7 @@ export class EmployersService {
     const acc = await this.employerRepository.findOne({ where: { userId } });
 
     if (!acc) {
-      throw new NotFoundException("Compte non trouvé.");
+      throw new NotFoundException("Employeur non trouvé.");
     }
 
     acc.verifiedAt = null;

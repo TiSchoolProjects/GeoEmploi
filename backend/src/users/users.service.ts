@@ -36,7 +36,7 @@ export class UsersService {
     const user = await this.UserRepository.findOne({where: {id}});
 
     if (!user) {
-      throw new NotFoundException("Utilisateur non trouvée.");
+      throw new NotFoundException("Utilisateur non trouvé.");
     }
 
     user.status = data.status;
@@ -47,7 +47,7 @@ export class UsersService {
     const user = await this.UserRepository.findOne({where: {id}});
 
     if (!user) {
-      throw new NotFoundException("Utilisateur non trouvée.");
+      throw new NotFoundException("Utilisateur non trouvé.");
     }
 
     const taken = await this.UserRepository.findOne({
@@ -55,7 +55,7 @@ export class UsersService {
     });
 
     if (taken) {
-      throw new ConflictException("Adresse email déjà utilisée");
+      throw new ConflictException("Adresse email déjà utilisée.");
     }
 
     Object.assign(user, data);

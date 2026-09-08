@@ -382,7 +382,11 @@ export default function MapPage() {
     if (!position.trim()) return
 
     setSearchError("")
-    const response = await fetch(`http://localhost:4242/jobs/geocode?address=${encodeURIComponent(position)}`)
+
+    const response = await fetch(
+      `http://localhost:4242/jobs/geocode?commune=${encodeURIComponent(position)}`
+    )
+
     const data = await response.json()
 
     if (data.GeocodingStatus !== "valid" || !data.lat || !data.lng) {

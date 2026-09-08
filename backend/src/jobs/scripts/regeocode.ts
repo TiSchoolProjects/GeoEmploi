@@ -1,7 +1,5 @@
-import { resolve } from "path";
 import { DataSource, IsNull } from "typeorm";
 import { GeoCodingStatus, Job } from "../entities/job.entity";
-import { async } from "rxjs";
 import 'dotenv/config';
 import 'reflect-metadata';
 import { User } from "../../users/entities/user.entity";
@@ -168,7 +166,7 @@ async function main() {
   const movements: { id: number; address: string; distance: number;}[] = [];
 
   for (const job of toHandle) {
-    console.log(`Adresse n°${job.id} - ${job.commune}`);
+    console.log(`Offre n°${job.id} - ${job.commune}`);
     
     const OldLat = job.lat != null ? Number(job.lat) : null;
     const OldLng = job.lng != null ? Number(job.lng) : null;
@@ -212,7 +210,7 @@ async function main() {
   if (movements.length > 0) {
     console.log('\n\n- Top 5 des Déplacements -');
     for(const move of movements.slice(0,5)) {
-      console.log(`Adresse n°${move.id} - ${move.address} - ${move.distance.toFixed(0)} m`)
+      console.log(`Offre n°${move.id} - ${move.address} - ${move.distance.toFixed(0)} m`)
     }
   }
 

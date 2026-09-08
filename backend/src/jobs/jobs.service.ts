@@ -2,8 +2,9 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, GeoCodingStatus } from './entities/job.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, LessThanOrEqual, Repository } from 'typeorm';
+import { IsNull, LessThan, LessThanOrEqual, Not, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
+import { IS_NOT_EMPTY } from 'class-validator';
 
 @Injectable()
 export class JobsService {
@@ -84,7 +85,7 @@ export class JobsService {
   }
 
   findOne(id: number) {
-    return this.jobRepository.findOne({ where: { id } });
+    return this.jobRepository.findOne({ where: { id, archivedAt: IsNull(), },});
   }
 
   async findByEmployer(employerId: number): Promise<Job[]> {
@@ -109,10 +110,10 @@ export class JobsService {
     const job = await this.jobRepository.findOne({ where: { id } });
 
     if (!job) {
-      throw new NotFoundException("Offre non trouvé.");
+      throw new NotFoundException("Offre non trouvée.");
     }
     if (role !== UserRole.ADMIN && job.employerId !== curId) {
-      throw new ForbiddenException("Vous ne pouvez pas modifié cette offre");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     const changed = updateJobDto.commune !== undefined && updateJobDto.commune != job.commune;
@@ -143,7 +144,7 @@ export class JobsService {
     }
 
     if (role !== UserRole.ADMIN && job.employerId !== curId) {
-      throw new ForbiddenException("Cette offre ne vous appartient pas.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     await this.jobRepository.remove(job);
@@ -159,6 +160,27 @@ export class JobsService {
 
     return res.affected ?? 0;
   }
+
+  async purgeArchiveJobs() : Promise<{deleted: number, limDate: Date;}> {
+    const limDate = new Date();
+
+    limDate.setDate(limDate.getDate() - 90,);
+
+    const jobs = await this.jobRepository.find({where: { createdAt: LessThan(limDate), archivedAt: Not(IsNull()),},});
+
+    if (jobs.length === 0) {
+      return {deleted: 0, limDate,};
+    }
+
+    await this.jobRepository.remove(jobs);
+
+    return {deleted: jobs.length, limDate,};
+  }
+
+
+
+
+
 
   private calcdist(Alat: number, Alng: number, Blat: number, Blng: number): number {
     const R = 6371.0
