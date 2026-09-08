@@ -18,7 +18,7 @@ export class ReportsService {
     const job = await this.jobRepository.findOne({where: {id: jobId,},});
 
     if (!job) {
-      throw new NotFoundException("Offre n'existe pas.");
+      throw new NotFoundException("Offre non trouvée.");
     }
 
     const exist = await this.reportRepository.findOne({where: {jobId, reporterId, status: ReportStatus.PENDING,},});

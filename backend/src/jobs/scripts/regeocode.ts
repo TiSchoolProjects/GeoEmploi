@@ -1,7 +1,5 @@
-import { resolve } from "path";
 import { DataSource, IsNull } from "typeorm";
 import { GeoCodingStatus, Job } from "../entities/job.entity";
-import { async } from "rxjs";
 import 'dotenv/config';
 import 'reflect-metadata';
 import { User } from "../../users/entities/user.entity";

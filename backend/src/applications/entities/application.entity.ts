@@ -34,7 +34,7 @@ export class Application {
   @JoinColumn({ name: 'jobSeekerId' })
   jobSeeker: User;
 
-  @ApiProperty({ description: 'Application status', example: ApplicationStatus.ACCEPTED})
+  @ApiProperty({ description: 'Application status', enum: ApplicationStatus, example: ApplicationStatus.ACCEPTED})
   @Column({ type: 'enum', enum: ApplicationStatus, default: ApplicationStatus.WAITING })
   status: ApplicationStatus;
 

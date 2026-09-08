@@ -30,7 +30,7 @@ export class NotificationsService {
       where: {id, receverId},});
 
       if (!notif) {
-        throw new NotFoundException("Notification introuvable.");
+        throw new NotFoundException("Notification non trouvée.");
       }
       if (!notif.readAt) {
         notif.readAt = new Date();

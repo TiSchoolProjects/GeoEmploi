@@ -21,7 +21,7 @@ export class OwnershipGuard implements CanActivate {
     const user = request.user;
 
     if (!user) {
-      throw new ForbiddenException('User context missing.');
+      throw new ForbiddenException('Contexte utilisateur manquant.');
     }
 
     if (user.role === UserRole.ADMIN) {
@@ -31,7 +31,7 @@ export class OwnershipGuard implements CanActivate {
     const targetId = Number(request.params[paramName]);
 
     if (isNaN(targetId) || user.userId !== targetId) {
-      throw new ForbiddenException("You do not own this resource.");
+      throw new ForbiddenException("Vous n'avez pas la permission.");
     }
 
     return true;
