@@ -56,4 +56,8 @@ export class User {
 
   @OneToMany('Application', (app: Application) => app.jobSeeker)
   applications: Application[];
+
+  @ApiProperty({ description: 'Last date of activity', example: '2026-09-02T10:00:00.000Z' })
+  @Column({ type: 'timestamp', nullable: true })
+  lastLogin: Date | null;
 }

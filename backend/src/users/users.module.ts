@@ -7,10 +7,11 @@ import { Employer } from '../employers/entities/employer.entity';
 import { Seeker } from '../seekers/entities/seeker.entity';
 import { Job } from '../jobs/entities/job.entity';
 import { Application } from '../applications/entities/application.entity';
+import { UsersScheduler } from './users.scheduler';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, UsersScheduler,],
   imports: [TypeOrmModule.forFeature([User, Employer, Seeker, Job, Application])],
   exports: [TypeOrmModule, UsersService]
 })
