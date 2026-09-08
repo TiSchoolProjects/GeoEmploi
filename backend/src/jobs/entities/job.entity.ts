@@ -30,7 +30,7 @@ export class Job {
   @Column('text')
   description: string;
 
-  @ApiProperty({ description: 'Job address', example: 'Rennes, 35000'})
+  @ApiProperty({ description: 'Job city', example: 'Rennes, 35000'})
   @Column({name: 'adress'})
   commune: string;
 

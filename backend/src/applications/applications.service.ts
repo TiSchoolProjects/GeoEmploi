@@ -30,7 +30,7 @@ export class ApplicationsService {
   async apply(jobSeekerId: number, jobId: number): Promise<Application> {
     const job = await this.JobRepository.findOne({ where: { id: jobId }, });
 
-    if (!job) {
+    if (!job || job.archivedAt !== null) {
       throw new NotFoundException("L'offre demandée n'existe pas.");
     }
 

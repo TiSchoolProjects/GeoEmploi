@@ -85,7 +85,7 @@ export class JobsService {
   }
 
   findOne(id: number) {
-    return this.jobRepository.findOne({ where: { id } });
+    return this.jobRepository.findOne({ where: { id, archivedAt: IsNull(), },});
   }
 
   async findByEmployer(employerId: number): Promise<Job[]> {
