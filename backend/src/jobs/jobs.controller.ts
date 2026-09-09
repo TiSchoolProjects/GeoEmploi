@@ -6,6 +6,7 @@ import { createDoc, findAllDoc, findAroundDoc, findByEmployerDoc, findOneDoc, up
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
+import { CheckOwnership } from '../auth/decorators/ownership.decorator';
 
 @Controller('jobs')
 export class JobsController {
@@ -62,6 +63,7 @@ export class JobsController {
   }
 
   @findOneDoc()
+  @CheckOwnership('id')
   @Public()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {

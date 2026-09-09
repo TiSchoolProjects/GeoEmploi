@@ -33,6 +33,7 @@ export class EmployersController {
   }
 
   @findOneDoc()
+  @CheckOwnership('id')
   @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
   @Get(':id')
   findOne(@Param('id') id: string) {

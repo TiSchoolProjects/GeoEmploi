@@ -90,6 +90,7 @@ export class JobsService {
 
     const job = this.jobRepository.create({
       ...data,
+      employerId,
       ...geoc,
       locationPrecision: 'commune',
     });
