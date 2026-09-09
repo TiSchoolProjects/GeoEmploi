@@ -16,6 +16,8 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { CartographyModule } from './cartography/cartography.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExportModule } from './export/export.module';
+import { MetricsModule } from './metrics/metrics.module';
+
 
 @Module({
   imports: [
@@ -48,6 +50,7 @@ import { ExportModule } from './export/export.module';
     ExportModule,
     AuthModule,
     ScheduleModule.forRoot(),
+    MetricsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

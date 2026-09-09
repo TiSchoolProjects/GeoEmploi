@@ -29,6 +29,8 @@ export default function AdminPanel() {
   const [employersLoading, setEmployersLoading] = useState(false);
   const [employersError, setEmployersError] = useState("");
 
+  const [metrics, setMetrics] = useState(null);
+
   const currentUser = JSON.parse(localStorage.getItem("user") || "null");
   const currentAdminId = currentUser?.sub;
 
@@ -284,6 +286,22 @@ export default function AdminPanel() {
     }
   };
 
+ const fetchMetrics = async () => {
+    try {
+      const data = await apiFetch("/admin/metrics");
+
+      setMetrics(data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Impossible de charger les métriques.");
+    }
+  };
+  useEffect(() => {
+    if (activeTab === "metrics") {
+      fetchMetrics();
+    }
+  }, [activeTab]);
+
   const pendingReports = reports.filter((report) => report.status === "pending");
 
   return (
@@ -339,6 +357,14 @@ export default function AdminPanel() {
             }}
           >
             {t("admin.tabs.employers")}
+          </button>
+          <button
+            className={activeTab === "metrics" ? "active" : ""}
+            onClick={() => {
+              setActiveTab("metrics")
+            }}
+          >
+            Métriques
           </button>
         </nav>
 
@@ -414,8 +440,6 @@ export default function AdminPanel() {
                     <p><strong>{t("admin.jobs.commune")} :</strong> {job.commune || t("admin.notProvidedFem")}</p>
                     <p><strong>{t("admin.jobs.description")} :</strong> {job.description}</p>
                     <p><strong>{t("admin.jobs.geocodeStatus")} :</strong> {job.GeocodingStatus}</p>
-                    <p><strong>{t("admin.jobs.latitude")} :</strong> {job.lat ?? t("admin.absent")}</p>
-                    <p><strong>{t("admin.jobs.longitude")} :</strong> {job.lng ?? t("admin.absent")}</p>
                   </div>
 
                   <div className="admin-address-edit">
@@ -573,6 +597,49 @@ export default function AdminPanel() {
               ))}
           </section>
         )}
+
+      {activeTab === "metrics" && metrics && (
+        <div className="admin-metrics">
+          <div className="stats-grid">
+            <div className="stat-card">
+              <h3>Offres publiées</h3>
+              <p>{metrics.jobs}</p>
+            </div>
+
+            <div className="stat-card">
+              <h3>Candidatures</h3>
+              <p>{metrics.applications}</p>
+            </div>
+
+            <div className="stat-card">
+              <h3>Employeurs</h3>
+              <p>{metrics.employers}</p>
+            </div>
+          </div>
+
+          <div className="metrics-table">
+            <h3>Répartition géographique des offres</h3>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Commune</th>
+                  <th>Nombre d'offres</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {metrics.jobsByCommune.map((item) => (
+                  <tr key={item.commune}>
+                    <td>{item.commune}</td>
+                    <td>{item.count}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
       </main>
     </>
   );
