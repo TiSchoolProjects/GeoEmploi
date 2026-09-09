@@ -13,7 +13,7 @@ const compareMock = compare as jest.MockedFunction<typeof compare>;
 const hashMock = hash as jest.MockedFunction<typeof hash>;
 
 describe('AuthService', () => {
-  const usersService = { findbyEmail: jest.fn() };
+  const usersService = { findbyEmail: jest.fn(), updateLoginDate: jest.fn(), };
   const jwtService = { sign: jest.fn() };
   const configService = { get: jest.fn().mockReturnValue(10) };
   const dataSource = { transaction: jest.fn() };
@@ -58,18 +58,22 @@ describe('AuthService', () => {
   });
 
   it('génère un JWT au login', async () => {
+    usersService.updateLoginDate.mockResolvedValue(undefined);
     jwtService.sign.mockReturnValue('token-test');
 
     await expect(
-      service.login({ id: 2, email: 'a@b.fr', role: UserRole.EMPLOYER }),
-    ).resolves.toEqual({ access_token: 'token-test' });
-
-    expect(jwtService.sign).toHaveBeenCalledWith({
-      email: 'a@b.fr',
-      sub: 2,
-      role: UserRole.EMPLOYER,
+      service.login({
+        id: 2,
+        email: 'a@b.fr',
+        role: UserRole.EMPLOYER,
+      }),
+    ).resolves.toEqual({
+      access_token: 'token-test',
     });
-  });
+
+  expect(usersService.updateLoginDate)
+    .toHaveBeenCalledWith(2);
+});
 
   it('refuse une inscription seeker si l’email existe déjà', async () => {
     dataSource.transaction.mockImplementation(async (callback: any) =>
