@@ -1,32 +1,30 @@
+import { useTranslation } from "react-i18next";
+
 export default function GeoConsentNotice() {
+  const { t } = useTranslation();
+
   return (
     <ul className="locationModalList">
       <li>
-        <strong>Données concernées :</strong> coordonnées GPS brutes (latitude, longitude).
+        <strong>{t("geoConsent.dataLabel")} :</strong> {t("geoConsent.dataDesc")}
       </li>
       <li>
-        <strong>Finalité :</strong> filtrer les offres d'emploi selon la distance
-        géographique de l'utilisateur.
+        <strong>{t("geoConsent.purposeLabel")} :</strong> {t("geoConsent.purposeDesc")}
       </li>
       <li>
-        <strong>Base légale :</strong> votre consentement, exprimé via l'autorisation
-        demandée par le navigateur.
+        <strong>{t("geoConsent.legalBasisLabel")} :</strong> {t("geoConsent.legalBasisDesc")}
       </li>
       <li>
-        <strong>Destinataires :</strong> équipe technique et produit de GéoEmploi (logs
-        techniques) ; IGN pour les tuiles cartographiques et le géocodage (API Adresse /
-        Géoplateforme).
+        <strong>{t("geoConsent.recipientsLabel")} :</strong> {t("geoConsent.recipientsDesc")}
       </li>
       <li>
-        <strong>Transfert hors UE :</strong> aucun ; données hébergées en France.
+        <strong>{t("geoConsent.transferLabel")} :</strong> {t("geoConsent.transferDesc")}
       </li>
       <li>
-        <strong>Durée de conservation :</strong> donnée volatile, utilisée uniquement le
-        temps de la requête, sans stockage en base de données.
+        <strong>{t("geoConsent.retentionLabel")} :</strong> {t("geoConsent.retentionDesc")}
       </li>
       <li>
-        <strong>Vos droits :</strong> accès, effacement, limitation, et retrait du
-        consentement à tout moment, y compris depuis votre page de profil.
+        <strong>{t("geoConsent.rightsLabel")} :</strong> {t("geoConsent.rightsDesc")}
       </li>
     </ul>
   );

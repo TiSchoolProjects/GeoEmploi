@@ -1,0 +1,699 @@
+{
+  "home": {
+    "title": "Descobreishatz lo mercat",
+    "subtitle": "deu tribalh francés",
+    "mapButton": "Descobrir la mapa",
+    "imageAlt": "Illustracion"
+  },
+  "account": {
+    "title": "Benvenguts sus GéoEmploi",
+    "subtitle": "Creatz lo vòste compte e començatz la vòsta experiéncia de d'ara enlà.",
+    "button1": "Crear un compte RH",
+    "button2": "Crear un compte Cercaire",
+    "question": "Ja un compte ?",
+    "link": "Se connectar"
+  },
+  "more": {
+    "title": "Informacions",
+    "subtitle": "Condicions d'utilizacion e transparéncia de GéoEmploi",
+    "summary": "Somari",
+    "articleLabel": "Article",
+    "tabs": {
+      "cgu": "CGU",
+      "transparency": "Transparéncia"
+    },
+    "cgu": {
+      "title": "Condicions generalas d'utilizacion",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Preambul e presentacion deu servici",
+          "corps": [
+            "Lo Ministèri deu Tribalh e deu Bonur que bota a la disposicion deus utilizaires la plataforma numerica publica GéoEmploi. Aqueth servici public d'intermediacion qu'a per mission de facilitar la mesa en relacion dirècta enter candidats e recrutaires en permetent la consultacion geolocalizada d'ofèrtas de tribalh a l'escala de la comuna.",
+            "Aqueras Condicions Generalas d'Utilizacion (CGU) que determinan las règlas d'accès, d'utilizacion e de proteccion de las donadas qui regeishen las relacions enter l'Administracion editritz e los utilizaires deu servici. Tot accès o creacion de compte qu'emportan adesion sancèra a las presentas disposicions."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Definicions",
+          "liste": [
+            ["Plataforma", "Lo servici numeric GéoEmploi, accessible en linha."],
+            ["Candidat", "Tota persona fisica qui accedeish au servici entà cercar un tribalh, consultar ofèrtas o candidatar."],
+            ["Emplegaire / Recrutaire", "Tota persona morala o professionau qui procedish a la publicacion d'anóncias de recrutament via un compte dedicat."],
+            ["Donadas cartograficas", "Honts cartograficas hornidas per la Geoplataforma IGN e donadas d'adreças gessidas de l'API Adreça nacionau (api-adresse.data.gouv.fr)."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Accès au servici e tarificacion emplegaires",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Accès candidats",
+              "corps": [
+                "L'ensemble de las foncionalitats botadas a disposicion deus candidats — consultacion de la mapa, afichatge de las anóncias, calcul de proximitat e transmission de candidaturas — qu'ei estrictament gratuit e liure de tot abonament."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Geolocalizacion e respècte de la vita privada",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Tractament transitòri e abséncia d'estocatge GPS",
+              "corps": [
+                "Entà beneficiar deu triatge d'ofèrtas per proximitat geografica, l'utilizaire que pòt activar la localizacion deu son aparelh via l'API deu son navigader. Aquera accion que demanda ua autorizacion tecnica exprèssa.",
+                "Cap de coordenada GPS d'utilizaire n'ei pas estocada, enregistrada ni traçada dens las basas de donadas o los jornals d'aplicacion deu Ministèri. Lo calcul de distància a respècte de las ofèrtas que's hè sonque de faiçon transitòria e volatila dens la memòria viva durant la durada de la sesilha activa."
+              ]
+            },
+            {
+              "soustitre": "4.2. Alternativa shens localizacion",
+              "corps": [
+                "L'autorizacion de localizacion qu'ei facultativa. En cas de refús, l'utilizaire que beneficia de l'integralitat de las foncionalitats en picant a la man ua comuna o un còdi postau de referéncia."
+              ]
+            },
+            {
+              "soustitre": "4.3. Proteccion de las adreças deus emplegaires",
+              "corps": [
+                "Entà preservar la tranquillitat deus establiments emplegaires, las adreças postalas exactas ne son pas afichadas sus la mapa publica : sonque la comuna d'estacament de l'ofèrta qu'ei visibla deus utilizaires."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Proteccion de las donadas personalas e exercici deus drets",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Categorias de donadas collectadas a l'inscripcion",
+              "corps": [
+                "En aplicacion deu principi de minimizacion (Art. 5.1.c RGPD), GéoEmploi que collècta sonque las donadas estrictament necessàrias a l'intermediacion entau tribalh :"
+              ],
+              "liste": [
+                ["Candidat", "Nom, prenom, adreça e-mail de contacte, senhau securizat (chifrat/hachat), document de CV (format PDF/DOC)."],
+                ["Emplegaire", "Rason sociau, numèro SIRET, adreça deu sièti, nom/prenom deu gestionari, adreça e-mail professionau, numèro de telefòn."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Duradas de conservacion",
+              "table": [
+                ["Donadas de perfil e candidaturas", "Durada d'utilizacion activa, puish supression après 2 ans d'inactivitat continua"],
+                ["Logs de connexion", "IP anonimizadas devath 24 h, logs tecnics purjats devath 12 mes"],
+                ["Donadas GPS", "Retencion de 0 segonda (calcul transitòri, shens archiu)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Modalitats concrètas d'exercici deus drets",
+              "corps": [
+                "Conformament au Reglament Generau sus la Proteccion de las Donadas (RGPD) e a la lei Informatica e Libertats, cada utilizaire que dispausa d'un dret d'accès, de rectificacion, d'esfaçament, de limitacion e d'oposicion au tractament de las suas donadas."
+              ],
+              "liste": [
+                ["Autonomia dirècta", "Modificacion de las informacions o supression immediata deu compte despuish « Lo mòn Compte » > « Suprimir lo mòn compte »."],
+                ["Sasida deu DPO", "Per e-mail a dpo@job-et-bonheur.fr. Responsa devath un relambi legau maximau d'un mes."],
+                ["Dret de reclamacion", "Auprès de la CNIL (www.cnil.fr) en cas de non-respècte deus drets."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Responsabilitats",
+          "corps": [
+            "Lo Ministèri que bota en òbra las diligéncias requeridas entà assegurar la disponibilitat e la seguretat deu servici. La sua responsabilitat ne's poiriá pas engatjar en cas de fòrça majora, d'interrupcion temporària per mantenença, d'inexactitud dens las anóncias redigidas peus emplegaires o de gessida negativa a ua candidatura."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Dret aplicable e jurisdiccion competenta",
+          "corps": [
+            "Aqueras CGU que son regidas peu dret francés. A fauta de resolucion amistosa, tot diferent relatiu a la lor validitat o execucion que serà sosmetut aus tribunaus francés territorialament competents."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Transparéncia",
+      "intro": "GéoEmploi qu'ei un servici qui permet de consultar ofèrtas de tribalh, de candidatar e, entaus emplegaires, de publicar gratuitament ofèrtas.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Publicacion gratuita",
+          "corps": [
+            "La publicacion d'ua ofèrta de tribalh sus GéoEmploi qu'ei completament gratuita.",
+            "Cap d'abonament, tarifa o contrapartida financièra n'ei pas demandat aus emplegaires entà publicar ua ofèrta."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Localizacion de las ofèrtas",
+          "corps": [
+            "Las ofèrtas de tribalh que son localizadas a la malha de la comuna. Que son posicionadas sus lo centre de la lor comuna e non pas a la lor adreça exacta.",
+            "La posicion de l'utilizaire que pòt estar utilizada entà'u permetre de consultar las ofèrtas a proximitat. Aquera posicion n'ei pas conservada per GéoEmploi.",
+            "Las solas donadas de localizacion conservadas que concernishen la localizacion associada a las ofèrtas de tribalh."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Conservacion de las donadas de localizacion",
+          "corps": [
+            "La posicion deus utilizaires n'ei pas enregistrada ni conservada.",
+            "Las donadas de localizacion associadas a las ofèrtas de tribalh que son conservadas conformament a las règlas definidas dens lo registre deus tractaments.",
+            "Los istorics de localizacion de las ofèrtas que son automaticament suprimits delà 90 dias."
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Proteccion de las donadas",
+          "corps": [
+            "GéoEmploi qu'aplica lo principi de minimizacion de las donadas : sonque las donadas necessàrias au foncionament deu servici que son collectadas e conservadas.",
+            "Entà tota question qui pertòca la proteccion de las vòstas donadas personalas o l'exercici deus vòstes drets, que podetz contactar lo delegat a la proteccion de las donadas (DPO) : dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Administracion",
+    "subtitle": "Gestion e moderacion de GéoEmploi",
+    "pendingReportsStat": "Senhalaments en espèra",
+    "loading": "Cargament...",
+    "youBadge": "Vosautes",
+    "notProvided": "Non pas hornit",
+    "notProvidedFem": "Non pas hornida",
+    "absent": "absenta",
+    "tabs": {
+      "reports": "Senhalaments",
+      "jobs": "Ofèrtas de verificar",
+      "users": "Utilizaires",
+      "employers": "Emplegaires"
+    },
+    "actions": {
+      "delete": "Suprimir",
+      "cancel": "Anullar",
+      "resolve": "Resòlver",
+      "deleteOffer": "Suprimir l'ofèrta",
+      "suspend": "Suspénder",
+      "reactivate": "Reactivar",
+      "deleteAccount": "Suprimir lo compte",
+      "verifyCompany": "Verificar l'entrepresa",
+      "removeVerification": "Levar la verificacion"
+    },
+    "errors": {
+      "fetchReports": "Impossible de cargar los senhalaments.",
+      "fetchJobs": "Impossible de cargar las ofèrtas de verificar.",
+      "fetchUsers": "Impossible de cargar los utilizaires.",
+      "fetchEmployers": "Impossible de cargar los emplegaires."
+    },
+    "reports": {
+      "empty": "Cap de senhalament.",
+      "deletedJob": "Ofèrta suprimida",
+      "reason": "Motiu",
+      "description": "Descripcion",
+      "reportedBy": "Senhalat per",
+      "deletedUser": "Utilizaire suprimit",
+      "date": "Data",
+      "status": "Estatut",
+      "pending": "En espèra",
+      "resolved": "Resolgut",
+      "resolveSuccess": "Senhalament resolgut",
+      "resolveError": "Impossible de resòlver lo senhalament."
+    },
+    "jobs": {
+      "toVerifyCount": "Ofèrtas de verificar ({{count}})",
+      "noneToVerify": "Cap d'ofèrta de verificar.",
+      "commune": "Comuna",
+      "description": "Descripcion",
+      "geocodeStatus": "Estatut geocodatge",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "correctAddressLabel": "Corregir la comuna",
+      "newAddressPlaceholder": "Navèra comuna",
+      "checking": "Verificacion...",
+      "correctAndGeocode": "Corregir e regeocodar",
+      "enterCityPrompt": "Mercés de sasir ua comuna.",
+      "addressCorrected": "Comuna corregida e ofèrta regeocodada.",
+      "geocodeFailed": "La comuna ne s'ei pas poguda geocodar.",
+      "correctError": "Impossible de corregir la comuna.",
+      "deleteConfirmTitle": "Suprimir l'ofèrta ?",
+      "deleteConfirmText": "Ètz segurs de voler suprimir aquera ofèrta ?",
+      "deleteSuccess": "Ofèrta suprimida",
+      "deleteError": "Supression impossible"
+    },
+    "users": {
+      "count": "Utilizaires ({{count}})",
+      "none": "Cap d'utilizaire.",
+      "email": "E-mail",
+      "role": "Ròtle",
+      "status": "Estatut",
+      "createdAt": "Creat lo",
+      "cannotSuspendSelf": "Ne podetz pas suspénder lo vòste pròpi compte.",
+      "cannotDeleteSelf": "Ne podetz pas suprimir lo vòste pròpi compte.",
+      "suspendedSuccess": "Utilizaire suspendut",
+      "reactivatedSuccess": "Utilizaire reactivat",
+      "deletedSuccess": "Utilizaire suprimit",
+      "statusError": "Impossible de modificar l'estatut.",
+      "deleteConfirmTitle": "Suprimir lo compte ?",
+      "deleteConfirmText": "Ètz segurs de voler suprimir aqueth compte ?",
+      "deleteError": "Impossible de suprimir l'utilizaire."
+    },
+    "employers": {
+      "count": "Emplegaires ({{count}})",
+      "none": "Cap d'emplegaire.",
+      "manager": "Responsable",
+      "email": "E-mail",
+      "description": "Descripcion",
+      "accountStatus": "Compte",
+      "verification": "Verificacion",
+      "verifiedAt": "Verificat lo",
+      "verifySuccess": "Entrepresa verificada",
+      "verifyError": "Impossible de verificar l'entrepresa.",
+      "unverifySuccess": "Verificacion de l'entrepresa levada",
+      "unverifyError": "Impossible de levar la verificacion."
+    },
+    "status": {
+      "active": "Actiu",
+      "suspended": "Suspendut",
+      "verified": "Verificat",
+      "toVerify": "De verificar"
+    }
+  },
+  "map": {
+    "unknownCompany": "Entrepresa desconoishuda",
+    "mustBeLoggedIn": "Que devetz estar connectats entà postular.",
+    "applicationSent": "Candidatura mandada dab succès.",
+    "alreadyApplied": "Qu'avetz ja postulat a aquera ofèrta.",
+    "reportDescTooShort": "La descripcion qu'ei tròp corta.",
+    "reportSent": "Lo senhalament qu'ei estat mandat.",
+    "reportError": "Impossible de mandar lo senhalament.",
+    "loading": "Cargament...",
+    "jobOfferAria": "Ofèrta de tribalh",
+    "companyLabel": "Entrepresa",
+    "applyBtn": "Postular",
+    "reportBtn": "Senhalar aquera ofèrta",
+    "closePopup": "Barrar los detalhs de l'ofèrta",
+    "sending": "Mandadís en cors...",
+    "applied": "Candidatura mandada",
+    "singleOfferAria": "Afichar l'ofèrta de tribalh a aqueth endret",
+    "multipleOffersAria": "Afichar las ofèrtas de tribalh a aqueth endret",
+    "locationNotFound": "Comuna o vila introbabla. Mercés de tornar ensajar.",
+    "locationModalTitle": "Utilizacion de la vòsta posicion",
+    "locationModalDesc": "Dab la vòsta autorizacion, GéoEmploi qu'utiliza la vòsta geolocalizacion entà afichar las ofèrtas de tribalh las mei pròchas de vosautes.",
+    "decline": "Refusar",
+    "accept": "Que disi d'òc",
+    "searchLabel": "Cercar ua comuna o ua vila",
+    "searchPlaceholder": "Cercar un lòc",
+    "searchBtn": "Cercar",
+    "mapAriaLabel": "Mapa de las ofèrtas de tribalh",
+    "reportModalTitle": "Senhalar aquera ofèrta",
+    "reasonLabel": "Motiu",
+    "descriptionLabel": "Descripcion",
+    "cancel": "Anullar",
+    "send": "Mandar",
+    "reasons": {
+      "fraud": "Ofèrta fraudulosa",
+      "misleading": "Informacions enganairas",
+      "discriminatory": "Contengut discriminatòri",
+      "nonCompliant": "Ofèrta non confòrma",
+      "other": "Auta"
+    }
+  },
+  "myOffers": {
+    "title": "Las mias ofèrtas",
+    "subtitle": "Retrobatz ací totas las ofèrtas qui avetz publicadas.",
+    "loading": "Cargament de las ofèrtas...",
+    "emptyTitle": "Cap d'ofèrta publicada",
+    "emptyText": "Ne'vs avetz pas enqüèra creat d'ofèrta de tribalh.",
+    "viewsCount_zero": "0 vista",
+    "viewsCount_one": "1 vista",
+    "viewsCount_other": "{{count}} vistas",
+    "companyPrefix": "Entrepresa :",
+    "communePrefix": "Comuna :",
+    "descPrefix": "Descripcion :",
+    "detailsTitle": "Véder los detalhs",
+    "editTitle": "Modificar l'ofèrta",
+    "deleteTitle": "Suprimir l'ofèrta",
+    "deleteConfirmTitle": "Suprimir l'ofèrta ?",
+    "deleteConfirmText": "Ètz segurs de voler suprimir aquera ofèrta ?",
+    "deleteSuccess": "Ofèrta suprimida dab succès",
+    "deleteError": "Impossible de suprimir l'ofèrta.",
+    "editSuccess": "Ofèrta modificada dab succès",
+    "editError": "Modificacion impossible",
+    "actions": {
+      "details": "Detalhs",
+      "edit": "Editar",
+      "delete": "Suprimir",
+      "cancel": "Anullar",
+      "close": "Barrar",
+      "modify": "Modificar",
+      "save": "Enregistrar",
+      "accept": "Acceptar",
+      "reject": "Refusar"
+    },
+    "errors": {
+      "fetchEmployerId": "Impossible de recuperar l'identificant de l'emplegaire.",
+      "fetchOffers": "Impossible de cargar las vòstas ofèrtas.",
+      "fetchApplications": "Impossible de cargar las candidaturas."
+    },
+    "modal": {
+      "offerInfoTitle": "Informacions de l'ofèrta",
+      "companyInfoTitle": "Informacions de l'entrepresa",
+      "titleLabel": "Títol",
+      "communeLabel": "Comuna",
+      "descLabel": "Descripcion",
+      "viewsLabel": "Nombre de vistas",
+      "companyLabel": "Entrepresa",
+      "emailLabel": "E-mail",
+      "notProvided": "Non pas hornit",
+      "notProvidedFem": "Non pas hornida",
+      "notProvidedPlur": "Non pas hornidas",
+      "noDescription": "Cap de descripcion disponibla."
+    },
+    "applications": {
+      "titleCount": "Candidaturas ({{count}})",
+      "loading": "Cargament de las candidaturas...",
+      "empty": "Cap de candidatura recebuda entà aquera ofèrta.",
+      "acceptedToast": "Candidatura acceptada",
+      "rejectedToast": "Candidatura refusada.",
+      "statusError": "Impossible de modificar la candidatura."
+    },
+    "candidate": {
+      "defaultFirstname": "Prenom",
+      "defaultLastname": "Nom",
+      "email": "E-mail",
+      "skills": "Competéncias",
+      "experience": "Experiéncia",
+      "availability": "Disponibilitat",
+      "status": "Estatut",
+      "receivedAt": "Candidatura recebuda lo"
+    },
+    "status": {
+      "waiting": "En espèra",
+      "accepted": "Acceptada",
+      "rejected": "Refusada"
+    },
+    "editModal": {
+      "title": "Modificar l'ofèrta",
+      "titleLabel": "Títol de l'ofèrta",
+      "communeLabel": "Comuna",
+      "descLabel": "Descripcion",
+      "saving": "Enregistrament..."
+    }
+  },
+  "consent": {
+    "saveError": "Impossible d'enregistrar lo consentiment :"
+  },
+  "application": {
+    "title": "Las mias candidaturas",
+    "subtitle": "Retrobatz ací totas las ofèrtas a lasquaus avetz postulat.",
+    "loading": "Cargament de las candidaturas...",
+    "emptyTitle": "Cap de candidatura",
+    "emptyText": "Ne'vs avetz pas enqüèra postulat a ua ofèrta de tribalh.",
+    "untitledOffer": "Ofèrta shens títol",
+    "company": "Entrepresa :",
+    "location": "Comuna :",
+    "description": "Descripcion :",
+    "detailsButton": "Detalhs",
+    "detailsTitle": "Véder los detalhs",
+    "deleteButton": "Suprimir",
+    "deleteTitle": "Suprimir la candidatura",
+    "deleting": "...",
+    "deletingInProgress": "Supression...",
+    "deleteConfirmTitle": "Suprimir la candidatura ?",
+    "deleteConfirmText": "Ètz segurs de voler suprimir aquera candidatura ?",
+    "deleteConfirmButton": "Suprimir",
+    "deleteCancelButton": "Anullar",
+    "deleteSuccess": "Candidatura suprimida dab succès",
+    "deleteError": "Impossible de suprimir la candidatura.",
+    "fetchUserError": "Impossible de recuperar l'identificant de l'utilizaire.",
+    "fetchError": "Impossible de cargar las vòstas candidaturas.",
+    "modalDefaultTitle": "Detalhs de la candidatura",
+    "modalApplicationInfo": "Informacions de la candidatura",
+    "status": "Estatut",
+    "notProvided": "Non pas hornit",
+    "notProvidedFem": "Non pas hornida",
+    "applicationDate": "Data de candidatura",
+    "modalOfferInfo": "Informacions de l'ofèrta",
+    "offerTitle": "Títol",
+    "contractType": "Tipe de contracte",
+    "noDescription": "Cap de descripcion disponibla.",
+    "close": "Barrar"
+  },
+  "cgu": {
+    "pageTitle": "Condicions Generalas d'Utilizacion",
+    "intro": "Benvenguts sus lo nòste sit. Aqueras Condicions Generalas d'Utilizacion que definishen las règlas aplicablas a l'utilizacion de la nòsta plataforma.",
+    "section1": {
+      "heading": "1. Objècte",
+      "p1": "Aqueras Condicions Generalas d'Utilizacion qu'an per objècte de definir las condicions dens lasquaus los utilizaires pòden accedir au sit e utilizar los servicis prepausats.",
+      "p2": "Tota utilizacion deu sit qu'implica l'acceptacion sancèra de las presentas condicions. Se n'acceptatz pas aqueras condicions, que'vs convidam a non pas utilizar lo sit."
+    },
+    "section2": {
+      "heading": "2. Accès au sit",
+      "p1": "Lo sit qu'ei accessible gratuitament a tot utilizaire qui dispausa d'un accès a Internet. Los despens eventuaus ligats a l'accès au ret, notadament los despens de connexion o de materiau, que demòran a la carga de l'utilizaire.",
+      "p2": "Que'ns reservam lo dret de modificar, suspénder o interrompre temporàriament tot o partida deu sit, notadament per rasons de mantenença o de mesa a dia."
+    },
+    "section3": {
+      "heading": "3. Utilizacion deu servici",
+      "intro": "L'utilizaire que s'engatja a utilizar lo sit d'ua faiçon responsabla e confòrma a las leis e reglaments en vigor.",
+      "list": [
+        "Non pas utilizar lo sit a fins fraudulosas o illegalas.",
+        "Non pas ensajar de perturbar lo foncionament deu sit.",
+        "Non pas portar atencha aus drets o a la seguretat d'autes utilizaires.",
+        "Non pas introduire de contengut maliciós o susceptible d'endomajar lo servici."
+      ]
+    },
+    "section4": {
+      "heading": "4. Compte utilizaire",
+      "p1": "Quan la creacion d'un compte ei necessària entà accedir a certans servicis, l'utilizaire que s'engatja a hornir informacions exactas, completas e a dia.",
+      "p2": "L'utilizaire qu'ei responsable de la confidencialitat deus sons identificants de connexion e de tota activitat efectuada despuish lo son compte."
+    },
+    "section5": {
+      "heading": "5. Proprietat intellectuala",
+      "p1": "L'ensemble deus elements presents sus lo sit, notadament los tèxtes, imatges, logotipes, grafismes, interfàcias, contenguts e logiciaus, que son protegits per las disposicions relativas a la proprietat intellectuala.",
+      "p2": "Tota reproduccion, representacion, modificacion o espleitacion de tot o partida deu sit shens autorizacion prealabla qu'ei susceptible de constituir ua violacion deus drets de proprietat intellectuala."
+    },
+    "section6": {
+      "heading": "6. Responsabilitat",
+      "p1": "Que botam tot en òbra entà assegurar l'exactitud e la disponibilitat de las informacions presentas sus lo sit. Totun, ne podem pas garantir que lo sit serà disponible en permanéncia o exempt d'errors.",
+      "p2": "L'utilizaire que reconeish utilizar lo sit devath la sua pròpia responsabilitat e que demòra responsable deu son materiau, de la sua connexion Internet e de l'utilizacion qui hè deus servicis."
+    },
+    "section7": {
+      "heading": "7. Donadas personalas",
+      "p1": "Dens lo quadre de l'utilizacion deu sit, certanas donadas personalas que pòden estar collectadas e tractadas.",
+      "p2": "Aqueths tractaments que son realizats conformament a la reglamentacion aplicabla en matèria de proteccion de las donadas personalas.",
+      "p3": "Entà mei d'informacions, mercés de consultar la nòsta politica de confidencialitat."
+    },
+    "section8": {
+      "heading": "8. Ligams extèrnes",
+      "p1": "Lo sit que pòt contiéner ligams de cap a sits o servicis extèrnes. Ne vam pas estar responsables deu contengut, de la disponibilitat o de las practicas d'aqueths sits tèrces."
+    },
+    "section9": {
+      "heading": "9. Modificacion de las condicions",
+      "p1": "Que'ns reservam lo dret de modificar las presentas Condicions Generalas d'Utilizacion a tot moment entà las adaptar a l'evolucion deu sit, deus sons servicis o de la reglamentacion.",
+      "p2": "Las navèras condicions que prenon efèit tre la lor publicacion sus lo sit."
+    },
+    "section10": {
+      "heading": "10. Dret aplicable",
+      "p1": "Aqueras Condicions Generalas d'Utilizacion que son sosmetudas au dret aplicable dens lo país on ei establit l'editor deu sit.",
+      "p2": "En cas de litigi, las partidas que s'esforçaràn de cercar ua solucion amistosa abans tota procedura judiciària."
+    },
+    "section11": {
+      "heading": "11. Contacte",
+      "p1": "Entà tota question qui pertòca las presentas Condicions Generalas d'Utilizacion, que'ns podetz contactar via los mejans de contacte disponibles sus lo nòste sit."
+    },
+    "backHome": "Tornar a l'arcuelh",
+    "lastUpdate": "Darrèra mesa a dia : 1èr de seteme de 2026"
+  },
+  "geoConsentNotice": {
+    "dataLabel": "Donadas concernidas :",
+    "dataValue": "coordenadas GPS brutas (latitud, longitud).",
+    "purposeLabel": "Finalitat :",
+    "purposeValue": "filtrar las ofèrtas de tribalh segon la distància geografica de l'utilizaire.",
+    "legalBasisLabel": "Basa legau :",
+    "legalBasisValue": "lo vòste consentiment, exprimit via l'autorizacion demandada peu navigader.",
+    "recipientsLabel": "Destinataris :",
+    "recipientsValue": "equipa tecnica e produch de GéoEmploi (logs tecnics) ; IGN entaus teules cartografics e lo geocodatge (API Adreça / Geoplataforma).",
+    "transferLabel": "Transferiment hòra UE :",
+    "transferValue": "cap ; donadas albergadas en França.",
+    "retentionLabel": "Durada de conservacion :",
+    "retentionValue": "donada volatila, utilizada sonque durant lo temps de la requèsta, shens estocatge en basa de donadas.",
+    "rightsLabel": "Los vòstes drets :",
+    "rightsValue": "accès, esfaçament, limitacion, e retirament deu consentiment a tot moment, en inclusent despuish la vòsta pagina de perfil."
+  },
+  "jobOffer": {
+    "pageTitle": "Creacion d'ofèrta de tribalh",
+    "titleLabel": "Títol",
+    "titlePlaceholder": "CDI - emplegat polivalent",
+    "titleRequired": "Lo títol deu tribalh qu'ei requerit",
+    "descriptionLabel": "Descripcion",
+    "descriptionPlaceholder": "Descripcion deu tribalh",
+    "descriptionRequired": "La descripcion qu'ei requerida",
+    "communeLabel": "Comuna",
+    "communePlaceholder": "35000 Rennes",
+    "communeRequired": "La comuna qu'ei requerida",
+    "submitButton": "Publicar l'ofèrta",
+    "createSuccess": "Ofèrta creada dab succès",
+    "createError": "Impossible de crear l'ofèrta"
+  },
+  "login": {
+    "welcomeTitle": "Benvenguts",
+    "subtitle": "Connectatz-vos au vòste compte.",
+    "emailLabel": "Adreça E-mail",
+    "emailPlaceholder": "exemple@exemple.com",
+    "emailRequired": "L'adreça e-mail qu'ei requerida",
+    "emailInvalid": "E-mail invalid",
+    "passwordLabel": "Senhau",
+    "passwordPlaceholder": "Lo vòste senhau",
+    "passwordRequired": "Lo senhau qu'ei requerit",
+    "submitButton": "Se connectar",
+    "noAccount": "Pas enqüèra de compte ?",
+    "registerLink": "S'inscriure",
+    "loginSuccess": "Connexion efectuada dab succès",
+    "loginError": "Identificant incorrècte",
+    "invalidCredentials": "Identificants invalids",
+    "noToken": "Cap d'access_token recebut deu servidor"
+  },
+  "profile": {
+    "pageTitle": "Modificar lo mòn perfil",
+    "subtitle": "Modificatz las vòstas informacions personalas e professionaus.",
+    "firstNameLabel": "Prenom",
+    "firstNamePlaceholder": "Prenom",
+    "firstNameRequired": "Lo prenom qu'ei obligatòri",
+    "lastNameLabel": "Nom",
+    "lastNamePlaceholder": "Nom",
+    "lastNameRequired": "Lo nom qu'ei obligatòri",
+    "emailLabel": "Adreça E-mail",
+    "emailPlaceholder": "exemple@exemple.com",
+    "emailRequired": "L'e-mail qu'ei obligatòri",
+    "emailInvalid": "E-mail invalid",
+    "skillsLabel": "Competéncias",
+    "skillsPlaceholder": "Ex: React, JavaScript, Marketing...",
+    "skillsRequired": "Las competéncias que son obligatòrias",
+    "experienceLabel": "Experiéncia",
+    "experiencePlaceholder": "Ex: 2 ans",
+    "experienceRequired": "L'experiéncia qu'ei obligatòria",
+    "availabilityLabel": "Disponibilitat",
+    "availabilityPlaceholder": "Ex: Temps plen",
+    "availabilityRequired": "La disponibilitat qu'ei obligatòria",
+    "companyNameLabel": "Entrepresa",
+    "companyNamePlaceholder": "Nom de la vòsta entrepresa",
+    "companyNameRequired": "Lo nom de l'entrepresa qu'ei obligatòri",
+    "companyDescLabel": "Descripcion de la vòsta entrepresa",
+    "companyDescPlaceholder": "Ex: Entrepresa de seguretat",
+    "companyDescRequired": "La descripcion qu'ei obligatòria",
+    "saveButton": "Enregistrar las modificacions",
+    "saving": "Modificacion...",
+    "logoutButton": "Se desconnectar",
+    "exportButton": "Exportar las mias donadas",
+    "exportSuccess": "Exportacion capitada !",
+    "exportError": "Impossible d'exportar las donadas",
+    "exportEmptyError": "Cap de donada d'exportar",
+    "saveSuccess": "Perfil modificat dab succès !",
+    "userUpdateError": "Error dens la modificacion de l'utilizaire",
+    "profileUpdateError": "Error dens la modificacion deu perfil",
+    "unsupportedRole": "Ròtle utilizaire non suportat : {{role}}",
+    "fetchProfileError": "Impossible de recuperar lo perfil",
+    "privacyHeading": "Confidencialitat & geolocalizacion",
+    "privacyText": "Dab lo vòste acòrd, GéoEmploi qu'utiliza la vòsta posicion entà afichar las ofèrtas de tribalh las mei pròchas de vosautes sus la mapa.",
+    "consentStatusLabel": "Estatut actuau :",
+    "consentAccepted": "Geolocalizacion autorizada",
+    "consentDeclined": "Geolocalizacion refusada",
+    "consentUnset": "Cap de causida enregistrada",
+    "consentAcceptedToast": "Geolocalizacion autorizada.",
+    "consentDeclinedToast": "Geolocalizacion refusada.",
+    "viewNoticeButton": "Véder la mencion d'informacion",
+    "allowGeoButton": "Autorizar la geolocalizacion",
+    "declineGeoButton": "Refusar la geolocalizacion",
+    "noticeTitle": "Mencion d'informacion — Geolocalizacion",
+    "noticeIntro": "Dab la vòsta autorizacion, GéoEmploi qu'utiliza la vòsta geolocalizacion entà afichar las ofèrtas de tribalh las mei pròchas de vosautes.",
+    "closeButton": "Barrar",
+    "backLink": "← Tornar",
+    "deleteAccountButton": "Suprimir lo compte",
+    "deleteAccountTitle": "Suprimir lo compte ?",
+    "deleteAccountText": "Ètz segurs de voler suprimir aqueth compte ?",
+    "deleteAccountConfirm": "Suprimir",
+    "deleteAccountCancel": "Anullar",
+    "deleteAccountSuccess": "Perfil suprimit dab succès",
+    "deleteAccountError": "Impossible de suprimir lo perfil."
+  },
+  "register": {
+    "invalidRoleTitle": "Tipe de compte invalid",
+    "invalidRoleText": "Mercés de causir un tipe de compte.",
+    "backButton": "Tornar",
+    "titleSeeker": "Crear un compte Cercaire",
+    "titleRH": "Crear un compte RH",
+    "subtitle": "Arremplishatz las vòstas coordenadas entà començar.",
+    "firstNameLabel": "Prenom",
+    "firstNamePlaceholder": "Prenom",
+    "firstNameRequired": "Lo prenom qu'ei obligatòri",
+    "lastNameLabel": "Nom",
+    "lastNamePlaceholder": "Nom",
+    "lastNameRequired": "Lo nom qu'ei obligatòri",
+    "emailLabel": "Adreça E-mail",
+    "emailPlaceholder": "exemple@exemple.com",
+    "emailRequired": "L'e-mail qu'ei obligatòri",
+    "emailInvalid": "E-mail invalid",
+    "passwordLabel": "Senhau",
+    "passwordPlaceholder": "Senhau",
+    "passwordRequired": "Lo senhau qu'ei obligatòri",
+    "skillsLabel": "Competéncias",
+    "skillsPlaceholder": "Ex: React, JavaScript, Marketing...",
+    "skillsRequired": "Las competéncias que son obligatòrias",
+    "experienceLabel": "Experiéncia",
+    "experiencePlaceholder": "Ex: 2 ans",
+    "experienceRequired": "L'experiéncia qu'ei obligatòria",
+    "availabilityLabel": "Disponibilitat",
+    "availabilityPlaceholder": "Ex: Temps plen",
+    "availabilityRequired": "La disponibilitat qu'ei obligatòria",
+    "companyNameLabel": "Entrepresa",
+    "companyNamePlaceholder": "Nom de la vòsta entrepresa",
+    "companyNameRequired": "Lo nom de l'entrepresa qu'ei obligatòri",
+    "companyDescLabel": "Descripcion de la vòsta entrepresa",
+    "companyDescPlaceholder": "Ex: Entrepresa de seguretat",
+    "companyDescRequired": "La descripcion qu'ei obligatòria",
+    "submitSeeker": "Crear lo mòn compte Cercaire",
+    "submitRH": "Crear lo mòn compte RH",
+    "alreadyAccount": "Ja un compte ?",
+    "loginLink": "Se connectar",
+    "seekerCreateError": "Error pendent la creacion deu compte Cercaire",
+    "rhCreateError": "Error pendent la creacion deu compte RH",
+    "createSuccess": "Compte creat dab succès.",
+    "createError": "Impossible de crear lo vòste compte."
+  },
+  "footer": {
+    "text": "Demostrader tecnic, ne constituish pas un servici public en espleitacion."
+  },
+  "navbar": {
+    "siteName": "GéoEmploi",
+    "notificationsAria": "Notificacions",
+    "aboutLink": "A prepaus",
+    "applicationsLink": "Candidaturas",
+    "myOffersLink": "Véder las mias ofèrtas",
+    "createOfferLink": "Crear ua ofèrta",
+    "adminLink": "Administracion",
+    "accountAria": "Compte",
+    "notificationsTitle": "Notificacions",
+    "noNotifications": "Cap de notificacion peu moment.",
+    "typeApplication": "Candidatura",
+    "typeJob": "Ofèrta",
+    "typeSystem": "Sistèma",
+    "read": "legit",
+    "unread": "non pas legit",
+    "markAsRead": "Marcar coma legida",
+    "markingAsRead": "Enregistrament...",
+    "close": "Barrar",
+    "closeAria": "Barrar",
+    "fetchError": "Impossible de cargar las vòstas notificacions.",
+    "markReadError": "Impossible de marcar la notificacion coma legida."
+  }
+}

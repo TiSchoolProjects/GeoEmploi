@@ -1,0 +1,704 @@
+{
+  "home": {
+    "title": "Dizoloit marc'had",
+    "subtitle": "al labour e Frañs",
+    "mapButton": "Dizoleiñ ar gartenn",
+    "imageAlt": "Skeudenn"
+  },
+  "account": {
+    "title": "Degemer mat war GéoEmploi",
+    "subtitle": "Krouit ho kont ha krogit gant ho skiant-prenet bremañ.",
+    "button1": "Krouiñ ur gont HR",
+    "button2": "Krouiñ ur gont Klasker",
+    "question": "Ur gont ho peus c'hoazh ?",
+    "link": "Kennaskañ"
+  },
+  "more": {
+    "title": "Titouroù",
+    "subtitle": "Termenoù implijout ha treuzwelusted GéoEmploi",
+    "summary": "Taolenn",
+    "articleLabel": "Pennad",
+    "tabs": {
+      "cgu": "TIU",
+      "transparency": "Treuzwelusted"
+    },
+    "cgu": {
+      "title": "Termenoù hollek implijout",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Rakskrid ha kinnig ar servij",
+          "corps": [
+            "Ministrerezh al Labour hag al Levenez a laka ar savenn niverel foran GéoEmploi e kerz an arveriaded. Pal ar servij foran etremouezh-mañ eo aesaat an daremprediñ eeun etre an danvez-implijidi hag ar goprerien en ur aotren gwelet kinnigoù labour lec'hiet diouzh skeul ar gumun.",
+            "An Termenoù Hollek Implijout (THI) a dermen reolennoù moned, implij ha gwareziñ roadennoù etre an Armerzh embanner hag arveriaded ar servij. Kement moned pe krouidigezh kont a dalvez asant leun d'an dispositions-mañ."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Termenadurioù",
+          "liste": [
+            ["Savenn", "Ar servij niverel GéoEmploi, hegerz enlinenn."],
+            ["Danvez-implijad", "Kement den fizikel a ya war ar servij evit klask labour, sellet ouzh kinnigoù pe lakaat e anv."],
+            ["Goprer / Goprer", "Kement den moral pe a-vicher a embann kemennoù tuta dre ur gont gouestlet."],
+            ["Roadennoù kartennel", "Fondoù kartennel pourchaset gant Géoplateforme IGN ha roadennoù chomlec'hioù o tont eus an API Adresse broadel (api-adresse.data.gouv.fr)."]
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Moned d'ar servij ha prizioù goprerien",
+          "sousArticles": [
+            {
+              "soustitre": "3.1. Moned danvez-implijidi",
+              "corps": [
+                "An holl berzhioù kinniget d'an danvez-implijidi — sellet ouzh ar gartenn, diskouez ar c'hemennoù, jediñ an nester ha kas emstrivadurioù — a zo digoust da vat hag hep koumanant ebet."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Geolec'hiañ ha doujañ d'ar vuhez prevez",
+          "sousArticles": [
+            {
+              "soustitre": "4.1. Tretiñ tremeniat hag ezvezañs enrollañ GPS",
+              "corps": [
+                "Evit gellout renkañ ar c'hinnigoù hervez an nester douaroniel, an arveriad a c'hell enaouiñ lec'hiañ e ardivink dre API e verdeer. Ur goulenn aotren teknikel sklaer a zo ret evit kement-se.",
+                "Daveennoù GPS ebet eus an arveriad n'int miret, enrollet pe heuliet e diaz-titouroù pe kazetennoù arloañ ar Ministrerezh. Jediñ an hed e-keñver ar c'hinnigoù a vez graet nemetken en un doare tremeniat e memor vev e-pad padelezh an dalc'h oberiant."
+              ]
+            },
+            {
+              "soustitre": "4.2. Dibab all hep lec'hiañ",
+              "corps": [
+                "An aotren lec'hiañ a zo diret. Ma vez nac'het, an arveriad a c'hell implijout an holl berzhioù en ur skrivañ gant an dorn ur gumun pe ur c'hod-post dave."
+              ]
+            },
+            {
+              "soustitre": "4.3. Gwareziñ chomlec'hioù ar c'hoprerien",
+              "corps": [
+                "Evit mirout sioulder lec'hioù ar c'hoprerien, ar chomlec'hioù-post rik ne vezont ket diskwezet war ar gartenn foran : kumun stag ar c'hinnig hepken a vez gwelet gant an arveriaded."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art5",
+          "num": "5",
+          "titre": "Gwareziñ ar roadennoù personel hag implij ar gwirioù",
+          "sousArticles": [
+            {
+              "soustitre": "5.1. Rannoù roadennoù dastumet e-pad an enskrivadur",
+              "corps": [
+                "Hervez pennaenn bihanaat ar roadennoù (Pennad 5.1.c RGPD), GéoEmploi a zastum hepken ar roadennoù rekis evit etremouezh al labour :",
+                "Danvez-implijad : Anv, anv-bihan, chomlec'h postel daremprediñ, ger-tremen suroc'haet (enkodlet/heshet), teul CV (mentrezh PDF/DOC).",
+                "Goprer : Anv embregerezh, niverenn SIRET, chomlec'h ar sez, anv/anv-bihan ar merour, chomlec'h postel a-vicher, niverenn bellgomz."
+              ],
+              "liste": [
+                ["Danvez-implijad", "Anv, anv-bihan, chomlec'h postel daremprediñ, ger-tremen suroc'haet (enkodlet/heshet), teul CV (mentrezh PDF/DOC)."],
+                ["Goprer", "Anv embregerezh, niverenn SIRET, chomlec'h ar sez, anv/anv-bihan ar merour, chomlec'h postel a-vicher, niverenn bellgomz."]
+              ]
+            },
+            {
+              "soustitre": "5.2. Padelezhioù mirout",
+              "table": [
+                ["Roadennoù profil hag emstrivadurioù", "Padelezh implij oberiant, ha diverket goude 2 vloaz dizoberiantiz dizehan"],
+                ["Kazetennoù kennaskañ", "Chomlec'hioù IP dizanvet dindan 24 eurvezh, kazetennoù teknikel diverket dindan 12 miz"],
+                ["Roadennoù GPS", "Mirout e-pad 0 eilenn (jedadenn dremeniad, hep diellaouiñ)"]
+              ]
+            },
+            {
+              "soustitre": "5.3. Doareoù pleustrek da implijout ar gwirioù",
+              "corps": [
+                "Hervez ar Reoliadur Hollek war Gwareziñ ar Roadennoù (RGPD) hag al lezenn Stlenneg ha Frankizoù, pep arveriad en deus ur gwir moned, reizhañ, diverkañ, bevenniñ ha sevel a-enep da dretadur e roadennoù."
+              ],
+              "liste": [
+                ["Emrenerezh eeun", "Kemmañ an titouroù pe diverkañ ar gont diouzhtu adalek « Ma c'hont » > « Diverkañ ma c'hont »."],
+                ["Sevel klemm ouzh an DPO", "Dre bostel da dpo@job-et-bonheur.fr. Respont dindan ul lajad lezennel a ur miz d'ar muiañ."],
+                ["Gwir da glemm", "Ouzh ar CNIL (www.cnil.fr) ma ne vez ket doujet d'ar gwirioù."]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "art7",
+          "num": "7",
+          "titre": "Kiriegezhioù",
+          "corps": [
+            "Ar Ministrerezh a laka e pleustr kement tra rekis evit asuriñ hegerzded ha surentez ar servij. Ne c'hell ket bezañ lakaet da giriek e degouezh nerzh meur, ehanadenn badennek evit kempenn, amreizhded er c'hemennoù skrivet gant ar c'hoprerien pe disoc'h fall d'un emstrivadur."
+          ]
+        },
+        {
+          "id": "art8",
+          "num": "8",
+          "titre": "Lezenn aplikadus ha barnerezh beli gantañ",
+          "corps": [
+            "An Termenoù Hollek Implijout-mañ a zo renet gant al lezenn c'hall. Ma n'eus diskoulm peoc'hus ebet, kement dizemglev diwar-benn o talvoudegezh pe o lakaat e pleustr a vo kaset dirak lezioù-barn gall beli ganto."
+          ]
+        }
+      ]
+    },
+    "transparency": {
+      "title": "Treuzwelusted",
+      "intro": "GéoEmploi a zo ur servij a aotren gwelet kinnigoù labour, lakaat e anv ha, evit ar c'hoprerien, embann kinnigoù digoust.",
+      "articles": [
+        {
+          "id": "art1",
+          "num": "1",
+          "titre": "Embann digoust",
+          "corps": [
+            "Embann ur c'hinnig labour war GéoEmploi a zo digoust penn-da-benn.",
+            "Koumanant, feur pe gwerzh arc'hant ebet ne vez goulennet digant ar c'hoprerien evit embann ur c'hinnig."
+          ]
+        },
+        {
+          "id": "art2",
+          "num": "2",
+          "titre": "Lec'hiañ ar c'hinnigoù",
+          "corps": [
+            "Kinnigoù labour a vez lec'hiet diouzh maezienn ar gumun. Lec'hiet int e kreiz o c'humun ha n'eo ket ouzh o chomlec'h resis.",
+            "Lec'hiadur an arveriad a c'hell bezañ implijet evit gwelet ar c'hinnigoù tro-dro. Al lec'hiadur-se ne vez ket miret gant GéoEmploi.",
+            "Ar roadennoù lec'hiañ miret nemeto a sell ouzh al lec'hiañ liammet gant ar c'hinnigoù labour."
+          ]
+        },
+        {
+          "id": "art3",
+          "num": "3",
+          "titre": "Mirout roadennoù lec'hiañ",
+          "corps": [
+            "Lec'hiadur an arveriaded ne vez ket enrollet nag ivez miret.",
+            "Roadennoù lec'hiañ liammet ouzh ar c'hinnigoù labour a vez miret hervez ar reolennoù termenet e marilh an tretadurioù.",
+            "Istor lec'hiañ ar c'hinnigoù a vez diverket ent-emgefreek goude 90 devezh."
+          ]
+        },
+        {
+          "id": "art4",
+          "num": "4",
+          "titre": "Gwareziñ ar roadennoù",
+          "corps": [
+            "GéoEmploi a laka e pleustr pennaenn bihanaat ar roadennoù : ar roadennoù rekis da vont en-dro ar servij hepken a vez dastumet ha miret.",
+            "Evit kement goulenn diwar-benn gwarez ho roadennoù personel pe implij ho kwirioù, gallout a rit mont e darempred gant an drougverour da wareziñ ar roadennoù (DPO) : dpo@job-et-bohneur.fr"
+          ]
+        }
+      ]
+    }
+  },
+  "admin": {
+    "title": "Melestradur",
+    "subtitle": "Merañ hag evezhiañ GéoEmploi",
+    "pendingReportsStat": "Kemennadennoù o c'hortoz",
+    "loading": "O kargañ...",
+    "youBadge": "C'hwi",
+    "notProvided": "Ket roet",
+    "notProvidedFem": "Ket roet",
+    "absent": "ezvezant",
+    "tabs": {
+      "reports": "Kemennadennoù",
+      "jobs": "Kinnigoù da wiriañ",
+      "users": "Arveriaded",
+      "employers": "Goprerien"
+    },
+    "actions": {
+      "delete": "Diverkañ",
+      "cancel": "Nullañ",
+      "resolve": "Diskoulmañ",
+      "deleteOffer": "Diverkañ ar c'hinnig",
+      "suspend": "Suspentañ",
+      "reactivate": "Adoberiañ",
+      "deleteAccount": "Diverkañ ar gont",
+      "verifyCompany": "Gwiriañ an embregerezh",
+      "removeVerification": "Lemel ar gwiriadur"
+    },
+    "errors": {
+      "fetchReports": "Dibosupl eo kargañ ar c'hemennadennoù.",
+      "fetchJobs": "Dibosupl eo kargañ ar c'hinnigoù da wiriañ.",
+      "fetchUsers": "Dibosupl eo kargañ an arveriaded.",
+      "fetchEmployers": "Dibosupl eo kargañ ar c'hoprerien."
+    },
+    "reports": {
+      "empty": "Kemennadenn ebet.",
+      "deletedJob": "Kinnig diverket",
+      "reason": "Abeg",
+      "description": "Deskrivadur",
+      "reportedBy": "Kemenned gant",
+      "deletedUser": "Arveriad diverket",
+      "date": "Deiziad",
+      "status": "Statud",
+      "pending": "O c'hortoz",
+      "resolved": "Diskoulmet",
+      "resolveSuccess": "Kemennadenn diskoulmet",
+      "resolveError": "Dibosupl diskoulmañ ar gemennadenn."
+    },
+    "jobs": {
+      "toVerifyCount": "Kinnigoù da wiriañ ({{count}})",
+      "noneToVerify": "Kinnig ebet da wiriañ.",
+      "commune": "Kumun",
+      "description": "Deskrivadur",
+      "geocodeStatus": "Statud geokodiñ",
+      "latitude": "Ledred",
+      "longitude": "Hedred",
+      "correctAddressLabel": "Reizhañ ar gumun",
+      "newAddressPlaceholder": "Kumun nevez",
+      "checking": "O wiriañ...",
+      "correctAndGeocode": "Reizhañ hag adzeokodiñ",
+      "enterCityPrompt": "Trugarez da reiñ ur gumun.",
+      "addressCorrected": "Kumun reizhet ha kinnig adzeokodet.",
+      "geocodeFailed": "N'eus ket bet gallet geokodiñ ar gumun.",
+      "correctError": "Dibosupl eo reizhañ ar gumun.",
+      "deleteConfirmTitle": "Diverkañ al labour ?",
+      "deleteConfirmText": "Ha sur oc'h e fell deoc'h diverkañ ar c'hinnig-mañ ?",
+      "deleteSuccess": "Kinnig diverket",
+      "deleteError": "Diverkadur dibosupl"
+    },
+    "users": {
+      "count": "Arveriaded ({{count}})",
+      "none": "Arveriad ebet.",
+      "email": "Postel",
+      "role": "Roll",
+      "status": "Statud",
+      "createdAt": "Krouet d'an",
+      "cannotSuspendSelf": "Ne c'hellit ket suspentañ ho kont hoc'h-unan.",
+      "cannotDeleteSelf": "Ne c'hellit ket diverkañ ho kont hoc'h-unan.",
+      "suspendedSuccess": "Arveriad suspentet",
+      "reactivatedSuccess": "Arveriad adoberiet",
+      "deletedSuccess": "Arveriad diverket",
+      "statusError": "Dibosupl kemmañ ar statud.",
+      "deleteConfirmTitle": "Diverkañ ar gont ?",
+      "deleteConfirmText": "Ha sur oc'h e fell deoc'h diverkañ ar gont-mañ ?",
+      "deleteError": "Dibosupl eo diverkañ an arveriad."
+    },
+    "employers": {
+      "count": "Goprerien ({{count}})",
+      "none": "Goprer ebet.",
+      "manager": "Karget",
+      "email": "Postel",
+      "description": "Deskrivadur",
+      "accountStatus": "Kont",
+      "verification": "Gwiriadur",
+      "verifiedAt": "Gwiriet d'an",
+      "verifySuccess": "Embregerezh gwiriet",
+      "verifyError": "Dibosupl eo gwiriañ an embregerezh.",
+      "unverifySuccess": "Gwiriadur an embregerezh tennet kuit",
+      "unverifyError": "Dibosupl tennañ ar gwiriadur kuit."
+    },
+    "status": {
+      "active": "Oberiant",
+      "suspended": "Suspentelet",
+      "verified": "Gwiriet",
+      "toVerify": "Da wiriañ"
+    }
+  },
+  "map": {
+    "unknownCompany": "Embregerezh dianav",
+    "mustBeLoggedIn": "Ret eo deoc'h bezañ kennasket evit lakaat hoc'h anv.",
+    "applicationSent": "Emstrivadur kaset gant berzh.",
+    "alreadyApplied": "Lakaet ho peus hoc'h anv war ar c'hinnig-mañ c'hoazh.",
+    "reportDescTooShort": "Re verr eo an deskrivadur.",
+    "reportSent": "Kaset eo bet ar gemennadenn.",
+    "reportError": "Dibosupl eo kas ar gemennadenn.",
+    "loading": "O kargañ...",
+    "jobOfferAria": "Kinnig labour",
+    "companyLabel": "Embregerezh",
+    "applyBtn": "Lakaat e anv",
+    "reportBtn": "Kemenn ar c'hinnig-mañ",
+    "closePopup": "Serriñ munudoù ar c'hinnig",
+    "sending": "O kas...",
+    "applied": "Emstrivadur kaset",
+    "singleOfferAria": "Diskouez ar c'hinnig labour el lec'h-mañ",
+    "multipleOffersAria": "Diskouez ar c'hinnigoù labour el lec'h-mañ",
+    "locationNotFound": "Kumun pe gêr digavadus. Trugarez da glask en-dro.",
+    "locationModalTitle": "Implijout ho lec'hiadur",
+    "locationModalDesc": "Gant hoc'h aotren e implij GéoEmploi ho teolec'hiadur evit diskouez ar c'hinnigoù labour tostañ deoc'h.",
+    "decline": "Nac'hañ",
+    "accept": "Asantiñ a ran",
+    "searchLabel": "Klask ur gumun pe ur gêr",
+    "searchPlaceholder": "Klask ul lec'h",
+    "searchBtn": "Klask",
+    "mapAriaLabel": "Kartenn ar c'hinnigoù labour",
+    "reportModalTitle": "Kemenn ar c'hinnig-mañ",
+    "reasonLabel": "Abeg",
+    "descriptionLabel": "Deskrivadur",
+    "cancel": "Nullañ",
+    "send": "Kas",
+    "reasons": {
+      "fraud": "Kinnig faos",
+      "misleading": "Titouroù touellus",
+      "discriminatory": "Danvez droukziforc'hus",
+      "nonCompliant": "Kinnig nann-kenstur",
+      "other": "All"
+    }
+  },
+  "myOffers": {
+    "title": "Ma c'hinnigoù",
+    "subtitle": "Kavit amañ an holl ginnigoù embannet ganeoc'h.",
+    "loading": "O kargañ ar c'hinnigoù...",
+    "emptyTitle": "Kinnig embannet ebet",
+    "emptyText": "N'ho peus krouet kinnig labour ebet evit c'hoazh.",
+    "viewsCount_zero": "0 gweladenn",
+    "viewsCount_one": "1 weladenn",
+    "viewsCount_two": "2 weladenn",
+    "viewsCount_few": "{{count}} gweladenn",
+    "viewsCount_many": "{{count}} a weladennoù",
+    "viewsCount_other": "{{count}} gweladenn",
+    "companyPrefix": "Embregerezh :",
+    "communePrefix": "Kumun :",
+    "descPrefix": "Deskrivadur :",
+    "detailsTitle": "Gwelet ar munudoù",
+    "editTitle": "Kemmañ ar c'hinnig",
+    "deleteTitle": "Diverkañ ar c'hinnig",
+    "deleteConfirmTitle": "Diverkañ ar c'hinnig ?",
+    "deleteConfirmText": "Ha sur oc'h e fell deoc'h diverkañ ar c'hinnig-mañ ?",
+    "deleteSuccess": "Kinnig diverket gant berzh",
+    "deleteError": "Dibosupl eo diverkañ ar c'hinnig.",
+    "editSuccess": "Kinnig kemmet gant berzh",
+    "editError": "Kemmadur dibosupl",
+    "actions": {
+      "details": "Munud",
+      "edit": "Aozañ",
+      "delete": "Diverkañ",
+      "cancel": "Nullañ",
+      "close": "Serriñ",
+      "modify": "Kemmañ",
+      "save": "Enrollañ",
+      "accept": "Asantiñ",
+      "reject": "Nac'hañ"
+    },
+    "errors": {
+      "fetchEmployerId": "Dibosupl eo adkavout anaouder ar goprer.",
+      "fetchOffers": "Dibosupl eo kargañ ho kinnigoù.",
+      "fetchApplications": "Dibosupl eo kargañ an emstrivadurioù."
+    },
+    "modal": {
+      "offerInfoTitle": "Titouroù ar c'hinnig",
+      "companyInfoTitle": "Titouroù an embregerezh",
+      "titleLabel": "Titl",
+      "communeLabel": "Kumun",
+      "descLabel": "Deskrivadur",
+      "viewsLabel": "Niver a weladennoù",
+      "companyLabel": "Embregerezh",
+      "emailLabel": "Postel",
+      "notProvided": "Ket roet",
+      "notProvidedFem": "Ket roet",
+      "notProvidedPlur": "Ket roet",
+      "noDescription": "Deskrivadur ebet hegerz."
+    },
+    "applications": {
+      "titleCount": "Emstrivadurioù ({{count}})",
+      "loading": "O kargañ an emstrivadurioù...",
+      "empty": "Emstrivadur ebet resevet evit ar c'hinnig-mañ.",
+      "acceptedToast": "Emstrivadur asantet",
+      "rejectedToast": "Emstrivadur nac'het.",
+      "statusError": "Dibosupl kemmañ an emstrivadur."
+    },
+    "candidate": {
+      "defaultFirstname": "Anv-bihan",
+      "defaultLastname": "Anv",
+      "email": "Postel",
+      "skills": "Barregezhioù",
+      "experience": "Skiant-prenet",
+      "availability": "Kaeusted",
+      "status": "Statud",
+      "receivedAt": "Emstrivadur resevet d'an"
+    },
+    "status": {
+      "waiting": "O c'hortoz",
+      "accepted": "Asantet",
+      "rejected": "Nac'het"
+    },
+    "editModal": {
+      "title": "Kemmañ ar c'hinnig",
+      "titleLabel": "Titl ar c'hinnig",
+      "communeLabel": "Kumun",
+      "descLabel": "Deskrivadur",
+      "saving": "Oc'h enrollañ..."
+    }
+  },
+  "consent": {
+    "saveError": "Dibosupl enrollañ an asant :"
+  },
+  "application": {
+    "title": "Ma emstrivadurioù",
+    "subtitle": "Kavit amañ an holl ginnigoù ho peus lakaet hoc'h anv warno.",
+    "loading": "O kargañ an emstrivadurioù...",
+    "emptyTitle": "Emstrivadur ebet",
+    "emptyText": "N'ho peus ket lakaet hoc'h anv war ur c'hinnig labour evit c'hoazh.",
+    "untitledOffer": "Kinnig hep titl",
+    "company": "Embregerezh :",
+    "location": "Kumun :",
+    "description": "Deskrivadur :",
+    "detailsButton": "Munud",
+    "detailsTitle": "Gwelet ar munudoù",
+    "deleteButton": "Diverkañ",
+    "deleteTitle": "Diverkañ an emstrivadur",
+    "deleting": "...",
+    "deletingInProgress": "O tiverkañ...",
+    "deleteConfirmTitle": "Diverkañ an emstrivadur ?",
+    "deleteConfirmText": "Ha sur oc'h e fell deoc'h diverkañ an emstrivadur-mañ ?",
+    "deleteConfirmButton": "Diverkañ",
+    "deleteCancelButton": "Nullañ",
+    "deleteSuccess": "Emstrivadur diverket gant berzh",
+    "deleteError": "Dibosupl eo diverkañ an emstrivadur.",
+    "fetchUserError": "Dibosupl eo adkavout anaouder an arveriad.",
+    "fetchError": "Dibosupl eo kargañ hoc'h emstrivadurioù.",
+    "modalDefaultTitle": "Munudoù an emstrivadur",
+    "modalApplicationInfo": "Titouroù an emstrivadur",
+    "status": "Statud",
+    "notProvided": "Ket roet",
+    "notProvidedFem": "Ket roet",
+    "applicationDate": "Deiziad emstrivañ",
+    "modalOfferInfo": "Titouroù ar c'hinnig",
+    "offerTitle": "Titl",
+    "contractType": "Seurt kevrat",
+    "noDescription": "Deskrivadur ebet hegerz.",
+    "close": "Serriñ"
+  },
+  "cgu": {
+    "pageTitle": "Termenoù Hollek Implijout",
+    "intro": "Degemer mat war hol lec'hienn. An Termenoù Hollek Implijout-mañ a dermen ar reolennoù a dalvez evit implijout hor savenn.",
+    "section1": {
+      "heading": "1. Pal",
+      "p1": "Pal an Termenoù Hollek Implijout-mañ eo termeniñ an aozioù ma c'hell an arveriaded mont war al lec'hienn hag implijout ar servijoù kinniget.",
+      "p2": "Kement implij eus al lec'hienn a dalvez asantiñ leun ha didalvoud d'an aozioù-mañ. Ma ne asantit ket d'an aozioù-mañ, e pedomp ac'hanoc'h da chom hep implijout al lec'hienn."
+    },
+    "section2": {
+      "heading": "2. Moned d'al lec'hienn",
+      "p1": "Al lec'hienn a zo hegerz digoust da gement arveriad a zo gantañ ur moned d'an Internet. Ar c'houstoù liammet ouzh ar moned d'ar rouedad, dreist-holl koust ar c'hennaskañ pe an dafar, a chom dindan kourvez an arveriad.",
+      "p2": "Miret e vez ganeomp ar gwir da gemmañ, suspentañ pe ehanadenniñ evit ur pennad al lec'hienn pe un darn anezhi, dreist-holl evit abegoù kempenn pe hizivaat."
+    },
+    "section3": {
+      "heading": "3. Implij ar servij",
+      "intro": "An arveriad en em ouestl da implijout al lec'hienn en un doare atebek hag a-du gant al lezennoù hag ar reoliadurioù a dalvez.",
+      "list": [
+        "Chom hep implijout al lec'hienn evit palioù touellus pe nann-lezennel.",
+        "Chom hep klask trubuilhañ mont en-dro al lec'hienn.",
+        "Chom hep noazout ouzh gwirioù pe surentez arveriaded all.",
+        "Chom hep lakaat danvez fallakr pe a c'hellfe gwanaat ar servij."
+      ]
+    },
+    "section4": {
+      "heading": "4. Kont arveriad",
+      "p1": "Pa vez ret krouiñ ur gont evit mont d'ur servij bennak, an arveriad en em ouestl da reiñ titouroù rik, klok ha hizivaet.",
+      "p2": "An arveriad a zo kiriek da gevrinelezh e zaveoù kennaskañ ha da gement obererezh graet diwar e gont."
+    },
+    "section5": {
+      "heading": "5. Perc'henniezh speredel",
+      "p1": "Holl elfennoù al lec'hienn, dreist-holl an testennoù, skeudennoù, logoioù, grafikoù, etrefasoù, danvezioù ha meziantoù, a zo gwarezet gant an dispositions diwar-benn ar berc'henniezh speredel.",
+      "p2": "Kement eilañ, taolennañ, kemmañ pe implijout eus al lec'hienn a-bezh pe un darn anezhi hep aotren a-raok a c'hell bezañ un dorridigezh eus gwirioù perc'henniezh speredel."
+    },
+    "section6": {
+      "heading": "6. Kiriegezh",
+      "p1": "Lakaat a reomp pep tra e pleustr evit asuriñ reizhded hag hegerzded an titouroù war al lec'hienn. Koulskoude ne c'hellomp ket gouestlañ e vo hegerz al lec'hienn a-hed an amzer pe hep fazi ebet.",
+      "p2": "An arveriad a anavez implijout al lec'hienn dindan e gannaderezh e-unan hag a chom kiriek d'e ardivinkoù, d'e gennaskadur Internet ha d'an implij a ra eus ar servijoù."
+    },
+    "section7": {
+      "heading": "7. Roadennoù personel",
+      "p1": "E framm implij al lec'hienn e c'hell bezañ dastumet ha tretet roadennoù personel zo.",
+      "p2": "An tretadurioù-mañ a vez kaset da benn hervez ar reoliadurioù a dalvez diwar-benn gwarez ar roadennoù personel.",
+      "p3": "Evit gouzout hiroc'h, sellit ouzh hor reolennadur prevezded mar plij."
+    },
+    "section8": {
+      "heading": "8. Liammoù diavaez",
+      "p1": "Al lec'hienn a c'hell kaout liammoù etrezek lec'hiennoù pe servijoù diavaez. N'omp ket kiriek da zanvez, hegerzded pe emzalc'hioù al lec'hiennoù trede-mañ."
+    },
+    "section9": {
+      "heading": "9. Kemmañ an aozioù",
+      "p1": "Miret e vez ganeomp ar gwir da gemmañ an Termenoù Hollek Implijout-mañ pa garomp evit o lakaat a-glot gant emdroadur al lec'hienn, he servijoù pe ar reoliadurioù.",
+      "p2": "An aozioù nevez a dalvez kerkent hag embannet war al lec'hienn."
+    },
+    "section10": {
+      "heading": "10. Lezenn aplikadus",
+      "p1": "An Termenoù Hollek Implijout-mañ a zo dindan lezenn ar vro m'emañ staliet embanner al lec'hienn.",
+      "p2": "Ma c'hoarvez un dizemglev, ar perzhioù a glasko un diskoulm a-zoare a-raok kement hirgoll barnerezhel."
+    },
+    "section11": {
+      "heading": "11. Darempred",
+      "p1": "Evit kement goulenn diwar-benn an Termenoù Hollek Implijout-mañ, gallout a rit mont e darempred ganeomp dre an doareoù hegerz war hol lec'hienn."
+    },
+    "backHome": "Distreiñ d'ar pennlec'h",
+    "lastUpdate": "Hizivadenn diwezhañ : 1añ a viz Gwengolo 2026"
+  },
+  "geoConsentNotice": {
+    "dataLabel": "Roadennoù selektet :",
+    "dataValue": "daveennoù GPS kriz (ledred, hedred).",
+    "purposeLabel": "Pal :",
+    "purposeValue": "kribañ ar c'hinnigoù labour hervez an hed douaroniel ouzh an arveriad.",
+    "legalBasisLabel": "Diazez lezennel :",
+    "legalBasisValue": "hoc'h asant, roet dre an aotren goulennet gant ar merdeer.",
+    "recipientsLabel": "Degemererien :",
+    "recipientsValue": "skipailh teknikel ha produ GéoEmploi (kazetennoù teknikel) ; IGN evit ar gartenn hag ar geokodiñ (API Adresse / Géoplateforme).",
+    "transferLabel": "Treuzkas er-maez eus an UE :",
+    "transferValue": "hini ebet ; roadennoù herberc'hiet e Frañs.",
+    "retentionLabel": "Padelezh virout :",
+    "retentionValue": "roadenn dremeniad, implijet nemetken e-pad ar reked, hep enrolladur e diaz-roadennoù.",
+    "rightsLabel": "Ho kwirioù :",
+    "rightsValue": "moned, diverkañ, bevenniñ, ha lemel an asant pa garit, en o zouez adalek ho pajenn profil."
+  },
+  "jobOffer": {
+    "pageTitle": "Krouiñ ur c'hinnig labour",
+    "titleLabel": "Titl",
+    "titlePlaceholder": "CDI - implijad liestaol",
+    "titleRequired": "Titl al labour a zo rekis",
+    "descriptionLabel": "Deskrivadur",
+    "descriptionPlaceholder": "Deskrivadur al labour",
+    "descriptionRequired": "Rekis eo an deskrivadur",
+    "communeLabel": "Kumun",
+    "communePlaceholder": "35000 Roazhon",
+    "communeRequired": "Rekis eo ar gumun",
+    "submitButton": "Embann ar c'hinnig",
+    "createSuccess": "Kinnig krouet gant berzh",
+    "createError": "Dibosupl krouiñ ar c'hinnig"
+  },
+  "login": {
+    "welcomeTitle": "Degemer mat",
+    "subtitle": "Kennaskit ouzh ho kont.",
+    "emailLabel": "Chomlec'h postel",
+    "emailPlaceholder": "skouer@skouer.bzh",
+    "emailRequired": "Rekis eo ar chomlec'h postel",
+    "emailInvalid": "Postel direizh",
+    "passwordLabel": "Ger-tremen",
+    "passwordPlaceholder": "Ho ker-tremen",
+    "passwordRequired": "Rekis eo ar ger-tremen",
+    "submitButton": "Kennaskañ",
+    "noAccount": "Kont ebet ganeoc'h c'hoazh ?",
+    "registerLink": "Enskrivañ",
+    "loginSuccess": "Kennasket gant berzh",
+    "loginError": "Titouroù kennaskañ fall",
+    "invalidCredentials": "Titouroù kennaskañ direizh",
+    "noToken": "access_token ebet resevet digant ar servijer"
+  },
+  "profile": {
+    "pageTitle": "Kemmañ ma frofil",
+    "subtitle": "Kemmit ho titouroù personel hag a-vicher.",
+    "firstNameLabel": "Anv-bihan",
+    "firstNamePlaceholder": "Anv-bihan",
+    "firstNameRequired": "Rekis eo an anv-bihan",
+    "lastNameLabel": "Anv",
+    "lastNamePlaceholder": "Anv",
+    "lastNameRequired": "Rekis eo an anv",
+    "emailLabel": "Chomlec'h postel",
+    "emailPlaceholder": "skouer@skouer.bzh",
+    "emailRequired": "Rekis eo ar postel",
+    "emailInvalid": "Postel direizh",
+    "skillsLabel": "Barregezhioù",
+    "skillsPlaceholder": "Sk: React, JavaScript, Marketing...",
+    "skillsRequired": "Rekis eo ar barregezhioù",
+    "experienceLabel": "Skiant-prenet",
+    "experiencePlaceholder": "Sk: 2 vloaz",
+    "experienceRequired": "Rekis eo ar skiant-prenet",
+    "availabilityLabel": "Kaeusted",
+    "availabilityPlaceholder": "Sk: Amzer leun",
+    "availabilityRequired": "Rekis eo ar gaeusted",
+    "companyNameLabel": "Embregerezh",
+    "companyNamePlaceholder": "Anv hoc'h embregerezh",
+    "companyNameRequired": "Rekis eo anv an embregerezh",
+    "companyDescLabel": "Deskrivadur hoc'h embregerezh",
+    "companyDescPlaceholder": "Sk: Embregerezh surentez",
+    "companyDescRequired": "Rekis eo an deskrivadur",
+    "saveButton": "Enrollañ ar c'hemmoù",
+    "saving": "O kemmañ...",
+    "logoutButton": "Digennaskañ",
+    "exportButton": "Ezporzhiañ ma roadennoù",
+    "exportSuccess": "Ezporzhiadur aet da benn vat !",
+    "exportError": "Dibosupl ezporzhiañ ar roadennoù",
+    "exportEmptyError": "Roadenn ebet da ezporzhiañ",
+    "saveSuccess": "Profil kemmet gant berzh !",
+    "userUpdateError": "Fazi e-ser kemmañ an arveriad",
+    "profileUpdateError": "Fazi e-ser kemmañ ar profil",
+    "unsupportedRole": "Roll arveriad nann-skoret : {{role}}",
+    "fetchProfileError": "Dibosupl eo adkavout ar profil",
+    "privacyHeading": "Prevezded & geolec'hiañ",
+    "privacyText": "Gant hoc'h aotren e implij GéoEmploi ho lec'hiadur evit diskouez ar c'hinnigoù labour tostañ deoc'h war ar gartenn.",
+    "consentStatusLabel": "Statud bremañ :",
+    "consentAccepted": "Geolec'hiañ aotreet",
+    "consentDeclined": "Geolec'hiañ nac'het",
+    "consentUnset": "Dibab ebet enrollet",
+    "consentAcceptedToast": "Geolec'hiañ aotreet.",
+    "consentDeclinedToast": "Geolec'hiañ nac'het.",
+    "viewNoticeButton": "Gwelet an evezhiadenn gelaouiñ",
+    "allowGeoButton": "Aotren ar geolec'hiañ",
+    "declineGeoButton": "Nac'hañ ar geolec'hiañ",
+    "noticeTitle": "Evezhiadenn gelaouiñ — Geolec'hiañ",
+    "noticeIntro": "Gant hoc'h aotren e implij GéoEmploi ho teolec'hiadur evit diskouez ar c'hinnigoù labour tostañ deoc'h.",
+    "closeButton": "Serriñ",
+    "backLink": "← Distreiñ",
+    "deleteAccountButton": "Diverkañ ar gont",
+    "deleteAccountTitle": "Diverkañ ar gont ?",
+    "deleteAccountText": "Ha sur oc'h e fell deoc'h diverkañ ar gont-mañ ?",
+    "deleteAccountConfirm": "Diverkañ",
+    "deleteAccountCancel": "Nullañ",
+    "deleteAccountSuccess": "Profil diverket gant berzh",
+    "deleteAccountError": "Dibosupl eo diverkañ ar profil."
+  },
+  "register": {
+    "invalidRoleTitle": "Seurt kont direizh",
+    "invalidRoleText": "Dibabit ur seurt kont mar plij.",
+    "backButton": "Distreiñ",
+    "titleSeeker": "Krouiñ ur gont Klasker",
+    "titleRH": "Krouiñ ur gont HR",
+    "subtitle": "Leugnit ho titouroù evit kregiñ ganti.",
+    "firstNameLabel": "Anv-bihan",
+    "firstNamePlaceholder": "Anv-bihan",
+    "firstNameRequired": "Rekis eo an anv-bihan",
+    "lastNameLabel": "Anv",
+    "lastNamePlaceholder": "Anv",
+    "lastNameRequired": "Rekis eo an anv",
+    "emailLabel": "Chomlec'h postel",
+    "emailPlaceholder": "skouer@skouer.bzh",
+    "emailRequired": "Rekis eo ar postel",
+    "emailInvalid": "Postel direizh",
+    "passwordLabel": "Ger-tremen",
+    "passwordPlaceholder": "Ger-tremen",
+    "passwordRequired": "Rekis eo ar ger-tremen",
+    "skillsLabel": "Barregezhioù",
+    "skillsPlaceholder": "Sk: React, JavaScript, Marketing...",
+    "skillsRequired": "Rekis eo ar barregezhioù",
+    "experienceLabel": "Skiant-prenet",
+    "experiencePlaceholder": "Sk: 2 vloaz",
+    "experienceRequired": "Rekis eo ar skiant-prenet",
+    "availabilityLabel": "Kaeusted",
+    "availabilityPlaceholder": "Sk: Amzer leun",
+    "availabilityRequired": "Rekis eo ar gaeusted",
+    "companyNameLabel": "Embregerezh",
+    "companyNamePlaceholder": "Anv hoc'h embregerezh",
+    "companyNameRequired": "Rekis eo anv an embregerezh",
+    "companyDescLabel": "Deskrivadur hoc'h embregerezh",
+    "companyDescPlaceholder": "Sk: Embregerezh surentez",
+    "companyDescRequired": "Rekis eo an deskrivadur",
+    "submitSeeker": "Krouiñ ma c'hont Klasker",
+    "submitRH": "Krouiñ ma c'hont HR",
+    "alreadyAccount": "Ur gont ho peus c'hoazh ?",
+    "loginLink": "Kennaskañ",
+    "seekerCreateError": "Fazi e-ser krouiñ ar gont Klasker",
+    "rhCreateError": "Fazi e-ser krouiñ ar gont HR",
+    "createSuccess": "Kont krouet gant berzh.",
+    "createError": "Dibosupl krouiñ ho kont."
+  },
+  "footer": {
+    "text": "Diskouezer teknikel, n'eo ket ur servij foran war implij."
+  },
+  "navbar": {
+    "siteName": "GéoEmploi",
+    "notificationsAria": "Kemennoù",
+    "aboutLink": "Diwar-benn",
+    "applicationsLink": "Emstrivadurioù",
+    "myOffersLink": "Gwelet ma c'hinnigoù",
+    "createOfferLink": "Krouiñ ur c'hinnig",
+    "adminLink": "Melestradur",
+    "accountAria": "Kont",
+    "notificationsTitle": "Kemennoù",
+    "noNotifications": "Kemenn ebet evit ar mare.",
+    "typeApplication": "Emstrivadur",
+    "typeJob": "Kinnig",
+    "typeSystem": "Reizhiad",
+    "read": "lennet",
+    "unread": "dilenn",
+    "markAsRead": "Merkañ evel lennet",
+    "markingAsRead": "Oc'h enrollañ...",
+    "close": "Serriñ",
+    "closeAria": "Serriñ",
+    "fetchError": "Dibosupl kargañ ho kemennoù.",
+    "markReadError": "Dibosupl merkañ ar c'hemenn evel lennet."
+  }
+}

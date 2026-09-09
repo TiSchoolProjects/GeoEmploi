@@ -1,6 +1,6 @@
 import { IsEnum, IsOptional, IsString, IsEmail } from 'class-validator';
 import { UserStatus } from '../entities/user.entity';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateUserDto {
   @ApiPropertyOptional({ description: 'Email address', example: 'yourmail@example.com' })
@@ -21,6 +21,7 @@ export class UpdateUserDto {
 
 
 export class UpdateStatusDto {
+  @ApiProperty({ description: 'New user status', enum: UserStatus, example: UserStatus.SUSPENDED })
   @IsEnum(UserStatus)
   status: UserStatus;
 }

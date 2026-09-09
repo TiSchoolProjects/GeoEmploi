@@ -2,19 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../CSS/Account.css";
 import NavBar from "../components/Navbar";
+import { useTranslation } from "react-i18next";
 
 function Account() {
+  const { t } = useTranslation();
   return (
     <div className="account">
       <NavBar />
       <div className="account-container">
-        <h1>Bienvenue sur GéoEmploi</h1>
-        <p className="subtitle">Créez votre compte et commencez votre expérience dès maintenant.</p>
+        <h1>{t("account.title")}</h1>
+        <p className="subtitle">{t("account.subtitle")}</p>
         <div className="buttons-container">
-          <Link to="/register/rh" className="role-button rh-button">Créer un compte RH</Link>
-          <Link to="/register/seeker" className="role-button seeker-button">Créer un compte Seeker</Link>
+          <Link to="/register/rh" className="role-button rh-button">{t("account.button1")}</Link>
+          <Link to="/register/seeker" className="role-button seeker-button">{t("account.button2")}</Link>
         </div>
-        <p className="footer">Déjà un compte ?{" "}<Link to="/login">Se connecter</Link></p>
+        <p className="footer">{t("account.question")}{" "}<Link to="/login">{t("account.link")}</Link></p>
       </div>
     </div>
   );
