@@ -9,7 +9,7 @@ export default () => ({
     type: 'postgres',
     host: process.env.DB_HOST || 'db',
     port: parseInt(process.env.DB_PORT || '5432', 10),
-    username: process.env.DB_USERNAME || 'GeoUser',
+    username: process.env.DB_USER || 'GeoUser',
     password: process.env.DB_PASSWORD || 'GeoPassword',
     database: process.env.DB_NAME || 'GeoDB',
   },

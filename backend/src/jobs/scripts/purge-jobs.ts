@@ -21,7 +21,7 @@ const dataSource = new DataSource({
     process.env.DB_PORT || 5432,
   ),
   username:
-    process.env.DB_USERNAME || 'GeoUser',
+    process.env.DB_USER || 'GeoUser',
   password:
     process.env.DB_PASSWORD || 'GeoPassword',
   database:

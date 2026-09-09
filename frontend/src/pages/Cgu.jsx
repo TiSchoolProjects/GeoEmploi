@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 function ContentBlock({ node }) {
   return (
     <div className="content-block">
-      {node.soustitre && <h4 className="content-under-title">{node.soustitre}</h4>}
+      {node.soustitre && <h4 className="content-undertitle">{node.soustitre}</h4>}
       {node.corps && node.corps.map((p, i) => <p className="content-paragraphe" key={i}>{p}</p>)}
       {node.liste && (
         <dl className="content-list">
@@ -86,8 +86,8 @@ export default function More() {
           <section className="more-section">
             <h2>{t("more.cgu.title")}</h2>
             <div className="content-layout">
-              <nav className="content-summary">
-                <p className="content-summary-titre">{t("more.summary")}</p>
+              <nav className="content-sommaire">
+                <p className="content-sommaire-title">{t("more.summary")}</p>
                 {cguArticles.map((a) => (
                   <button
                     key={a.id}
@@ -129,8 +129,8 @@ export default function More() {
               <p>{t("more.transparency.intro")}</p>
             </div>
             <div className="content-layout">
-              <nav className="content-summary">
-                <p className="content-summary-titre">{t("more.summary")}</p>
+              <nav className="content-sommaire">
+                <p className="content-sommaire-title">{t("more.summary")}</p>
                 {transArticles.map((a) => (
                   <button
                     key={a.id}
@@ -143,7 +143,7 @@ export default function More() {
                 ))}
               </nav>
 
-              <div className="content-contenu">
+              <div className="content-content">
                 {transArticles.map((a) => (
                   <section
                     key={a.id}

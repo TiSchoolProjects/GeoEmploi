@@ -11,7 +11,7 @@ const dataSource = new DataSource({
   type: 'postgres',
   host: 'db',
   port: Number(process.env.DB_PORT || 5432),
-  username: process.env.DB_USERNAME || 'GeoUser',
+  username: process.env.DB_USER || 'GeoUser',
   password: process.env.DB_PASSWORD || 'GeoPassword',
   database: process.env.DB_NAME || 'GeoDB',
   entities: [Job, User, Employer, Seeker, Application],
