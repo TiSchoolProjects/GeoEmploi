@@ -508,3 +508,165 @@ body {
     font-size: 14px;
   }
 }
+
+
+.maplibregl-popup-content {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--bg-white);
+  box-shadow: 0 12px 30px rgba(18, 22, 28, 0.18);
+  font-family: var(--font-body);
+}
+
+.jobOfferContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jobOfferPopup {
+  width: 260px;
+  max-width: calc(100vw - 64px);
+  text-align: left;
+}
+
+.jobOfferPopup + .jobOfferPopup {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.jobOfferPopup h3 {
+  margin-bottom: 8px;
+  padding-right: 36px;
+
+  color: var(--blue-primary);
+
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.jobOfferPopup p {
+  margin: 4px 0;
+
+  color: var(--text-main);
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.jobOfferPreview {
+  color: var(--text-muted) !important;
+}
+
+.jobFullDetails {
+  margin-top: 10px;
+  padding: 12px 14px;
+
+  border-left: 3px solid var(--orange-accent);
+  border-radius: 8px;
+
+  background: var(--blue-light);
+}
+
+.jobFullDetails p {
+  margin: 0;
+
+  color: var(--text-main);
+
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+
+
+.jobViewBtn,
+.jobApplyBtn,
+.jobReportBtn {
+  display: block;
+  width: 100%;
+  min-height: 42px;
+
+  margin-top: 8px;
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+
+
+.jobViewBtn {
+  border: 1.5px solid var(--blue-primary);
+
+  background: var(--blue-primary);
+  color: var(--bg-white);
+}
+
+.jobViewBtn:hover {
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+}
+
+.jobViewBtn:active {
+  transform: translateY(1px);
+}
+
+
+
+.jobApplyBtn {
+  border: 1.5px solid var(--orange-accent);
+
+  background: var(--orange-accent);
+  color: #1a1a1a;
+}
+
+.jobApplyBtn:hover {
+  background: var(--orange-hover);
+  border-color: var(--orange-hover);
+}
+
+.jobApplyBtn:active {
+  transform: translateY(1px);
+}
+
+.jobApplyBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+
+
+.jobReportBtn {
+  border: 1.5px solid var(--error-red);
+
+  background: transparent;
+  color: var(--error-red);
+}
+
+.jobReportBtn:hover {
+  background: var(--error-bg);
+  color: var(--error-red);
+}
+
+
+
+.jobViewBtn:focus-visible,
+.jobApplyBtn:focus-visible,
+.jobReportBtn:focus-visible {
+  outline: 3px solid var(--blue-primary);
+  outline-offset: 2px;
+}

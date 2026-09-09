@@ -17,7 +17,7 @@ import { CartographyModule } from './cartography/cartography.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExportModule } from './export/export.module';
 import { MetricsModule } from './metrics/metrics.module';
-
+import { ChallengesModule } from './challenges/challenges.module';
 
 @Module({
   imports: [
@@ -51,6 +51,7 @@ import { MetricsModule } from './metrics/metrics.module';
     AuthModule,
     ScheduleModule.forRoot(),
     MetricsModule,
+    ChallengesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

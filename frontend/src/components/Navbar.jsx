@@ -6,6 +6,8 @@ import "./Navbar.css";
 import { getUser } from "../utils/auth.js";
 import { apiFetch } from "../api/client";
 import { useTranslation } from "react-i18next";
+import DailyChallenge from "../components/challenges/DailyChallenge.jsx"
+import { useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -16,6 +18,13 @@ export default function NavBar() {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+
+  const currentUser = JSON.parse(
+    localStorage.getItem("user") || "null",
+  );
+
+  const location = useLocation();
+  const showDailyChallenge = currentUser?.role === "seeker" && location.pathname === "/Home";
 
   useEffect(() => {
     if (selectedNotification) {
@@ -145,6 +154,11 @@ export default function NavBar() {
           </Link>
         </div>
       </nav>
+        {showDailyChallenge && (
+          <div className="navbar-daily-challenge">
+              <DailyChallenge />
+          </div>
+        )}
 
       {/* NOTIF MODAL */}
       {isNotificationModalOpen && (

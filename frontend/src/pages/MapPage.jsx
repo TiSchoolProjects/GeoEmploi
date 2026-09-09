@@ -96,6 +96,34 @@ export default function MapPage() {
     await apiFetch(`/jobs/views/${offerId}`, { method: "PATCH" });
   }
 
+  const registerChallengeView = async (offerId) => {
+    const user = JSON.parse(
+      localStorage.getItem("user") || "null"
+    );
+
+    if (user?.role !== "seeker") {
+      return;
+    }
+
+    try {
+      await apiFetch(
+        `/challenges/today/jobs/${offerId}`,
+        {
+          method: "POST",
+        }
+      );
+
+      window.dispatchEvent(
+        new Event("challenge-progress-updated")
+      );
+    } catch (error) {
+      console.error(
+        "Erreur progression défi :",
+        error
+      );
+    }
+  };
+
   const submitReport = async (event) => {
     event.preventDefault()
     if (!reportOffer) return
@@ -164,6 +192,8 @@ export default function MapPage() {
             const statusId = `applyStatus-${offerId}`
             const safeTitle = escapeHtml(offer.title);
             const safeDescription = escapeHtml(truncateDescription(offer.description));
+            const safeFullDescription = escapeHtml(offer.description);
+            const detailsId = `jobDetails-${offerId}`;
             const safeCompanyName = escapeHtml(companyName);
             const safeOfferId = escapeHtml(offerId);
             const safeStatusId = escapeHtml(statusId);
@@ -173,6 +203,23 @@ export default function MapPage() {
                 <h3>${safeTitle}</h3>
                 <p>${safeDescription}</p> 
                 <p><strong>${escapeHtml(t("map.companyLabel"))} :</strong> ${safeCompanyName}</p>
+                <button
+                  type="button"
+                  class="jobViewBtn"
+                  data-offer-id="${safeOfferId}"
+                  aria-controls="${detailsId}"
+                  aria-expanded="false"
+                >
+                  Consulter l'offre
+                </button>
+
+                <div
+                  id="${detailsId}"
+                  class="jobFullDetails"
+                  hidden
+                >
+                  <p>${safeFullDescription}</p>
+                </div>
                 ${role === "seeker" ? `
                   <button
                     type="button"
@@ -199,7 +246,73 @@ export default function MapPage() {
 
         const closeBtn = popupEl.querySelector('.maplibregl-popup-close-button')
         if (closeBtn) closeBtn.setAttribute('aria-label', t("map.closePopup"))
+        const viewBtns =
+          popupEl.querySelectorAll(".jobViewBtn");
 
+        viewBtns.forEach((viewBtn) => {
+          viewBtn.addEventListener(
+            "click",
+            async () => {
+              const offerId =
+                viewBtn.getAttribute(
+                  "data-offer-id"
+                );
+
+              const offer = offers.find(
+                (currentOffer) =>
+                  String(
+                    currentOffer.id ??
+                    currentOffer._id ??
+                    currentOffer.index
+                  ) === String(offerId)
+              );
+
+              if (!offer) return;
+
+              const details =
+                popupEl.querySelector(
+                  `#jobDetails-${offerId}`
+                );
+
+              if (!details) return;
+
+              const opening = details.hidden;
+
+              details.hidden = !opening;
+
+              viewBtn.setAttribute(
+                "aria-expanded",
+                String(opening)
+              );
+
+              viewBtn.textContent = opening
+                ? "Masquer les détails"
+                : "Consulter l'offre";
+
+              if (
+                opening &&
+                viewBtn.dataset.viewRegistered !==
+                  "true"
+              ) {
+                viewBtn.dataset.viewRegistered =
+                  "true";
+
+                try {
+                  await regView(offer.id);
+                } catch (error) {
+                  console.error(
+                    "Erreur compteur vue :",
+                    error
+                  );
+                }
+
+                await registerChallengeView(
+                  offer.id
+                );
+              }
+            }
+          );
+        });
         const detailsBtns = popupEl.querySelectorAll('.jobDetailsBtn')
         detailsBtns.forEach((detailsBtn) => {
           detailsBtn.addEventListener('click', async () => {
@@ -264,20 +377,6 @@ export default function MapPage() {
 
       const marker = new Marker().setLngLat(lngLat).setPopup(popup).addTo(map)
       const markerElement = marker.getElement()
-      let viewed = false
-
-      markerElement.addEventListener('click', async () => {
-        if (viewed) return
-        viewed = true
-        try {
-          for (const offer of offers) {
-            await regView(offer.id)
-          }
-        } catch (error) {
-          console.error(error)
-          viewed = false
-        }
-      })
 
       markerElement.setAttribute('tabindex', '0')
       markerElement.setAttribute(

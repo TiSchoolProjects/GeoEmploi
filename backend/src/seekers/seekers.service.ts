@@ -3,13 +3,15 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Seeker } from './entities/seeker.entity';
 import { Repository } from 'typeorm';
+import { ChallengesService } from '../challenges/challenges.service';
 
 @Injectable()
 export class SeekersService {
   constructor(
     @InjectRepository(Seeker)
-    private seekerRepository: Repository<Seeker>
-  ) { }
+    private seekerRepository: Repository<Seeker>,
+    private readonly challengesService: ChallengesService,
+  ) {}
 
   async create(data: Partial<Seeker>) {
     const seeker = this.seekerRepository.create(data);
@@ -31,13 +33,27 @@ export class SeekersService {
   }
 
   async update(userId: number, updateSeekerDto: UpdateSeekerDto) {
-    const seeker = await this.seekerRepository.findOne({ where: { userId } });
+    const seeker = await this.seekerRepository.findOne({ where: { userId,},});
 
     if (!seeker) {
-      throw new NotFoundException("Rechercheur d'emploi non trouvé.");
+      throw new NotFoundException("Rechercheur d'emploi non trouvé.",);
     }
-    Object.assign(seeker, updateSeekerDto);
-    return await this.seekerRepository.save(seeker);
+
+    const oldSkills = [...(seeker.skills ?? [])].sort();
+
+    const newSkills = updateSeekerDto.skills !== undefined ? [...updateSeekerDto.skills].sort() : oldSkills;
+
+    const skillsChanged = JSON.stringify(oldSkills) !== JSON.stringify(newSkills);
+
+    Object.assign(seeker, updateSeekerDto,);
+
+    const saved = await this.seekerRepository.save(seeker);
+
+    if (skillsChanged) {
+      await this.challengesService.recordSkillUpdate(userId,);
+    }
+
+    return saved;
   }
 
   async remove(userId: number) {

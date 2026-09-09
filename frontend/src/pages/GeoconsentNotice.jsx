@@ -6,25 +6,25 @@ export default function GeoConsentNotice() {
   return (
     <ul className="locationModalList">
       <li>
-        <strong>{t("geoConsent.dataLabel")} :</strong> {t("geoConsent.dataDesc")}
+        <strong>{t("geoConsentNotice.dataLabel")}</strong> {t("geoConsentNotice.dataValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.purposeLabel")} :</strong> {t("geoConsent.purposeDesc")}
+        <strong>{t("geoConsentNotice.purposeLabel")}</strong> {t("geoConsentNotice.purposeValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.legalBasisLabel")} :</strong> {t("geoConsent.legalBasisDesc")}
+        <strong>{t("geoConsentNotice.legalBasisLabel")}</strong> {t("geoConsentNotice.legalBasisValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.recipientsLabel")} :</strong> {t("geoConsent.recipientsDesc")}
+        <strong>{t("geoConsentNotice.recipientsLabel")}</strong> {t("geoConsentNotice.recipientsValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.transferLabel")} :</strong> {t("geoConsent.transferDesc")}
+        <strong>{t("geoConsentNotice.transferLabel")}</strong> {t("geoConsentNotice.transferValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.retentionLabel")} :</strong> {t("geoConsent.retentionDesc")}
+        <strong>{t("geoConsentNotice.retentionLabel")}</strong> {t("geoConsentNotice.retentionValue")}
       </li>
       <li>
-        <strong>{t("geoConsent.rightsLabel")} :</strong> {t("geoConsent.rightsDesc")}
+        <strong>{t("geoConsentNotice.rightsLabel")}</strong> {t("geoConsentNotice.rightsValue")}
       </li>
     </ul>
   );

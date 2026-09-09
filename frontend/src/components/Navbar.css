@@ -418,3 +418,13 @@
     font-size: 15px;
   }
 }
+
+.navbar-daily-challenge {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 90px 20px 0;
+}
+
+.navbar-daily-challenge .daily-challenge-card {
+  margin: 12px 0 20px;
+}

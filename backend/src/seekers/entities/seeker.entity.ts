@@ -24,4 +24,13 @@ export class Seeker {
   @Column({ nullable: true })
   availability: string;
 
+  @ApiProperty({
+    description: 'Daily challenges permanently hidden by the user',
+    example: false,
+  })
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  challengesHidden: boolean;
 }
