@@ -514,21 +514,21 @@
     "backHome": "Itzuli hasierara",
     "lastUpdate": "Azken eguneraketa: 2026ko irailaren 1a"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Eragindako datuak:",
-    "dataValue": "GPS koordenatu gordinak (latitudea, longitudea).",
-    "purposeLabel": "Helburua:",
-    "purposeValue": "lan-eskaintzak erabiltzailearen distantzia geografikoaren arabera iragaztea.",
-    "legalBasisLabel": "Oinarri legala:",
-    "legalBasisValue": "zure baimena, nabigatzaileak eskatutako baimenaren bidez emana.",
-    "recipientsLabel": "Hartzaileak:",
-    "recipientsValue": "GéoEmploi-ren talde teknikoa eta produktukoa (erregistro teknikoak); IGN mapa-lauzetarako eta geokodetzarako (Helbide APIa / Géoplateforme).",
-    "transferLabel": "EBtik kanpoko transferentzia:",
-    "transferValue": "bat ere ez; datuak Frantzian ostatatzen dira.",
-    "retentionLabel": "Kontserbazio-epea:",
-    "retentionValue": "aldi baterako datua, eskaerak irauten duen bitartean soilik erabilia, datu-basean gorde gabe.",
-    "rightsLabel": "Zure eskubideak:",
-    "rightsValue": "eskuratzea, ezabatzea, mugatzea eta baimena edozein unetan kentzea, baita zure profil-orrialdetik ere."
+  "geoConsent": {
+    "dataLabel": "Datuak",
+    "dataDesc": "GPS koordenatu gordinak (latitudea, longitudea).",
+    "purposeLabel": "Helburua",
+    "purposeDesc": "Lan-eskaintzak erabiltzailearen distantzia geografikoaren arabera iragaztea.",
+    "legalBasisLabel": "Lege-oinarria",
+    "legalBasisDesc": "Zure baimena, zure nabigatzaileak eskatutako baimenaren bidez adierazia.",
+    "recipientsLabel": "Hartzaileak",
+    "recipientsDesc": "GéoEmploi-ren talde teknikoa eta produktukoa (erregistro teknikoak); IGN, mapa-geruzetarako eta geokoderako (API Adresse / Géoplateforme).",
+    "transferLabel": "EBtik kanpoko transferentzia",
+    "transferDesc": "Bat ere ez; datuak Frantzian ostatatuta daude.",
+    "retentionLabel": "Kontserbazio-epea",
+    "retentionDesc": "Aldi baterako datuak dira, eskaerak irauten duen bitartean soilik erabiltzen dira, eta ez dira datu-base batean gordetzen.",
+    "rightsLabel": "Zure eskubideak",
+    "rightsDesc": "Datuak eskuratzeko, ezabatzeko, tratamendua mugatzeko eta baimena edozein unetan kentzeko eskubidea duzu, baita zure profileko orrialdetik ere."
   },
   "jobOffer": {
     "pageTitle": "Sortu lan-eskaintza",

@@ -519,21 +519,21 @@
     "backHome": "Distreiñ d'ar pennlec'h",
     "lastUpdate": "Hizivadenn diwezhañ : 1añ a viz Gwengolo 2026"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Roadennoù selektet :",
-    "dataValue": "daveennoù GPS kriz (ledred, hedred).",
-    "purposeLabel": "Pal :",
-    "purposeValue": "kribañ ar c'hinnigoù labour hervez an hed douaroniel ouzh an arveriad.",
-    "legalBasisLabel": "Diazez lezennel :",
-    "legalBasisValue": "hoc'h asant, roet dre an aotren goulennet gant ar merdeer.",
-    "recipientsLabel": "Degemererien :",
-    "recipientsValue": "skipailh teknikel ha produ GéoEmploi (kazetennoù teknikel) ; IGN evit ar gartenn hag ar geokodiñ (API Adresse / Géoplateforme).",
-    "transferLabel": "Treuzkas er-maez eus an UE :",
-    "transferValue": "hini ebet ; roadennoù herberc'hiet e Frañs.",
-    "retentionLabel": "Padelezh virout :",
-    "retentionValue": "roadenn dremeniad, implijet nemetken e-pad ar reked, hep enrolladur e diaz-roadennoù.",
-    "rightsLabel": "Ho kwirioù :",
-    "rightsValue": "moned, diverkañ, bevenniñ, ha lemel an asant pa garit, en o zouez adalek ho pajenn profil."
+  "geoConsent": {
+    "dataLabel": "Roadoù an data",
+    "dataDesc": "Kordinadoù GPS kriz (ledred, hedred).",
+    "purposeLabel": "Pal",
+    "purposeDesc": "Mirennañ kinnigoù labour hervez pellder douaroniel an implijer.",
+    "legalBasisLabel": "Diazez lezennel",
+    "legalBasisDesc": "Ho toniñ-kuzul, roet dre an aotre goulennet gant ho merdeer.",
+    "recipientsLabel": "Degemerourien",
+    "recipientsDesc": "Skipailh teknikel ha produiñ GéoEmploi (renkoù teknikel); IGN evit ar c'hartennoù ha zokeniñ (API Adresse / Géoplateforme).",
+    "transferLabel": "Treuzkas er-maez eus an UE",
+    "transferDesc": "Ebet; dalc'het eo an data e Frañs.",
+    "retentionLabel": "Pad mirout",
+    "retentionDesc": "Data berrbad, implijet hepken e-pad ar goulenn, hep bezañ enrollet en ur stlennvon.",
+    "rightsLabel": "Ho kwirioù",
+    "rightsDesc": "Gwelout, dilemel, strishaat ha tennañ ho toniñ-kuzul da ne vern pegoulz, en o zouez eus ho pajenn profil."
   },
   "jobOffer": {
     "pageTitle": "Krouiñ ur c'hinnig labour",

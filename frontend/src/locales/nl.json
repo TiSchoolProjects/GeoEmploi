@@ -515,21 +515,21 @@
     "backHome": "Terug naar startpagina",
     "lastUpdate": "Laatste update: 1 september 2026"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Betrokken gegevens:",
-    "dataValue": "ruwe GPS-coördinaten (breedtegraad, lengtegraad).",
-    "purposeLabel": "Doel:",
-    "purposeValue": "vacatures filteren op basis van de geografische afstand van de gebruiker.",
-    "legalBasisLabel": "Rechtsgrond:",
-    "legalBasisValue": "uw toestemming, verleend via de door de browser gevraagde autorisatie.",
-    "recipientsLabel": "Ontvangers:",
-    "recipientsValue": "technisch en productteam van GéoEmploi (technische logs); IGN voor kaarttegels en geocodering (Adres-API / Géoplateforme).",
-    "transferLabel": "Doorgifte buiten de EU:",
-    "transferValue": "geen; gegevens worden gehost in Frankrijk.",
-    "retentionLabel": "Bewaartermijn:",
-    "retentionValue": "vluchtige gegevens, uitsluitend gebruikt voor de duur van het verzoek, zonder opslag in de database.",
-    "rightsLabel": "Uw rechten:",
-    "rightsValue": "inzage, wissing, beperking en intrekking van toestemming op elk moment, inclusief vanaf uw profielpagina."
+  "geoConsent": {
+    "dataLabel": "Betrokken gegevens",
+    "dataDesc": "Ruwe GPS-coördinaten (breedtegraad, lengtegraad).",
+    "purposeLabel": "Doel",
+    "purposeDesc": "Vacatures filteren op basis van de geografische afstand van de gebruiker.",
+    "legalBasisLabel": "Rechtsgrond",
+    "legalBasisDesc": "Uw toestemming, gegeven via de autorisatie die door uw browser wordt gevraagd.",
+    "recipientsLabel": "Ontvangers",
+    "recipientsDesc": "Het technische en productteam van GéoEmploi (technische logs); IGN voor kaarttegels en geocodering (API Adresse / Géoplateforme).",
+    "transferLabel": "Doorgifte buiten de EU",
+    "transferDesc": "Geen; de gegevens worden in Frankrijk gehost.",
+    "retentionLabel": "Bewaartermijn",
+    "retentionDesc": "Vlottende gegevens, uitsluitend gebruikt gedurende de duur van het verzoek, zonder opslag in een database.",
+    "rightsLabel": "Uw rechten",
+    "rightsDesc": "Recht op inzage, verwijdering, beperking en intrekking van uw toestemming op elk moment, ook via uw profielpagina."
   },
   "jobOffer": {
     "pageTitle": "Vacature aanmaken",

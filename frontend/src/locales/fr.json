@@ -514,21 +514,21 @@
     "backHome": "Retour à l'accueil",
     "lastUpdate": "Dernière mise à jour : 1 septembre 2026"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Données concernées :",
-    "dataValue": "coordonnées GPS brutes (latitude, longitude).",
-    "purposeLabel": "Finalité :",
-    "purposeValue": "filtrer les offres d'emploi selon la distance géographique de l'utilisateur.",
-    "legalBasisLabel": "Base légale :",
-    "legalBasisValue": "votre consentement, exprimé via l'autorisation demandée par le navigateur.",
-    "recipientsLabel": "Destinataires :",
-    "recipientsValue": "équipe technique et produit de GéoEmploi (logs techniques) ; IGN pour les tuiles cartographiques et le géocodage (API Adresse / Géoplateforme).",
-    "transferLabel": "Transfert hors UE :",
-    "transferValue": "aucun ; données hébergées en France.",
-    "retentionLabel": "Durée de conservation :",
-    "retentionValue": "donnée volatile, utilisée uniquement le temps de la requête, sans stockage en base de données.",
-    "rightsLabel": "Vos droits :",
-    "rightsValue": "accès, effacement, limitation, et retrait du consentement à tout moment, y compris depuis votre page de profil."
+  "geoConsent": {
+    "dataLabel": "Données concernées",
+    "dataDesc": "Coordonnées GPS brutes (latitude, longitude).",
+    "purposeLabel": "Finalité",
+    "purposeDesc": "Filtrer les offres d'emploi selon la distance géographique de l'utilisateur.",
+    "legalBasisLabel": "Base légale",
+    "legalBasisDesc": "Votre consentement, exprimé via l'autorisation demandée par le navigateur.",
+    "recipientsLabel": "Destinataires",
+    "recipientsDesc": "Équipe technique et produit de GéoEmploi (logs techniques) ; IGN pour les tuiles cartographiques et le géocodage (API Adresse / Géoplateforme).",
+    "transferLabel": "Transfert hors UE",
+    "transferDesc": "Aucun ; données hébergées en France.",
+    "retentionLabel": "Durée de conservation",
+    "retentionDesc": "Donnée volatile, utilisée uniquement le temps de la requête, sans stockage en base de données.",
+    "rightsLabel": "Vos droits",
+    "rightsDesc": "Accès, effacement, limitation et retrait du consentement à tout moment, y compris depuis votre page de profil."
   },
   "jobOffer": {
     "pageTitle": "Création d'offre d'emploi",

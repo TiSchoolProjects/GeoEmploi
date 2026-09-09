@@ -514,21 +514,21 @@
     "backHome": "Tornar a l'arcuelh",
     "lastUpdate": "Darrèra mesa a dia : 1èr de seteme de 2026"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Donadas concernidas :",
-    "dataValue": "coordenadas GPS brutas (latitud, longitud).",
-    "purposeLabel": "Finalitat :",
-    "purposeValue": "filtrar las ofèrtas de tribalh segon la distància geografica de l'utilizaire.",
-    "legalBasisLabel": "Basa legau :",
-    "legalBasisValue": "lo vòste consentiment, exprimit via l'autorizacion demandada peu navigader.",
-    "recipientsLabel": "Destinataris :",
-    "recipientsValue": "equipa tecnica e produch de GéoEmploi (logs tecnics) ; IGN entaus teules cartografics e lo geocodatge (API Adreça / Geoplataforma).",
-    "transferLabel": "Transferiment hòra UE :",
-    "transferValue": "cap ; donadas albergadas en França.",
-    "retentionLabel": "Durada de conservacion :",
-    "retentionValue": "donada volatila, utilizada sonque durant lo temps de la requèsta, shens estocatge en basa de donadas.",
-    "rightsLabel": "Los vòstes drets :",
-    "rightsValue": "accès, esfaçament, limitacion, e retirament deu consentiment a tot moment, en inclusent despuish la vòsta pagina de perfil."
+  "geoConsent": {
+    "dataLabel": "Dadas concernidas",
+    "dataDesc": "Coordenadas GPS brutas (latitud, longitud).",
+    "purposeLabel": "Finalitat",
+    "purposeDesc": "Filtrar las ofèrtas d'emplec en foncion de la distància geografica de l'utilizaire.",
+    "legalBasisLabel": "Fondament juridic",
+    "legalBasisDesc": "Lo vòste consentiment, exprimit a través de l'autorizacion demandada per lo vòste navigator.",
+    "recipientsLabel": "Recipients",
+    "recipientsDesc": "L'equipa tecnica e producte de GéoEmploi (jornals tecnics); l'IGN entà las teulas cartograficas e lo geocodatge (API Adresse / Géoplateforme).",
+    "transferLabel": "Transferiment dehòra de l'UE",
+    "transferDesc": "Cap; las dadas que son albergadas en França.",
+    "retentionLabel": "Durada de conservacion",
+    "retentionDesc": "Dadas volatilas, utilizadas sonque pendent la durada de la requèsta, shens estar enregistradas dens ua basa de dadas.",
+    "rightsLabel": "Los vòstes drets",
+    "rightsDesc": "Accès, supression, limitacion e retirada deu consentiment a tot moment, tanben dempuish la vòsta pagina de perfil."
   },
   "jobOffer": {
     "pageTitle": "Creacion d'ofèrta de tribalh",

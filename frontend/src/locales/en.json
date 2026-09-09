@@ -515,21 +515,21 @@
     "backHome": "Back to home",
     "lastUpdate": "Last updated: September 1, 2026"
   },
-  "geoConsentNotice": {
-    "dataLabel": "Data concerned:",
-    "dataValue": "raw GPS coordinates (latitude, longitude).",
-    "purposeLabel": "Purpose:",
-    "purposeValue": "filter job offers based on the user's geographic distance.",
-    "legalBasisLabel": "Legal basis:",
-    "legalBasisValue": "your consent, given through the permission requested by your browser.",
-    "recipientsLabel": "Recipients:",
-    "recipientsValue": "GéoEmploi's technical and product team (technical logs); IGN for map tiles and geocoding (Adresse API / Géoplateforme).",
-    "transferLabel": "Transfer outside the EU:",
-    "transferValue": "none; data hosted in France.",
-    "retentionLabel": "Retention period:",
-    "retentionValue": "volatile data, used only for the duration of the request, with no database storage.",
-    "rightsLabel": "Your rights:",
-    "rightsValue": "access, erasure, restriction, and withdrawal of consent at any time, including from your profile page."
+  "geoConsent": {
+    "dataLabel": "Data concerned",
+    "dataDesc": "Raw GPS coordinates (latitude, longitude).",
+    "purposeLabel": "Purpose",
+    "purposeDesc": "Filter job offers based on the user's geographical distance.",
+    "legalBasisLabel": "Legal basis",
+    "legalBasisDesc": "Your consent, expressed through the authorization requested by your browser.",
+    "recipientsLabel": "Recipients",
+    "recipientsDesc": "GéoEmploi's technical and product team (technical logs); IGN for map tiles and geocoding (API Adresse / Géoplateforme).",
+    "transferLabel": "Transfer outside the EU",
+    "transferDesc": "None; data is hosted in France.",
+    "retentionLabel": "Retention period",
+    "retentionDesc": "Volatile data, used only for the duration of the request, without being stored in a database.",
+    "rightsLabel": "Your rights",
+    "rightsDesc": "Access, deletion, restriction, and withdrawal of consent at any time, including from your profile page."
   },
   "jobOffer": {
     "pageTitle": "Create a job offer",
