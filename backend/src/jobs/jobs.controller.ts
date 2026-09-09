@@ -64,7 +64,6 @@ export class JobsController {
   }
 
   @findOneDoc()
-  @CheckOwnership('id')
   @Public()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {

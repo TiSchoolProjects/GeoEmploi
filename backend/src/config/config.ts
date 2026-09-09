@@ -1,6 +1,6 @@
 export default () => ({
   auth: {
-    jwtSecret: process.env.JWT_SECRET || 'jwt_secret',
+    jwtSecret: process.env.JWT_SECRET,
     jwtExpiration: process.env.JWT_EXPIRATION || '1h',
     saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS || '10', 10),
     frontIp: process.env.FRONT_ID || 'http://localhost:5173',
