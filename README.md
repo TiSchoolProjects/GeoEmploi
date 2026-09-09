@@ -95,7 +95,11 @@ backend/seed.ts
 
 ### Seed de géocodage historique
 
+
+
 Un seed spécifique permet de simuler une ancienne offre enregistrée avec une localisation plus précise que la commune.
+
+
 
 ```bash
 docker compose exec backend npm run seed-adresse
