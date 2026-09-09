@@ -20,7 +20,7 @@ export class JobsController {
     },
   ) {
     const employerId = req.user.role === UserRole.ADMIN ? createJobDto.employerId : req.user.userId;
-    return this.jobsService.create({ ...createJobDto, employerId });
+    return this.jobsService.create( createJobDto, employerId);
   }
 
   @findAllDoc()

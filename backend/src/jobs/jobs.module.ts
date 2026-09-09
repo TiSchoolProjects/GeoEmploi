@@ -8,11 +8,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
 import { JobsScheduler } from './jobs.scheduler';
 import { CoordinatesModule } from '../common/coordinates.module';
+import { Employer } from '../employers/entities/employer.entity';
 
 @Module({
   controllers: [JobsController],
   providers: [JobsService, JobsScheduler,],
-  imports: [AuthModule, CoordinatesModule, TypeOrmModule.forFeature([Job, User, Application])],
+  imports: [AuthModule, CoordinatesModule, TypeOrmModule.forFeature([Job, User, Application, Employer])],
   exports: [TypeOrmModule]
 
 })
