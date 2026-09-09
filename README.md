@@ -90,7 +90,7 @@ docker compose exec backend npm run seed
 Fichier associé :
 
 ```text
-backend/seed.ts
+backend/seeds/seed.ts
 ```
 
 ### Seed de géocodage historique
@@ -293,9 +293,9 @@ docker compose exec backend npm test -- --runInBand
 ```text
 GeoEmploi/
 ├── backend/
-│   ├── seed.ts
 │   ├── seeds/
 │   │   └── seed-adresse.ts
+│   │   └── seed.ts
 │   └── src/
 │       ├── applications/
 │       ├── auth/

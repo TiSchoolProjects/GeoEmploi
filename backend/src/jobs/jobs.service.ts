@@ -5,12 +5,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, LessThan, LessThanOrEqual, Not, Repository } from 'typeorm';
 import { UserRole } from '../auth/roles.enum';
 import { IS_NOT_EMPTY } from 'class-validator';
+import { Employer } from '../employers/entities/employer.entity';
+import { EmployersService } from '../employers/employers.service';
 
 @Injectable()
 export class JobsService {
   constructor(
     @InjectRepository(Job)
     private jobRepository: Repository<Job>,
+    @InjectRepository(Employer)
+    private employerRepository: Repository<Employer>,
   ) { }
 
   private geocodingFail(): Partial<Job> {
@@ -66,11 +70,23 @@ export class JobsService {
   }
 
 
-  async create(data: Partial<Job>) {
+  async create(data: Partial<Job>, employerId: number) {
     if (!data.commune) {
       throw new BadRequestException("Commune obligatoire.")
     }
     const geoc = await this.geocodeAdress(data.commune);
+
+    const employer = await this.employerRepository.findOne({where: {userId: employerId}})
+
+    if (!employer) {
+      throw new ForbiddenException("Profil employeur introuvable.");
+    }
+
+    if (!employer.verifiedAt) {
+      throw new ForbiddenException(
+        "Votre compte employeur doit être vérifié avant de publier une offre.",
+      );
+    }
 
     const job = this.jobRepository.create({
       ...data,
@@ -166,7 +182,7 @@ export class JobsService {
 
     limDate.setDate(limDate.getDate() - 90,);
 
-    const jobs = await this.jobRepository.find({where: { createdAt: LessThan(limDate), archivedAt: Not(IsNull()),},});
+    const jobs = await this.jobRepository.find({where: { createdAt: LessThan(limDate),},});
 
     if (jobs.length === 0) {
       return {deleted: 0, limDate,};
