@@ -19,7 +19,7 @@ export default function MapPage() {
   const [position, setPosition] = useState("")
   const [jobOffers, setJobOffers] = useState([])
   const [searchError, setSearchError] = useState("")
-  const [showLocationModal, setShowLocationModal] = useState(() => !getGeoConsent())
+  const [showLocationModal, setShowLocationModal] = useState(() => getGeoConsent()?.status !== "accepted")
   const [reportOffer, setReportOffer] = useState(null)
   const [reportReason, setReportReason] = useState("fraud")
   const [reportDescription, setReportDescription] = useState("")
