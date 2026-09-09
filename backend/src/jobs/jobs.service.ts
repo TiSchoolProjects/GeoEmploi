@@ -166,7 +166,7 @@ export class JobsService {
 
     limDate.setDate(limDate.getDate() - 90,);
 
-    const jobs = await this.jobRepository.find({where: { createdAt: LessThan(limDate), archivedAt: Not(IsNull()),},});
+    const jobs = await this.jobRepository.find({where: { createdAt: LessThan(limDate),},});
 
     if (jobs.length === 0) {
       return {deleted: 0, limDate,};
