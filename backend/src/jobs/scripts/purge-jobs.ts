@@ -61,7 +61,6 @@ async function main() {
   const jobs = await repo.find({
     where: {
       createdAt: LessThan(cutoffDate),
-      archivedAt: Not(IsNull()),
     },
   });
 

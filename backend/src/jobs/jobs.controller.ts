@@ -42,7 +42,8 @@ export class JobsController {
   }
 
   @findByEmployerDoc()
-  @Public()
+  @Roles(UserRole.ADMIN, UserRole.EMPLOYER)
+  @CheckOwnership('id')
   @Get('/employer/:id')
   findByEmployer(@Param('id', ParseIntPipe) id: number) {
     return this.jobsService.findByEmployer(id);

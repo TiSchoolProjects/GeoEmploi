@@ -169,7 +169,7 @@ Les coordonnées WGS84 ne sont pas exposées dans les exports.
 
 Les offres sont automatiquement archivées après **30 jours**.
 
-Les offres archivées âgées de plus de **90 jours** sont supprimées par le mécanisme de purge de l'application.
+Les offres âgées de plus de **90 jours** sont supprimées par le mécanisme de purge de l'application.
 
 La purge peut également être exécutée manuellement :
 
@@ -282,8 +282,8 @@ docker compose exec backend npm test -- --runInBand
 
 ```text
 20 suites réussies
-120 tests réussis
-120 tests au total
+135 tests réussis
+135 tests au total
 ```
 
 ---
