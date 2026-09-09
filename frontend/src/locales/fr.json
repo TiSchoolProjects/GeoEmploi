@@ -39,16 +39,28 @@
           "num": "2",
           "titre": "Définitions",
           "liste": [
-            ["Plateforme", "Le service numérique GéoEmploi, accessible en ligne."],
-            ["Candidat", "Toute personne physique accédant au service à des fins de recherche d'emploi, de consultation d'offres ou de candidature."],
-            ["Employeur / Recruteur", "Toute personne morale ou professionnelle procédant à la publication d'annonces de recrutement via un compte dédié."],
-            ["Données cartographiques", "Fonds cartographiques fournis par la Géoplateforme IGN et données d'adresses issues de l'API Adresse nationale (api-adresse.data.gouv.fr)."]
+            [
+              "Plateforme",
+              "Le service numérique GéoEmploi, accessible en ligne."
+            ],
+            [
+              "Candidat",
+              "Toute personne physique accédant au service à des fins de recherche d'emploi, de consultation d'offres ou de candidature."
+            ],
+            [
+              "Employeur / Recruteur",
+              "Toute personne morale ou professionnelle procédant à la publication d'annonces de recrutement via un compte dédié."
+            ],
+            [
+              "Données cartographiques",
+              "Fonds cartographiques fournis par la Géoplateforme IGN et données d'adresses issues de l'API Adresse nationale (api-adresse.data.gouv.fr)."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Accès au service et tarification employeurs",
+          "titre": "Accès au service et gratuité",
           "sousArticles": [
             {
               "soustitre": "3.1. Accès candidats",
@@ -95,16 +107,27 @@
                 "En application du principe de minimisation (Art. 5.1.c RGPD), GéoEmploi collecte uniquement les données strictement nécessaires à l'intermédiation pour l'emploi :"
               ],
               "liste": [
-                ["Candidat", "Nom, prénom, adresse e-mail de contact, mot de passe sécurisé (chiffré/haché), document de CV (format PDF/DOC)."],
-                ["Employeur", "Raison sociale, numéro SIRET, adresse de siège, nom/prénom du gestionnaire, adresse e-mail professionnelle, numéro de téléphone."]
+                [
+                  "Candidat",
+                  "Nom, prénom, adresse e-mail, mot de passe haché, compétences, expérience et disponibilité."
+                ],
+                [
+                  "Employeur",
+                  "Nom, prénom, adresse e-mail, mot de passe haché, nom de l'entreprise et description de l'entreprise."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Durées de conservation",
               "table": [
-                ["Données de profil et candidatures", "Durée d'utilisation active, puis suppression après 2 ans d'inactivité continue"],
-                ["Logs de connexion", "IP anonymisées sous 24 h, logs techniques purgés sous 12 mois"],
-                ["Données GPS", "Rétention de 0 seconde (calcul transitoire, sans archivage)"]
+                [
+                  "Données de profil et candidatures",
+                  "Durée d'utilisation active, puis suppression après 2 ans d'inactivité continue"
+                ],
+                [
+                  "Données GPS",
+                  "Rétention de 0 seconde (calcul transitoire, sans archivage)"
+                ]
               ]
             },
             {
@@ -113,24 +136,33 @@
                 "Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, chaque utilisateur dispose d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition au traitement de ses données."
               ],
               "liste": [
-                ["Autonomie directe", "Modification des informations ou suppression immédiate du compte depuis « Mon Compte » > « Supprimer mon compte »."],
-                ["Saisine du DPO", "Par e-mail à dpo@job-et-bonheur.fr. Réponse sous un délai légal maximal d'un mois."],
-                ["Droit de réclamation", "Auprès de la CNIL (www.cnil.fr) en cas de non-respect des droits."]
+                [
+                  "Autonomie directe",
+                  "Modification des informations ou suppression immédiate du compte depuis « Mon Compte » > « Supprimer mon compte »."
+                ],
+                [
+                  "Saisine du DPO",
+                  "Par e-mail à dpo@job-et-bonheur.fr. Réponse sous un délai légal maximal d'un mois."
+                ],
+                [
+                  "Droit de réclamation",
+                  "Auprès de la CNIL (www.cnil.fr) en cas de non-respect des droits."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Responsabilités",
           "corps": [
             "Le Ministère met en œuvre les diligences requises pour assurer la disponibilité et la sécurité du service. Sa responsabilité ne saurait être engagée en cas de force majeure, d'interruption temporaire pour maintenance, d'inexactitude dans les annonces rédigées par les employeurs ou d'issue négative à une candidature."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Droit applicable et juridiction compétente",
           "corps": [
             "Les présentes CGU sont régies par le droit français. À défaut de résolution amiable, tout différend relatif à leur validité ou leur exécution sera soumis aux tribunaux français territorialement compétents."
@@ -164,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Conservation des données de localisation",
+          "titre": "Conservation des offres",
           "corps": [
             "La position des utilisateurs n'est pas enregistrée ni conservée.",
-            "Les données de localisation associées aux offres d'emploi sont conservées conformément aux règles définies dans le registre des traitements.",
-            "Les historiques de localisation des offres sont automatiquement supprimés au-delà de 90 jours"
+            "Les offres sont localisées uniquement au niveau de la commune.",
+            "Les offres archivées âgées de plus de 90 jours depuis leur création sont automatiquement supprimées."
           ]
         },
         {

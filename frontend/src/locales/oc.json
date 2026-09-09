@@ -39,16 +39,28 @@
           "num": "2",
           "titre": "Definicions",
           "liste": [
-            ["Plataforma", "Lo servici numeric GéoEmploi, accessible en linha."],
-            ["Candidat", "Tota persona fisica qui accedeish au servici entà cercar un tribalh, consultar ofèrtas o candidatar."],
-            ["Emplegaire / Recrutaire", "Tota persona morala o professionau qui procedish a la publicacion d'anóncias de recrutament via un compte dedicat."],
-            ["Donadas cartograficas", "Honts cartograficas hornidas per la Geoplataforma IGN e donadas d'adreças gessidas de l'API Adreça nacionau (api-adresse.data.gouv.fr)."]
+            [
+              "Plataforma",
+              "Lo servici numeric GéoEmploi, accessible en linha."
+            ],
+            [
+              "Candidat",
+              "Tota persona fisica qui accedeish au servici entà cercar un tribalh, consultar ofèrtas o candidatar."
+            ],
+            [
+              "Emplegaire / Recrutaire",
+              "Tota persona morala o professionau qui procedish a la publicacion d'anóncias de recrutament via un compte dedicat."
+            ],
+            [
+              "Donadas cartograficas",
+              "Honts cartograficas hornidas per la Geoplataforma IGN e donadas d'adreças gessidas de l'API Adreça nacionau (api-adresse.data.gouv.fr)."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Accès au servici e tarificacion emplegaires",
+          "titre": "Accès au servici e gratuitat",
           "sousArticles": [
             {
               "soustitre": "3.1. Accès candidats",
@@ -95,16 +107,27 @@
                 "En aplicacion deu principi de minimizacion (Art. 5.1.c RGPD), GéoEmploi que collècta sonque las donadas estrictament necessàrias a l'intermediacion entau tribalh :"
               ],
               "liste": [
-                ["Candidat", "Nom, prenom, adreça e-mail de contacte, senhau securizat (chifrat/hachat), document de CV (format PDF/DOC)."],
-                ["Emplegaire", "Rason sociau, numèro SIRET, adreça deu sièti, nom/prenom deu gestionari, adreça e-mail professionau, numèro de telefòn."]
+                [
+                  "Candidat",
+                  "Nom, prenom, adreça e-mail, senhau hachat, competéncias, experiéncia e disponibilitat."
+                ],
+                [
+                  "Emplegaire",
+                  "Nom, prenom, adreça e-mail, senhau hachat, nom de l'entrepresa e descripcion de l'entrepresa."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Duradas de conservacion",
               "table": [
-                ["Donadas de perfil e candidaturas", "Durada d'utilizacion activa, puish supression après 2 ans d'inactivitat continua"],
-                ["Logs de connexion", "IP anonimizadas devath 24 h, logs tecnics purjats devath 12 mes"],
-                ["Donadas GPS", "Retencion de 0 segonda (calcul transitòri, shens archiu)"]
+                [
+                  "Donadas de perfil e candidaturas",
+                  "Durada d'utilizacion activa, puish supression après 2 ans d'inactivitat continua"
+                ],
+                [
+                  "Donadas GPS",
+                  "Retencion de 0 segonda (calcul transitòri, shens archiu)"
+                ]
               ]
             },
             {
@@ -113,24 +136,33 @@
                 "Conformament au Reglament Generau sus la Proteccion de las Donadas (RGPD) e a la lei Informatica e Libertats, cada utilizaire que dispausa d'un dret d'accès, de rectificacion, d'esfaçament, de limitacion e d'oposicion au tractament de las suas donadas."
               ],
               "liste": [
-                ["Autonomia dirècta", "Modificacion de las informacions o supression immediata deu compte despuish « Lo mòn Compte » > « Suprimir lo mòn compte »."],
-                ["Sasida deu DPO", "Per e-mail a dpo@job-et-bonheur.fr. Responsa devath un relambi legau maximau d'un mes."],
-                ["Dret de reclamacion", "Auprès de la CNIL (www.cnil.fr) en cas de non-respècte deus drets."]
+                [
+                  "Autonomia dirècta",
+                  "Modificacion de las informacions o supression immediata deu compte despuish « Lo mòn Compte » > « Suprimir lo mòn compte »."
+                ],
+                [
+                  "Sasida deu DPO",
+                  "Per e-mail a dpo@job-et-bonheur.fr. Responsa devath un relambi legau maximau d'un mes."
+                ],
+                [
+                  "Dret de reclamacion",
+                  "Auprès de la CNIL (www.cnil.fr) en cas de non-respècte deus drets."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Responsabilitats",
           "corps": [
             "Lo Ministèri que bota en òbra las diligéncias requeridas entà assegurar la disponibilitat e la seguretat deu servici. La sua responsabilitat ne's poiriá pas engatjar en cas de fòrça majora, d'interrupcion temporària per mantenença, d'inexactitud dens las anóncias redigidas peus emplegaires o de gessida negativa a ua candidatura."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Dret aplicable e jurisdiccion competenta",
           "corps": [
             "Aqueras CGU que son regidas peu dret francés. A fauta de resolucion amistosa, tot diferent relatiu a la lor validitat o execucion que serà sosmetut aus tribunaus francés territorialament competents."
@@ -164,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Conservacion de las donadas de localizacion",
+          "titre": "Conservacion de las ofèrtas",
           "corps": [
             "La posicion deus utilizaires n'ei pas enregistrada ni conservada.",
-            "Las donadas de localizacion associadas a las ofèrtas de tribalh que son conservadas conformament a las règlas definidas dens lo registre deus tractaments.",
-            "Los istorics de localizacion de las ofèrtas que son automaticament suprimits delà 90 dias."
+            "Las ofèrtas de tribalh son localizadas sonque au nivèu de la comuna.",
+            "Las ofèrtas archivadas de mei de 90 dias despuish la lor creacion son automaticament suprimidas."
           ]
         },
         {
