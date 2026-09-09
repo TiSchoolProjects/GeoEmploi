@@ -76,16 +76,3 @@ cartographique s'explique notamment par une charge plus importante lors
 de la consultation de la carte, qui récupère les données des offres ainsi
 que plusieurs tuiles cartographiques.
 
-## Première correction envisagée
-
-Même si les résultats actuels sont satisfaisants, la première partie que
-nous optimiserions est la récupération de la liste des offres dans
-`JobsService.findAll()` :
-
-```
-return this.jobRepository.find({
-  where: {
-    archivedAt: IsNull(),
-  },
-});
-```
