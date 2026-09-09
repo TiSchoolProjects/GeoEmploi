@@ -58,6 +58,24 @@ export class EmployersService {
     return await this.employerRepository.save(employer);
   }
 
+  async findPublic(userId: number) {
+    const employer = await this.employerRepository.findOne({
+      where: { userId },
+      select: {
+        userId: true,
+        companyName: true,
+        companyDesc: true,
+        verifiedAt: true,
+      },
+    });
+
+    if (!employer) {
+      throw new NotFoundException("Employeur non trouvé.");
+    }
+
+    return employer;
+  }
+
   remove(userId: number) {
     return this.employerRepository.delete({ userId });
   }

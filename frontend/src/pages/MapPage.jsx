@@ -59,11 +59,7 @@ export default function MapPage() {
 
   const getCompanyName = async (offer) => {
     try {
-      const response = await fetch(`http://localhost:4242/employers/${offer.employerId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      })
-      const data = await response.json()
+      const data = await apiFetch(`/employers/public/${offer.employerId}`);
       return data.companyName || t("map.unknownCompany")
     } catch (error) {
       console.error("Erreur récupération nom entreprise :", error)

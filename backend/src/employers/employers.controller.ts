@@ -13,17 +13,23 @@ export class EmployersController {
   constructor(private readonly employersService: EmployersService) { }
 
   @createDoc()
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.EMPLOYER)
   @Post()
   create(@Body() createEmployerDto: CreateEmployerDto) {
     return this.employersService.create(createEmployerDto);
   }
 
   @findAllDoc()
-  @Roles()
+  @Roles(UserRole.ADMIN)
   @Get()
   findAll() {
     return this.employersService.findAll();
+  }
+
+  @Public()
+  @Get('public/:id')
+  findPublic(@Param('id', ParseIntPipe) id: number) {
+    return this.employersService.findPublic(id);
   }
 
   @findOneDoc()
