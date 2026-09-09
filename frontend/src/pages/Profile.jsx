@@ -51,7 +51,7 @@ export default function EditProfile() {
 
       try {
         const profileEndpoints = {
-          admin: `/admins/${user.sub}`,
+          admin: `/users/${user.sub}`,
           employer: `/employers/${user.sub}`,
           seeker: `/seekers/${user.sub}`,
         };
@@ -159,18 +159,18 @@ export default function EditProfile() {
         );
       }
 
-      const profileEndpoint = isRH ? `/employers/${user.sub}` : `/seekers/${user.sub}`;
-      const profileData = await apiFetch(profileEndpoint, {
-        method: "PATCH",
-        body: JSON.stringify(profileBody),
-      });
+      // const profileEndpoint = isRH ? `/employers/${user.sub}` : `/seekers/${user.sub}`;
+      // const profileData = await apiFetch(profileEndpoint, {
+      //   method: "PATCH",
+      //   body: JSON.stringify(profileBody),
+      // });
 
-      if (!profileData) {
-        throw new Error(
-          Array.isArray(profileData.message)
-            ? profileData.message.join(", ") : profileData.message || t("profile.profileUpdateError")
-        );
-      }
+      // if (!profileData) {
+      //   throw new Error(
+      //     Array.isArray(profileData.message)
+      //       ? profileData.message.join(", ") : profileData.message || t("profile.profileUpdateError")
+      //   );
+      // }
 
       const updatedUser = {
         ...user,
