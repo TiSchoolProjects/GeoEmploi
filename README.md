@@ -294,7 +294,7 @@ docker compose exec backend npm test -- --runInBand
 GeoEmploi/
 ├── backend/
 │   ├── seeds/
-│   │   └── seed-adresse.ts
+│   │   ├── seed-adresse.ts
 │   │   └── seed.ts
 │   └── src/
 │       ├── applications/

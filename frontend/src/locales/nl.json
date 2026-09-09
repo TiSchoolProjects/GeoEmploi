@@ -39,16 +39,28 @@
           "num": "2",
           "titre": "Definities",
           "liste": [
-            ["Platform", "De online digitale dienst GéoEmploi."],
-            ["Kandidaat", "Elke natuurlijke persoon die de dienst bezoekt om werk te zoeken, vacatures te bekijken of te solliciteren."],
-            ["Werkgever / Recruiter", "Elke rechtspersoon of professional die wervingsadvertenties plaatst via een speciaal account."],
-            ["Cartografische gegevens", "Kaartlagen geleverd door het IGN Geoplateforme en adresgegevens afkomstig van de nationale Adres-API (api-adresse.data.gouv.fr)."]
+            [
+              "Platform",
+              "De online digitale dienst GéoEmploi."
+            ],
+            [
+              "Kandidaat",
+              "Elke natuurlijke persoon die de dienst bezoekt om werk te zoeken, vacatures te bekijken of te solliciteren."
+            ],
+            [
+              "Werkgever / Recruiter",
+              "Elke rechtspersoon of professional die wervingsadvertenties plaatst via een speciaal account."
+            ],
+            [
+              "Cartografische gegevens",
+              "Kaartlagen geleverd door het IGN Geoplateforme en adresgegevens afkomstig van de nationale Adres-API (api-adresse.data.gouv.fr)."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Toegang tot de dienst en tarieven voor werkgevers",
+          "titre": "Toegang tot de dienst en gratis gebruik",
           "sousArticles": [
             {
               "soustitre": "3.1. Toegang voor kandidaten",
@@ -95,16 +107,27 @@
                 "Met toepassing van het beginsel van minimale gegevensverwerking (Art. 5.1.c AVG) verzamelt GéoEmploi uitsluitend gegevens die strikt noodzakelijk zijn voor arbeidsbemiddeling:"
               ],
               "liste": [
-                ["Kandidaat", "Naam, voornaam, contact-e-mailadres, beveiligd wachtwoord (versleuteld/gehasht), cv-document (PDF/DOC-formaat)."],
-                ["Werkgever", "Bedrijfsnaam, SIRET-nummer, statutaire zetel, naam/voornaam van de beheerder, zakelijk e-mailadres, telefoonnummer."]
+                [
+                  "Kandidaat",
+                  "Naam, voornaam, e-mailadres, gehasht wachtwoord, vaardigheden, ervaring en beschikbaarheid."
+                ],
+                [
+                  "Werkgever",
+                  "Naam, voornaam, e-mailadres, gehasht wachtwoord, bedrijfsnaam en bedrijfsbeschrijving."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Bewaartermijnen",
               "table": [
-                ["Profielgegevens en sollicitaties", "Duur van actief gebruik, daarna verwijdering na 2 jaar continue inactiviteit"],
-                ["Verbindingslogs", "IP-adressen geanonimiseerd binnen 24 uur, technische logs gewist na 12 maanden"],
-                ["GPS-gegevens", "Bewaartermijn van 0 seconden (tijdelijke berekening, zonder archivering)"]
+                [
+                  "Profielgegevens en sollicitaties",
+                  "Duur van actief gebruik, daarna verwijdering na 2 jaar continue inactiviteit"
+                ],
+                [
+                  "GPS-gegevens",
+                  "Bewaartermijn van 0 seconden (tijdelijke berekening, zonder archivering)"
+                ]
               ]
             },
             {
@@ -113,24 +136,33 @@
                 "Overeenkomstig de Algemene Verordening Gegevensbescherming (AVG) en de toepasselijke privacywetgeving beschikt elke gebruiker over het recht op inzage, rectificatie, wissing, beperking en bezwaar tegen de verwerking van zijn gegevens."
               ],
               "liste": [
-                ["Directe autonomie", "Wijziging van gegevens of onmiddellijke verwijdering van het account via « Mijn account » > « Mijn account verwijderen »."],
-                ["Contact opnemen met de FG", "Per e-mail via dpo@job-et-bonheur.fr. Antwoord binnen de wettelijke termijn van maximaal één maand."],
-                ["Klachtrecht", "Bij de toezichthoudende autoriteit (CNIL - www.cnil.fr) in geval van niet-naleving van uw rechten."]
+                [
+                  "Directe autonomie",
+                  "Wijziging van gegevens of onmiddellijke verwijdering van het account via « Mijn account » > « Mijn account verwijderen »."
+                ],
+                [
+                  "Contact opnemen met de FG",
+                  "Per e-mail via dpo@job-et-bonheur.fr. Antwoord binnen de wettelijke termijn van maximaal één maand."
+                ],
+                [
+                  "Klachtrecht",
+                  "Bij de toezichthoudende autoriteit (CNIL - www.cnil.fr) in geval van niet-naleving van uw rechten."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Aansprakelijkheid",
           "corps": [
             "Het Ministerie spant zich naar behoren in om de beschikbaarheid en beveiliging van de dienst te waarborgen. Het kan niet aansprakelijk worden gesteld in geval van overmacht, tijdelijke onderbreking voor onderhoud, onjuistheden in advertenties opgesteld door werkgevers of een afwijzing van een sollicitatie."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Toepasselijk recht en bevoegde rechtbank",
           "corps": [
             "Deze gebruiksvoorwaarden worden beheerst door het Franse recht. Indien een minnelijke schikking uitblijft, wordt elk geschil over de geldigheid of uitvoering ervan voorgelegd aan de bevoegde Franse rechtbanken."
@@ -164,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Bewaring van locatiegegevens",
+          "titre": "Bewaring van vacatures",
           "corps": [
             "De positie van gebruikers wordt niet geregistreerd of bewaard.",
-            "Locatiegegevens gekoppeld aan vacatures worden bewaard volgens de regels die zijn vastgelegd in het verwerkingsregister.",
-            "De locatiegeschiedenis van vacatures wordt automatisch verwijderd na 90 dagen."
+            "Vacatures worden uitsluitend op gemeenteniveau gelokaliseerd.",
+            "Gearchiveerde vacatures die meer dan 90 dagen oud zijn sinds hun aanmaak worden automatisch verwijderd."
           ]
         },
         {

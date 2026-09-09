@@ -39,16 +39,28 @@
           "num": "2",
           "titre": "Definizioak",
           "liste": [
-            ["Plataforma", "GéoEmploi zerbitzu digitala, linean eskuragarri."],
-            ["Hautagaia", "Zerbitzuan lana bilatzeko, eskaintzak kontsultatzeko edo izena emateko sartzen den pertsona fisikoa."],
-            ["Enplegatzailea / Hautatzailea", "Kontu dedikatu baten bidez lan-eskaintzak argitaratzen dituen pertsona moral edo profesionala."],
-            ["Kartografia-datuak", "IGN Geoplateforme-k emandako mapa-oinarriak eta Helbide Nazionalaren API-tik (api-adresse.data.gouv.fr) lortutako helbide-datuak."]
+            [
+              "Plataforma",
+              "GéoEmploi zerbitzu digitala, linean eskuragarri."
+            ],
+            [
+              "Hautagaia",
+              "Zerbitzuan lana bilatzeko, eskaintzak kontsultatzeko edo izena emateko sartzen den pertsona fisikoa."
+            ],
+            [
+              "Enplegatzailea / Hautatzailea",
+              "Kontu dedikatu baten bidez lan-eskaintzak argitaratzen dituen pertsona moral edo profesionala."
+            ],
+            [
+              "Kartografia-datuak",
+              "IGN Geoplateforme-k emandako mapa-oinarriak eta Helbide Nazionalaren API-tik (api-adresse.data.gouv.fr) lortutako helbide-datuak."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Zerbitzurako sarbidea eta enplegatzaileen tarifak",
+          "titre": "Zerbitzurako sarbidea eta doakotasuna",
           "sousArticles": [
             {
               "soustitre": "3.1. Hautagaien sarbidea",
@@ -95,16 +107,27 @@
                 "Datuak minimizatzeko printzipioa aplikatuz (DBEO 5.1.c art.), GéoEmploi-k enplegurako bitartekotzarako guztiz beharrezkoak diren datuak soilik biltzen ditu:"
               ],
               "liste": [
-                ["Hautagaia", "Izena, abizena, harremanetarako helbide elektronikoa, pasahitz segurua (zifratua/hash-atua), CV dokumentua (PDF/DOC formatua)."],
-                ["Enplegatzailea", "Sozietatearen izena, SIRET zenbakia, egoitzaren helbidea, kudeatzailearen izen-abizenak, posta elektroniko profesionala, telefono zenbakia."]
+                [
+                  "Hautagaia",
+                  "Izena, abizena, helbide elektronikoa, hash bidez gordetako pasahitza, gaitasunak, esperientzia eta erabilgarritasuna."
+                ],
+                [
+                  "Enplegatzailea",
+                  "Izena, abizena, helbide elektronikoa, hash bidez gordetako pasahitza, enpresaren izena eta deskribapena."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Kontserbazio-epeak",
               "table": [
-                ["Profilaren datuak eta hautagaitzak", "Erabilera aktiboaren iraupena, eta ondoren ezabatzea etengabeko 2 urteko ez-aktibotasunaren ostean"],
-                ["Konexio-erregistroak", "IPak 24 ordutan anonimizatuak, erregistro teknikoak 12 hilabetetan garbituak"],
-                ["GPS datuak", "0 segundoko atxikipena (aldi baterako kalkulua, artxibatu gabe)"]
+                [
+                  "Profilaren datuak eta hautagaitzak",
+                  "Erabilera aktiboaren iraupena, eta ondoren ezabatzea etengabeko 2 urteko ez-aktibotasunaren ostean"
+                ],
+                [
+                  "GPS datuak",
+                  "0 segundoko atxikipena (aldi baterako kalkulua, artxibatu gabe)"
+                ]
               ]
             },
             {
@@ -113,24 +136,33 @@
                 "Datuak Babesteko Erregelamendu Orokorraren (DBEO) eta aplikagarri den datu-babesaren legearen arabera, erabiltzaile bakoitzak bere datuak eskuratzeko, zuzentzeko, ezabatzeko, mugatzeko eta tratamenduari aurka egiteko eskubidea du."
               ],
               "liste": [
-                ["Autonomia zuzena", "Informazioa aldatzea edo kontua berehala ezabatzea « Nire kontua » > « Ezabatu nire kontua » atalean."],
-                ["DPOari helaraztea", "Posta elektronikoz: dpo@job-et-bonheur.fr helbidera. Gehienez hilabeteko epe legalaren barruan erantzungo da."],
-                ["Erreklamazio-eskubidea", "Datuen Babeserako Agintaritzaren aurrean (CNIL - www.cnil.fr), eskubideak errespetatzen ez badira."]
+                [
+                  "Autonomia zuzena",
+                  "Informazioa aldatzea edo kontua berehala ezabatzea « Nire kontua » > « Ezabatu nire kontua » atalean."
+                ],
+                [
+                  "DPOari helaraztea",
+                  "Posta elektronikoz: dpo@job-et-bonheur.fr helbidera. Gehienez hilabeteko epe legalaren barruan erantzungo da."
+                ],
+                [
+                  "Erreklamazio-eskubidea",
+                  "Datuen Babeserako Agintaritzaren aurrean (CNIL - www.cnil.fr), eskubideak errespetatzen ez badira."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Erantzukizunak",
           "corps": [
             "Ministerioak behar diren ahaleginak egiten ditu zerbitzuaren erabilgarritasuna eta segurtasuna bermatzeko. Ezingo zaio erantzukizunik eskatu ezinbesteko kasuetan, mantentze-lanengatik aldi baterako etenaldietan, enplegatzaileek idatzitako eskaintzetako zehaztasun-gabezietan edo hautagaitza baten ezezko emaitzan."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Zuzenbide aplikagarria eta jurisdikzio eskumenduna",
           "corps": [
             "EBO hauek Frantziako legediak arautzen ditu. Adiskidantzazko konponbiderik ezean, haien baliozkotasunari edo betearazpenari buruzko edozein auzi Frantziako auzitegi eskudunen esku utziko da."
@@ -164,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Kokapen-datuen kontserbazioa",
+          "titre": "Lan-eskaintzen kontserbazioa",
           "corps": [
-            "Erabiltzaileen posizioa ez da erregistratzen ezta gordetzen ere.",
-            "Lan-eskaintzei lotutako kokapen-datuak tratamendu-erregistroan zehaztutako arauen arabera gordetzen dira.",
-            "Eskaintzen kokapen-historiak automatikoki ezabatzen dira 90 egun igaro ondoren."
+            "Erabiltzaileen kokapena ez da erregistratzen edo gordetzen.",
+            "Lan-eskaintzak udalerri mailan soilik kokatzen dira.",
+            "Sortu zirenetik 90 egun baino gehiago dituzten artxibatutako eskaintzak automatikoki ezabatzen dira."
           ]
         },
         {

@@ -13,7 +13,6 @@
     "question": "Already have an account?",
     "link": "Log in"
   },
-  
   "more": {
     "title": "Information",
     "subtitle": "Terms of Service and Transparency of GéoEmploi",
@@ -40,16 +39,28 @@
           "num": "2",
           "titre": "Definitions",
           "liste": [
-            ["Platform", "The online digital service GéoEmploi."],
-            ["Applicant", "Any natural person accessing the service to look for jobs, view job listings, or apply."],
-            ["Employer / Recruiter", "Any legal entity or professional posting job offers via a dedicated account."],
-            ["Map Data", "Map layers provided by IGN Geoplateforme and address data provided by the National Address API (api-adresse.data.gouv.fr)."]
+            [
+              "Platform",
+              "The online digital service GéoEmploi."
+            ],
+            [
+              "Applicant",
+              "Any natural person accessing the service to look for jobs, view job listings, or apply."
+            ],
+            [
+              "Employer / Recruiter",
+              "Any legal entity or professional posting job offers via a dedicated account."
+            ],
+            [
+              "Map Data",
+              "Map layers provided by IGN Geoplateforme and address data provided by the National Address API (api-adresse.data.gouv.fr)."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Service Access and Employer Pricing",
+          "titre": "Service Access and Free Use",
           "sousArticles": [
             {
               "soustitre": "3.1. Applicant Access",
@@ -96,16 +107,27 @@
                 "Under the data minimization principle (Art. 5.1.c GDPR), GéoEmploi collects only data strictly necessary for employment matching:"
               ],
               "liste": [
-                ["Applicant", "First name, last name, contact email address, secured password (hashed/encrypted), resume document (PDF/DOC)."],
-                ["Employer", "Company name, SIRET number, headquarters address, manager first/last name, professional email address, phone number."]
+                [
+                  "Applicant",
+                  "First name, last name, email address, hashed password, skills, experience and availability."
+                ],
+                [
+                  "Employer",
+                  "First name, last name, email address, hashed password, company name and company description."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Retention Periods",
               "table": [
-                ["Profile data and applications", "Period of active use, then deletion after 2 years of continuous inactivity"],
-                ["Connection logs", "IPs anonymized within 24 hours, technical logs purged after 12 months"],
-                ["GPS data", "0-second retention (transient calculation without archiving)"]
+                [
+                  "Profile data and applications",
+                  "Period of active use, then deletion after 2 years of continuous inactivity"
+                ],
+                [
+                  "GPS data",
+                  "0-second retention (transient calculation without archiving)"
+                ]
               ]
             },
             {
@@ -114,24 +136,33 @@
                 "In compliance with the General Data Protection Regulation (GDPR) and national data protection laws, every user has the right to access, rectify, erase, restrict, and object to the processing of their data."
               ],
               "liste": [
-                ["Direct Control", "Update profile details or immediately delete account via « My Account » > « Delete my account »."],
-                ["Contact the DPO", "Via email at dpo@job-et-bonheur.fr. Response within the statutory limit of one month."],
-                ["Lodge a Complaint", "With the CNIL (www.cnil.fr) in case of non-compliance with your rights."]
+                [
+                  "Direct Control",
+                  "Update profile details or immediately delete account via « My Account » > « Delete my account »."
+                ],
+                [
+                  "Contact the DPO",
+                  "Via email at dpo@job-et-bonheur.fr. Response within the statutory limit of one month."
+                ],
+                [
+                  "Lodge a Complaint",
+                  "With the CNIL (www.cnil.fr) in case of non-compliance with your rights."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Liability",
           "corps": [
             "The Ministry exercises due diligence to ensure platform availability and security. It shall not be held liable in cases of force majeure, temporary maintenance disruptions, inaccurate employer listings, or unsuccessful applications."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Governing Law and Jurisdiction",
           "corps": [
             "These Terms of Service are governed by French law. In the absence of an amicable settlement, any dispute regarding their validity or performance shall be submitted to the competent French courts."
@@ -165,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Location Data Retention",
+          "titre": "Job Retention",
           "corps": [
-            "User positions are neither recorded nor retained.",
-            "Location data associated with job listings is retained according to records of processing activities.",
-            "Location history for listings is automatically deleted after 90 days."
+            "Users' positions are not recorded or stored.",
+            "Job offers are located only at municipality level.",
+            "Archived job offers more than 90 days old from their creation date are automatically deleted."
           ]
         },
         {

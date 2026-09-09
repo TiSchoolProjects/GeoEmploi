@@ -39,16 +39,28 @@
           "num": "2",
           "titre": "Termenadurioù",
           "liste": [
-            ["Savenn", "Ar servij niverel GéoEmploi, hegerz enlinenn."],
-            ["Danvez-implijad", "Kement den fizikel a ya war ar servij evit klask labour, sellet ouzh kinnigoù pe lakaat e anv."],
-            ["Goprer / Goprer", "Kement den moral pe a-vicher a embann kemennoù tuta dre ur gont gouestlet."],
-            ["Roadennoù kartennel", "Fondoù kartennel pourchaset gant Géoplateforme IGN ha roadennoù chomlec'hioù o tont eus an API Adresse broadel (api-adresse.data.gouv.fr)."]
+            [
+              "Savenn",
+              "Ar servij niverel GéoEmploi, hegerz enlinenn."
+            ],
+            [
+              "Danvez-implijad",
+              "Kement den fizikel a ya war ar servij evit klask labour, sellet ouzh kinnigoù pe lakaat e anv."
+            ],
+            [
+              "Goprer / Goprer",
+              "Kement den moral pe a-vicher a embann kemennoù tuta dre ur gont gouestlet."
+            ],
+            [
+              "Roadennoù kartennel",
+              "Fondoù kartennel pourchaset gant Géoplateforme IGN ha roadennoù chomlec'hioù o tont eus an API Adresse broadel (api-adresse.data.gouv.fr)."
+            ]
           ]
         },
         {
           "id": "art3",
           "num": "3",
-          "titre": "Moned d'ar servij ha prizioù goprerien",
+          "titre": "Moned d'ar servij ha digoust",
           "sousArticles": [
             {
               "soustitre": "3.1. Moned danvez-implijidi",
@@ -92,21 +104,30 @@
             {
               "soustitre": "5.1. Rannoù roadennoù dastumet e-pad an enskrivadur",
               "corps": [
-                "Hervez pennaenn bihanaat ar roadennoù (Pennad 5.1.c RGPD), GéoEmploi a zastum hepken ar roadennoù rekis evit etremouezh al labour :",
-                "Danvez-implijad : Anv, anv-bihan, chomlec'h postel daremprediñ, ger-tremen suroc'haet (enkodlet/heshet), teul CV (mentrezh PDF/DOC).",
-                "Goprer : Anv embregerezh, niverenn SIRET, chomlec'h ar sez, anv/anv-bihan ar merour, chomlec'h postel a-vicher, niverenn bellgomz."
+                "Hervez pennaenn bihanaat ar roadennoù (Pennad 5.1.c RGPD), GéoEmploi a zastum hepken ar roadennoù rekis evit etremouezh al labour :"
               ],
               "liste": [
-                ["Danvez-implijad", "Anv, anv-bihan, chomlec'h postel daremprediñ, ger-tremen suroc'haet (enkodlet/heshet), teul CV (mentrezh PDF/DOC)."],
-                ["Goprer", "Anv embregerezh, niverenn SIRET, chomlec'h ar sez, anv/anv-bihan ar merour, chomlec'h postel a-vicher, niverenn bellgomz."]
+                [
+                  "Danvez-implijad",
+                  "Anv, anv-bihan, chomlec'h postel, ger-tremen heshet, barregezhioù, skiant-prenet ha hegerz."
+                ],
+                [
+                  "Goprer",
+                  "Anv, anv-bihan, chomlec'h postel, ger-tremen heshet, anv an embregerezh ha deskrivadur an embregerezh."
+                ]
               ]
             },
             {
               "soustitre": "5.2. Padelezhioù mirout",
               "table": [
-                ["Roadennoù profil hag emstrivadurioù", "Padelezh implij oberiant, ha diverket goude 2 vloaz dizoberiantiz dizehan"],
-                ["Kazetennoù kennaskañ", "Chomlec'hioù IP dizanvet dindan 24 eurvezh, kazetennoù teknikel diverket dindan 12 miz"],
-                ["Roadennoù GPS", "Mirout e-pad 0 eilenn (jedadenn dremeniad, hep diellaouiñ)"]
+                [
+                  "Roadennoù profil hag emstrivadurioù",
+                  "Padelezh implij oberiant, ha diverket goude 2 vloaz dizoberiantiz dizehan"
+                ],
+                [
+                  "Roadennoù GPS",
+                  "Mirout e-pad 0 eilenn (jedadenn dremeniad, hep diellaouiñ)"
+                ]
               ]
             },
             {
@@ -115,24 +136,33 @@
                 "Hervez ar Reoliadur Hollek war Gwareziñ ar Roadennoù (RGPD) hag al lezenn Stlenneg ha Frankizoù, pep arveriad en deus ur gwir moned, reizhañ, diverkañ, bevenniñ ha sevel a-enep da dretadur e roadennoù."
               ],
               "liste": [
-                ["Emrenerezh eeun", "Kemmañ an titouroù pe diverkañ ar gont diouzhtu adalek « Ma c'hont » > « Diverkañ ma c'hont »."],
-                ["Sevel klemm ouzh an DPO", "Dre bostel da dpo@job-et-bonheur.fr. Respont dindan ul lajad lezennel a ur miz d'ar muiañ."],
-                ["Gwir da glemm", "Ouzh ar CNIL (www.cnil.fr) ma ne vez ket doujet d'ar gwirioù."]
+                [
+                  "Emrenerezh eeun",
+                  "Kemmañ an titouroù pe diverkañ ar gont diouzhtu adalek « Ma c'hont » > « Diverkañ ma c'hont »."
+                ],
+                [
+                  "Sevel klemm ouzh an DPO",
+                  "Dre bostel da dpo@job-et-bonheur.fr. Respont dindan ul lajad lezennel a ur miz d'ar muiañ."
+                ],
+                [
+                  "Gwir da glemm",
+                  "Ouzh ar CNIL (www.cnil.fr) ma ne vez ket doujet d'ar gwirioù."
+                ]
               ]
             }
           ]
         },
         {
-          "id": "art7",
-          "num": "7",
+          "id": "art6",
+          "num": "6",
           "titre": "Kiriegezhioù",
           "corps": [
             "Ar Ministrerezh a laka e pleustr kement tra rekis evit asuriñ hegerzded ha surentez ar servij. Ne c'hell ket bezañ lakaet da giriek e degouezh nerzh meur, ehanadenn badennek evit kempenn, amreizhded er c'hemennoù skrivet gant ar c'hoprerien pe disoc'h fall d'un emstrivadur."
           ]
         },
         {
-          "id": "art8",
-          "num": "8",
+          "id": "art7",
+          "num": "7",
           "titre": "Lezenn aplikadus ha barnerezh beli gantañ",
           "corps": [
             "An Termenoù Hollek Implijout-mañ a zo renet gant al lezenn c'hall. Ma n'eus diskoulm peoc'hus ebet, kement dizemglev diwar-benn o talvoudegezh pe o lakaat e pleustr a vo kaset dirak lezioù-barn gall beli ganto."
@@ -166,11 +196,11 @@
         {
           "id": "art3",
           "num": "3",
-          "titre": "Mirout roadennoù lec'hiañ",
+          "titre": "Mirout ar c'hinnigoù labour",
           "corps": [
-            "Lec'hiadur an arveriaded ne vez ket enrollet nag ivez miret.",
-            "Roadennoù lec'hiañ liammet ouzh ar c'hinnigoù labour a vez miret hervez ar reolennoù termenet e marilh an tretadurioù.",
-            "Istor lec'hiañ ar c'hinnigoù a vez diverket ent-emgefreek goude 90 devezh."
+            "Lec'hiadur an arveriaded ne vez ket enrollet na miret.",
+            "Ar c'hinnigoù labour a vez lec'hiet hepken e live ar gumun.",
+            "Ar c'hinnigoù diellaouet koshoc'h eget 90 devezh abaoe o c'hrouidigezh a vez diverket ent-emgefreek."
           ]
         },
         {
