@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   CreateDateColumn,
   Entity,
@@ -19,15 +20,19 @@ import { Job } from '../../jobs/entities/job.entity';
   'jobId',
 ])
 export class ChallengeJobView {
+  @ApiProperty({ description: 'Primary key ID', example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ description: 'ID of the seeker/user who viewed the job', example: 42 })
   @Column()
   userId: number;
 
+  @ApiProperty({ description: 'ID of the associated challenge', example: 10 })
   @Column()
   challengeId: number;
 
+  @ApiProperty({ description: 'ID of the job that was viewed', example: 105 })
   @Column()
   jobId: number;
 
@@ -59,6 +64,7 @@ export class ChallengeJobView {
   })
   job: Job;
 
+  @ApiProperty({ description: 'Timestamp when the view event was logged', example: '2026-09-10T09:15:00.000Z' })
   @CreateDateColumn()
   createdAt: Date;
 }

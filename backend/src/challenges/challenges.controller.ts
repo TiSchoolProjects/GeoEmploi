@@ -28,6 +28,7 @@ import {
 import {
   UserRole,
 } from '../auth/roles.enum';
+import { createDoc, findAllAdminDoc, hideDoc, historyDoc, recordJobViewDoc, todayDoc, updateDoc } from './challenges.controller.docs';
 
 @Controller('challenges')
 export class ChallengesController {
@@ -40,6 +41,7 @@ export class ChallengesController {
    * ADMIN
    */
 
+  @findAllAdminDoc()
   @Roles(UserRole.ADMIN)
   @Get('admin')
   findAllAdmin() {
@@ -47,6 +49,7 @@ export class ChallengesController {
       .findAllAdmin();
   }
 
+  @createDoc()
   @Roles(UserRole.ADMIN)
   @Post()
   create(
@@ -57,6 +60,7 @@ export class ChallengesController {
       .create(dto);
   }
 
+  @updateDoc()
   @Roles(UserRole.ADMIN)
   @Patch(':id')
   update(
@@ -77,6 +81,7 @@ export class ChallengesController {
    * SEEKER
    */
 
+  @todayDoc()
   @Roles(UserRole.SEEKER)
   @Get('today')
   today(
@@ -94,6 +99,7 @@ export class ChallengesController {
       );
   }
 
+  @historyDoc()
   @Roles(UserRole.SEEKER)
   @Get('history')
   history(
@@ -111,6 +117,7 @@ export class ChallengesController {
       );
   }
 
+  @recordJobViewDoc()
   @Roles(UserRole.SEEKER)
   @Post('today/jobs/:jobId')
   recordJobView(
@@ -135,6 +142,7 @@ export class ChallengesController {
       );
   }
 
+  @hideDoc()
   @Roles(UserRole.SEEKER)
   @Patch('hide/permanently')
   hide(
