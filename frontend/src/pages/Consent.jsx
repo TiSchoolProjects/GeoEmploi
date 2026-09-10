@@ -1,4 +1,4 @@
-import i18n from "../i18n"; // ajuste le chemin vers ton fichier d'initialisation i18n
+import i18n from "../i18n";
 
 const GEO_CONSENT_KEY = "geoConsent";
 
