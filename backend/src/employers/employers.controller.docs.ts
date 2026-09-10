@@ -23,6 +23,7 @@ export function createDoc() {
 
 export function findAllDoc() {
     return applyDecorators(
+        ApiBearerAuth('JWT-Auth'),
         ApiOperation({ summary: 'Get all employers' }),
         ApiResponse({ status: 200, description: 'List of all registered employers', type: [Employer] }),
     );
