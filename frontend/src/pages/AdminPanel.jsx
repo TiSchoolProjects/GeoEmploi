@@ -304,6 +304,185 @@ export default function AdminPanel() {
 
   const pendingReports = reports.filter((report) => report.status === "pending");
 
+  const createAdminAccount = async () => {
+    const result = await Swal.fire({
+      title: "Créer un administrateur",
+
+      html: `
+        <input
+          id="new-admin-firstname"
+          class="swal2-input"
+          type="text"
+          placeholder="Prénom"
+        />
+
+        <input
+          id="new-admin-lastname"
+          class="swal2-input"
+          type="text"
+          placeholder="Nom"
+        />
+
+        <input
+          id="new-admin-email"
+          class="swal2-input"
+          type="email"
+          placeholder="Email"
+        />
+
+        <input
+          id="new-admin-password"
+          class="swal2-input"
+          type="password"
+          placeholder="Mot de passe"
+        />
+
+        <input
+          id="new-admin-password-confirm"
+          class="swal2-input"
+          type="password"
+          placeholder="Confirmer le mot de passe"
+        />
+      `,
+
+      showCancelButton: true,
+
+      confirmButtonText:
+        "Créer l'administrateur",
+
+      cancelButtonText:
+        "Annuler",
+
+      reverseButtons: true,
+
+      focusConfirm: false,
+
+      preConfirm: () => {
+        const popup = Swal.getPopup();
+
+        const firstname =
+          popup
+            .querySelector(
+              "#new-admin-firstname"
+            )
+            .value
+            .trim();
+
+        const lastname =
+          popup
+            .querySelector(
+              "#new-admin-lastname"
+            )
+            .value
+            .trim();
+
+        const email =
+          popup
+            .querySelector(
+              "#new-admin-email"
+            )
+            .value
+            .trim();
+
+        const password =
+          popup
+            .querySelector(
+              "#new-admin-password"
+            )
+            .value;
+
+        const passwordConfirm =
+          popup
+            .querySelector(
+              "#new-admin-password-confirm"
+            )
+            .value;
+
+        if (
+          !firstname ||
+          !lastname ||
+          !email ||
+          !password
+        ) {
+          Swal.showValidationMessage(
+            "Tous les champs sont obligatoires."
+          );
+
+          return false;
+        }
+
+        const emailValid =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            email
+          );
+
+        if (!emailValid) {
+          Swal.showValidationMessage(
+            "Adresse email invalide."
+          );
+
+          return false;
+        }
+
+        if (password.length < 8) {
+          Swal.showValidationMessage(
+            "Le mot de passe doit contenir au moins 8 caractères."
+          );
+
+          return false;
+        }
+
+        if (
+          password !==
+          passwordConfirm
+        ) {
+          Swal.showValidationMessage(
+            "Les mots de passe ne correspondent pas."
+          );
+
+          return false;
+        }
+
+        return {
+          firstname,
+          lastname,
+          email,
+          password,
+        };
+      },
+    });
+
+    if (!result.isConfirmed) {
+      return;
+    }
+
+    try {
+      await apiFetch(
+        "/users/admin",
+        {
+          method: "POST",
+
+          body: JSON.stringify(
+            result.value
+          ),
+        }
+      );
+
+      toast.success(
+        "Compte administrateur créé."
+      );
+
+      await fetchUsers();
+    } catch (error) {
+      console.error(error);
+
+      toast.error(
+        error.message ||
+          "Impossible de créer l'administrateur."
+      );
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -478,8 +657,15 @@ export default function AdminPanel() {
 
         {activeTab === "users" && (
           <section className="admin-section">
-            <h2>{t("admin.users.count", { count: users.length })}</h2>
-            {usersLoading && <p>{t("admin.loading")}</p>}
+              <h2>{t("admin.users.count", {count: users.length,})}</h2>
+          <button
+            type="button"
+            className="admin-create-admin-btn"
+            onClick={createAdminAccount}
+          >
+            + Créer un administrateur
+          </button>
+          {usersLoading && <p>{t("admin.loading")}</p>}
             {usersError && <p className="error-message">{usersError}</p>}
             {!usersLoading && !usersError && users.length === 0 && <p>{t("admin.users.none")}</p>}
 

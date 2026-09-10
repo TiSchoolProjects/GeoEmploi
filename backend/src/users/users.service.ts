@@ -5,6 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { UpdateStatusDto, UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserRole } from '../auth/roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -18,6 +20,18 @@ export class UsersService {
     const pwdhashed = await hash(data.password!, this.configService.get<number>('auth.saltRounds')!);
     const user = this.UserRepository.create({ ...data, password: pwdhashed });
     return this.UserRepository.save(user);
+  }
+
+  async createAdmin(createUserDto: CreateUserDto) {
+    const exist = await this.UserRepository.findOne({where: {email: createUserDto.email}});
+
+    if (exist) {
+      throw new ConflictException('Adresse email déjà utilisée.',);
+    }
+    
+    const created = await this.create({...createUserDto, role: UserRole.ADMIN});
+    const {password: _password, ...safeUser} = created;
+    return safeUser;
   }
 
   findAll() {

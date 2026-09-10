@@ -47,6 +47,7 @@ async function seed() {
   }
 }
 
+console.log(`Profil admin: admin@job-et-bonheur.fr : Admin123!`);
 seed().catch(async (error) => {
   console.error('Erreur pendant le seed :', error);
 

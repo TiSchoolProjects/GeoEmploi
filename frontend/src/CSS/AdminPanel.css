@@ -388,3 +388,49 @@
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
+
+.admin-users-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-users-header h2 {
+  margin: 0;
+}
+
+.admin-create-admin-btn {
+  padding: 10px 16px;
+
+  border: 1px solid #d9a441;
+  border-radius: 8px;
+
+  background: #d9a441;
+  color: #1a1a1a;
+
+  font-family: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-create-admin-btn:hover {
+  background: #b8862f;
+  border-color: #b8862f;
+}
+
+@media (max-width: 700px) {
+  .admin-users-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-create-admin-btn {
+    width: 100%;
+  }
+}

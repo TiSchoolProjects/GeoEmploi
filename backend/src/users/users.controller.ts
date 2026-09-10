@@ -1,21 +1,33 @@
 import { Controller, Get, Post, Body, Param, Delete, Patch, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { createDoc, findAllDoc, findOneDoc, updateStatusDoc, updateDoc, removeDoc } from './user.controller.doc';
+import { createDoc, findAllDoc, findOneDoc, updateStatusDoc, updateDoc, removeDoc, createAdminDoc } from './user.controller.doc';
 import { UpdateStatusDto, UpdateUserDto } from './dto/update-user.dto';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
 import { CheckOwnership } from '../auth/decorators/ownership.decorator';
+import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @createDoc()
-  @Roles(UserRole.ADMIN)
+  @Public()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @createAdminDoc()
+  @Roles(UserRole.ADMIN)
+  @Post('admin')
+  createAdmin(
+    @Body() createUserDto: CreateUserDto,
+  ) {
+    return this.usersService.createAdmin(
+      createUserDto,
+    );
   }
 
   @findAllDoc()
