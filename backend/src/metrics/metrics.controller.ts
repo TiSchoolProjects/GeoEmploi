@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { MetricsService } from './metrics.service';
 import { Roles } from '../auth/decorators/role.decorator';
 import { UserRole } from '../auth/roles.enum';
+import { getMetricsDoc } from './metrics.controller.docs';
 
 @Controller('admin')
 export class MetricsController {
@@ -9,6 +10,7 @@ export class MetricsController {
     private readonly metricsService: MetricsService,
   ) {}
 
+  @getMetricsDoc()
   @Get('metrics')
   @Roles(UserRole.ADMIN)
   getMetrics() {
